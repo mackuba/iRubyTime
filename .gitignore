@@ -1,0 +1,4 @@
+build
+*.tm_build_errors
+RubyTime.xcodeproj/*.pbxuser
+RubyTime.xcodeproj/*.perspective*
