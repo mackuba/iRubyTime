@@ -8,8 +8,12 @@
 
 #import "RootViewController.h"
 #import "RubyTimeAppDelegate.h"
+#import "RubyTimeConnector.h"
 #import "LoginDialogController.h"
 #import "Utils.h"
+#import "Activity.h"
+
+#define ACTIVITY_CELL_TYPE @"activityCell"
 
 @implementation RootViewController
 
@@ -33,9 +37,11 @@ OnDeallocRelease(loginController);
 
 - (void) viewDidAppear: (BOOL) animated {
   [super viewDidAppear: animated];
+  activities = [[NSMutableArray alloc] initWithCapacity: 20];
+  connector = [[RubyTimeConnector alloc] init];
   loginController = [[LoginDialogController alloc] initWithNibName: @"LoginDialog"
                                                             bundle: [NSBundle mainBundle]
- //                                                        connector: connector
+                                                         connector: connector
                                                     mainController: self];
   [self presentModalViewController: loginController animated: YES];
 }
@@ -46,10 +52,10 @@ OnDeallocRelease(loginController);
     [loginController release];
     loginController = nil;
     //[self saveLoginAndPassword];
-    //connector.delegate = self;
+    connector.delegate = self;
   }
   // TODO: spin spinner
-  // connector load
+  [connector getActivities];
 }
 
 /*
@@ -76,34 +82,36 @@ OnDeallocRelease(loginController);
     // Release anything that's not essential, such as cached data
 }
 
-#pragma mark Table view methods
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+- (void) addActivity: (Activity *) activity {
+  [self.tableView beginUpdates];
+  // TODO: mass add
+  [activities insertObject: activity atIndex: 0];
+  NSIndexPath *row = [NSIndexPath indexPathForRow: 0 inSection: 0];
+  [self.tableView insertRowsAtIndexPaths: RTArray(row) withRowAnimation: UITableViewRowAnimationTop];
+  [self.tableView endUpdates];
 }
 
-
-// Customize the number of rows in the table view.
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+- (void) scrollTextViewToTop {
+  [self.tableView setContentOffset: CGPointZero animated: YES];
 }
 
+// -------------------------------------------------------------------------------------------
+#pragma mark Table view delegate / data source
 
-// Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    // Set up the cell...
-
-    return cell;
+- (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
+  return activities.count;
 }
 
+- (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
+  Activity *activity = [activities objectAtIndex: path.row];
+  UITableViewCell *cell = [table dequeueReusableCellWithIdentifier: ACTIVITY_CELL_TYPE];
+  if (!cell) {
+    cell = [[[UITableViewCell alloc] initWithFrame: CGRectZero reuseIdentifier: ACTIVITY_CELL_TYPE] autorelease];
+  }
+  cell.font = [UIFont systemFontOfSize: 11];
+  cell.text = RTFormat(@"[%@] %@ (%d min.)", activity.date, activity.comments, activity.minutes);
+  return cell;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
@@ -151,6 +159,18 @@ OnDeallocRelease(loginController);
     return YES;
 }
 */
+
+// -------------------------------------------------------------------------------------------
+#pragma mark RubyTimeConnector delegate callbacks
+
+- (void) activitiesReceived: (NSArray *) receivedActivities {
+  if (receivedActivities.count > 0) {
+    [self scrollTextViewToTop];
+  }
+  for (Activity *activity in [receivedActivities reverseObjectEnumerator]) {
+    [self addActivity: activity];
+  }
+}
 
 @end
 

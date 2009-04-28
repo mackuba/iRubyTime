@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @class LoginDialogController;
+@class RubyTimeConnector;
 
 @interface RootViewController : UITableViewController {
   LoginDialogController *loginController;
+  RubyTimeConnector *connector;
+  NSMutableArray *activities;
 }
 
 - (void) loginSuccessful;

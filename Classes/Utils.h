@@ -23,7 +23,9 @@
 
 
 @interface Utils : NSObject
-
 + (void) showAlertWithTitle: (NSString *) title content: (NSString *) content;
+@end
 
+@interface NSString (RubyTime)
+- (NSString *) trimmedString;
 @end

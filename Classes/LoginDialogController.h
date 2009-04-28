@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 
-// @class RubyTimeConnector;
+@class RubyTimeConnector;
 @class RootViewController;
 
 @interface LoginDialogController : UIViewController <UITextFieldDelegate> {
@@ -8,7 +8,7 @@
   UITextField *usernameField;
   UITextField *passwordField;
   UIActivityIndicatorView *spinner;
-  // RubyTimeConnector *connector;
+  RubyTimeConnector *connector;
   __weak RootViewController *mainController;
 }
 
@@ -19,7 +19,7 @@
 
 - (id) initWithNibName: (NSString *) nibName
                 bundle: (NSBundle *) bundle
-//             connector: (RubyTimeConnector *) rtConnector
+             connector: (RubyTimeConnector *) rtConnector
         mainController: (RootViewController *) controller;
 
 - (IBAction) loginPressed;

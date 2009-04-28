@@ -22,6 +22,10 @@
 		58CA2D370FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D310FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.m */; };
 		58CA2D380FA78D18007A6A65 /* NSScanner+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D330FA78D18007A6A65 /* NSScanner+BSJSONAdditions.m */; };
 		58CA2D390FA78D18007A6A65 /* NSString+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D350FA78D18007A6A65 /* NSString+BSJSONAdditions.m */; };
+		58CA2D450FA78DED007A6A65 /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D3E0FA78DED007A6A65 /* NSDataMBBase64.m */; };
+		58CA2D4E0FA7995E007A6A65 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4B0FA7995E007A6A65 /* Request.m */; };
+		58CA2D4F0FA7995E007A6A65 /* RubyTimeConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4D0FA7995E007A6A65 /* RubyTimeConnector.m */; };
+		58CA2DAE0FA7AE6A007A6A65 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2DAD0FA7AE6A007A6A65 /* Activity.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +54,15 @@
 		58CA2D330FA78D18007A6A65 /* NSScanner+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		58CA2D340FA78D18007A6A65 /* NSString+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BSJSONAdditions.h"; sourceTree = "<group>"; };
 		58CA2D350FA78D18007A6A65 /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BSJSONAdditions.m"; sourceTree = "<group>"; };
+		58CA2D3C0FA78DED007A6A65 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		58CA2D3D0FA78DED007A6A65 /* NSDataMBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataMBBase64.h; sourceTree = "<group>"; };
+		58CA2D3E0FA78DED007A6A65 /* NSDataMBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMBBase64.m; sourceTree = "<group>"; };
+		58CA2D4A0FA7995E007A6A65 /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
+		58CA2D4B0FA7995E007A6A65 /* Request.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
+		58CA2D4C0FA7995E007A6A65 /* RubyTimeConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyTimeConnector.h; sourceTree = "<group>"; };
+		58CA2D4D0FA7995E007A6A65 /* RubyTimeConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyTimeConnector.m; sourceTree = "<group>"; };
+		58CA2DAC0FA7AE6A007A6A65 /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
+		58CA2DAD0FA7AE6A007A6A65 /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,6 +106,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				58CA2DAB0FA7AE54007A6A65 /* Models */,
+				58CA2D3B0FA78DD8007A6A65 /* Backend */,
 				58CA2D2D0FA78D00007A6A65 /* BSJSONAdditions */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -146,6 +161,29 @@
 				58CA2D350FA78D18007A6A65 /* NSString+BSJSONAdditions.m */,
 			);
 			path = BSJSONAdditions;
+			sourceTree = "<group>";
+		};
+		58CA2D3B0FA78DD8007A6A65 /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				58CA2D4A0FA7995E007A6A65 /* Request.h */,
+				58CA2D4B0FA7995E007A6A65 /* Request.m */,
+				58CA2D4C0FA7995E007A6A65 /* RubyTimeConnector.h */,
+				58CA2D4D0FA7995E007A6A65 /* RubyTimeConnector.m */,
+				58CA2D3C0FA78DED007A6A65 /* Constants.h */,
+				58CA2D3D0FA78DED007A6A65 /* NSDataMBBase64.h */,
+				58CA2D3E0FA78DED007A6A65 /* NSDataMBBase64.m */,
+			);
+			path = Backend;
+			sourceTree = "<group>";
+		};
+		58CA2DAB0FA7AE54007A6A65 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				58CA2DAC0FA7AE6A007A6A65 /* Activity.h */,
+				58CA2DAD0FA7AE6A007A6A65 /* Activity.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +257,10 @@
 				58CA2D370FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.m in Sources */,
 				58CA2D380FA78D18007A6A65 /* NSScanner+BSJSONAdditions.m in Sources */,
 				58CA2D390FA78D18007A6A65 /* NSString+BSJSONAdditions.m in Sources */,
+				58CA2D450FA78DED007A6A65 /* NSDataMBBase64.m in Sources */,
+				58CA2D4E0FA7995E007A6A65 /* Request.m in Sources */,
+				58CA2D4F0FA7995E007A6A65 /* RubyTimeConnector.m in Sources */,
+				58CA2DAE0FA7AE6A007A6A65 /* Activity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +276,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = RubyTime_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = RubyTime;
 			};
@@ -246,6 +289,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = RubyTime_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = RubyTime;
 			};

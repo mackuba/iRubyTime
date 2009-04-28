@@ -1,23 +1,23 @@
 #import "LoginDialogController.h"
 #import "RootViewController.h"
-// #import "RubyTimeConnector.h"
+#import "RubyTimeConnector.h"
 #import "Utils.h"
 
 @implementation LoginDialogController
 
 @synthesize urlField, usernameField, passwordField, spinner;
-OnDeallocRelease(urlField, usernameField, passwordField, spinner /*, connector*/);
+OnDeallocRelease(urlField, usernameField, passwordField, spinner, connector);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initializers
 
 - (id) initWithNibName: (NSString *) nibName
                 bundle: (NSBundle *) bundle
-//             connector: (RubyTimeConnector *) rtConnector
+             connector: (RubyTimeConnector *) rtConnector
         mainController: (RootViewController *) controller {
   if (self = [super initWithNibName: nibName bundle: bundle]) {
-//    connector = [rtConnector retain];
-//    connector.delegate = self;
+    connector = [rtConnector retain];
+    connector.delegate = self;
     mainController = controller;
   }
   return self;
@@ -53,15 +53,12 @@ OnDeallocRelease(urlField, usernameField, passwordField, spinner /*, connector*/
     [urlField resignFirstResponder];
     [usernameField resignFirstResponder];
     [passwordField resignFirstResponder];
-    // [connector setURL: urlField.text username: usernameField.text password: passwordField.text];
+    [connector setServerURL: urlField.text username: usernameField.text password: passwordField.text];
     // [connector authenticate];
     [spinner startAnimating];
     
     // just for testing
-    static int i = 1;
-    [self performSelector: ((i < 3) ? @selector(authenticationFailed) : @selector(authenticationSuccessful))
-          withObject: nil afterDelay: 2.5];
-    i++;
+    [self performSelector: @selector(authenticationSuccessful) withObject: nil afterDelay: 2.0];
   }
 }
 

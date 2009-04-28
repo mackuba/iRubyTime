@@ -13,3 +13,12 @@
 }
 
 @end
+
+@implementation NSString (RubyTime)
+
+- (NSString *) trimmedString {
+  NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+  return [self stringByTrimmingCharactersInSet: whitespace];
+}
+
+@end
