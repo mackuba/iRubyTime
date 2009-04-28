@@ -18,6 +18,10 @@
 		58CA2D0D0FA77FF9007A6A65 /* LoginDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D0C0FA77FF9007A6A65 /* LoginDialogController.m */; };
 		58CA2D0F0FA78000007A6A65 /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58CA2D0E0FA78000007A6A65 /* LoginDialog.xib */; };
 		58CA2D1D0FA78A61007A6A65 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D1C0FA78A61007A6A65 /* Utils.m */; };
+		58CA2D360FA78D18007A6A65 /* NSArray+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D2F0FA78D18007A6A65 /* NSArray+BSJSONAdditions.m */; };
+		58CA2D370FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D310FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.m */; };
+		58CA2D380FA78D18007A6A65 /* NSScanner+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D330FA78D18007A6A65 /* NSScanner+BSJSONAdditions.m */; };
+		58CA2D390FA78D18007A6A65 /* NSString+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D350FA78D18007A6A65 /* NSString+BSJSONAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +42,14 @@
 		58CA2D0E0FA78000007A6A65 /* LoginDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginDialog.xib; sourceTree = "<group>"; };
 		58CA2D1B0FA78A61007A6A65 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		58CA2D1C0FA78A61007A6A65 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		58CA2D2E0FA78D18007A6A65 /* NSArray+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BSJSONAdditions.h"; sourceTree = "<group>"; };
+		58CA2D2F0FA78D18007A6A65 /* NSArray+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BSJSONAdditions.m"; sourceTree = "<group>"; };
+		58CA2D300FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BSJSONAdditions.h"; sourceTree = "<group>"; };
+		58CA2D310FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BSJSONAdditions.m"; sourceTree = "<group>"; };
+		58CA2D320FA78D18007A6A65 /* NSScanner+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+BSJSONAdditions.h"; sourceTree = "<group>"; };
+		58CA2D330FA78D18007A6A65 /* NSScanner+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+BSJSONAdditions.m"; sourceTree = "<group>"; };
+		58CA2D340FA78D18007A6A65 /* NSString+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BSJSONAdditions.h"; sourceTree = "<group>"; };
+		58CA2D350FA78D18007A6A65 /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +93,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				58CA2D2D0FA78D00007A6A65 /* BSJSONAdditions */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -118,6 +131,21 @@
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		58CA2D2D0FA78D00007A6A65 /* BSJSONAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				58CA2D2E0FA78D18007A6A65 /* NSArray+BSJSONAdditions.h */,
+				58CA2D2F0FA78D18007A6A65 /* NSArray+BSJSONAdditions.m */,
+				58CA2D300FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.h */,
+				58CA2D310FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.m */,
+				58CA2D320FA78D18007A6A65 /* NSScanner+BSJSONAdditions.h */,
+				58CA2D330FA78D18007A6A65 /* NSScanner+BSJSONAdditions.m */,
+				58CA2D340FA78D18007A6A65 /* NSString+BSJSONAdditions.h */,
+				58CA2D350FA78D18007A6A65 /* NSString+BSJSONAdditions.m */,
+			);
+			path = BSJSONAdditions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +215,10 @@
 				28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */,
 				58CA2D0D0FA77FF9007A6A65 /* LoginDialogController.m in Sources */,
 				58CA2D1D0FA78A61007A6A65 /* Utils.m in Sources */,
+				58CA2D360FA78D18007A6A65 /* NSArray+BSJSONAdditions.m in Sources */,
+				58CA2D370FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.m in Sources */,
+				58CA2D380FA78D18007A6A65 /* NSScanner+BSJSONAdditions.m in Sources */,
+				58CA2D390FA78D18007A6A65 /* NSString+BSJSONAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
