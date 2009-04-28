@@ -8,9 +8,13 @@
 
 #import "RootViewController.h"
 #import "RubyTimeAppDelegate.h"
-
+#import "LoginDialogController.h"
+#import "Utils.h"
 
 @implementation RootViewController
+
+OnDeallocRelease(loginController);
+
 
 /*
 - (void)viewDidLoad {
@@ -26,11 +30,28 @@
     [super viewWillAppear:animated];
 }
 */
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+
+- (void) viewDidAppear: (BOOL) animated {
+  [super viewDidAppear: animated];
+  loginController = [[LoginDialogController alloc] initWithNibName: @"LoginDialog"
+                                                            bundle: [NSBundle mainBundle]
+ //                                                        connector: connector
+                                                    mainController: self];
+  [self presentModalViewController: loginController animated: YES];
 }
-*/
+
+- (void) loginSuccessful {
+  if (loginController) {
+    [loginController dismissModalViewControllerAnimated: YES];
+    [loginController release];
+    loginController = nil;
+    //[self saveLoginAndPassword];
+    //connector.delegate = self;
+  }
+  // TODO: spin spinner
+  // connector load
+}
+
 /*
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
@@ -130,12 +151,6 @@
     return YES;
 }
 */
-
-
-- (void)dealloc {
-    [super dealloc];
-}
-
 
 @end
 

@@ -15,6 +15,9 @@
 		2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E55F0DE3E45000AC0155 /* RootViewController.xib */; };
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		58CA2D0D0FA77FF9007A6A65 /* LoginDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D0C0FA77FF9007A6A65 /* LoginDialogController.m */; };
+		58CA2D0F0FA78000007A6A65 /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58CA2D0E0FA78000007A6A65 /* LoginDialog.xib */; };
+		58CA2D1D0FA78A61007A6A65 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D1C0FA78A61007A6A65 /* Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,11 @@
 		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		58CA2D0B0FA77FF9007A6A65 /* LoginDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDialogController.h; sourceTree = "<group>"; };
+		58CA2D0C0FA77FF9007A6A65 /* LoginDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDialogController.m; sourceTree = "<group>"; };
+		58CA2D0E0FA78000007A6A65 /* LoginDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginDialog.xib; sourceTree = "<group>"; };
+		58CA2D1B0FA78A61007A6A65 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		58CA2D1C0FA78A61007A6A65 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -50,6 +58,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				58CA2D1B0FA78A61007A6A65 /* Utils.h */,
+				58CA2D1C0FA78A61007A6A65 /* Utils.m */,
+				58CA2D0B0FA77FF9007A6A65 /* LoginDialogController.h */,
+				58CA2D0C0FA77FF9007A6A65 /* LoginDialogController.m */,
 				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
 				28C286E00D94DF7D0034E888 /* RootViewController.m */,
 				1D3623240D0F684500981E51 /* RubyTimeAppDelegate.h */,
@@ -90,6 +102,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				58CA2D0E0FA78000007A6A65 /* LoginDialog.xib */,
 				2899E55F0DE3E45000AC0155 /* RootViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -158,6 +171,7 @@
 			files = (
 				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
 				2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */,
+				58CA2D0F0FA78000007A6A65 /* LoginDialog.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +185,8 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* RubyTimeAppDelegate.m in Sources */,
 				28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */,
+				58CA2D0D0FA77FF9007A6A65 /* LoginDialogController.m in Sources */,
+				58CA2D1D0FA78A61007A6A65 /* Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class LoginDialogController;
+
 @interface RootViewController : UITableViewController {
+  LoginDialogController *loginController;
 }
+
+- (void) loginSuccessful;
 
 @end
