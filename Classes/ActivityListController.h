@@ -11,7 +11,7 @@
 @class LoginDialogController;
 @class RubyTimeConnector;
 
-@interface RootViewController : UITableViewController {
+@interface ActivityListController : UITableViewController {
   LoginDialogController *loginController;
   RubyTimeConnector *connector;
   NSMutableArray *activities;

@@ -7,7 +7,7 @@
 // ---------------------------------------------------------------------------------------
 
 #import "RubyTimeAppDelegate.h"
-#import "RootViewController.h"
+#import "ActivityListController.h"
 
 
 @implementation RubyTimeAppDelegate

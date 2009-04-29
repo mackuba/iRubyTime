@@ -7,7 +7,7 @@
 // ---------------------------------------------------------------------------------------
 
 #import "LoginDialogController.h"
-#import "RootViewController.h"
+#import "ActivityListController.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
 
@@ -22,7 +22,7 @@ OnDeallocRelease(urlField, usernameField, passwordField, spinner, connector);
 - (id) initWithNibName: (NSString *) nibName
                 bundle: (NSBundle *) bundle
              connector: (RubyTimeConnector *) rtConnector
-        mainController: (RootViewController *) controller {
+        mainController: (ActivityListController *) controller {
   if (self = [super initWithNibName: nibName bundle: bundle]) {
     connector = [rtConnector retain];
     connector.delegate = self;

@@ -6,7 +6,7 @@
 // 2 of the License, or (at your option) any later version.
 // ---------------------------------------------------------------------------------------
 
-#import "RootViewController.h"
+#import "ActivityListController.h"
 #import "RubyTimeAppDelegate.h"
 #import "RubyTimeConnector.h"
 #import "LoginDialogController.h"
@@ -15,7 +15,7 @@
 
 #define ACTIVITY_CELL_TYPE @"activityCell"
 
-@implementation RootViewController
+@implementation ActivityListController
 
 OnDeallocRelease(loginController, connector, activities);
 
