@@ -54,11 +54,8 @@ OnDeallocRelease(urlField, usernameField, passwordField, spinner, connector);
     [usernameField resignFirstResponder];
     [passwordField resignFirstResponder];
     [connector setServerURL: urlField.text username: usernameField.text password: passwordField.text];
-    // [connector authenticate];
+    [connector authenticate];
     [spinner startAnimating];
-    
-    // just for testing
-    [self performSelector: @selector(authenticationSuccessful) withObject: nil afterDelay: 2.0];
   }
 }
 

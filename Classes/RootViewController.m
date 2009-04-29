@@ -17,8 +17,12 @@
 
 @implementation RootViewController
 
-OnDeallocRelease(loginController);
+OnDeallocRelease(loginController, connector, activities);
 
+- (void) awakeFromNib {
+  activities = [[NSMutableArray alloc] initWithCapacity: 20];
+  connector = [[RubyTimeConnector alloc] init];
+}
 
 /*
 - (void)viewDidLoad {
@@ -37,8 +41,6 @@ OnDeallocRelease(loginController);
 
 - (void) viewDidAppear: (BOOL) animated {
   [super viewDidAppear: animated];
-  activities = [[NSMutableArray alloc] initWithCapacity: 20];
-  connector = [[RubyTimeConnector alloc] init];
   loginController = [[LoginDialogController alloc] initWithNibName: @"LoginDialog"
                                                             bundle: [NSBundle mainBundle]
                                                          connector: connector

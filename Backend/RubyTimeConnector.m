@@ -22,7 +22,7 @@
 @interface RubyTimeConnector ()
 - (NSString *) generateAuthenticationStringFromUsername: (NSString *) username
                                                password: (NSString *) password;
-- (void) handleFinishedRequest;
+- (void) handleFinishedRequest: (Request *) request;
 - (void) cleanupRequest;
 - (void) sendRequest: (Request *) request;
 @end
@@ -86,8 +86,8 @@
 #pragma mark Request sending
 
 - (void) authenticate {
-  // TODO: how to check login in RubyTime?
-  Request *request = [[Request alloc] initWithURL: ServerPath(@"/login") type: RTAuthenticationRequest];
+  Request *request = [[Request alloc] initWithURL: ServerPath(@"/activities?search_criteria[limit]=1")
+                                             type: RTAuthenticationRequest];
   [self sendRequest: request];
 }
 
@@ -122,21 +122,22 @@
 
 - (void) connectionDidFinishLoading: (NSURLConnection *) connection {
   NSLog(@"finished request to %@ (%d) (text = %@)", currentRequest.URL, currentRequest.type, currentRequest.receivedText);
-  [self handleFinishedRequest];
+  Request *request = [[currentRequest retain] autorelease]; // keep it in memory until the end of this method
   [self cleanupRequest];
+  [self handleFinishedRequest: request];
 }
 
-- (void) handleFinishedRequest {
+- (void) handleFinishedRequest: (Request *) request {
   NSString *trimmedString;
   NSArray *activities;
-  switch (currentRequest.type) {
+  switch (request.type) {
     case RTAuthenticationRequest:
       SafeDelegateCall(authenticationSuccessful);
       loggedIn = YES;
       break;
     
     case RTActivityIndexRequest:
-      trimmedString = [currentRequest.receivedText trimmedString];
+      trimmedString = [request.receivedText trimmedString];
       if (trimmedString.length > 0) {
         activities = [Activity activitiesFromJSONString: trimmedString];
         // if (activities.count > 0) {
