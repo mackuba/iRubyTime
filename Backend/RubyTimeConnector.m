@@ -92,7 +92,7 @@
 }
 
 - (void) getActivities {
-  Request *request = [[Request alloc] initWithURL: ServerPath(@"/activities.json") type: RTActivityIndexRequest];
+  Request *request = [[Request alloc] initWithURL: ServerPath(@"/activities") type: RTActivityIndexRequest];
   [self sendRequest: request];
 }
 

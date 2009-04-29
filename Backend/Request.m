@@ -25,7 +25,7 @@ SynthesizeAndReleaseLater(response, receivedText, sentText, connection);
     self.HTTPMethod = method;
     receivedText = [[NSMutableString alloc] init];
     sentText = [text copy];
-    //SetHeader(@"Accept", @"application/json");
+    SetHeader(@"Accept", @"application/json");
     if (sentText) {
       //SetHeader(@"Content-Type", @"application/json");
       self.HTTPBody = [sentText dataUsingEncoding: NSUTF8StringEncoding];
