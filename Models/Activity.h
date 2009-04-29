@@ -1,10 +1,10 @@
+// ---------------------------------------------------------------------------------------
+// Copyright by Jakub Suder (2009)
 //
-//  Activity.h
-//  RubyTime
-//
-//  Created by Jakub Suder on 28-04-09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
-//
+// xBlip is free software: you can redistribute it and/or modify it under the terms of the
+// GNU General Public License as published by the Free Software Foundation, either version
+// 2 of the License, or (at your option) any later version.
+// ---------------------------------------------------------------------------------------
 
 #import <Foundation/Foundation.h>
 
