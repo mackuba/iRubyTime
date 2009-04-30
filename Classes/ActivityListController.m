@@ -1,3 +1,10 @@
+// -------------------------------------------------------
+// ActivityListController.m
+//
+// Copyright (c) 2009 Jakub Suder <jakub.suder@gmail.com>
+// Licensed under MIT license
+// -------------------------------------------------------
+
 #import "ActivityListController.h"
 #import "RubyTimeAppDelegate.h"
 #import "RubyTimeConnector.h"

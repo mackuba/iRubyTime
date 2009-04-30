@@ -1,3 +1,10 @@
+// -------------------------------------------------------
+// RubyTimeAppDelegate.m
+//
+// Copyright (c) 2009 Jakub Suder <jakub.suder@gmail.com>
+// Licensed under MIT license
+// -------------------------------------------------------
+
 #import "RubyTimeAppDelegate.h"
 #import "ActivityListController.h"
 

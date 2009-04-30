@@ -1,5 +1,11 @@
-#import <Foundation/Foundation.h>
+// -------------------------------------------------------
+// Activity.h
+//
+// Copyright (c) 2009 Jakub Suder <jakub.suder@gmail.com>
+// Licensed under MIT license
+// -------------------------------------------------------
 
+#import <Foundation/Foundation.h>
 
 @interface Activity : NSObject {
   NSString *comments;

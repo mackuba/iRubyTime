@@ -1,3 +1,10 @@
+// -------------------------------------------------------
+// LoginDialogController.m
+//
+// Copyright (c) 2009 Jakub Suder <jakub.suder@gmail.com>
+// Licensed under MIT license
+// -------------------------------------------------------
+
 #import "LoginDialogController.h"
 #import "ActivityListController.h"
 #import "RubyTimeConnector.h"

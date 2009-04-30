@@ -1,3 +1,10 @@
+// -------------------------------------------------------
+// Request.m
+//
+// Copyright (c) 2009 Jakub Suder <jakub.suder@gmail.com>
+// Licensed under MIT license
+// -------------------------------------------------------
+
 #import "NSString+BSJSONAdditions.h"
 #import "Constants.h"
 #import "Request.h"
