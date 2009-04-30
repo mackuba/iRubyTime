@@ -7,31 +7,20 @@
 
 #import "RubyTimeAppDelegate.h"
 #import "ActivityListController.h"
-
+#import "Utils.h"
 
 @implementation RubyTimeAppDelegate
 
-@synthesize window;
-@synthesize navigationController;
+SynthesizeAndReleaseLater(window, navigationController);
 
-
-- (void)applicationDidFinishLaunching:(UIApplication *)application {
-	
-	// Configure and show the window
-	[window addSubview:[navigationController view]];
-	[window makeKeyAndVisible];
+- (void) applicationDidFinishLaunching: (UIApplication *) application {
+  // Configure and show the window
+  [window addSubview: [navigationController view]];
+  [window makeKeyAndVisible];
 }
 
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-	// Save data if appropriate
-}
-
-
-- (void)dealloc {
-	[navigationController release];
-	[window release];
-	[super dealloc];
+- (void) applicationWillTerminate: (UIApplication *) application {
+  // Save data if appropriate
 }
 
 @end
