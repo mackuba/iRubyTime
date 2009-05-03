@@ -16,8 +16,6 @@
 #define ACTIVITY_CELL_TYPE @"activityCell"
 
 @interface ActivityListController ()
-- (void) startLoading;
-- (void) stopLoading;
 @end
 
 @implementation ActivityListController
@@ -38,14 +36,11 @@
   spinner.contentMode = UIViewContentModeCenter;
   
   // prepare buttons for toolbar
-  loadingButton = [[UIBarButtonItem alloc] initWithCustomView: spinner];
-  reloadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemRefresh
-                                                               target: self
-                                                               action: @selector(refreshClicked)];
-  addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd
-                                                            target: nil
-                                                            action: nil];
-  self.navigationItem.leftBarButtonItem = reloadButton;
+  UIBarButtonItem *loadingButton = [[UIBarButtonItem alloc] initWithCustomView: spinner];
+  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd
+                                                                             target: nil
+                                                                             action: nil]; // TODO: implement action
+  self.navigationItem.leftBarButtonItem = loadingButton;
   self.navigationItem.rightBarButtonItem = addButton;
 }
 
@@ -74,7 +69,7 @@
     //[self saveLoginAndPassword];
     connector.delegate = self;
   }
-  [self startLoading];
+  [spinner startAnimating];
   [connector getActivities];
 }
 
@@ -113,21 +108,6 @@
 
 - (void) scrollTextViewToTop {
   [self.tableView setContentOffset: CGPointZero animated: YES];
-}
-
-- (void) refreshClicked {
-  [self startLoading];
-  [connector getActivities];
-}
-
-- (void) startLoading {
-  [spinner startAnimating];
-  self.navigationItem.leftBarButtonItem = loadingButton;
-}
-
-- (void) stopLoading {
-  self.navigationItem.leftBarButtonItem = reloadButton;
-  [spinner stopAnimating];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -210,7 +190,7 @@
     [self addActivity: activity];
   }
   // TODO: save activities to a file
-  [self stopLoading];
+  [spinner stopAnimating];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -220,7 +200,7 @@
   if (connector.delegate == self) {
     connector.delegate = nil;
   }
-  ReleaseAll(loginController, connector, activities);
+  ReleaseAll(loginController, connector, activities, spinner);
   [super dealloc];
 }
 
