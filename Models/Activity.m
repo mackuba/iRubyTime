@@ -34,4 +34,8 @@ SynthesizeAndReleaseLater(date, comments);
   return self;
 }
 
+- (NSString *) hourString {
+  return RTFormat(@"%d:%02d", minutes / 60, minutes % 60);
+}
+
 @end

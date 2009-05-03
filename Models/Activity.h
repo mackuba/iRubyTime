@@ -19,5 +19,6 @@
 
 + (NSArray *) activitiesFromJSONString: (NSString *) jsonString;
 - (id) initWithJSON: (NSDictionary *) json;
+- (NSString *) hourString;
 
 @end

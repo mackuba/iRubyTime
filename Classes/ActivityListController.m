@@ -11,11 +11,13 @@
 #import "LoginDialogController.h"
 #import "Utils.h"
 #import "Activity.h"
+#import "ActivityCell.h"
 
 #define ACTIVITY_CELL_TYPE @"activityCell"
 
 @implementation ActivityListController
 
+@synthesize currentCell;
 OnDeallocRelease(loginController, connector, activities);
 
 - (void) awakeFromNib {
@@ -105,13 +107,17 @@ OnDeallocRelease(loginController, connector, activities);
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
   Activity *activity = [activities objectAtIndex: path.row];
-  UITableViewCell *cell = [table dequeueReusableCellWithIdentifier: ACTIVITY_CELL_TYPE];
+  ActivityCell *cell = (ActivityCell *) [table dequeueReusableCellWithIdentifier: ACTIVITY_CELL_TYPE];
   if (!cell) {
-    cell = [[[UITableViewCell alloc] initWithFrame: CGRectZero reuseIdentifier: ACTIVITY_CELL_TYPE] autorelease];
+    [[NSBundle mainBundle] loadNibNamed: @"ActivityCell" owner: self options: nil];
+    cell = currentCell;
   }
-  cell.font = [UIFont systemFontOfSize: 11];
-  cell.text = RTFormat(@"[%@] %@ (%d min.)", activity.date, activity.comments, activity.minutes);
+  [cell displayActivity: activity];
   return cell;
+}
+
+- (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
+  return 69;
 }
 
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {

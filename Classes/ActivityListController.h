@@ -9,12 +9,16 @@
 
 @class LoginDialogController;
 @class RubyTimeConnector;
+@class ActivityCell;
 
 @interface ActivityListController : UITableViewController {
   LoginDialogController *loginController;
   RubyTimeConnector *connector;
   NSMutableArray *activities;
+  ActivityCell *currentCell;
 }
+
+@property (nonatomic, assign) IBOutlet ActivityCell *currentCell;
 
 - (void) loginSuccessful;
 
