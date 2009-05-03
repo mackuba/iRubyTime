@@ -13,7 +13,6 @@
 @implementation LoginDialogController
 
 @synthesize urlField, usernameField, passwordField, spinner;
-OnDeallocRelease(urlField, usernameField, passwordField, spinner, connector);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initializers
@@ -101,5 +100,13 @@ OnDeallocRelease(urlField, usernameField, passwordField, spinner, connector);
   [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
   // Release anything that's not essential, such as cached data
 }
+
+- (void) dealloc {
+  if (connector.delegate == self) {
+    connector.delegate = nil;
+  }
+  ReleaseAll(urlField, usernameField, passwordField, spinner, connector);
+  [super dealloc];
+}  
 
 @end

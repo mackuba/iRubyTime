@@ -23,7 +23,6 @@
 @implementation ActivityListController
 
 @synthesize currentCell;
-OnDeallocRelease(loginController, connector, activities);
 
 - (void) awakeFromNib {
   activities = [[NSMutableArray alloc] initWithCapacity: 20];
@@ -212,6 +211,17 @@ OnDeallocRelease(loginController, connector, activities);
   }
   // TODO: save activities to a file
   [self stopLoading];
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Cleanup
+
+- (void) dealloc {
+  if (connector.delegate == self) {
+    connector.delegate = nil;
+  }
+  ReleaseAll(loginController, connector, activities);
+  [super dealloc];
 }
 
 @end
