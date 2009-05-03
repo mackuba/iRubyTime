@@ -93,7 +93,7 @@
 #pragma mark Request sending
 
 - (void) authenticate {
-  Request *request = [[Request alloc] initWithURL: ServerPath(@"/activities?search_criteria[limit]=1")
+  Request *request = [[Request alloc] initWithURL: ServerPath(@"/users/authenticate")
                                              type: RTAuthenticationRequest];
   [self sendRequest: request];
 }
