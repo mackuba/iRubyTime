@@ -11,7 +11,7 @@
 
 @implementation Activity
 
-@synthesize minutes;
+@synthesize minutes, activityId;
 SynthesizeAndReleaseLater(date, comments);
 
 + (NSArray *) activitiesFromJSONString: (NSString *) jsonString {
@@ -30,6 +30,7 @@ SynthesizeAndReleaseLater(date, comments);
     self.comments = [json objectForKey: @"comments"];
     self.date = [json objectForKey: @"date"];
     self.minutes = [[json objectForKey: @"minutes"] intValue];
+    self.activityId = [[json objectForKey: @"id"] intValue];
   }
   return self;
 }

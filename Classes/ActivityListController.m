@@ -58,11 +58,13 @@ OnDeallocRelease(loginController, connector, activities);
 
 - (void) viewDidAppear: (BOOL) animated {
   [super viewDidAppear: animated];
-  loginController = [[LoginDialogController alloc] initWithNibName: @"LoginDialog"
-                                                            bundle: [NSBundle mainBundle]
-                                                         connector: connector
-                                                    mainController: self];
-  [self presentModalViewController: loginController animated: YES];
+  if (!connector.loggedIn) {
+    loginController = [[LoginDialogController alloc] initWithNibName: @"LoginDialog"
+                                                              bundle: [NSBundle mainBundle]
+                                                           connector: connector
+                                                      mainController: self];
+    [self presentModalViewController: loginController animated: YES];
+  }
 }
 
 - (void) loginSuccessful {
@@ -116,9 +118,7 @@ OnDeallocRelease(loginController, connector, activities);
 
 - (void) refreshClicked {
   [self startLoading];
-  
-  // TODO: reload list
-  [self performSelector: @selector(stopLoading) withObject: nil afterDelay: 2.0];
+  [connector getActivities];
 }
 
 - (void) startLoading {
@@ -210,6 +210,7 @@ OnDeallocRelease(loginController, connector, activities);
   for (Activity *activity in [receivedActivities reverseObjectEnumerator]) {
     [self addActivity: activity];
   }
+  // TODO: save activities to a file
   [self stopLoading];
 }
 

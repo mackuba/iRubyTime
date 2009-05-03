@@ -16,7 +16,7 @@
   NSString *username;
   NSString *password;
   NSString *authenticationString;
-  // NSInteger lastMessageId;
+  NSInteger lastActivityId;
   Request *currentRequest;
 }
 

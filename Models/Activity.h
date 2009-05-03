@@ -11,11 +11,13 @@
   NSString *comments;
   NSString *date;
   NSInteger minutes;
+  NSInteger activityId;
 }
 
 @property (nonatomic, copy) NSString *comments;
 @property (nonatomic, copy) NSString *date;
 @property (nonatomic) NSInteger minutes;
+@property (nonatomic) NSInteger activityId;
 
 + (NSArray *) activitiesFromJSONString: (NSString *) jsonString;
 - (id) initWithJSON: (NSDictionary *) json;

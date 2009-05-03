@@ -49,7 +49,7 @@
   if (self = [super init]) {
     [self setServerURL: url username: aUsername password: aPassword];
     delegate = aDelegate;
-    // lastMessageId = -1;
+    lastActivityId = -1;
     loggedIn = NO;
   }
   return self;
@@ -99,7 +99,13 @@
 }
 
 - (void) getActivities {
-  Request *request = [[Request alloc] initWithURL: ServerPath(@"/activities") type: RTActivityIndexRequest];
+  NSString *path;
+  if (lastActivityId == -1) {
+    path = ServerPath(@"/activities?search_criteria[limit]=20");
+  } else {
+    path = ServerPath(RTFormat(@"/activities?search_criteria[since_activity]=%d", lastActivityId));
+  }
+  Request *request = [[Request alloc] initWithURL: path type: RTActivityIndexRequest];
   [self sendRequest: request];
 }
 
@@ -147,9 +153,9 @@
       trimmedString = [request.receivedText trimmedString];
       if (trimmedString.length > 0) {
         activities = [Activity activitiesFromJSONString: trimmedString];
-        // if (activities.count > 0) {
-        //   lastMessageId = [[messages objectAtIndex: 0] messageId];
-        // }
+        if (activities.count > 0) {
+          lastActivityId = [[activities objectAtIndex: 0] activityId];
+        }
         SafeDelegateCall(activitiesReceived:, activities);
       }
       break;
