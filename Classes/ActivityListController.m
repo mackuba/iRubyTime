@@ -15,6 +15,11 @@
 
 #define ACTIVITY_CELL_TYPE @"activityCell"
 
+@interface ActivityListController ()
+- (void) startLoading;
+- (void) stopLoading;
+@end
+
 @implementation ActivityListController
 
 @synthesize currentCell;
@@ -25,14 +30,25 @@ OnDeallocRelease(loginController, connector, activities);
   connector = [[RubyTimeConnector alloc] init];
 }
 
-/*
 - (void)viewDidLoad {
-    [super viewDidLoad];
+  [super viewDidLoad];
 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+  // prepare "loading" spinner
+  spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+  spinner.frame = CGRectMake(0, 0, 36, 20);
+  spinner.contentMode = UIViewContentModeCenter;
+  
+  // prepare buttons for toolbar
+  loadingButton = [[UIBarButtonItem alloc] initWithCustomView: spinner];
+  reloadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemRefresh
+                                                               target: self
+                                                               action: @selector(refreshClicked)];
+  addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd
+                                                            target: nil
+                                                            action: nil];
+  self.navigationItem.leftBarButtonItem = reloadButton;
+  self.navigationItem.rightBarButtonItem = addButton;
 }
-*/
 
 /*
 - (void)viewWillAppear:(BOOL)animated {
@@ -57,7 +73,7 @@ OnDeallocRelease(loginController, connector, activities);
     //[self saveLoginAndPassword];
     connector.delegate = self;
   }
-  // TODO: spin spinner
+  [self startLoading];
   [connector getActivities];
 }
 
@@ -96,6 +112,23 @@ OnDeallocRelease(loginController, connector, activities);
 
 - (void) scrollTextViewToTop {
   [self.tableView setContentOffset: CGPointZero animated: YES];
+}
+
+- (void) refreshClicked {
+  [self startLoading];
+  
+  // TODO: reload list
+  [self performSelector: @selector(stopLoading) withObject: nil afterDelay: 2.0];
+}
+
+- (void) startLoading {
+  [spinner startAnimating];
+  self.navigationItem.leftBarButtonItem = loadingButton;
+}
+
+- (void) stopLoading {
+  self.navigationItem.leftBarButtonItem = reloadButton;
+  [spinner stopAnimating];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -177,6 +210,7 @@ OnDeallocRelease(loginController, connector, activities);
   for (Activity *activity in [receivedActivities reverseObjectEnumerator]) {
     [self addActivity: activity];
   }
+  [self stopLoading];
 }
 
 @end
