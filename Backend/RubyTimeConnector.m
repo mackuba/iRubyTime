@@ -19,16 +19,17 @@
 
 
 @interface NSObject (RubyTimeConnectorDelegate)
-//- activityCreated;
-- activitiesReceived: (NSArray *) activities;
-- authenticationSuccessful;
-- authenticationFailed;
-- requestFailedWithError: (NSError *) error;
+//- (void) activityCreated;
+- (void) activitiesReceived: (NSArray *) activities;
+- (void) authenticationSuccessful;
+- (void) authenticationFailed;
+- (void) requestFailedWithError: (NSError *) error;
 @end
 
 @interface RubyTimeConnector ()
 - (NSString *) generateAuthenticationStringFromUsername: (NSString *) username
                                                password: (NSString *) password;
+- (NSString *) fixURL: (NSString *) url;
 - (void) handleFinishedRequest: (Request *) request;
 - (void) cleanupRequest;
 - (void) sendRequest: (Request *) request;
@@ -70,7 +71,7 @@
   [serverURL autorelease];
   username = [aUsername copy];
   password = [aPassword copy];
-  serverURL = [url copy];
+  serverURL = url ? [[self fixURL: url] retain] : nil;
   // TODO: add http:// if not present, remove trailing slash, etc.
   authenticationString = [self generateAuthenticationStringFromUsername: username
                                                                password: password];
@@ -87,6 +88,20 @@
   } else {
     return nil;
   }
+}
+
+- (NSString *) fixURL: (NSString *) url {
+  url = [[url copy] autorelease];
+
+  if (![url hasPrefix: @"http://"]) {
+    url = [@"http://" stringByAppendingString: url];
+  }
+  
+  if ([url hasSuffix: @"/"]) {
+    url = [url substringToIndex: url.length - 1];
+  }
+  
+  return url;
 }
 
 // -------------------------------------------------------------------------------------------
