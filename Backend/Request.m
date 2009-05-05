@@ -5,12 +5,9 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "NSString+BSJSONAdditions.h"
-#import "Constants.h"
 #import "Request.h"
 #import "Utils.h"
-
-#define SetHeader(key, value) [self setValue: value forHTTPHeaderField: key]
+#import "NSString+BSJSONAdditions.h"
 
 @implementation Request
 
@@ -18,7 +15,7 @@
 SynthesizeAndReleaseLater(response, receivedText, sentText, connection);
 
 // -------------------------------------------------------------------------------------------
-#pragma mark Initializers
+#pragma mark Initialization
 
 - (id) initWithURL: (NSString *) url
             method: (NSString *) method
@@ -32,9 +29,9 @@ SynthesizeAndReleaseLater(response, receivedText, sentText, connection);
     self.HTTPMethod = method;
     receivedText = [[NSMutableString alloc] init];
     sentText = [text copy];
-    SetHeader(@"Accept", @"application/json");
+    [self setValue: @"application/json" forHTTPHeaderField: @"Accept"];
     if (sentText) {
-      //SetHeader(@"Content-Type", @"application/json");
+      // [self setValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
       self.HTTPBody = [sentText dataUsingEncoding: NSUTF8StringEncoding];
     }
   }

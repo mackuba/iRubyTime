@@ -5,51 +5,31 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "LoginDialogController.h"
 #import "ActivityListController.h"
+#import "LoginDialogController.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
 
 @implementation LoginDialogController
 
 @synthesize urlField, usernameField, passwordField, spinner;
+OnDeallocRelease(urlField, usernameField, passwordField, spinner, connector);
 
 // -------------------------------------------------------------------------------------------
-#pragma mark Initializers
+#pragma mark Initialization
 
-- (id) initWithNibName: (NSString *) nibName
-                bundle: (NSBundle *) bundle
-             connector: (RubyTimeConnector *) rtConnector
-        mainController: (ActivityListController *) controller {
-  if (self = [super initWithNibName: nibName bundle: bundle]) {
+- (id) initWithConnector: (RubyTimeConnector *) rtConnector {
+  self = [super initWithNibName: @"LoginDialog" bundle: [NSBundle mainBundle]];
+  if (self) {
     connector = [rtConnector retain];
-    connector.delegate = self;
-    mainController = controller;
+    Observe(connector, @"authenticationFailed", authenticationFailed);
   }
   return self;
 }
 
-// -------------------------------------------------------------------------------------------
-#pragma mark View initialization
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-*/
-
 - (void) viewDidAppear: (BOOL) animated {
   [urlField becomeFirstResponder];
 }
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Action handlers
@@ -82,31 +62,11 @@
 }
 
 // -------------------------------------------------------------------------------------------
-#pragma mark RubyTimeConnector delegate callbacks
-
-- (void) authenticationSuccessful {
-  [mainController loginSuccessful];
-}
+#pragma mark Notification callbacks
 
 - (void) authenticationFailed {
   [spinner stopAnimating];
   [Utils showAlertWithTitle: @"Error" content: @"Incorrect username or password."];
 }
-
-// -------------------------------------------------------------------------------------------
-#pragma mark Cleaning up
-
-- (void) didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
-  // Release anything that's not essential, such as cached data
-}
-
-- (void) dealloc {
-  if (connector.delegate == self) {
-    connector.delegate = nil;
-  }
-  ReleaseAll(urlField, usernameField, passwordField, spinner, connector);
-  [super dealloc];
-}  
 
 @end

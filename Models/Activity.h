@@ -19,8 +19,7 @@
 @property (nonatomic) NSInteger minutes;
 @property (nonatomic) NSInteger activityId;
 
-+ (NSArray *) activitiesFromJSONString: (NSString *) jsonString;
-- (id) initWithJSON: (NSDictionary *) json;
 - (NSString *) hourString;
+- (BOOL) isEqualToActivity: (Activity *) other;
 
 @end

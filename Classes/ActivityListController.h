@@ -14,12 +14,12 @@
 @interface ActivityListController : UITableViewController {
   LoginDialogController *loginController;
   RubyTimeConnector *connector;
-  NSMutableArray *activities;
   ActivityCell *currentCell;
   UIActivityIndicatorView *spinner;
 }
 
 @property (nonatomic, assign) IBOutlet ActivityCell *currentCell;
+@property (nonatomic, retain) IBOutlet RubyTimeConnector *connector;
 
 - (void) loginSuccessful;
 

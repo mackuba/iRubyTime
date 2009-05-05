@@ -5,29 +5,25 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "ActivityListController.h"
-#import "RubyTimeAppDelegate.h"
-#import "RubyTimeConnector.h"
-#import "LoginDialogController.h"
-#import "Utils.h"
 #import "Activity.h"
 #import "ActivityCell.h"
+#import "ActivityListController.h"
+#import "LoginDialogController.h"
+#import "RubyTimeAppDelegate.h"
+#import "RubyTimeConnector.h"
+#import "Utils.h"
 
 #define ACTIVITY_CELL_TYPE @"activityCell"
 
-@interface ActivityListController ()
-@end
-
 @implementation ActivityListController
 
-@synthesize currentCell;
+@synthesize currentCell, connector;
+OnDeallocRelease(loginController, connector, spinner);
 
-- (void) awakeFromNib {
-  activities = [[NSMutableArray alloc] initWithCapacity: 20];
-  connector = [[RubyTimeConnector alloc] init];
-}
+// -------------------------------------------------------------------------------------------
+#pragma mark Initialization
 
-- (void)viewDidLoad {
+- (void) viewDidLoad {
   [super viewDidLoad];
 
   // prepare "loading" spinner
@@ -42,83 +38,73 @@
                                                                              action: nil]; // TODO: implement action
   self.navigationItem.leftBarButtonItem = loadingButton;
   self.navigationItem.rightBarButtonItem = addButton;
+  
+  Observe(connector, @"authenticationSuccessful", loginSuccessful);
+  Observe(connector, @"updateActivities", activitiesLoading);
+  Observe(connector, @"activitiesReceived", activitiesReceived:);
 }
-
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-*/
 
 - (void) viewDidAppear: (BOOL) animated {
   [super viewDidAppear: animated];
   if (!connector.loggedIn) {
-    loginController = [[LoginDialogController alloc] initWithNibName: @"LoginDialog"
-                                                              bundle: [NSBundle mainBundle]
-                                                           connector: connector
-                                                      mainController: self];
+    loginController = [[LoginDialogController alloc] initWithConnector: connector];
     [self presentModalViewController: loginController animated: YES];
   }
 }
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Action handlers
+
+- (void) scrollTextViewToTop {
+  [self.tableView setContentOffset: CGPointZero animated: YES];
+}
+
+- (void) addActivitiesToList: (NSInteger) amount {
+  NSMutableArray *rows = [[NSMutableArray alloc] initWithCapacity: amount];
+  for (int i = 0; i < amount; i++) {
+    [rows addObject: [NSIndexPath indexPathForRow: i inSection: 0]];
+  }
+
+  [self.tableView beginUpdates];
+  [self.tableView insertRowsAtIndexPaths: rows withRowAnimation: UITableViewRowAnimationTop];
+  [self.tableView endUpdates];
+  
+  [rows release];
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Notification callbacks
 
 - (void) loginSuccessful {
   if (loginController) {
     [loginController dismissModalViewControllerAnimated: YES];
     [loginController release];
     loginController = nil;
-    //[self saveLoginAndPassword];
-    connector.delegate = self;
   }
+}
+
+- (void) activitiesLoading {
   [spinner startAnimating];
-  [connector getActivities];
 }
 
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-*/
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
-    // Release anything that's not essential, such as cached data
-}
-
-- (void) addActivity: (Activity *) activity {
-  [self.tableView beginUpdates];
-  // TODO: mass add
-  [activities insertObject: activity atIndex: 0];
-  NSIndexPath *row = [NSIndexPath indexPathForRow: 0 inSection: 0];
-  [self.tableView insertRowsAtIndexPaths: RTArray(row) withRowAnimation: UITableViewRowAnimationTop];
-  [self.tableView endUpdates];
-}
-
-- (void) scrollTextViewToTop {
-  [self.tableView setContentOffset: CGPointZero animated: YES];
+- (void) activitiesReceived: (NSNotification *) notification {
+  NSArray *activities = [[notification userInfo] objectForKey: @"activities"];
+  if (activities.count > 0) {
+    [self scrollTextViewToTop];
+  }
+  [self addActivitiesToList: activities.count];
+  [spinner stopAnimating];
 }
 
 // -------------------------------------------------------------------------------------------
-#pragma mark Table view delegate / data source
+#pragma mark Table view delegate & data source
 
 - (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
-  return activities.count;
+  return connector.activities.count;
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  Activity *activity = [activities objectAtIndex: path.row];
+  Activity *activity = [connector.activities objectAtIndex: path.row];
   ActivityCell *cell = (ActivityCell *) [table dequeueReusableCellWithIdentifier: ACTIVITY_CELL_TYPE];
   if (!cell) {
     [[NSBundle mainBundle] loadNibNamed: @"ActivityCell" owner: self options: nil];
@@ -133,76 +119,7 @@
 }
 
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
-	// [self.navigationController pushViewController:anotherViewController];
-	// [anotherViewController release];
-}
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-// -------------------------------------------------------------------------------------------
-#pragma mark RubyTimeConnector delegate callbacks
-
-- (void) activitiesReceived: (NSArray *) receivedActivities {
-  if (receivedActivities.count > 0) {
-    [self scrollTextViewToTop];
-  }
-  for (Activity *activity in [receivedActivities reverseObjectEnumerator]) {
-    [self addActivity: activity];
-  }
-  // TODO: save activities to a file
-  [spinner stopAnimating];
-}
-
-// -------------------------------------------------------------------------------------------
-#pragma mark Cleanup
-
-- (void) dealloc {
-  if (connector.delegate == self) {
-    connector.delegate = nil;
-  }
-  ReleaseAll(loginController, connector, activities, spinner);
-  [super dealloc];
+  // TODO: show activity details controller
 }
 
 @end
-

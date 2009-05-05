@@ -13,6 +13,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		580504850FA8E9B500F47490 /* ActivityListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 580504840FA8E9B500F47490 /* ActivityListController.m */; };
+		5831E83F0FB0B2A5008680E5 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831E83E0FB0B2A5008680E5 /* DataManager.m */; };
 		588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB020FADD47C00460689 /* MIT-LICENSE.txt */; };
 		588BAB050FADD47C00460689 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB030FADD47C00460689 /* README.txt */; };
 		588BAB130FADD78B00460689 /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB0F0FADD78B00460689 /* ActivityCell.xib */; };
@@ -43,6 +44,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		580504830FA8E9B500F47490 /* ActivityListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityListController.h; sourceTree = "<group>"; };
 		580504840FA8E9B500F47490 /* ActivityListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityListController.m; sourceTree = "<group>"; };
+		5831E83D0FB0B2A5008680E5 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		5831E83E0FB0B2A5008680E5 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		588BAB020FADD47C00460689 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
 		588BAB030FADD47C00460689 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		588BAB0F0FADD78B00460689 /* ActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
@@ -63,7 +66,6 @@
 		58CA2D330FA78D18007A6A65 /* NSScanner+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		58CA2D340FA78D18007A6A65 /* NSString+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BSJSONAdditions.h"; sourceTree = "<group>"; };
 		58CA2D350FA78D18007A6A65 /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BSJSONAdditions.m"; sourceTree = "<group>"; };
-		58CA2D3C0FA78DED007A6A65 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		58CA2D3D0FA78DED007A6A65 /* NSDataMBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataMBBase64.h; sourceTree = "<group>"; };
 		58CA2D3E0FA78DED007A6A65 /* NSDataMBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMBBase64.m; sourceTree = "<group>"; };
 		58CA2D4A0FA7995E007A6A65 /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
@@ -192,9 +194,10 @@
 				58CA2D4B0FA7995E007A6A65 /* Request.m */,
 				58CA2D4C0FA7995E007A6A65 /* RubyTimeConnector.h */,
 				58CA2D4D0FA7995E007A6A65 /* RubyTimeConnector.m */,
-				58CA2D3C0FA78DED007A6A65 /* Constants.h */,
 				58CA2D3D0FA78DED007A6A65 /* NSDataMBBase64.h */,
 				58CA2D3E0FA78DED007A6A65 /* NSDataMBBase64.m */,
+				5831E83D0FB0B2A5008680E5 /* DataManager.h */,
+				5831E83E0FB0B2A5008680E5 /* DataManager.m */,
 			);
 			path = Backend;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				58CA2DAE0FA7AE6A007A6A65 /* Activity.m in Sources */,
 				580504850FA8E9B500F47490 /* ActivityListController.m in Sources */,
 				588BAB190FADD79B00460689 /* ActivityCell.m in Sources */,
+				5831E83F0FB0B2A5008680E5 /* DataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -5,22 +5,51 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "RubyTimeAppDelegate.h"
 #import "ActivityListController.h"
+#import "RubyTimeAppDelegate.h"
+#import "RubyTimeConnector.h"
 #import "Utils.h"
+
+@interface RubyTimeAppDelegate()
+- (void) initApplication;
+@end
 
 @implementation RubyTimeAppDelegate
 
-SynthesizeAndReleaseLater(window, navigationController);
+@synthesize window, navigationController, activityListController;
+OnDeallocRelease(window, navigationController, connector, activityListController);
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Initialization
+
+- (void) initApplication {
+  connector = [[RubyTimeConnector alloc] init]; // TODO: load password if possible
+  activityListController.connector = connector;
+  Observe(connector, @"authenticationSuccessful", loginSuccessful);
+  // TODO: send auth request if password is set
+  // TODO: save activities to file when they're received
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Notification callbacks
+
+- (void) loginSuccessful {
+  // TODO: save login & password
+  // TODO: fetch project list first
+  [connector updateActivities];
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark UIApplication callbacks
 
 - (void) applicationDidFinishLaunching: (UIApplication *) application {
-  // Configure and show the window
+  [self initApplication];
   [window addSubview: [navigationController view]];
   [window makeKeyAndVisible];
 }
 
 - (void) applicationWillTerminate: (UIApplication *) application {
-  // Save data if appropriate
+  // TODO: save data
 }
 
 @end

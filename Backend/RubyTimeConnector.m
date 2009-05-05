@@ -5,59 +5,44 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "NSDataMBBase64.h"
-#import "Constants.h"
-#import "RubyTimeConnector.h"
-#import "Request.h"
-#import "Utils.h"
 #import "Activity.h"
+#import "DataManager.h"
+#import "Request.h"
+#import "RubyTimeConnector.h"
+#import "Utils.h"
+#import "NSDataMBBase64.h"
 
 #define ServerPath(...) [serverURL stringByAppendingFormat: __VA_ARGS__]
 
-#define SafeDelegateCall(method, ...) \
-  if ([delegate respondsToSelector: @selector(method)]) [delegate method __VA_ARGS__]
-
-
-@interface NSObject (RubyTimeConnectorDelegate)
-//- (void) activityCreated;
-- (void) activitiesReceived: (NSArray *) activities;
-- (void) authenticationSuccessful;
-- (void) authenticationFailed;
-- (void) requestFailedWithError: (NSError *) error;
-@end
-
 @interface RubyTimeConnector ()
-- (NSString *) generateAuthenticationStringFromUsername: (NSString *) username
-                                               password: (NSString *) password;
+- (NSString *) generateAuthStringFromUsername: (NSString *) username password: (NSString *) password;
 - (NSString *) fixURL: (NSString *) url;
 - (void) handleFinishedRequest: (Request *) request;
 - (void) cleanupRequest;
 - (void) sendRequest: (Request *) request;
 @end
 
-
 @implementation RubyTimeConnector
 
-@synthesize serverURL, username, password, delegate, loggedIn;
+@synthesize serverURL, username, password, loggedIn;
 
 // -------------------------------------------------------------------------------------------
-#pragma mark Initializers
+#pragma mark Initialization
 
 - (id) initWithServerURL: (NSString *) url
                 username: (NSString *) aUsername
-                password: (NSString *) aPassword
-                delegate: (id) aDelegate {
+                password: (NSString *) aPassword {
   if (self = [super init]) {
     [self setServerURL: url username: aUsername password: aPassword];
-    delegate = aDelegate;
     lastActivityId = -1;
     loggedIn = NO;
+    dataManager = [[DataManager alloc] initWithDelegate: self];
   }
   return self;
 }
 
 - (id) init {
-  return [self initWithServerURL: nil username: nil password: nil delegate: nil];
+  return [self initWithServerURL: nil username: nil password: nil];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -72,22 +57,16 @@
   username = [aUsername copy];
   password = [aPassword copy];
   serverURL = url ? [[self fixURL: url] retain] : nil;
-  // TODO: add http:// if not present, remove trailing slash, etc.
-  authenticationString = [self generateAuthenticationStringFromUsername: username
-                                                               password: password];
-  [authenticationString retain];
+  authenticationString = [[self generateAuthStringFromUsername: username password: password] retain];
 }
 
-- (NSString *) generateAuthenticationStringFromUsername: (NSString *) aUsername
-                                               password: (NSString *) aPassword {
-  if (aUsername && aPassword) {
-    NSString *authString = RTFormat(@"%@:%@", aUsername, aPassword);
-    NSData *data = [authString dataUsingEncoding: NSUTF8StringEncoding];
-    NSString *encoded = RTFormat(@"Basic %@", [data base64Encoding]);
-    return encoded;
-  } else {
-    return nil;
-  }
+- (NSString *) generateAuthStringFromUsername: (NSString *) aUsername password: (NSString *) aPassword {
+  if (!aUsername || !aPassword) return nil;
+
+  NSString *authString = RTFormat(@"%@:%@", aUsername, aPassword);
+  NSData *data = [authString dataUsingEncoding: NSUTF8StringEncoding];
+  NSString *encoded = RTFormat(@"Basic %@", [data base64Encoding]);
+  return encoded;
 }
 
 - (NSString *) fixURL: (NSString *) url {
@@ -96,12 +75,15 @@
   if (![url hasPrefix: @"http://"]) {
     url = [@"http://" stringByAppendingString: url];
   }
-  
   if ([url hasSuffix: @"/"]) {
     url = [url substringToIndex: url.length - 1];
   }
   
   return url;
+}
+
+- (NSArray *) activities {
+  return dataManager.activities;
 }
 
 // -------------------------------------------------------------------------------------------
@@ -113,14 +95,11 @@
   [self sendRequest: request];
 }
 
-- (void) getActivities {
-  NSString *path;
-  if (lastActivityId == -1) {
-    path = ServerPath(@"/activities?search_criteria[limit]=20");
-  } else {
-    path = ServerPath(RTFormat(@"/activities?search_criteria[since_activity]=%d", lastActivityId));
-  }
-  Request *request = [[Request alloc] initWithURL: path type: RTActivityIndexRequest];
+- (void) updateActivities {
+  Notify(@"updateActivities");
+  NSString *path = (lastActivityId == -1) ? @"/activities?search_criteria[limit]=20" :
+    RTFormat(@"/activities?search_criteria[since_activity]=%d", lastActivityId);
+  Request *request = [[Request alloc] initWithURL: ServerPath(path) type: RTActivityIndexRequest];
   [self sendRequest: request];
 }
 
@@ -160,38 +139,40 @@
   NSArray *activities;
   switch (request.type) {
     case RTAuthenticationRequest:
-      SafeDelegateCall(authenticationSuccessful);
+      Notify(@"authenticationSuccessful");
       loggedIn = YES;
       break;
     
     case RTActivityIndexRequest:
       trimmedString = [request.receivedText trimmedString];
       if (trimmedString.length > 0) {
-        activities = [Activity activitiesFromJSONString: trimmedString];
+        activities = [dataManager activitiesFromJSONString: trimmedString];
         if (activities.count > 0) {
           lastActivityId = [[activities objectAtIndex: 0] activityId];
         }
-        SafeDelegateCall(activitiesReceived:, activities);
+        [dataManager addActivities: activities];
       }
       break;
   }
 }
 
 - (void) connection: (NSURLConnection *) connection didFailWithError: (NSError *) error {
-  SafeDelegateCall(requestFailedWithError:, error);
-  [self cleanupRequest];
+  if (error.code != NSURLErrorUserCancelledAuthentication) {
+    NotifyWithData(@"requestFailed", RTDict(error, @"error"));
+    [self cleanupRequest];
+  }
 }
 
 - (void) connection: (NSURLConnection *) connection
          didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *) challenge {
-  SafeDelegateCall(authenticationFailed);
+  Notify(@"authenticationFailed");
   // TODO: let the user try again and reuse the connection
   [[challenge sender] cancelAuthenticationChallenge: challenge];
   [self cleanupRequest];
 }
 
 // -------------------------------------------------------------------------------------------
-#pragma mark Cleaning up
+#pragma mark Cleanup
 
 - (void) cleanupRequest {
   [currentRequest release];
@@ -201,7 +182,8 @@
 - (void) dealloc {
   [currentRequest.connection cancel];
   [self cleanupRequest];
-  ReleaseAll(serverURL, username, password, authenticationString);
+  dataManager.delegate = nil;
+  ReleaseAll(serverURL, username, password, authenticationString, dataManager);
   [super dealloc];
 }
 
