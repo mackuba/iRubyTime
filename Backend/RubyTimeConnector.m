@@ -103,6 +103,12 @@
   [self sendRequest: request];
 }
 
+- (void) loadProjects {
+  Notify(@"loadProjects");
+  Request *request = [[Request alloc] initWithURL: ServerPath(@"/projects") type: RTProjectIndexRequest];
+  [self sendRequest: request];
+}
+
 - (void) sendRequest: (Request *) request {
   if (currentRequest) {
     [currentRequest.connection cancel];
@@ -136,7 +142,7 @@
 
 - (void) handleFinishedRequest: (Request *) request {
   NSString *trimmedString;
-  NSArray *activities;
+  NSArray *records;
   switch (request.type) {
     case RTAuthenticationRequest:
       Notify(@"authenticationSuccessful");
@@ -146,11 +152,19 @@
     case RTActivityIndexRequest:
       trimmedString = [request.receivedText trimmedString];
       if (trimmedString.length > 0) {
-        activities = [dataManager activitiesFromJSONString: trimmedString];
-        if (activities.count > 0) {
-          lastActivityId = [[activities objectAtIndex: 0] activityId];
+        records = [dataManager activitiesFromJSONString: trimmedString];
+        if (records.count > 0) {
+          lastActivityId = [[records objectAtIndex: 0] activityId];
         }
-        [dataManager addActivities: activities];
+        [dataManager addActivities: records];
+      }
+      break;
+    
+    case RTProjectIndexRequest:
+      trimmedString = [request.receivedText trimmedString];
+      if (trimmedString.length > 0) {
+        records = [dataManager projectsFromJSONString: trimmedString];
+        [dataManager setProjects: records];
       }
       break;
   }

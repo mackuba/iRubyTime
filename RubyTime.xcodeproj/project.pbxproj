@@ -31,6 +31,7 @@
 		58CA2D4E0FA7995E007A6A65 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4B0FA7995E007A6A65 /* Request.m */; };
 		58CA2D4F0FA7995E007A6A65 /* RubyTimeConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4D0FA7995E007A6A65 /* RubyTimeConnector.m */; };
 		58CA2DAE0FA7AE6A007A6A65 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2DAD0FA7AE6A007A6A65 /* Activity.m */; };
+		58E9FFC10FB22F9D00CDA046 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E9FFC00FB22F9D00CDA046 /* Project.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,8 @@
 		58CA2D4D0FA7995E007A6A65 /* RubyTimeConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyTimeConnector.m; sourceTree = "<group>"; };
 		58CA2DAC0FA7AE6A007A6A65 /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
 		58CA2DAD0FA7AE6A007A6A65 /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
+		58E9FFBF0FB22F9D00CDA046 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
+		58E9FFC00FB22F9D00CDA046 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,6 +210,8 @@
 			children = (
 				58CA2DAC0FA7AE6A007A6A65 /* Activity.h */,
 				58CA2DAD0FA7AE6A007A6A65 /* Activity.m */,
+				58E9FFBF0FB22F9D00CDA046 /* Project.h */,
+				58E9FFC00FB22F9D00CDA046 /* Project.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 				580504850FA8E9B500F47490 /* ActivityListController.m in Sources */,
 				588BAB190FADD79B00460689 /* ActivityCell.m in Sources */,
 				5831E83F0FB0B2A5008680E5 /* DataManager.m in Sources */,
+				58E9FFC10FB22F9D00CDA046 /* Project.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

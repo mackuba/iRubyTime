@@ -9,7 +9,8 @@
 
 typedef enum {
   RTAuthenticationRequest = 1,
-  RTActivityIndexRequest
+  RTActivityIndexRequest,
+  RTProjectIndexRequest
 } RTRequestType;
 
 @interface Request : NSMutableURLRequest {

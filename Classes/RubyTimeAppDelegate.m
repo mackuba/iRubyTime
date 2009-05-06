@@ -26,6 +26,7 @@ OnDeallocRelease(window, navigationController, connector, activityListController
   connector = [[RubyTimeConnector alloc] init]; // TODO: load password if possible
   activityListController.connector = connector;
   Observe(connector, @"authenticationSuccessful", loginSuccessful);
+  Observe(connector, @"projectsReceived", projectsReceived);
   // TODO: send auth request if password is set
   // TODO: save activities to file when they're received
 }
@@ -35,7 +36,10 @@ OnDeallocRelease(window, navigationController, connector, activityListController
 
 - (void) loginSuccessful {
   // TODO: save login & password
-  // TODO: fetch project list first
+  [connector loadProjects];
+}
+
+- (void) projectsReceived {
   [connector updateActivities];
 }
 

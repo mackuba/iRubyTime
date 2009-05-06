@@ -7,6 +7,7 @@
 
 #import "ActivityCell.h"
 #import "Activity.h"
+#import "Project.h"
 #import "Utils.h"
 
 @implementation ActivityCell
@@ -16,7 +17,7 @@ SynthesizeAndReleaseLater(dateLabel, hoursLabel, commentsLabel, projectLabel);
 - (void) displayActivity: (Activity *) activity {
   self.commentsLabel.text = activity.comments;
   self.dateLabel.text = activity.date;
-  self.projectLabel.text = @"Secret project"; // TODO: get list of projects
+  self.projectLabel.text = activity.project.name;
   self.hoursLabel.text = [activity hourString];
 }
 

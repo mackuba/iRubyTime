@@ -40,7 +40,7 @@ OnDeallocRelease(loginController, connector, spinner);
   self.navigationItem.rightBarButtonItem = addButton;
   
   Observe(connector, @"authenticationSuccessful", loginSuccessful);
-  Observe(connector, @"updateActivities", activitiesLoading);
+  Observe(connector, @"loadProjects", loading);
   Observe(connector, @"activitiesReceived", activitiesReceived:);
 }
 
@@ -83,7 +83,7 @@ OnDeallocRelease(loginController, connector, spinner);
   }
 }
 
-- (void) activitiesLoading {
+- (void) loading {
   [spinner startAnimating];
 }
 
@@ -115,7 +115,7 @@ OnDeallocRelease(loginController, connector, spinner);
 }
 
 - (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
-  return 69;
+  return 69; // TODO: make variable height
 }
 
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {

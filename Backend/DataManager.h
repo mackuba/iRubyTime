@@ -8,14 +8,18 @@
 #import <Foundation/Foundation.h>
 
 @class Activity;
+@class Project;
 
 @interface DataManager : NSObject {
   NSMutableArray *activities;
   NSMutableDictionary *activityHash;
+  NSArray *projects;
+  NSMutableDictionary *projectHash;
   __weak id delegate;
 }
 
 @property (nonatomic, readonly) NSArray *activities;
+@property (nonatomic, retain) NSArray *projects;
 @property (nonatomic, assign) id delegate;
 
 - (id) initWithDelegate: (id) delegate;
@@ -23,5 +27,7 @@
 - (void) addActivities: (NSArray *) newActivities;
 - (Activity *) activityFromJSON: (NSDictionary *) json;
 - (NSArray *) activitiesFromJSONString: (NSString *) jsonString;
+- (Project *) projectFromJSON: (NSDictionary *) json;
+- (NSArray *) projectsFromJSONString: (NSString *) jsonString;
 
 @end
