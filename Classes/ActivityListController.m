@@ -39,6 +39,9 @@ OnDeallocRelease(loginController, connector, spinner);
   self.navigationItem.leftBarButtonItem = loadingButton;
   self.navigationItem.rightBarButtonItem = addButton;
   
+  [loadingButton release];
+  [addButton release];
+  
   Observe(connector, @"authenticationSuccessful", loginSuccessful);
   Observe(connector, @"loadProjects", loading);
   Observe(connector, @"activitiesReceived", activitiesReceived:);

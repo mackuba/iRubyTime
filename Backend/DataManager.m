@@ -43,6 +43,7 @@ OnDeallocRelease(activities, activityHash, projects, projectHash);
     }
   }
   NotifyWithDataAs(delegate ? delegate : self, @"activitiesReceived", RTDict(newlyAdded, @"activities"));
+  [newlyAdded release];
 }
 
 - (Activity *) activityFromJSON: (NSDictionary *) json {
