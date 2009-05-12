@@ -17,10 +17,10 @@
 		588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB020FADD47C00460689 /* MIT-LICENSE.txt */; };
 		588BAB050FADD47C00460689 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB030FADD47C00460689 /* README.txt */; };
 		588BAB130FADD78B00460689 /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB0F0FADD78B00460689 /* ActivityCell.xib */; };
-		588BAB140FADD78B00460689 /* ActivityListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB100FADD78B00460689 /* ActivityListController.xib */; };
 		588BAB150FADD78B00460689 /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB110FADD78B00460689 /* LoginDialog.xib */; };
 		588BAB160FADD78B00460689 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB120FADD78B00460689 /* MainWindow.xib */; };
 		588BAB190FADD79B00460689 /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 588BAB180FADD79B00460689 /* ActivityCell.m */; };
+		58C0A0ED0FBA000700AF8C14 /* ActivityList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */; };
 		58CA2D0D0FA77FF9007A6A65 /* LoginDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D0C0FA77FF9007A6A65 /* LoginDialogController.m */; };
 		58CA2D1D0FA78A61007A6A65 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D1C0FA78A61007A6A65 /* Utils.m */; };
 		58CA2D360FA78D18007A6A65 /* NSArray+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D2F0FA78D18007A6A65 /* NSArray+BSJSONAdditions.m */; };
@@ -50,11 +50,11 @@
 		588BAB020FADD47C00460689 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
 		588BAB030FADD47C00460689 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		588BAB0F0FADD78B00460689 /* ActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
-		588BAB100FADD78B00460689 /* ActivityListController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityListController.xib; sourceTree = "<group>"; };
 		588BAB110FADD78B00460689 /* LoginDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginDialog.xib; sourceTree = "<group>"; };
 		588BAB120FADD78B00460689 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		588BAB170FADD79B00460689 /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
 		588BAB180FADD79B00460689 /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
+		58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityList.xib; sourceTree = "<group>"; };
 		58CA2D0B0FA77FF9007A6A65 /* LoginDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDialogController.h; sourceTree = "<group>"; };
 		58CA2D0C0FA77FF9007A6A65 /* LoginDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDialogController.m; sourceTree = "<group>"; };
 		58CA2D1B0FA78A61007A6A65 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -165,8 +165,8 @@
 		588BAB0E0FADD76E00460689 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */,
 				588BAB0F0FADD78B00460689 /* ActivityCell.xib */,
-				588BAB100FADD78B00460689 /* ActivityListController.xib */,
 				588BAB110FADD78B00460689 /* LoginDialog.xib */,
 				588BAB120FADD78B00460689 /* MainWindow.xib */,
 				588BAB170FADD79B00460689 /* ActivityCell.h */,
@@ -268,9 +268,9 @@
 				588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */,
 				588BAB050FADD47C00460689 /* README.txt in Resources */,
 				588BAB130FADD78B00460689 /* ActivityCell.xib in Resources */,
-				588BAB140FADD78B00460689 /* ActivityListController.xib in Resources */,
 				588BAB150FADD78B00460689 /* LoginDialog.xib in Resources */,
 				588BAB160FADD78B00460689 /* MainWindow.xib in Resources */,
+				58C0A0ED0FBA000700AF8C14 /* ActivityList.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
