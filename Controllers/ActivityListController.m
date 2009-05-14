@@ -9,6 +9,7 @@
 #import "ActivityCell.h"
 #import "ActivityListController.h"
 #import "LoginDialogController.h"
+#import "NewActivityDialogController.h"
 #import "RubyTimeAppDelegate.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
@@ -34,8 +35,8 @@ OnDeallocRelease(loginController, connector, spinner);
   // prepare buttons for toolbar
   UIBarButtonItem *loadingButton = [[UIBarButtonItem alloc] initWithCustomView: spinner];
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd
-                                                                             target: nil
-                                                                             action: nil]; // TODO: implement action
+                                                                             target: self
+                                                                             action: @selector(showNewActivityDialog)];
   self.navigationItem.leftBarButtonItem = loadingButton;
   self.navigationItem.rightBarButtonItem = addButton;
   
@@ -45,6 +46,8 @@ OnDeallocRelease(loginController, connector, spinner);
   Observe(connector, @"authenticationSuccessful", loginSuccessful);
   Observe(connector, @"loadProjects", loading);
   Observe(connector, @"activitiesReceived", activitiesReceived:);
+  Observe(connector, @"activityCreated", activityCreated:);
+  Observe(nil, @"newActivityDialogCancelled", newActivityDialogCancelled:);
 }
 
 - (void) viewDidAppear: (BOOL) animated {
@@ -75,6 +78,22 @@ OnDeallocRelease(loginController, connector, spinner);
   [rows release];
 }
 
+- (void) loading {
+  [spinner startAnimating];
+}
+
+- (void) showNewActivityDialog {
+  NewActivityDialogController *dialog = [[NewActivityDialogController alloc] initWithConnector: connector];
+  UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController: dialog];
+  [self presentModalViewController: navigation animated: YES];
+  [navigation release];
+  [dialog release];
+}
+
+- (void) closeNewActivityDialog {
+  [self dismissModalViewControllerAnimated: YES];
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Notification callbacks
 
@@ -86,10 +105,6 @@ OnDeallocRelease(loginController, connector, spinner);
   }
 }
 
-- (void) loading {
-  [spinner startAnimating];
-}
-
 - (void) activitiesReceived: (NSNotification *) notification {
   NSArray *activities = [[notification userInfo] objectForKey: @"activities"];
   if (activities.count > 0) {
@@ -97,6 +112,15 @@ OnDeallocRelease(loginController, connector, spinner);
   }
   [self addActivitiesToList: activities.count];
   [spinner stopAnimating];
+}
+
+- (void) activityCreated: (NSNotification *) notification {
+  // TODO: add activity to list
+  [self closeNewActivityDialog];
+}
+
+- (void) newActivityDialogCancelled: (NSNotification *) notification {
+  [self closeNewActivityDialog];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -123,6 +147,7 @@ OnDeallocRelease(loginController, connector, spinner);
 
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
   // TODO: show activity details controller
+  [tableView deselectRowAtIndexPath: indexPath animated: YES];
 }
 
 @end

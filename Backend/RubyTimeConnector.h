@@ -7,8 +7,9 @@
 
 #import <Foundation/Foundation.h>
 
-@class Request;
+@class Activity;
 @class DataManager;
+@class Request;
 
 @interface RubyTimeConnector : NSObject {
   BOOL loggedIn;
@@ -35,7 +36,7 @@
 - (void) authenticate;
 - (void) updateActivities;
 - (void) loadProjects;
-// - (void) createActivity: (Activity *) activity;
+- (void) createActivity: (Activity *) activity;
 - (void) setServerURL: (NSString *) url
              username: (NSString *) aUsername
              password: (NSString *) aPassword;

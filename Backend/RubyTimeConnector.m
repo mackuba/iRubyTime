@@ -103,6 +103,11 @@
   [self sendRequest: request];
 }
 
+- (void) createActivity: (Activity *) activity {
+  // TODO: send request
+  NotifyWithData(@"activityCreated", RTDict(activity, @"activity"));
+}
+
 - (void) loadProjects {
   Notify(@"loadProjects");
   Request *request = [[Request alloc] initWithURL: ServerPath(@"/projects") type: RTProjectIndexRequest];
