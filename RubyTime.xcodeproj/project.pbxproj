@@ -37,6 +37,8 @@
 		58E9FFC10FB22F9D00CDA046 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E9FFC00FB22F9D00CDA046 /* Project.m */; };
 		58EB65700FBCEF4400717C36 /* ActivityDateDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EB656F0FBCEF4400717C36 /* ActivityDateDialog.xib */; };
 		58EB65740FBDCDFE00717C36 /* ActivityDateDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58EB65730FBDCDFE00717C36 /* ActivityDateDialogController.m */; };
+		58EB65BA0FBDE71100717C36 /* ActivityCommentsDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EB65B90FBDE71100717C36 /* ActivityCommentsDialog.xib */; };
+		58EB65E00FBDE86800717C36 /* ActivityCommentsDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58EB65DF0FBDE86800717C36 /* ActivityCommentsDialogController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +92,9 @@
 		58EB656F0FBCEF4400717C36 /* ActivityDateDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityDateDialog.xib; sourceTree = "<group>"; };
 		58EB65720FBDCDFE00717C36 /* ActivityDateDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDateDialogController.h; sourceTree = "<group>"; };
 		58EB65730FBDCDFE00717C36 /* ActivityDateDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDateDialogController.m; sourceTree = "<group>"; };
+		58EB65B90FBDE71100717C36 /* ActivityCommentsDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCommentsDialog.xib; sourceTree = "<group>"; };
+		58EB65DE0FBDE86800717C36 /* ActivityCommentsDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCommentsDialogController.h; sourceTree = "<group>"; };
+		58EB65DF0FBDE86800717C36 /* ActivityCommentsDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCommentsDialogController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +127,8 @@
 				586DAE620FBC912900DBCF0A /* ProjectChoiceController.m */,
 				58EB65720FBDCDFE00717C36 /* ActivityDateDialogController.h */,
 				58EB65730FBDCDFE00717C36 /* ActivityDateDialogController.m */,
+				58EB65DE0FBDE86800717C36 /* ActivityCommentsDialogController.h */,
+				58EB65DF0FBDE86800717C36 /* ActivityCommentsDialogController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -192,6 +199,7 @@
 				588BAB170FADD79B00460689 /* ActivityCell.h */,
 				588BAB180FADD79B00460689 /* ActivityCell.m */,
 				586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */,
+				58EB65B90FBDE71100717C36 /* ActivityCommentsDialog.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -294,6 +302,7 @@
 				58C0A0ED0FBA000700AF8C14 /* ActivityList.xib in Resources */,
 				586DAE120FBB68CA00DBCF0A /* NewActivityDialog.xib in Resources */,
 				58EB65700FBCEF4400717C36 /* ActivityDateDialog.xib in Resources */,
+				58EB65BA0FBDE71100717C36 /* ActivityCommentsDialog.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +332,7 @@
 				58C0A0FC0FBA011C00AF8C14 /* NewActivityDialogController.m in Sources */,
 				586DAE630FBC912900DBCF0A /* ProjectChoiceController.m in Sources */,
 				58EB65740FBDCDFE00717C36 /* ActivityDateDialogController.m in Sources */,
+				58EB65E00FBDE86800717C36 /* ActivityCommentsDialogController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

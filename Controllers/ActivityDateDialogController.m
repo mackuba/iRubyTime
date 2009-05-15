@@ -20,7 +20,7 @@ OnDeallocRelease(tableView, activityDatePicker, activity);
 - (id) initWithActivity: (Activity *) newActivity {
   self = [super initWithNibName: @"ActivityDateDialog" bundle: [NSBundle mainBundle]];
   if (self) {
-    activity = newActivity;
+    activity = [newActivity retain];
     self.title = @"Choose date";
   }
   return self;

@@ -8,9 +8,10 @@
 #import <UIKit/UIKit.h>
 
 @class Activity;
+@class ActivityCommentsDialogController;
+@class ActivityDateDialogController;
 @class ProjectChoiceController;
 @class RubyTimeConnector;
-@class ActivityDateDialogController;
 
 @interface NewActivityDialogController : UIViewController {
   UIDatePicker *activityLengthPicker;
@@ -18,6 +19,7 @@
   Activity *activity;
   RubyTimeConnector *connector;
   ProjectChoiceController *projectChoiceController;
+  ActivityCommentsDialogController *activityCommentsDialogController;
   ActivityDateDialogController *activityDateDialogController;
 }
 

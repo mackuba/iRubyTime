@@ -6,6 +6,7 @@
 // -------------------------------------------------------
 
 #import "Activity.h"
+#import "ActivityCommentsDialogController.h"
 #import "ActivityDateDialogController.h"
 #import "NewActivityDialogController.h"
 #import "Project.h"
@@ -16,15 +17,16 @@
 #define NEW_ACTIVITY_CELL_TYPE @"NewActivityDialogCell"
 
 @interface NewActivityDialogController ()
-- (ProjectChoiceController *) projectChoiceController;
 - (ActivityDateDialogController *) activityDateDialogController;
+- (ActivityCommentsDialogController *) activityCommentsDialogController;
+- (ProjectChoiceController *) projectChoiceController;
 @end
 
 @implementation NewActivityDialogController
 
 @synthesize tableView, activityLengthPicker;
 OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectChoiceController,
-  activityDateDialogController);
+  activityCommentsDialogController, activityDateDialogController);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -41,7 +43,6 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
     activity.minutes = 450;
     activity.project = [connector.projects objectAtIndex: 0];
     activity.date = [NSDate date];
-    activity.comments = @"Some comments";
   }
   return self;
 }
@@ -138,7 +139,7 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
   switch (path.row) {
     case 0: controller = [self projectChoiceController]; break;
     case 1: controller = [self activityDateDialogController]; break;
-    case 2: return;
+    case 2: controller = [self activityCommentsDialogController]; break;
   }
   [self.navigationController pushViewController: controller animated: YES];
 }
@@ -146,12 +147,11 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
 // -------------------------------------------------------------------------------------------
 #pragma mark Helper controllers
 
-- (ProjectChoiceController *) projectChoiceController {
-  if (!projectChoiceController) {
-    projectChoiceController = [[ProjectChoiceController alloc] initWithActivity: activity
-                                                                    projectList: connector.projects];
+- (ActivityCommentsDialogController *) activityCommentsDialogController {
+  if (!activityCommentsDialogController) {
+    activityCommentsDialogController = [[ActivityCommentsDialogController alloc] initWithActivity: activity];
   }
-  return projectChoiceController;
+  return activityCommentsDialogController;
 }
 
 - (ActivityDateDialogController *) activityDateDialogController {
@@ -159,6 +159,14 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
     activityDateDialogController = [[ActivityDateDialogController alloc] initWithActivity: activity];
   }
   return activityDateDialogController;
+}
+
+- (ProjectChoiceController *) projectChoiceController {
+  if (!projectChoiceController) {
+    projectChoiceController = [[ProjectChoiceController alloc] initWithActivity: activity
+                                                                    projectList: connector.projects];
+  }
+  return projectChoiceController;
 }
 
 @end
