@@ -11,10 +11,29 @@
 @implementation Activity
 
 @synthesize minutes, activityId;
-SynthesizeAndReleaseLater(date, comments, project);
+SynthesizeAndReleaseLater(date, dateAsString, comments, project);
 
 - (NSString *) hourString {
   return RTFormat(@"%d:%02d", minutes / 60, minutes % 60);
+}
+
+- (void) setDate: (NSDate *) newDate {
+  [date release];
+  date = [newDate copy];
+
+  NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+  outputFormatter.dateFormat = @"E d MMM";
+  // TODO: show "today" or "yesterday"
+  [dateAsString release];
+  dateAsString = [[outputFormatter stringFromDate: date] retain];
+  [outputFormatter release];
+}
+
+- (void) setDateAsString: (NSString *) dateString {
+  NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+  inputFormatter.dateFormat = @"yyyy-MM-dd";
+  self.date = [inputFormatter dateFromString: dateString];
+  [inputFormatter release];
 }
 
 - (BOOL) isEqualToActivity: (Activity *) other {
@@ -22,7 +41,7 @@ SynthesizeAndReleaseLater(date, comments, project);
     other.activityId == self.activityId &&
     other.minutes == self.minutes &&
     other.project == self.project &&
-    [other.date isEqualToString: self.date] &&
+    [other.date isEqualToDate: self.date] &&
     [other.comments isEqualToString: self.comments];
 }
 

@@ -49,7 +49,7 @@ OnDeallocRelease(activities, activityHash, projects, projectHash);
 - (Activity *) activityFromJSON: (NSDictionary *) json {
   Activity *activity = [[Activity alloc] init];
   activity.comments = [json objectForKey: @"comments"];
-  activity.date = [json objectForKey: @"date"];
+  activity.dateAsString = [json objectForKey: @"date"];
   activity.minutes = [[json objectForKey: @"minutes"] intValue];
   activity.activityId = [[json objectForKey: @"id"] intValue];
   activity.project = [projectHash objectForKey: [json objectForKey: @"project_id"]];

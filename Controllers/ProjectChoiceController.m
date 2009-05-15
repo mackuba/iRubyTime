@@ -31,7 +31,7 @@ OnDeallocRelease(activity, projects);
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
-- (NSInteger)tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section {
+- (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section {
   return projects.count;
 }
 

@@ -37,7 +37,8 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
     
     activity.minutes = 450;
     activity.project = [connector.projects objectAtIndex: 0];
-    //activity.date = [NSDate date];
+    activity.date = [NSDate date];
+    activity.comments = @"Some comments";
   }
   return self;
 }
@@ -115,8 +116,8 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
   }
   switch (path.row) {
     case 0: cell.text = RTFormat(@"Project: %@", activity.project.name); break;
-    case 1: cell.text = RTFormat(@"Date: today"); break;
-    case 2: cell.text = RTFormat(@"Some comments"); break;
+    case 1: cell.text = RTFormat(@"Date: %@", activity.dateAsString); break;
+    case 2: cell.text = RTFormat(@"%@", activity.comments); break;
   }
   return cell;
 }

@@ -16,7 +16,7 @@ SynthesizeAndReleaseLater(dateLabel, hoursLabel, commentsLabel, projectLabel);
 
 - (void) displayActivity: (Activity *) activity {
   self.commentsLabel.text = activity.comments;
-  self.dateLabel.text = activity.date;
+  self.dateLabel.text = activity.dateAsString;
   self.projectLabel.text = activity.project.name;
   self.hoursLabel.text = [activity hourString];
 }

@@ -11,14 +11,16 @@
 
 @interface Activity : NSObject {
   NSString *comments;
-  NSString *date;
+  NSDate *date;
+  NSString *dateAsString;
   NSInteger minutes;
   NSInteger activityId;
   Project *project;
 }
 
 @property (nonatomic, copy) NSString *comments;
-@property (nonatomic, copy) NSString *date;
+@property (nonatomic, copy) NSDate *date;
+@property (nonatomic, copy) NSString *dateAsString;
 @property (nonatomic) NSInteger minutes;
 @property (nonatomic) NSInteger activityId;
 @property (nonatomic, retain) Project *project;
