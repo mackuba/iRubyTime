@@ -6,6 +6,7 @@
 // -------------------------------------------------------
 
 #import "Activity.h"
+#import "ActivityDateDialogController.h"
 #import "NewActivityDialogController.h"
 #import "Project.h"
 #import "ProjectChoiceController.h"
@@ -16,12 +17,14 @@
 
 @interface NewActivityDialogController ()
 - (ProjectChoiceController *) projectChoiceController;
+- (ActivityDateDialogController *) activityDateDialogController;
 @end
 
 @implementation NewActivityDialogController
 
 @synthesize tableView, activityLengthPicker;
-OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectChoiceController);
+OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectChoiceController,
+  activityDateDialogController);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -52,9 +55,12 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
   UIBarButtonItem *save = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemSave
                                                                         target: self
                                                                         action: @selector(saveClicked)];
+  UIBarButtonItem *back = [[UIBarButtonItem alloc] init];
+  back.title = @"Back";
   
   self.navigationItem.leftBarButtonItem = cancel;
   self.navigationItem.rightBarButtonItem = save;
+  self.navigationItem.backBarButtonItem = back;
   self.navigationItem.title = @"New activity";
 
   tableView.scrollEnabled = false;
@@ -63,6 +69,7 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
   
   [cancel release];
   [save release];
+  [back release];
 }
 
 - (void) viewWillAppear: (BOOL) animated {
@@ -130,7 +137,7 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
   UIViewController *controller;
   switch (path.row) {
     case 0: controller = [self projectChoiceController]; break;
-    case 1: return;
+    case 1: controller = [self activityDateDialogController]; break;
     case 2: return;
   }
   [self.navigationController pushViewController: controller animated: YES];
@@ -145,6 +152,13 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
                                                                     projectList: connector.projects];
   }
   return projectChoiceController;
+}
+
+- (ActivityDateDialogController *) activityDateDialogController {
+  if (!activityDateDialogController) {
+    activityDateDialogController = [[ActivityDateDialogController alloc] initWithActivity: activity];
+  }
+  return activityDateDialogController;
 }
 
 @end

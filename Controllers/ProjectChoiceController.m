@@ -24,6 +24,7 @@ OnDeallocRelease(activity, projects);
   if (self) {
     activity = [newActivity retain];
     projects = [projectList retain];
+    self.title = @"Choose project";
   }
   return self;
 }
