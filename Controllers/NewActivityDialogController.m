@@ -1,5 +1,5 @@
 // -------------------------------------------------------
-// NewActivityDialogController.h
+// NewActivityDialogController.m
 //
 // Copyright (c) 2009 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under MIT license
@@ -7,15 +7,21 @@
 
 #import "Activity.h"
 #import "NewActivityDialogController.h"
+#import "Project.h"
+#import "ProjectChoiceController.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
 
 #define NEW_ACTIVITY_CELL_TYPE @"NewActivityDialogCell"
 
+@interface NewActivityDialogController ()
+- (ProjectChoiceController *) projectChoiceController;
+@end
+
 @implementation NewActivityDialogController
 
 @synthesize tableView, activityLengthPicker;
-OnDeallocRelease(tableView, activityLengthPicker, activity, connector);
+OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectChoiceController);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -30,6 +36,8 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector);
     // TODO: set activity length to sensible default based on recent entries
     
     activity.minutes = 450;
+    activity.project = [connector.projects objectAtIndex: 0];
+    //activity.date = [NSDate date];
   }
   return self;
 }
@@ -56,16 +64,16 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector);
   [save release];
 }
 
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void) viewWillAppear: (BOOL) animated {
+  [super viewWillAppear: animated];
+  [tableView reloadData];
+  NSIndexPath *selection = [tableView indexPathForSelectedRow];
+  [tableView deselectRowAtIndexPath: selection animated: YES];
 }
-*/
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
+
+// - (void) viewDidAppear: (BOOL) animated {
+// }
+
 /*
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
@@ -93,9 +101,6 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector);
 }
 
 // -------------------------------------------------------------------------------------------
-#pragma mark Notification callbacks
-
-// -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
 - (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section {
@@ -109,7 +114,7 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector);
     cell = [[[UITableViewCell alloc] initWithFrame: CGRectZero reuseIdentifier: NEW_ACTIVITY_CELL_TYPE] autorelease];
   }
   switch (path.row) {
-    case 0: cell.text = RTFormat(@"Project: %@", @"foo"); break;
+    case 0: cell.text = RTFormat(@"Project: %@", activity.project.name); break;
     case 1: cell.text = RTFormat(@"Date: today"); break;
     case 2: cell.text = RTFormat(@"Some comments"); break;
   }
@@ -120,11 +125,25 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector);
   return (path.row == 2) ? 92 : 44;
 }
 
-- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
-  // Navigation logic may go here. Create and push another view controller.
-  // AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
-  // [self.navigationController pushViewController:anotherViewController];
-  // [anotherViewController release];
+- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) path {
+  UIViewController *controller;
+  switch (path.row) {
+    case 0: controller = [self projectChoiceController]; break;
+    case 1: return;
+    case 2: return;
+  }
+  [self.navigationController pushViewController: controller animated: YES];
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Helper controllers
+
+- (ProjectChoiceController *) projectChoiceController {
+  if (!projectChoiceController) {
+    projectChoiceController = [[ProjectChoiceController alloc] initWithActivity: activity
+                                                                    projectList: connector.projects];
+  }
+  return projectChoiceController;
 }
 
 @end

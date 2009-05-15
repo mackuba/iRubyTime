@@ -86,6 +86,10 @@
   return dataManager.activities;
 }
 
+- (NSArray *) projects {
+  return dataManager.projects;
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Request sending
 

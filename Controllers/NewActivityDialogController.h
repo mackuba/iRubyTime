@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 
 @class Activity;
+@class ProjectChoiceController;
 @class RubyTimeConnector;
 
 @interface NewActivityDialogController : UIViewController {
@@ -15,6 +16,7 @@
   UITableView *tableView;
   Activity *activity;
   RubyTimeConnector *connector;
+  ProjectChoiceController *projectChoiceController;
 }
 
 @property (nonatomic, retain) IBOutlet UIDatePicker *activityLengthPicker;

@@ -44,7 +44,7 @@
 #define RTDict(...) [NSDictionary dictionaryWithObjectsAndKeys: __VA_ARGS__, nil]
 #define RTFormat(...) [NSString stringWithFormat: __VA_ARGS__]
 #define RTInt(i) [NSNumber numberWithInt: i]
-
+#define RTIndex(sec, row) [NSIndexPath indexPathForRow: row inSection: sec]
 
 @interface Utils : NSObject
 + (void) showAlertWithTitle: (NSString *) title content: (NSString *) content;

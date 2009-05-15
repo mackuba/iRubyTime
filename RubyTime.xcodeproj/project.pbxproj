@@ -15,6 +15,7 @@
 		580504850FA8E9B500F47490 /* ActivityListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 580504840FA8E9B500F47490 /* ActivityListController.m */; };
 		5831E83F0FB0B2A5008680E5 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831E83E0FB0B2A5008680E5 /* DataManager.m */; };
 		586DAE120FBB68CA00DBCF0A /* NewActivityDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */; };
+		586DAE630FBC912900DBCF0A /* ProjectChoiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586DAE620FBC912900DBCF0A /* ProjectChoiceController.m */; };
 		588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB020FADD47C00460689 /* MIT-LICENSE.txt */; };
 		588BAB050FADD47C00460689 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB030FADD47C00460689 /* README.txt */; };
 		588BAB130FADD78B00460689 /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB0F0FADD78B00460689 /* ActivityCell.xib */; };
@@ -50,6 +51,8 @@
 		5831E83D0FB0B2A5008680E5 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		5831E83E0FB0B2A5008680E5 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewActivityDialog.xib; sourceTree = "<group>"; };
+		586DAE610FBC912900DBCF0A /* ProjectChoiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectChoiceController.h; sourceTree = "<group>"; };
+		586DAE620FBC912900DBCF0A /* ProjectChoiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectChoiceController.m; sourceTree = "<group>"; };
 		588BAB020FADD47C00460689 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
 		588BAB030FADD47C00460689 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		588BAB0F0FADD78B00460689 /* ActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
@@ -110,6 +113,8 @@
 				1D3623250D0F684500981E51 /* RubyTimeAppDelegate.m */,
 				58C0A0FA0FBA011C00AF8C14 /* NewActivityDialogController.h */,
 				58C0A0FB0FBA011C00AF8C14 /* NewActivityDialogController.m */,
+				586DAE610FBC912900DBCF0A /* ProjectChoiceController.h */,
+				586DAE620FBC912900DBCF0A /* ProjectChoiceController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -307,6 +312,7 @@
 				58E9FFC10FB22F9D00CDA046 /* Project.m in Sources */,
 				58C0A0F20FBA009D00AF8C14 /* Utils.m in Sources */,
 				58C0A0FC0FBA011C00AF8C14 /* NewActivityDialogController.m in Sources */,
+				586DAE630FBC912900DBCF0A /* ProjectChoiceController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
