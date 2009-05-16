@@ -152,10 +152,17 @@
 }
 
 - (void) connectionDidFinishLoading: (NSURLConnection *) connection {
-  NSLog(@"finished request to %@ (%d) (text = %@)", currentRequest.URL, currentRequest.type, currentRequest.receivedText);
   Request *request = [[currentRequest retain] autorelease]; // keep it in memory until the end of this method
   [self cleanupRequest];
-  [self handleFinishedRequest: request];
+  
+  NSHTTPURLResponse *response = (NSHTTPURLResponse *) request.response;
+  NSLog(@"finished request to %@ (%d) (status %d, text = %@)",
+    request.URL, request.type, response.statusCode, request.receivedText);
+  if (response.statusCode >= 400) {
+    NotifyWithData(@"requestFailed", RTDict(RTInt(response.statusCode), @"errorCode"));
+  } else {
+    [self handleFinishedRequest: request];
+  }
 }
 
 - (void) handleFinishedRequest: (Request *) request {
@@ -187,7 +194,6 @@
       break;
     
     case RTCreateActivityRequest:
-      // TODO: handle errors too
       // TODO: unobserve in disappear, observe in appear
       [dataManager addNewActivity: request.info]; // TODO: make the server send the activity's id
       NotifyWithData(@"activityCreated", RTDict(request.info, @"activity"));

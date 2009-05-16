@@ -11,7 +11,6 @@
 #import "Utils.h"
 
 // TODO: redesign with a table view
-// TODO: doesn't handle host not found
 
 @implementation LoginDialogController
 
@@ -26,6 +25,8 @@ OnDeallocRelease(urlField, usernameField, passwordField, spinner, connector);
   if (self) {
     connector = [rtConnector retain];
     Observe(connector, @"authenticationFailed", authenticationFailed);
+    Observe(connector, @"requestFailed", requestFailed);
+    // TODO: unobserve everything on dealloc
   }
   return self;
 }
@@ -70,6 +71,11 @@ OnDeallocRelease(urlField, usernameField, passwordField, spinner, connector);
 - (void) authenticationFailed {
   [spinner stopAnimating];
   [Utils showAlertWithTitle: @"Error" content: @"Incorrect username or password."];
+}
+
+- (void) requestFailed {
+  [spinner stopAnimating];
+  [Utils showAlertWithTitle: @"Error" content: @"Can't connect to the server."];
 }
 
 @end

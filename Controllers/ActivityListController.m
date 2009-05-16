@@ -48,6 +48,8 @@ OnDeallocRelease(loginController, connector, spinner);
   Observe(connector, @"activitiesReceived", activitiesReceived:);
   Observe(connector, @"activityCreated", activityCreated:);
   Observe(nil, @"newActivityDialogCancelled", newActivityDialogCancelled:);
+//  TODO: Observe(connector, @"authenticationFailed", authenticationFailed);
+  Observe(connector, @"requestFailed", requestFailed);
 }
 
 - (void) viewDidAppear: (BOOL) animated {
@@ -123,6 +125,11 @@ OnDeallocRelease(loginController, connector, spinner);
 
 - (void) newActivityDialogCancelled: (NSNotification *) notification {
   [self closeNewActivityDialog];
+}
+
+- (void) requestFailed {
+  [spinner stopAnimating];
+  [Utils showAlertWithTitle: @"Error" content: @"Can't connect to the server."];
 }
 
 // -------------------------------------------------------------------------------------------
