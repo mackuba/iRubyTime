@@ -30,12 +30,8 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project);
   [date release];
   date = [newDate copy];
 
-  NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-  outputFormatter.dateFormat = @"E d MMM";
-  // TODO: show "today" or "yesterday"
   [dateAsString release];
-  dateAsString = [[outputFormatter stringFromDate: date] retain];
-  [outputFormatter release];
+  dateAsString = [self userFriendlyDateDescription: date];
 }
 
 - (void) setDateAsString: (NSString *) dateString {
@@ -43,6 +39,35 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project);
   inputFormatter.dateFormat = @"yyyy-MM-dd";
   self.date = [inputFormatter dateFromString: dateString];
   [inputFormatter release];
+}
+
+- (NSString *) userFriendlyDateDescription: (NSDate *) aDate {
+  NSCalendar *calendar = [NSCalendar currentCalendar];
+  NSUInteger dateUnits = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+  formatter.dateFormat = @"E d MMM";
+  NSDateComponents *oneDayBack = [[NSDateComponents alloc] init];
+  oneDayBack.day = -1;
+  NSString *result;
+
+  NSDate *today = [NSDate date];
+  NSDate *yesterday = [calendar dateByAddingComponents: oneDayBack toDate: today options: 0];
+
+  NSDateComponents *dateComponents = [calendar components: dateUnits fromDate: aDate];
+  NSDateComponents *nowComponents = [calendar components: dateUnits fromDate: [NSDate date]];
+  NSDateComponents *yesterdayComponents = [calendar components: dateUnits fromDate: yesterday];
+
+  if ([dateComponents isEqual: nowComponents]) {
+    result = @"Today";
+  } else if ([dateComponents isEqual: yesterdayComponents]) {
+    result = @"Yesterday";
+  } else {
+    result = [formatter stringFromDate: aDate];
+  }
+  
+  [formatter release];
+  [oneDayBack release];
+  return result;
 }
 
 - (BOOL) isEqualToActivity: (Activity *) other {
