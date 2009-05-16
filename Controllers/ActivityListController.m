@@ -99,6 +99,7 @@ OnDeallocRelease(loginController, connector, spinner);
 
 - (void) loginSuccessful {
   if (loginController) {
+    // TODO: add a switch in list controller to see all activities or only user's
     [loginController dismissModalViewControllerAnimated: YES];
     [loginController release];
     loginController = nil;

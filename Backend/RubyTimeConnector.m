@@ -35,6 +35,7 @@
   if (self = [super init]) {
     [self setServerURL: url username: aUsername password: aPassword];
     lastActivityId = -1;
+    userId = -1;
     loggedIn = NO;
     dataManager = [[DataManager alloc] initWithDelegate: self];
   }
@@ -101,8 +102,12 @@
 
 - (void) updateActivities {
   Notify(@"updateActivities");
-  NSString *path = (lastActivityId == -1) ? @"/activities?search_criteria[limit]=20" :
-    RTFormat(@"/activities?search_criteria[since_activity]=%d", lastActivityId);
+  NSString *path;
+  if (lastActivityId == -1) {
+    path = RTFormat(@"/users/%d/activities?search_criteria[limit]=20", userId);
+  } else {
+    path = RTFormat(@"/users/%d/activities?search_criteria[since_activity]=%d", userId, lastActivityId);
+  }
   Request *request = [[Request alloc] initWithURL: ServerPath(path) type: RTActivityIndexRequest];
   [self sendRequest: request];
 }
@@ -154,16 +159,16 @@
 }
 
 - (void) handleFinishedRequest: (Request *) request {
-  NSString *trimmedString;
+  NSString *trimmedString = [request.receivedText trimmedString];
   NSArray *records;
   switch (request.type) {
     case RTAuthenticationRequest:
       Notify(@"authenticationSuccessful");
       loggedIn = YES;
+      userId = [trimmedString intValue];
       break;
     
     case RTActivityIndexRequest:
-      trimmedString = [request.receivedText trimmedString];
       if (trimmedString.length > 0) {
         records = [dataManager activitiesFromJSONString: trimmedString];
         if (records.count > 0) {

@@ -18,6 +18,7 @@
   NSString *password;
   NSString *authenticationString;
   NSInteger lastActivityId;
+  NSInteger userId;
   Request *currentRequest;
   DataManager *dataManager;
 }
