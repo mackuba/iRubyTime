@@ -25,14 +25,18 @@
   OnDeallocRelease(__VA_ARGS__);
 
 #define Observe(sender, notification, callback) \
-  NSLog(@"%s:%d: registering for %@", __FILE__, __LINE__, (notification)); \
   [[NSNotificationCenter defaultCenter] addObserver: self \
                                            selector: @selector(callback) \
                                                name: (notification) \
                                              object: (sender)];
 
+#define StopObservingAll() [[NSNotificationCenter defaultCenter] removeObserver: self]
+#define StopObserving(sender, notification) \
+  [[NSNotificationCenter defaultCenter] removeObserver: self \
+                                                  name: (notification) \
+                                                object: (sender)];
+
 #define NotifyWithDataAs(sender, notification, data) \
-  NSLog(@"%s:%d: %@ sends %@ (%@)", __FILE__, __LINE__, (sender), (notification), (data)); \
   [[NSNotificationCenter defaultCenter] postNotificationName: (notification) \
                                                       object: (sender) \
                                                     userInfo: (data)];

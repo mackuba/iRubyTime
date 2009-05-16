@@ -25,8 +25,6 @@
 @implementation NewActivityDialogController
 
 @synthesize tableView, activityLengthPicker;
-OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectChoiceController,
-  activityCommentsDialogController, activityDateDialogController, spinner, saveButton, loadingButton);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -82,20 +80,6 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
   NSIndexPath *selection = [tableView indexPathForSelectedRow];
   [tableView deselectRowAtIndexPath: selection animated: YES];
 }
-
-// - (void) viewDidAppear: (BOOL) animated {
-// }
-
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-*/
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Action handlers
@@ -186,6 +170,16 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
                                                                     projectList: connector.projects];
   }
   return projectChoiceController;
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Cleanup
+
+- (void) dealloc {
+  StopObservingAll();
+  ReleaseAll(tableView, activityLengthPicker, activity, connector, projectChoiceController,
+    activityCommentsDialogController, activityDateDialogController, spinner, saveButton, loadingButton);
+  [super dealloc];
 }
 
 @end

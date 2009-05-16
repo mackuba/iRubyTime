@@ -26,13 +26,16 @@ OnDeallocRelease(urlField, usernameField, passwordField, spinner, connector);
     connector = [rtConnector retain];
     Observe(connector, @"authenticationFailed", authenticationFailed);
     Observe(connector, @"requestFailed", requestFailed);
-    // TODO: unobserve everything on dealloc
   }
   return self;
 }
 
 - (void) viewDidAppear: (BOOL) animated {
   [urlField becomeFirstResponder];
+}
+
+- (void) viewWillDisappear: (BOOL) animated {
+  StopObservingAll();
 }
 
 // -------------------------------------------------------------------------------------------

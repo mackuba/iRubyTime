@@ -194,7 +194,6 @@
       break;
     
     case RTCreateActivityRequest:
-      // TODO: unobserve in disappear, observe in appear
       activity = [dataManager activityFromJSONString: trimmedString];
       [dataManager addNewActivity: activity];
       NotifyWithData(@"activityCreated", RTDict(activity, @"activity"));

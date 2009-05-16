@@ -39,25 +39,30 @@ OnDeallocRelease(loginController, connector, spinner);
                                                                              action: @selector(showNewActivityDialog)];
   self.navigationItem.leftBarButtonItem = loadingButton;
   self.navigationItem.rightBarButtonItem = addButton;
-  
-  [loadingButton release];
-  [addButton release];
-  
+
   Observe(connector, @"authenticationSuccessful", loginSuccessful);
   Observe(connector, @"loadProjects", loading);
   Observe(connector, @"activitiesReceived", activitiesReceived:);
   Observe(connector, @"activityCreated", activityCreated:);
   Observe(nil, @"newActivityDialogCancelled", newActivityDialogCancelled:);
-//  TODO: Observe(connector, @"authenticationFailed", authenticationFailed);
-  Observe(connector, @"requestFailed", requestFailed);
+  // TODO: Observe(connector, @"authenticationFailed", authenticationFailed);
+  
+  [loadingButton release];
+  [addButton release];
 }
 
 - (void) viewDidAppear: (BOOL) animated {
   [super viewDidAppear: animated];
-  if (!connector.loggedIn) {
+  if (connector.loggedIn) {
+    Observe(connector, @"requestFailed", requestFailed);
+  } else {
     loginController = [[LoginDialogController alloc] initWithConnector: connector];
     [self presentModalViewController: loginController animated: YES];
   }
+}
+
+- (void) viewWillDisappear: (BOOL) animated {
+  StopObserving(connector, @"requestFailed");
 }
 
 // -------------------------------------------------------------------------------------------
