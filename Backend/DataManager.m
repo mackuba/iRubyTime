@@ -48,7 +48,7 @@ OnDeallocRelease(activities, activityHash, projects, projectHash);
 
 - (void) addNewActivity: (Activity *) activity {
   [activities insertObject: activity atIndex: 0];
-  // [activityHash setObject: activity forKey: RTInt(activity.activityId)]; TODO: id
+  [activityHash setObject: activity forKey: RTInt(activity.activityId)];
 }
 
 - (Activity *) activityFromJSON: (NSDictionary *) json {
@@ -59,6 +59,11 @@ OnDeallocRelease(activities, activityHash, projects, projectHash);
   activity.activityId = [[json objectForKey: @"id"] intValue];
   activity.project = [projectHash objectForKey: [json objectForKey: @"project_id"]];
   return [activity autorelease];
+}
+
+- (Activity *) activityFromJSONString: (NSString *) jsonString {
+  NSDictionary *record = [NSDictionary dictionaryWithJSONString: jsonString];
+  return [self activityFromJSON: record];
 }
 
 - (NSArray *) activitiesFromJSONString: (NSString *) jsonString {

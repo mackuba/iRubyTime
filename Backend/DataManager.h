@@ -27,6 +27,7 @@
 - (void) addActivities: (NSArray *) newActivities;
 - (void) addNewActivity: (Activity *) activity;
 - (Activity *) activityFromJSON: (NSDictionary *) json;
+- (Activity *) activityFromJSONString: (NSString *) jsonString;
 - (NSArray *) activitiesFromJSONString: (NSString *) jsonString;
 - (Project *) projectFromJSON: (NSDictionary *) json;
 - (NSArray *) projectsFromJSONString: (NSString *) jsonString;

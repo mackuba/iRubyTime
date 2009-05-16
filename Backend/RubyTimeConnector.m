@@ -117,7 +117,6 @@
                                            method: @"POST"
                                              text: [activity toQueryString]
                                              type: RTCreateActivityRequest];
-  request.info = activity;
   [self sendRequest: request];
 }
 
@@ -168,6 +167,7 @@
 - (void) handleFinishedRequest: (Request *) request {
   NSString *trimmedString = [request.receivedText trimmedString];
   NSArray *records;
+  Activity *activity;
   switch (request.type) {
     case RTAuthenticationRequest:
       Notify(@"authenticationSuccessful");
@@ -195,8 +195,9 @@
     
     case RTCreateActivityRequest:
       // TODO: unobserve in disappear, observe in appear
-      [dataManager addNewActivity: request.info]; // TODO: make the server send the activity's id
-      NotifyWithData(@"activityCreated", RTDict(request.info, @"activity"));
+      activity = [dataManager activityFromJSONString: trimmedString];
+      [dataManager addNewActivity: activity];
+      NotifyWithData(@"activityCreated", RTDict(activity, @"activity"));
       break;
   }
 }
