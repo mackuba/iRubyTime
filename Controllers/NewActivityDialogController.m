@@ -34,13 +34,15 @@
   if (self) {
     connector = [rtConnector retain];
     activity = [[Activity alloc] init];
-    // TODO: set activity's project based on recent entries
-    // TODO: set activity's date
-    // TODO: set activity length to sensible default based on recent entries
-    
-    activity.minutes = 450;
-    activity.project = [connector.projects objectAtIndex: 0];
     activity.date = [NSDate date];
+
+    if (connector.activities.count > 0) {
+      activity.minutes = [[connector valueForKeyPath: @"activities.@avg.minutes"] intValue];
+      activity.project = [[connector.activities objectAtIndex: 0] project];
+    } else {
+      activity.minutes = 7 * 60;
+      activity.project = [connector.projects objectAtIndex: 0];
+    }
   }
   return self;
 }
@@ -67,6 +69,8 @@
   tableView.scrollEnabled = false;
 
   activityLengthPicker.countDownDuration = activity.minutes * 60;
+  NSInteger precision = activityLengthPicker.minuteInterval;
+  activity.minutes = activity.minutes / precision * precision;
   
   Observe(connector, @"requestFailed", activityNotCreated);
   
