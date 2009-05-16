@@ -30,6 +30,12 @@ OnDeallocRelease(urlField, usernameField, passwordField, spinner, connector);
   return self;
 }
 
+- (void) viewDidLoad {
+  urlField.text = connector.serverURL;
+  usernameField.text = connector.username;
+  passwordField.text = connector.password;
+}
+
 - (void) viewDidAppear: (BOOL) animated {
   [urlField becomeFirstResponder];
 }

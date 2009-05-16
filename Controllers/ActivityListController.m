@@ -16,6 +16,10 @@
 
 #define ACTIVITY_CELL_TYPE @"activityCell"
 
+@interface ActivityListController ()
+- (void) showLoginDialog;
+@end
+
 @implementation ActivityListController
 
 @synthesize currentCell, connector;
@@ -42,11 +46,11 @@ OnDeallocRelease(loginController, connector, spinner);
   addButton.enabled = NO;
 
   Observe(connector, @"authenticationSuccessful", loginSuccessful);
+  Observe(connector, @"authenticate", loading);
   Observe(connector, @"loadProjects", loading);
   Observe(connector, @"activitiesReceived", activitiesReceived:);
-  Observe(connector, @"activityCreated", activityCreated:);
-  Observe(nil, @"newActivityDialogCancelled", newActivityDialogCancelled:);
-  // TODO: Observe(connector, @"authenticationFailed", authenticationFailed);
+  Observe(connector, @"activityCreated", activityCreated);
+  Observe(nil, @"newActivityDialogCancelled", newActivityDialogCancelled);
   
   [loadingButton release];
   [addButton release];
@@ -54,16 +58,17 @@ OnDeallocRelease(loginController, connector, spinner);
 
 - (void) viewDidAppear: (BOOL) animated {
   [super viewDidAppear: animated];
-  if (connector.loggedIn) {
+  if (connector.username && connector.password && connector.serverURL) {
     Observe(connector, @"requestFailed", requestFailed);
+    Observe(connector, @"authenticationFailed", authenticationFailed);
   } else {
-    loginController = [[LoginDialogController alloc] initWithConnector: connector];
-    [self presentModalViewController: loginController animated: YES];
+    [self showLoginDialog];
   }
 }
 
 - (void) viewWillDisappear: (BOOL) animated {
   StopObserving(connector, @"requestFailed");
+  StopObserving(connector, @"authenticationFailed");
 }
 
 // -------------------------------------------------------------------------------------------
@@ -98,6 +103,11 @@ OnDeallocRelease(loginController, connector, spinner);
   [dialog release];
 }
 
+- (void) showLoginDialog {
+  loginController = [[LoginDialogController alloc] initWithConnector: connector];
+  [self presentModalViewController: loginController animated: YES];
+}
+
 - (void) closeNewActivityDialog {
   [self dismissModalViewControllerAnimated: YES];
 }
@@ -108,7 +118,7 @@ OnDeallocRelease(loginController, connector, spinner);
 - (void) loginSuccessful {
   if (loginController) {
     // TODO: add a switch in list controller to see all activities or only user's
-    [loginController dismissModalViewControllerAnimated: YES];
+    [self dismissModalViewControllerAnimated: YES];
     [loginController release];
     loginController = nil;
   }
@@ -124,14 +134,18 @@ OnDeallocRelease(loginController, connector, spinner);
   self.navigationItem.rightBarButtonItem.enabled = YES;
 }
 
-- (void) activityCreated: (NSNotification *) notification {
+- (void) activityCreated {
   [self scrollTextViewToTop];
   [self addActivitiesToList: 1];
   [self closeNewActivityDialog];
 }
 
-- (void) newActivityDialogCancelled: (NSNotification *) notification {
+- (void) newActivityDialogCancelled {
   [self closeNewActivityDialog];
+}
+
+- (void) authenticationFailed {
+  [self showLoginDialog];
 }
 
 - (void) requestFailed {

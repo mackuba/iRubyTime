@@ -68,7 +68,7 @@
 
   activityLengthPicker.countDownDuration = activity.minutes * 60;
   
-  Observe(connector, @"requestFailed", activityNotCreated:);
+  Observe(connector, @"requestFailed", activityNotCreated);
   
   [cancel release];
   [back release];
@@ -106,7 +106,7 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Notification callbacks
 
-- (void) activityNotCreated: (NSNotification *) notification {
+- (void) activityNotCreated {
   [spinner stopAnimating];
   self.navigationItem.rightBarButtonItem = saveButton;
   [Utils showAlertWithTitle: @"Error" content: @"Activity could not be saved"];

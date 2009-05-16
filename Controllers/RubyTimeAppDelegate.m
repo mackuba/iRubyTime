@@ -10,6 +10,10 @@
 #import "RubyTimeConnector.h"
 #import "Utils.h"
 
+#define USERNAME_SETTING @"username"
+#define PASSWORD_SETTING @"password"
+#define SERVER_SETTING @"serverURL"
+
 @interface RubyTimeAppDelegate()
 - (void) initApplication;
 @end
@@ -23,19 +27,36 @@ OnDeallocRelease(window, navigationController, connector, activityListController
 #pragma mark Initialization
 
 - (void) initApplication {
-  connector = [[RubyTimeConnector alloc] init]; // TODO: load password if possible
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSString *username = [settings objectForKey: USERNAME_SETTING];
+  NSString *password = [settings objectForKey: PASSWORD_SETTING];
+  NSString *serverURL = [settings objectForKey: SERVER_SETTING];
+  connector = [[RubyTimeConnector alloc] initWithServerURL: serverURL username: username password: password];
   activityListController.connector = connector;
+  if (username && password && serverURL) {
+    [connector authenticate];
+  }
   Observe(connector, @"authenticationSuccessful", loginSuccessful);
   Observe(connector, @"projectsReceived", projectsReceived);
-  // TODO: send auth request if password is set
   // TODO: save activities to file when they're received
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Instance methods
+
+- (void) saveLoginAndPassword {
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings setObject: connector.username forKey: USERNAME_SETTING];
+  [settings setObject: connector.password forKey: PASSWORD_SETTING]; // TODO: encode password
+  [settings setObject: connector.serverURL forKey: SERVER_SETTING];
+  [settings synchronize];
 }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Notification callbacks
 
 - (void) loginSuccessful {
-  // TODO: save login & password
+  [self saveLoginAndPassword];
   [connector loadProjects];
 }
 

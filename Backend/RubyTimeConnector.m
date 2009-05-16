@@ -95,6 +95,7 @@
 #pragma mark Request sending
 
 - (void) authenticate {
+  Notify(@"authenticate");
   Request *request = [[Request alloc] initWithURL: ServerPath(@"/users/authenticate")
                                              type: RTAuthenticationRequest];
   [self sendRequest: request];
