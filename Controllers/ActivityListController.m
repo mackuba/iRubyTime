@@ -131,7 +131,7 @@ OnDeallocRelease(loginController, connector, spinner);
   }
   [self addActivitiesToList: activities.count];
   [spinner stopAnimating];
-  self.navigationItem.rightBarButtonItem.enabled = YES;
+  self.navigationItem.rightBarButtonItem.enabled = (connector.projects.count > 0);
 }
 
 - (void) activityCreated {
