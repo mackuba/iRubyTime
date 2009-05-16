@@ -25,6 +25,7 @@
 - (id) initWithDelegate: (id) delegate;
 // - (void) loadDataFromDisk;
 - (void) addActivities: (NSArray *) newActivities;
+- (void) addNewActivity: (Activity *) activity;
 - (Activity *) activityFromJSON: (NSDictionary *) json;
 - (NSArray *) activitiesFromJSONString: (NSString *) jsonString;
 - (Project *) projectFromJSON: (NSDictionary *) json;

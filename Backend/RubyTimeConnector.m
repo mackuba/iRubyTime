@@ -108,8 +108,12 @@
 }
 
 - (void) createActivity: (Activity *) activity {
-  // TODO: send request
-  NotifyWithData(@"activityCreated", RTDict(activity, @"activity"));
+  Request *request = [[Request alloc] initWithURL: ServerPath(@"/activities")
+                                           method: @"POST"
+                                             text: [activity toQueryString]
+                                             type: RTCreateActivityRequest];
+  request.info = activity;
+  [self sendRequest: request];
 }
 
 - (void) loadProjects {
@@ -175,6 +179,13 @@
         records = [dataManager projectsFromJSONString: trimmedString];
         [dataManager setProjects: records];
       }
+      break;
+    
+    case RTCreateActivityRequest:
+      // TODO: handle errors too
+      // TODO: unobserve in disappear, observe in appear
+      [dataManager addNewActivity: request.info]; // TODO: make the server send the activity's id
+      NotifyWithData(@"activityCreated", RTDict(request.info, @"activity"));
       break;
   }
 }

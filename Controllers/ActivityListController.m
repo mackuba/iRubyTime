@@ -115,7 +115,8 @@ OnDeallocRelease(loginController, connector, spinner);
 }
 
 - (void) activityCreated: (NSNotification *) notification {
-  // TODO: add activity to list
+  [self scrollTextViewToTop];
+  [self addActivitiesToList: 1];
   [self closeNewActivityDialog];
 }
 

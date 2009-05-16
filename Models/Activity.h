@@ -27,5 +27,6 @@
 
 - (NSString *) hourString;
 - (BOOL) isEqualToActivity: (Activity *) other;
+- (NSString *) toQueryString;
 
 @end

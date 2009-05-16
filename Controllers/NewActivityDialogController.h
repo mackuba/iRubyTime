@@ -21,6 +21,9 @@
   ProjectChoiceController *projectChoiceController;
   ActivityCommentsDialogController *activityCommentsDialogController;
   ActivityDateDialogController *activityDateDialogController;
+  UIBarButtonItem *loadingButton;
+  UIBarButtonItem *saveButton;
+  UIActivityIndicatorView *spinner;
 }
 
 @property (nonatomic, retain) IBOutlet UIDatePicker *activityLengthPicker;

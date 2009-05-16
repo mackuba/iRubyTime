@@ -10,7 +10,8 @@
 typedef enum {
   RTAuthenticationRequest = 1,
   RTActivityIndexRequest,
-  RTProjectIndexRequest
+  RTProjectIndexRequest,
+  RTCreateActivityRequest
 } RTRequestType;
 
 @interface Request : NSMutableURLRequest {
@@ -19,6 +20,7 @@ typedef enum {
   NSString *sentText;
   NSMutableString *receivedText;
   NSURLConnection *connection;
+  id info;
 }
 
 @property (nonatomic) RTRequestType type;
@@ -26,6 +28,7 @@ typedef enum {
 @property (nonatomic, retain) NSURLConnection *connection;
 @property (nonatomic, readonly) NSString *sentText;
 @property (nonatomic, readonly) NSMutableString *receivedText;
+@property (nonatomic, retain) id info;
 
 - (id) initWithURL: (NSString *) url
             method: (NSString *) method

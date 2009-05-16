@@ -10,6 +10,9 @@
 #import "RubyTimeConnector.h"
 #import "Utils.h"
 
+// TODO: redesign with a table view
+// TODO: doesn't handle host not found
+
 @implementation LoginDialogController
 
 @synthesize urlField, usernameField, passwordField, spinner;

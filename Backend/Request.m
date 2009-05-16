@@ -12,7 +12,7 @@
 @implementation Request
 
 @synthesize type;
-SynthesizeAndReleaseLater(response, receivedText, sentText, connection);
+SynthesizeAndReleaseLater(response, receivedText, sentText, connection, info);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization

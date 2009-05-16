@@ -46,6 +46,11 @@ OnDeallocRelease(activities, activityHash, projects, projectHash);
   [newlyAdded release];
 }
 
+- (void) addNewActivity: (Activity *) activity {
+  [activities insertObject: activity atIndex: 0];
+  // [activityHash setObject: activity forKey: RTInt(activity.activityId)]; TODO: id
+}
+
 - (Activity *) activityFromJSON: (NSDictionary *) json {
   Activity *activity = [[Activity alloc] init];
   activity.comments = [json objectForKey: @"comments"];

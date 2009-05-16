@@ -26,7 +26,7 @@
 
 @synthesize tableView, activityLengthPicker;
 OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectChoiceController,
-  activityCommentsDialogController, activityDateDialogController);
+  activityCommentsDialogController, activityDateDialogController, spinner, saveButton, loadingButton);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -50,17 +50,19 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
 - (void) viewDidLoad {
   [super viewDidLoad];
   
+  spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+  UIBarButtonItem *back = [[UIBarButtonItem alloc] init];
   UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel
                                                                           target: self
                                                                           action: @selector(cancelClicked)];
-  UIBarButtonItem *save = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemSave
-                                                                        target: self
-                                                                        action: @selector(saveClicked)];
-  UIBarButtonItem *back = [[UIBarButtonItem alloc] init];
+  saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemSave
+                                                             target: self
+                                                             action: @selector(saveClicked)];
+  loadingButton = [[UIBarButtonItem alloc] initWithCustomView: spinner];
   back.title = @"Back";
   
   self.navigationItem.leftBarButtonItem = cancel;
-  self.navigationItem.rightBarButtonItem = save;
+  self.navigationItem.rightBarButtonItem = saveButton;
   self.navigationItem.backBarButtonItem = back;
   self.navigationItem.title = @"New activity";
 
@@ -68,8 +70,9 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
 
   activityLengthPicker.countDownDuration = activity.minutes * 60;
   
+  Observe(connector, @"requestFailed", activityNotCreated:);
+  
   [cancel release];
-  [save release];
   [back release];
 }
 
@@ -98,6 +101,8 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
 #pragma mark Action handlers
 
 - (void) saveClicked {
+  self.navigationItem.rightBarButtonItem = loadingButton;
+  [spinner startAnimating];
   [connector createActivity: activity];
 }
 
@@ -107,6 +112,15 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
 
 - (IBAction) timeChanged {
   activity.minutes = activityLengthPicker.countDownDuration / 60;
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Notification callbacks
+
+- (void) activityNotCreated: (NSNotification *) notification {
+  [spinner stopAnimating];
+  self.navigationItem.rightBarButtonItem = saveButton;
+  [Utils showAlertWithTitle: @"Error" content: @"Activity could not be saved"];
 }
 
 // -------------------------------------------------------------------------------------------
