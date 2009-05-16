@@ -101,9 +101,14 @@ OnDeallocRelease(tableView, activityLengthPicker, activity, connector, projectCh
 #pragma mark Action handlers
 
 - (void) saveClicked {
-  self.navigationItem.rightBarButtonItem = loadingButton;
-  [spinner startAnimating];
-  [connector createActivity: activity];
+  if ([activity.comments trimmedString].length == 0) {
+    [Utils showAlertWithTitle: @"Can't create activity"
+                      content: @"Activity comments field is empty - please fill it first."];
+  } else {
+    self.navigationItem.rightBarButtonItem = loadingButton;
+    [spinner startAnimating];
+    [connector createActivity: activity];
+  }
 }
 
 - (void) cancelClicked {
