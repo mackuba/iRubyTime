@@ -39,6 +39,7 @@ OnDeallocRelease(loginController, connector, spinner);
                                                                              action: @selector(showNewActivityDialog)];
   self.navigationItem.leftBarButtonItem = loadingButton;
   self.navigationItem.rightBarButtonItem = addButton;
+  addButton.enabled = NO;
 
   Observe(connector, @"authenticationSuccessful", loginSuccessful);
   Observe(connector, @"loadProjects", loading);
@@ -120,6 +121,7 @@ OnDeallocRelease(loginController, connector, spinner);
   }
   [self addActivitiesToList: activities.count];
   [spinner stopAnimating];
+  self.navigationItem.rightBarButtonItem.enabled = YES;
 }
 
 - (void) activityCreated: (NSNotification *) notification {
