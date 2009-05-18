@@ -1,16 +1,17 @@
 # iRubyTime
 
-iRubyTime is a native iPhone client for RubyTime 3.0, a time-tracking system written in Merb (see http://rubytime.org,
-http://github.com/LunarLogicPolska/rubytime).
+iRubyTime is a native iPhone client for RubyTime 3.0, a time-tracking system written in Merb (see [http://rubytime.org](http://rubytime.org), [http://github.com/LunarLogicPolska/rubytime](http://github.com/LunarLogicPolska/rubytime)).
 
 ## Status
 
 What's done:
+
 * logging in, remembering login&password
 * list of recent activities
 * adding new activity
 
 What will be done in near future:
+
 * editing existing activities
 
 ## Screenshots
