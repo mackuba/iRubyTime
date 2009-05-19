@@ -142,9 +142,9 @@
     cell = currentCell;
   }
   if (row == 0) {
-    [cell displayFieldName: @"Project" value: activity.project.name];
-  } else {
     [cell displayFieldName: @"Date" value: activity.dateAsString];
+  } else {
+    [cell displayFieldName: @"Project" value: activity.project.name];
   }
   return cell;
 }
@@ -161,8 +161,8 @@
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) path {
   UIViewController *controller;
   switch (path.row) {
-    case 0: controller = [self projectChoiceController]; break;
-    case 1: controller = [self activityDateDialogController]; break;
+    case 0: controller = [self activityDateDialogController]; break;
+    case 1: controller = [self projectChoiceController]; break;
     case 2: controller = [self activityCommentsDialogController]; break;
   }
   [self.navigationController pushViewController: controller animated: YES];
