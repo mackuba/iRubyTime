@@ -22,6 +22,24 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project);
   return self;
 }
 
+- (void) encodeWithCoder: (NSCoder *) coder {
+  [coder encodeObject: comments forKey: @"comments"];
+  [coder encodeObject: date forKey: @"date"];
+  [coder encodeInt: minutes forKey: @"minutes"];
+  [coder encodeInt: activityId forKey: @"activityId"];
+  [coder encodeObject: project forKey: @"project"];
+}
+
+- (id) initWithCoder: (NSCoder *) coder {
+  self = [super init];
+  self.comments = [coder decodeObjectForKey: @"comments"];
+  self.date = [coder decodeObjectForKey: @"date"];
+  minutes = [coder decodeIntForKey: @"minutes"];
+  activityId = [coder decodeIntForKey: @"activityId"];
+  self.project = [coder decodeObjectForKey: @"project"];
+  return self;
+}
+
 - (NSString *) hourString {
   return RTFormat(@"%d:%02d", minutes / 60, minutes % 60);
 }
@@ -31,7 +49,7 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project);
   date = [newDate copy];
 
   [dateAsString release];
-  dateAsString = [self userFriendlyDateDescription: date];
+  dateAsString = [[self userFriendlyDateDescription: date] retain];
 }
 
 - (void) setDateAsString: (NSString *) dateString {

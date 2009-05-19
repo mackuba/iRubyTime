@@ -13,4 +13,16 @@
 @synthesize projectId;
 SynthesizeAndReleaseLater(name);
 
+- (void) encodeWithCoder: (NSCoder *) coder {
+  [coder encodeObject: name forKey: @"name"];
+  [coder encodeInt: projectId forKey: @"projectId"];
+}
+
+- (id) initWithCoder: (NSCoder *) coder {
+  self = [super init];
+  self.name = [coder decodeObjectForKey: @"name"];
+  projectId = [coder decodeIntForKey: @"projectId"];
+  return self;
+}
+
 @end

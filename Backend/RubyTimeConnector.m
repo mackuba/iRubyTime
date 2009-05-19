@@ -87,8 +87,16 @@
   return dataManager.activities;
 }
 
+- (void) setActivities: (NSArray *) activities {
+  if (activities) dataManager.activities = activities;
+}
+
 - (NSArray *) projects {
   return dataManager.projects;
+}
+
+- (void) setProjects: (NSArray *) projects {
+  if (projects) dataManager.projects = projects;
 }
 
 // -------------------------------------------------------------------------------------------
@@ -182,16 +190,18 @@
         if (records.count > 0) {
           lastActivityId = [[records objectAtIndex: 0] activityId];
         }
-        [dataManager addActivities: records];
+        dataManager.activities = records;
       }
+      NotifyWithData(@"activitiesReceived", RTDict(records, @"activities"));
       break;
     
     case RTProjectIndexRequest:
       trimmedString = [request.receivedText trimmedString];
       if (trimmedString.length > 0) {
         records = [dataManager projectsFromJSONString: trimmedString];
-        [dataManager setProjects: records];
+        dataManager.projects = records;
       }
+      NotifyWithData(@"projectsReceived", RTDict(records, @"projects"));
       break;
     
     case RTCreateActivityRequest:

@@ -28,20 +28,19 @@
   [[NSNotificationCenter defaultCenter] addObserver: self \
                                            selector: @selector(callback) \
                                                name: (notification) \
-                                             object: (sender)];
+                                             object: (sender)]
 
 #define StopObservingAll() [[NSNotificationCenter defaultCenter] removeObserver: self]
 #define StopObserving(sender, notification) \
   [[NSNotificationCenter defaultCenter] removeObserver: self \
                                                   name: (notification) \
-                                                object: (sender)];
+                                                object: (sender)]
 
-#define NotifyWithDataAs(sender, notification, data) \
+#define NotifyWithData(notification, data) \
   [[NSNotificationCenter defaultCenter] postNotificationName: (notification) \
-                                                      object: (sender) \
-                                                    userInfo: (data)];
+                                                      object: self \
+                                                    userInfo: (data)]
 
-#define NotifyWithData(notification, data) NotifyWithDataAs(self, (notification), (data))
 #define Notify(notification) NotifyWithData((notification), nil)
 
 #define RTArray(...) [NSArray arrayWithObjects: __VA_ARGS__, nil]

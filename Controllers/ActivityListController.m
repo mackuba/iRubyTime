@@ -58,11 +58,14 @@ OnDeallocRelease(loginController, connector, spinner);
 
 - (void) viewDidAppear: (BOOL) animated {
   [super viewDidAppear: animated];
-  if (connector.username && connector.password && connector.serverURL) {
-    Observe(connector, @"requestFailed", requestFailed);
-    Observe(connector, @"authenticationFailed", authenticationFailed);
-  } else {
-    [self showLoginDialog];
+  if (!connector.loggedIn) {
+    if (connector.username && connector.password && connector.serverURL) {
+      Observe(connector, @"requestFailed", requestFailed);
+      Observe(connector, @"authenticationFailed", authenticationFailed);
+      [connector authenticate];
+    } else {
+      [self showLoginDialog];
+    }
   }
 }
 
@@ -78,17 +81,10 @@ OnDeallocRelease(loginController, connector, spinner);
   [self.tableView setContentOffset: CGPointZero animated: YES];
 }
 
-- (void) addActivitiesToList: (NSInteger) amount {
-  NSMutableArray *rows = [[NSMutableArray alloc] initWithCapacity: amount];
-  for (int i = 0; i < amount; i++) {
-    [rows addObject: [NSIndexPath indexPathForRow: i inSection: 0]];
-  }
-
+- (void) addActivityToList {
   [self.tableView beginUpdates];
-  [self.tableView insertRowsAtIndexPaths: rows withRowAnimation: UITableViewRowAnimationTop];
+  [self.tableView insertRowsAtIndexPaths: RTArray(RTIndex(0, 0)) withRowAnimation: UITableViewRowAnimationTop];
   [self.tableView endUpdates];
-  
-  [rows release];
 }
 
 - (void) loading {
@@ -125,18 +121,14 @@ OnDeallocRelease(loginController, connector, spinner);
 }
 
 - (void) activitiesReceived: (NSNotification *) notification {
-  NSArray *activities = [[notification userInfo] objectForKey: @"activities"];
-  if (activities.count > 0) {
-    [self scrollTextViewToTop];
-  }
-  [self addActivitiesToList: activities.count];
+  [self.tableView reloadData];
   [spinner stopAnimating];
   self.navigationItem.rightBarButtonItem.enabled = (connector.projects.count > 0);
 }
 
 - (void) activityCreated {
   [self scrollTextViewToTop];
-  [self addActivitiesToList: 1];
+  [self addActivityToList];
   [self closeNewActivityDialog];
 }
 

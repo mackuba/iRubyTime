@@ -16,6 +16,7 @@
 
 @interface RubyTimeAppDelegate()
 - (void) initApplication;
+- (void) loadDataFromDisk;
 @end
 
 @implementation RubyTimeAppDelegate
@@ -33,12 +34,15 @@ OnDeallocRelease(window, navigationController, connector, activityListController
   NSString *serverURL = [settings objectForKey: SERVER_SETTING];
   connector = [[RubyTimeConnector alloc] initWithServerURL: serverURL username: username password: password];
   activityListController.connector = connector;
-  if (username && password && serverURL) {
-    [connector authenticate];
-  }
+  
+  NSArray *dirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  dataFile = [[[dirs objectAtIndex: 0] stringByAppendingPathComponent: @"activities.data"] retain];
+  
+  [self loadDataFromDisk];
+  
   Observe(connector, @"authenticationSuccessful", loginSuccessful);
   Observe(connector, @"projectsReceived", projectsReceived);
-  // TODO: save activities to file when they're received
+  Observe(connector, @"activitiesReceived", activitiesReceived);
 }
 
 // -------------------------------------------------------------------------------------------
@@ -50,6 +54,20 @@ OnDeallocRelease(window, navigationController, connector, activityListController
   [settings setObject: connector.password forKey: PASSWORD_SETTING]; // TODO: encode password
   [settings setObject: connector.serverURL forKey: SERVER_SETTING];
   [settings synchronize];
+}
+
+- (void) saveDataToDisk {
+  NSDictionary *data = RTDict(connector.projects, @"projects", connector.activities, @"activities");
+  BOOL ok = [NSKeyedArchiver archiveRootObject: data toFile: dataFile];
+  NSLog(@"saved data %@", ok ? @"OK" : @"ERROR");
+}
+
+- (void) loadDataFromDisk {
+  NSDictionary *data = [NSKeyedUnarchiver unarchiveObjectWithFile: dataFile];
+  if (data) {
+    connector.activities = [data objectForKey: @"activities"];
+    connector.projects = [data objectForKey: @"projects"];
+  }
 }
 
 // -------------------------------------------------------------------------------------------
@@ -64,6 +82,10 @@ OnDeallocRelease(window, navigationController, connector, activityListController
   [connector updateActivities];
 }
 
+- (void) activitiesReceived {
+  [self saveDataToDisk];
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark UIApplication callbacks
 
@@ -71,10 +93,6 @@ OnDeallocRelease(window, navigationController, connector, activityListController
   [self initApplication];
   [window addSubview: [navigationController view]];
   [window makeKeyAndVisible];
-}
-
-- (void) applicationWillTerminate: (UIApplication *) application {
-  // TODO: save data
 }
 
 @end

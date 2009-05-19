@@ -14,10 +14,10 @@
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		580504850FA8E9B500F47490 /* ActivityListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 580504840FA8E9B500F47490 /* ActivityListController.m */; };
 		5831E83F0FB0B2A5008680E5 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831E83E0FB0B2A5008680E5 /* DataManager.m */; };
+		5844CE620FC31FA8007F22FE /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 5844CE610FC31FA8007F22FE /* README.markdown */; };
 		586DAE120FBB68CA00DBCF0A /* NewActivityDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */; };
 		586DAE630FBC912900DBCF0A /* ProjectChoiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586DAE620FBC912900DBCF0A /* ProjectChoiceController.m */; };
 		588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB020FADD47C00460689 /* MIT-LICENSE.txt */; };
-		588BAB050FADD47C00460689 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB030FADD47C00460689 /* README.txt */; };
 		588BAB130FADD78B00460689 /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB0F0FADD78B00460689 /* ActivityCell.xib */; };
 		588BAB150FADD78B00460689 /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB110FADD78B00460689 /* LoginDialog.xib */; };
 		588BAB160FADD78B00460689 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB120FADD78B00460689 /* MainWindow.xib */; };
@@ -54,11 +54,11 @@
 		580504840FA8E9B500F47490 /* ActivityListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityListController.m; sourceTree = "<group>"; };
 		5831E83D0FB0B2A5008680E5 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		5831E83E0FB0B2A5008680E5 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		5844CE610FC31FA8007F22FE /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewActivityDialog.xib; sourceTree = "<group>"; };
 		586DAE610FBC912900DBCF0A /* ProjectChoiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectChoiceController.h; sourceTree = "<group>"; };
 		586DAE620FBC912900DBCF0A /* ProjectChoiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectChoiceController.m; sourceTree = "<group>"; };
 		588BAB020FADD47C00460689 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
-		588BAB030FADD47C00460689 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		588BAB0F0FADD78B00460689 /* ActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
 		588BAB110FADD78B00460689 /* LoginDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginDialog.xib; sourceTree = "<group>"; };
 		588BAB120FADD78B00460689 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -171,8 +171,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5844CE610FC31FA8007F22FE /* README.markdown */,
 				588BAB020FADD47C00460689 /* MIT-LICENSE.txt */,
-				588BAB030FADD47C00460689 /* README.txt */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 			);
 			name = Resources;
@@ -295,7 +295,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */,
-				588BAB050FADD47C00460689 /* README.txt in Resources */,
 				588BAB130FADD78B00460689 /* ActivityCell.xib in Resources */,
 				588BAB150FADD78B00460689 /* LoginDialog.xib in Resources */,
 				588BAB160FADD78B00460689 /* MainWindow.xib in Resources */,
@@ -303,6 +302,7 @@
 				586DAE120FBB68CA00DBCF0A /* NewActivityDialog.xib in Resources */,
 				58EB65700FBCEF4400717C36 /* ActivityDateDialog.xib in Resources */,
 				58EB65BA0FBDE71100717C36 /* ActivityCommentsDialog.xib in Resources */,
+				5844CE620FC31FA8007F22FE /* README.markdown in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

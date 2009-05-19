@@ -14,7 +14,7 @@
 @implementation DataManager
 
 @synthesize activities, projects, delegate;
-OnDeallocRelease(activities, activityHash, projects, projectHash);
+OnDeallocRelease(activities, projects, projectHash);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -22,7 +22,6 @@ OnDeallocRelease(activities, activityHash, projects, projectHash);
 - (id) initWithDelegate: (id) aDelegate {
   if (self = [super init]) {
     activities = [[NSMutableArray alloc] initWithCapacity: 20];
-    activityHash = [[NSMutableDictionary alloc] initWithCapacity: 20];
     projects = [[NSMutableArray alloc] initWithCapacity: 20];
     projectHash = [[NSMutableDictionary alloc] initWithCapacity: 20];
     delegate = aDelegate;
@@ -33,22 +32,8 @@ OnDeallocRelease(activities, activityHash, projects, projectHash);
 // -------------------------------------------------------------------------------------------
 #pragma mark Activities
 
-- (void) addActivities: (NSArray *) newActivities {
-  NSMutableArray *newlyAdded = [[NSMutableArray alloc] initWithCapacity: newActivities.count];
-  for (Activity *activity in [newActivities reverseObjectEnumerator]) {
-    if (![activityHash objectForKey: RTInt(activity.activityId)]) {
-      [newlyAdded insertObject: activity atIndex: 0];
-      [activities insertObject: activity atIndex: 0];
-      [activityHash setObject: activity forKey: RTInt(activity.activityId)];
-    }
-  }
-  NotifyWithDataAs(delegate ? delegate : self, @"activitiesReceived", RTDict(newlyAdded, @"activities"));
-  [newlyAdded release];
-}
-
 - (void) addNewActivity: (Activity *) activity {
   [activities insertObject: activity atIndex: 0];
-  [activityHash setObject: activity forKey: RTInt(activity.activityId)];
 }
 
 - (Activity *) activityFromJSON: (NSDictionary *) json {
@@ -88,7 +73,6 @@ OnDeallocRelease(activities, activityHash, projects, projectHash);
       [projectHash setObject: project forKey: RTInt(project.projectId)];
     }
   }
-  NotifyWithDataAs(delegate ? delegate : self, @"projectsReceived", RTDict(projects, @"projects"));
 }
 
 - (Project *) projectFromJSON: (NSDictionary *) json {

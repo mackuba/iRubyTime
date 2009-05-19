@@ -27,8 +27,8 @@
 @property (nonatomic, readonly) NSString *serverURL;
 @property (nonatomic, readonly) NSString *username;
 @property (nonatomic, readonly) NSString *password;
-@property (nonatomic, readonly) NSArray *activities;
-@property (nonatomic, readonly) NSArray *projects;
+@property (nonatomic, retain) NSArray *activities;
+@property (nonatomic, retain) NSArray *projects;
 
 - (id) init;
 - (id) initWithServerURL: (NSString *) url
