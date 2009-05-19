@@ -14,7 +14,7 @@
 #import "RubyTimeConnector.h"
 #import "Utils.h"
 
-#define ACTIVITY_CELL_TYPE @"activityCell"
+#define ACTIVITY_CELL_TYPE @"ActivityCell"
 
 @interface ActivityListController ()
 - (void) showLoginDialog;
