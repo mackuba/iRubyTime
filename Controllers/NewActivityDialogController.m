@@ -8,23 +8,25 @@
 #import "Activity.h"
 #import "ActivityCommentsDialogController.h"
 #import "ActivityDateDialogController.h"
+#import "ActivityFieldCell.h"
 #import "NewActivityDialogController.h"
 #import "Project.h"
 #import "ProjectChoiceController.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
 
-#define NEW_ACTIVITY_CELL_TYPE @"NewActivityDialogCell"
+#define ACTIVITY_FIELD_CELL_TYPE @"ActivityFieldCell"
 
 @interface NewActivityDialogController ()
 - (ActivityDateDialogController *) activityDateDialogController;
 - (ActivityCommentsDialogController *) activityCommentsDialogController;
 - (ProjectChoiceController *) projectChoiceController;
+- (UITableViewCell *) tableView: (UITableView *) table fieldCellForRow: (NSInteger) row;
 @end
 
 @implementation NewActivityDialogController
 
-@synthesize tableView, activityLengthPicker;
+@synthesize tableView, activityLengthPicker, currentCell, commentsCell, commentsLabel;
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -80,6 +82,8 @@
 
 - (void) viewWillAppear: (BOOL) animated {
   [super viewWillAppear: animated];
+  commentsLabel.text = (activity.comments.length > 0) ? activity.comments : @"Comments";
+  commentsLabel.textColor = (activity.comments.length > 0) ? [UIColor blackColor] : [UIColor lightGrayColor];
   [tableView reloadData];
   NSIndexPath *selection = [tableView indexPathForSelectedRow];
   [tableView deselectRowAtIndexPath: selection animated: YES];
@@ -123,22 +127,35 @@
   return 3;
 }
 
-// TODO: extract common functionality from here and ActivityListController
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  UITableViewCell *cell = [table dequeueReusableCellWithIdentifier: NEW_ACTIVITY_CELL_TYPE];
-  if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithFrame: CGRectZero reuseIdentifier: NEW_ACTIVITY_CELL_TYPE] autorelease];
+  if (path.row == 2) {
+    return commentsCell;
+  } else {
+    return [self tableView: table fieldCellForRow: path.row];
   }
-  switch (path.row) {
-    case 0: cell.text = RTFormat(@"Project: %@", activity.project.name); break;
-    case 1: cell.text = RTFormat(@"Date: %@", activity.dateAsString); break;
-    case 2: cell.text = RTFormat(@"%@", activity.comments); break;
+}
+
+- (UITableViewCell *) tableView: (UITableView *) table fieldCellForRow: (NSInteger) row {
+  ActivityFieldCell *cell = (ActivityFieldCell *) [table dequeueReusableCellWithIdentifier: ACTIVITY_FIELD_CELL_TYPE];
+  if (!cell) {
+    [[NSBundle mainBundle] loadNibNamed: @"ActivityFieldCell" owner: self options: nil];
+    cell = currentCell;
+  }
+  if (row == 0) {
+    [cell displayFieldName: @"Project" value: activity.project.name];
+  } else {
+    [cell displayFieldName: @"Date" value: activity.dateAsString];
   }
   return cell;
 }
 
 - (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
   return (path.row == 2) ? 92 : 44;
+}
+
+- (UITableViewCellAccessoryType) tableView: (UITableView *) table
+          accessoryTypeForRowWithIndexPath: (NSIndexPath *) path {
+  return UITableViewCellAccessoryDisclosureIndicator;
 }
 
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) path {
@@ -182,7 +199,8 @@
 - (void) dealloc {
   StopObservingAll();
   ReleaseAll(tableView, activityLengthPicker, activity, connector, projectChoiceController,
-    activityCommentsDialogController, activityDateDialogController, spinner, saveButton, loadingButton);
+    activityCommentsDialogController, activityDateDialogController, spinner, saveButton, loadingButton,
+    commentsCell, commentsLabel);
   [super dealloc];
 }
 

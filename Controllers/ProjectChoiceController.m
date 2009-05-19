@@ -48,7 +48,6 @@ OnDeallocRelease(activity, projects);
 
 - (UITableViewCellAccessoryType) tableView: (UITableView *) table
           accessoryTypeForRowWithIndexPath: (NSIndexPath *) path {
-  NSLog(@"%@ %d", activity.project, activity.project.projectId);
   if (activity.project == [projects objectAtIndex: path.row]) {
     return UITableViewCellAccessoryCheckmark;
   } else {
