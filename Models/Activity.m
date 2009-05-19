@@ -63,7 +63,6 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project);
   NSCalendar *calendar = [NSCalendar currentCalendar];
   NSUInteger dateUnits = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
   NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-  formatter.dateFormat = @"E d MMM";
   NSDateComponents *oneDayBack = [[NSDateComponents alloc] init];
   oneDayBack.day = -1;
   NSString *result;
@@ -79,7 +78,11 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project);
     result = @"Today";
   } else if ([dateComponents isEqual: yesterdayComponents]) {
     result = @"Yesterday";
+  } else if ([dateComponents year] != [nowComponents year]) {
+    formatter.dateFormat = @"E d MMM yyyy";
+    result = [formatter stringFromDate: aDate];
   } else {
+    formatter.dateFormat = @"E d MMM";
     result = [formatter stringFromDate: aDate];
   }
   
