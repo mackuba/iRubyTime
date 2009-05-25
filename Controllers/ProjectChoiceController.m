@@ -14,16 +14,19 @@
 
 @implementation ProjectChoiceController
 
-OnDeallocRelease(activity, projects);
+OnDeallocRelease(activity, projects, recentProjects);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithActivity: (Activity *) newActivity projectList: (NSArray *) projectList {
+- (id) initWithActivity: (Activity *) newActivity
+            projectList: (NSArray *) projectList
+         recentProjects: (NSArray *) recent {
   self = [super initWithStyle: UITableViewStyleGrouped];
   if (self) {
     activity = [newActivity retain];
     projects = [projectList retain];
+    recentProjects = [recent retain];
     self.title = @"Choose project";
   }
   return self;
@@ -43,6 +46,13 @@ OnDeallocRelease(activity, projects);
   }
   Project *project = (Project *) [projects objectAtIndex: path.row];
   cell.text = project.name;
+  if ([recentProjects indexOfObject: project] != NSNotFound) {
+    cell.font = [UIFont boldSystemFontOfSize: 16];
+    cell.textColor = [UIColor blackColor];
+  } else {
+    cell.font = [UIFont systemFontOfSize: 16];
+    cell.textColor = [UIColor darkGrayColor];
+  }
   return cell;
 }
 

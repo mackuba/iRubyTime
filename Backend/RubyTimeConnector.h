@@ -42,5 +42,6 @@
 - (void) setServerURL: (NSString *) url
              username: (NSString *) aUsername
              password: (NSString *) aPassword;
+- (NSArray *) recentProjects;
 
 @end

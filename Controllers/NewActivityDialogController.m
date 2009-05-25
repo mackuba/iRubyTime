@@ -188,7 +188,8 @@
 - (ProjectChoiceController *) projectChoiceController {
   if (!projectChoiceController) {
     projectChoiceController = [[ProjectChoiceController alloc] initWithActivity: activity
-                                                                    projectList: connector.projects];
+                                                                    projectList: connector.projects
+                                                                 recentProjects: [connector recentProjects]];
   }
   return projectChoiceController;
 }
