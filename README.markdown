@@ -12,7 +12,7 @@ What's done:
 
 What will be done in near future:
 
-* editing existing activities
+* editing/deleting existing activities
 
 ## Screenshots
 
