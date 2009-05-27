@@ -24,6 +24,7 @@
 		588BAB150FADD78B00460689 /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB110FADD78B00460689 /* LoginDialog.xib */; };
 		588BAB160FADD78B00460689 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB120FADD78B00460689 /* MainWindow.xib */; };
 		588BAB190FADD79B00460689 /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 588BAB180FADD79B00460689 /* ActivityCell.m */; };
+		58B809680FCDD213002EBA8C /* BSJSONEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B809670FCDD213002EBA8C /* BSJSONEncoder.m */; };
 		58C0A0ED0FBA000700AF8C14 /* ActivityList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */; };
 		58C0A0F20FBA009D00AF8C14 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C0A0F10FBA009D00AF8C14 /* Utils.m */; };
 		58C0A0FC0FBA011C00AF8C14 /* NewActivityDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C0A0FB0FBA011C00AF8C14 /* NewActivityDialogController.m */; };
@@ -69,6 +70,8 @@
 		588BAB120FADD78B00460689 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		588BAB170FADD79B00460689 /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
 		588BAB180FADD79B00460689 /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
+		58B809660FCDD213002EBA8C /* BSJSONEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSJSONEncoder.h; sourceTree = "<group>"; };
+		58B809670FCDD213002EBA8C /* BSJSONEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSJSONEncoder.m; sourceTree = "<group>"; };
 		58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityList.xib; sourceTree = "<group>"; };
 		58C0A0F00FBA009D00AF8C14 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		58C0A0F10FBA009D00AF8C14 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
@@ -215,6 +218,8 @@
 		58CA2D2D0FA78D00007A6A65 /* BSJSONAdditions */ = {
 			isa = PBXGroup;
 			children = (
+				58B809660FCDD213002EBA8C /* BSJSONEncoder.h */,
+				58B809670FCDD213002EBA8C /* BSJSONEncoder.m */,
 				58CA2D2E0FA78D18007A6A65 /* NSArray+BSJSONAdditions.h */,
 				58CA2D2F0FA78D18007A6A65 /* NSArray+BSJSONAdditions.m */,
 				58CA2D300FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.h */,
@@ -343,6 +348,7 @@
 				58EB65740FBDCDFE00717C36 /* ActivityDateDialogController.m in Sources */,
 				58EB65E00FBDE86800717C36 /* ActivityCommentsDialogController.m in Sources */,
 				5844CECD0FC33BAE007F22FE /* ActivityFieldCell.m in Sources */,
+				58B809680FCDD213002EBA8C /* BSJSONEncoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
