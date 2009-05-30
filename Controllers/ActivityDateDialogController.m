@@ -37,12 +37,16 @@ OnDeallocRelease(tableView, activityDatePicker, activity);
   activity.date = activityDatePicker.date;
 }
 
+- (IBAction) setToToday {
+  activity.date = [NSDate date];
+  [activityDatePicker setDate: activity.date animated: YES];
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
 - (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section {
   return 0;
-  // TODO: add some buttons setting date to today, yesterday etc.
 }
 
 @end
