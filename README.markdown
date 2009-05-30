@@ -21,4 +21,4 @@ What will be done in near future:
 ## License
 
 Copyright by Jakub Suder (Psionides) <jakub.suder at gmail.com>. Licensed under MIT license.
-Includes open source libraries NSData+MBBase64 by MiloBird, and BSJSONAdditions by Blake Seely.
+Includes open source libraries NSData+MBBase64 by MiloBird, BSJSONAdditions by Blake Seely, and scifihifi-iphone by Buzz Andersen.

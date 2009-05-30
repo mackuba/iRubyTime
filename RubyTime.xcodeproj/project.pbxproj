@@ -35,6 +35,7 @@
 		589BEA240FD1D60100CCFA82 /* NSDictionary+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA1D0FD1D60100CCFA82 /* NSDictionary+BSJSONAdditions.m */; };
 		589BEA250FD1D60100CCFA82 /* NSScanner+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA1F0FD1D60100CCFA82 /* NSScanner+BSJSONAdditions.m */; };
 		589BEA260FD1D60100CCFA82 /* NSString+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA210FD1D60100CCFA82 /* NSString+BSJSONAdditions.m */; };
+		589BEA2A0FD1D66700CCFA82 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA290FD1D66700CCFA82 /* SFHFKeychainUtils.m */; };
 		58C0A0ED0FBA000700AF8C14 /* ActivityList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */; };
 		58C0A0F20FBA009D00AF8C14 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C0A0F10FBA009D00AF8C14 /* Utils.m */; };
 		58CA2D4E0FA7995E007A6A65 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4B0FA7995E007A6A65 /* Request.m */; };
@@ -93,6 +94,8 @@
 		589BEA1F0FD1D60100CCFA82 /* NSScanner+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		589BEA200FD1D60100CCFA82 /* NSString+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BSJSONAdditions.h"; sourceTree = "<group>"; };
 		589BEA210FD1D60100CCFA82 /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BSJSONAdditions.m"; sourceTree = "<group>"; };
+		589BEA280FD1D66700CCFA82 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
+		589BEA290FD1D66700CCFA82 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityList.xib; sourceTree = "<group>"; };
 		58C0A0F00FBA009D00AF8C14 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		58C0A0F10FBA009D00AF8C14 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
@@ -205,6 +208,8 @@
 				589BE9DA0FD1D52300CCFA82 /* NSDataMBBase64.m */,
 				589BE9DB0FD1D52300CCFA82 /* SFHFEditableCell.h */,
 				589BE9DC0FD1D52300CCFA82 /* SFHFEditableCell.m */,
+				589BEA280FD1D66700CCFA82 /* SFHFKeychainUtils.h */,
+				589BEA290FD1D66700CCFA82 /* SFHFKeychainUtils.m */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -363,6 +368,7 @@
 				589BEA240FD1D60100CCFA82 /* NSDictionary+BSJSONAdditions.m in Sources */,
 				589BEA250FD1D60100CCFA82 /* NSScanner+BSJSONAdditions.m in Sources */,
 				589BEA260FD1D60100CCFA82 /* NSString+BSJSONAdditions.m in Sources */,
+				589BEA2A0FD1D66700CCFA82 /* SFHFKeychainUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
