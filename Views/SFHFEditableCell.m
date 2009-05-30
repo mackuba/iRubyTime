@@ -32,53 +32,54 @@
 @synthesize label = m_label;
 
 - (id) initWithFrame: (CGRect)frame reuseIdentifier: (NSString *) reuseIdentifier delegate: (id) delegate {
-    if (self = [super initWithFrame: frame reuseIdentifier: reuseIdentifier]) {
-        m_label = [[UILabel alloc] initWithFrame: CGRectZero];
+  if (self = [super initWithFrame: frame reuseIdentifier: reuseIdentifier]) {
+    m_label = [[UILabel alloc] initWithFrame: CGRectZero];
 		m_label.font = [UIFont boldSystemFontOfSize: 16.0];
 		m_label.textColor = [UIColor darkTextColor];
 		[self addSubview: m_label];
+
+    textColor = [[UIColor colorWithRed: 0.2 green: 0.3 blue: 0.5 alpha: 1.0] retain];
 		
 		m_textField = [[UITextField alloc] initWithFrame:CGRectZero];
-        m_textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        m_textField.font = [UIFont systemFontOfSize:16.0];
-        m_textField.textColor = [UIColor darkTextColor];
+    m_textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    m_textField.font = [UIFont systemFontOfSize:16.0];
+    m_textField.textColor = textColor;
 		m_textField.clearButtonMode = UITextFieldViewModeWhileEditing;
 		m_textField.delegate = delegate;
-        [self addSubview: m_textField];
-    }
-    return self;
+    [self addSubview: m_textField];
+  }
+  return self;
 }
 
 - (void) layoutSubviews {
 	[self.label sizeToFit];
-	self.label.frame = CGRectMake(self.contentView.bounds.origin.x + 20, self.contentView.bounds.origin.y + 12, self.label.frame.size.width, self.label.frame.size.height);
-	
-    self.textField.frame = CGRectMake(self.label.frame.origin.x + self.label.frame.size.width + 8, self.contentView.bounds.origin.y, self.contentView.bounds.size.width - self.label.frame.size.width - 40, self.contentView.bounds.size.height);
+	self.label.frame = CGRectMake(self.contentView.bounds.origin.x + 20, self.contentView.bounds.origin.y + 12,
+	                              self.label.frame.size.width, self.label.frame.size.height);
+  self.textField.frame = CGRectMake(120, self.contentView.bounds.origin.y,
+                                    self.contentView.bounds.size.width - 133,
+                                    self.contentView.bounds.size.height);
 }
 
 - (void) setLabelText: (NSString *) labelText andPlaceholderText: (NSString *) placeholderText {
 	self.label.text = labelText;
-	
 	self.textField.placeholder = placeholderText;
-	
 	[self layoutSubviews];
 }
 
 - (void) setSelected: (BOOL) selected animated: (BOOL) animated {
-    [super setSelected:selected animated:animated];
-
-    if (selected) {
-        self.textField.textColor = [UIColor whiteColor];
-    } else {
-        self.textField.textColor = [UIColor darkTextColor];
-    }
+  [super setSelected:selected animated:animated];
+  if (selected) {
+    self.textField.textColor = [UIColor whiteColor];
+  } else {
+    self.textField.textColor = textColor;
+  }
 }
 
 - (void) dealloc {
-    [m_textField release];
+  [m_textField release];
 	[m_label release];
-    [super dealloc];
+  [textColor release];
+  [super dealloc];
 }
-
 
 @end

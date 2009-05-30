@@ -28,8 +28,9 @@
 #import <UIKit/UIKit.h>
 
 @interface SFHFEditableCell : UITableViewCell {
-    UITextField *m_textField;
-	UILabel *m_label;
+  UITextField *m_textField;
+  UILabel *m_label;
+  UIColor *textColor;
 }
 
 @property (nonatomic, retain) UITextField *textField;
