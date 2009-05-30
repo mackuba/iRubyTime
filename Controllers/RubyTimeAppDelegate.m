@@ -42,7 +42,8 @@ OnDeallocRelease(window, navigationController, connector, activityListController
   
   Observe(connector, @"authenticationSuccessful", loginSuccessful);
   Observe(connector, @"projectsReceived", projectsReceived);
-  Observe(connector, @"activitiesReceived", activitiesReceived);
+  Observe(connector, @"activitiesReceived", activitiesUpdated);
+  Observe(connector, @"activityCreated", activitiesUpdated);
 }
 
 // -------------------------------------------------------------------------------------------
@@ -82,7 +83,7 @@ OnDeallocRelease(window, navigationController, connector, activityListController
   [connector updateActivities];
 }
 
-- (void) activitiesReceived {
+- (void) activitiesUpdated {
   [self saveDataToDisk];
 }
 
