@@ -7,55 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D3623260D0F684500981E51 /* RubyTimeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* RubyTimeAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
-		580504850FA8E9B500F47490 /* ActivityListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 580504840FA8E9B500F47490 /* ActivityListController.m */; };
 		5831E83F0FB0B2A5008680E5 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831E83E0FB0B2A5008680E5 /* DataManager.m */; };
 		5844CE620FC31FA8007F22FE /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 5844CE610FC31FA8007F22FE /* README.markdown */; };
 		5844CECD0FC33BAE007F22FE /* ActivityFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5844CECC0FC33BAE007F22FE /* ActivityFieldCell.m */; };
 		5844CED30FC33CFE007F22FE /* ActivityFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5844CED20FC33CFE007F22FE /* ActivityFieldCell.xib */; };
 		586DAE120FBB68CA00DBCF0A /* NewActivityDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */; };
-		586DAE630FBC912900DBCF0A /* ProjectChoiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586DAE620FBC912900DBCF0A /* ProjectChoiceController.m */; };
 		588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB020FADD47C00460689 /* MIT-LICENSE.txt */; };
 		588BAB130FADD78B00460689 /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB0F0FADD78B00460689 /* ActivityCell.xib */; };
 		588BAB150FADD78B00460689 /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB110FADD78B00460689 /* LoginDialog.xib */; };
 		588BAB160FADD78B00460689 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB120FADD78B00460689 /* MainWindow.xib */; };
 		588BAB190FADD79B00460689 /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 588BAB180FADD79B00460689 /* ActivityCell.m */; };
-		589BE9320FD1624900CCFA82 /* SFHFEditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9310FD1624900CCFA82 /* SFHFEditableCell.m */; };
-		58B809680FCDD213002EBA8C /* BSJSONEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B809670FCDD213002EBA8C /* BSJSONEncoder.m */; };
+		589BE9DE0FD1D52300CCFA82 /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9DA0FD1D52300CCFA82 /* NSDataMBBase64.m */; };
+		589BE9DF0FD1D52300CCFA82 /* SFHFEditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9DC0FD1D52300CCFA82 /* SFHFEditableCell.m */; };
+		589BE9EF0FD1D57C00CCFA82 /* ActivityCommentsDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9E20FD1D57C00CCFA82 /* ActivityCommentsDialogController.m */; };
+		589BE9F00FD1D57C00CCFA82 /* ActivityDateDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9E40FD1D57C00CCFA82 /* ActivityDateDialogController.m */; };
+		589BE9F10FD1D57C00CCFA82 /* ActivityListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9E60FD1D57C00CCFA82 /* ActivityListController.m */; };
+		589BE9F20FD1D57C00CCFA82 /* LoginDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9E80FD1D57C00CCFA82 /* LoginDialogController.m */; };
+		589BE9F30FD1D57C00CCFA82 /* NewActivityDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9EA0FD1D57C00CCFA82 /* NewActivityDialogController.m */; };
+		589BE9F40FD1D57C00CCFA82 /* ProjectChoiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9EC0FD1D57C00CCFA82 /* ProjectChoiceController.m */; };
+		589BE9F50FD1D57C00CCFA82 /* RubyTimeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9EE0FD1D57C00CCFA82 /* RubyTimeAppDelegate.m */; };
+		589BEA220FD1D60100CCFA82 /* BSJSONEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA190FD1D60100CCFA82 /* BSJSONEncoder.m */; };
+		589BEA230FD1D60100CCFA82 /* NSArray+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA1B0FD1D60100CCFA82 /* NSArray+BSJSONAdditions.m */; };
+		589BEA240FD1D60100CCFA82 /* NSDictionary+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA1D0FD1D60100CCFA82 /* NSDictionary+BSJSONAdditions.m */; };
+		589BEA250FD1D60100CCFA82 /* NSScanner+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA1F0FD1D60100CCFA82 /* NSScanner+BSJSONAdditions.m */; };
+		589BEA260FD1D60100CCFA82 /* NSString+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA210FD1D60100CCFA82 /* NSString+BSJSONAdditions.m */; };
 		58C0A0ED0FBA000700AF8C14 /* ActivityList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */; };
 		58C0A0F20FBA009D00AF8C14 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C0A0F10FBA009D00AF8C14 /* Utils.m */; };
-		58C0A0FC0FBA011C00AF8C14 /* NewActivityDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C0A0FB0FBA011C00AF8C14 /* NewActivityDialogController.m */; };
-		58CA2D0D0FA77FF9007A6A65 /* LoginDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D0C0FA77FF9007A6A65 /* LoginDialogController.m */; };
-		58CA2D360FA78D18007A6A65 /* NSArray+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D2F0FA78D18007A6A65 /* NSArray+BSJSONAdditions.m */; };
-		58CA2D370FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D310FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.m */; };
-		58CA2D380FA78D18007A6A65 /* NSScanner+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D330FA78D18007A6A65 /* NSScanner+BSJSONAdditions.m */; };
-		58CA2D390FA78D18007A6A65 /* NSString+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D350FA78D18007A6A65 /* NSString+BSJSONAdditions.m */; };
-		58CA2D450FA78DED007A6A65 /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D3E0FA78DED007A6A65 /* NSDataMBBase64.m */; };
 		58CA2D4E0FA7995E007A6A65 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4B0FA7995E007A6A65 /* Request.m */; };
 		58CA2D4F0FA7995E007A6A65 /* RubyTimeConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4D0FA7995E007A6A65 /* RubyTimeConnector.m */; };
 		58CA2DAE0FA7AE6A007A6A65 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2DAD0FA7AE6A007A6A65 /* Activity.m */; };
 		58E9FFC10FB22F9D00CDA046 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E9FFC00FB22F9D00CDA046 /* Project.m */; };
 		58EB65700FBCEF4400717C36 /* ActivityDateDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EB656F0FBCEF4400717C36 /* ActivityDateDialog.xib */; };
-		58EB65740FBDCDFE00717C36 /* ActivityDateDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58EB65730FBDCDFE00717C36 /* ActivityDateDialogController.m */; };
 		58EB65BA0FBDE71100717C36 /* ActivityCommentsDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EB65B90FBDE71100717C36 /* ActivityCommentsDialog.xib */; };
-		58EB65E00FBDE86800717C36 /* ActivityCommentsDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58EB65DF0FBDE86800717C36 /* ActivityCommentsDialogController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D3623240D0F684500981E51 /* RubyTimeAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyTimeAppDelegate.h; sourceTree = "<group>"; };
-		1D3623250D0F684500981E51 /* RubyTimeAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyTimeAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* RubyTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RubyTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* RubyTime_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyTime_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		580504830FA8E9B500F47490 /* ActivityListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityListController.h; sourceTree = "<group>"; };
-		580504840FA8E9B500F47490 /* ActivityListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityListController.m; sourceTree = "<group>"; };
 		5831E83D0FB0B2A5008680E5 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		5831E83E0FB0B2A5008680E5 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		5844CE610FC31FA8007F22FE /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
@@ -63,35 +59,43 @@
 		5844CECC0FC33BAE007F22FE /* ActivityFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityFieldCell.m; sourceTree = "<group>"; };
 		5844CED20FC33CFE007F22FE /* ActivityFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityFieldCell.xib; sourceTree = "<group>"; };
 		586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewActivityDialog.xib; sourceTree = "<group>"; };
-		586DAE610FBC912900DBCF0A /* ProjectChoiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectChoiceController.h; sourceTree = "<group>"; };
-		586DAE620FBC912900DBCF0A /* ProjectChoiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectChoiceController.m; sourceTree = "<group>"; };
 		588BAB020FADD47C00460689 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
 		588BAB0F0FADD78B00460689 /* ActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
 		588BAB110FADD78B00460689 /* LoginDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginDialog.xib; sourceTree = "<group>"; };
 		588BAB120FADD78B00460689 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		588BAB170FADD79B00460689 /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
 		588BAB180FADD79B00460689 /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
-		589BE9300FD1624900CCFA82 /* SFHFEditableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFEditableCell.h; sourceTree = "<group>"; };
-		589BE9310FD1624900CCFA82 /* SFHFEditableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFEditableCell.m; sourceTree = "<group>"; };
-		58B809660FCDD213002EBA8C /* BSJSONEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSJSONEncoder.h; sourceTree = "<group>"; };
-		58B809670FCDD213002EBA8C /* BSJSONEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSJSONEncoder.m; sourceTree = "<group>"; };
+		589BE9D90FD1D52300CCFA82 /* NSDataMBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataMBBase64.h; sourceTree = "<group>"; };
+		589BE9DA0FD1D52300CCFA82 /* NSDataMBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMBBase64.m; sourceTree = "<group>"; };
+		589BE9DB0FD1D52300CCFA82 /* SFHFEditableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFEditableCell.h; sourceTree = "<group>"; };
+		589BE9DC0FD1D52300CCFA82 /* SFHFEditableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFEditableCell.m; sourceTree = "<group>"; };
+		589BE9E10FD1D57C00CCFA82 /* ActivityCommentsDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCommentsDialogController.h; sourceTree = "<group>"; };
+		589BE9E20FD1D57C00CCFA82 /* ActivityCommentsDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCommentsDialogController.m; sourceTree = "<group>"; };
+		589BE9E30FD1D57C00CCFA82 /* ActivityDateDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDateDialogController.h; sourceTree = "<group>"; };
+		589BE9E40FD1D57C00CCFA82 /* ActivityDateDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDateDialogController.m; sourceTree = "<group>"; };
+		589BE9E50FD1D57C00CCFA82 /* ActivityListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityListController.h; sourceTree = "<group>"; };
+		589BE9E60FD1D57C00CCFA82 /* ActivityListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityListController.m; sourceTree = "<group>"; };
+		589BE9E70FD1D57C00CCFA82 /* LoginDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDialogController.h; sourceTree = "<group>"; };
+		589BE9E80FD1D57C00CCFA82 /* LoginDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDialogController.m; sourceTree = "<group>"; };
+		589BE9E90FD1D57C00CCFA82 /* NewActivityDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewActivityDialogController.h; sourceTree = "<group>"; };
+		589BE9EA0FD1D57C00CCFA82 /* NewActivityDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewActivityDialogController.m; sourceTree = "<group>"; };
+		589BE9EB0FD1D57C00CCFA82 /* ProjectChoiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectChoiceController.h; sourceTree = "<group>"; };
+		589BE9EC0FD1D57C00CCFA82 /* ProjectChoiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectChoiceController.m; sourceTree = "<group>"; };
+		589BE9ED0FD1D57C00CCFA82 /* RubyTimeAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyTimeAppDelegate.h; sourceTree = "<group>"; };
+		589BE9EE0FD1D57C00CCFA82 /* RubyTimeAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyTimeAppDelegate.m; sourceTree = "<group>"; };
+		589BEA180FD1D60100CCFA82 /* BSJSONEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSJSONEncoder.h; sourceTree = "<group>"; };
+		589BEA190FD1D60100CCFA82 /* BSJSONEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSJSONEncoder.m; sourceTree = "<group>"; };
+		589BEA1A0FD1D60100CCFA82 /* NSArray+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BSJSONAdditions.h"; sourceTree = "<group>"; };
+		589BEA1B0FD1D60100CCFA82 /* NSArray+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BSJSONAdditions.m"; sourceTree = "<group>"; };
+		589BEA1C0FD1D60100CCFA82 /* NSDictionary+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BSJSONAdditions.h"; sourceTree = "<group>"; };
+		589BEA1D0FD1D60100CCFA82 /* NSDictionary+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BSJSONAdditions.m"; sourceTree = "<group>"; };
+		589BEA1E0FD1D60100CCFA82 /* NSScanner+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+BSJSONAdditions.h"; sourceTree = "<group>"; };
+		589BEA1F0FD1D60100CCFA82 /* NSScanner+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+BSJSONAdditions.m"; sourceTree = "<group>"; };
+		589BEA200FD1D60100CCFA82 /* NSString+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BSJSONAdditions.h"; sourceTree = "<group>"; };
+		589BEA210FD1D60100CCFA82 /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityList.xib; sourceTree = "<group>"; };
 		58C0A0F00FBA009D00AF8C14 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		58C0A0F10FBA009D00AF8C14 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
-		58C0A0FA0FBA011C00AF8C14 /* NewActivityDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewActivityDialogController.h; sourceTree = "<group>"; };
-		58C0A0FB0FBA011C00AF8C14 /* NewActivityDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewActivityDialogController.m; sourceTree = "<group>"; };
-		58CA2D0B0FA77FF9007A6A65 /* LoginDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDialogController.h; sourceTree = "<group>"; };
-		58CA2D0C0FA77FF9007A6A65 /* LoginDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDialogController.m; sourceTree = "<group>"; };
-		58CA2D2E0FA78D18007A6A65 /* NSArray+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BSJSONAdditions.h"; sourceTree = "<group>"; };
-		58CA2D2F0FA78D18007A6A65 /* NSArray+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BSJSONAdditions.m"; sourceTree = "<group>"; };
-		58CA2D300FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BSJSONAdditions.h"; sourceTree = "<group>"; };
-		58CA2D310FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BSJSONAdditions.m"; sourceTree = "<group>"; };
-		58CA2D320FA78D18007A6A65 /* NSScanner+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+BSJSONAdditions.h"; sourceTree = "<group>"; };
-		58CA2D330FA78D18007A6A65 /* NSScanner+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+BSJSONAdditions.m"; sourceTree = "<group>"; };
-		58CA2D340FA78D18007A6A65 /* NSString+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BSJSONAdditions.h"; sourceTree = "<group>"; };
-		58CA2D350FA78D18007A6A65 /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BSJSONAdditions.m"; sourceTree = "<group>"; };
-		58CA2D3D0FA78DED007A6A65 /* NSDataMBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataMBBase64.h; sourceTree = "<group>"; };
-		58CA2D3E0FA78DED007A6A65 /* NSDataMBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMBBase64.m; sourceTree = "<group>"; };
 		58CA2D4A0FA7995E007A6A65 /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
 		58CA2D4B0FA7995E007A6A65 /* Request.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
 		58CA2D4C0FA7995E007A6A65 /* RubyTimeConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyTimeConnector.h; sourceTree = "<group>"; };
@@ -101,11 +105,7 @@
 		58E9FFBF0FB22F9D00CDA046 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
 		58E9FFC00FB22F9D00CDA046 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		58EB656F0FBCEF4400717C36 /* ActivityDateDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityDateDialog.xib; sourceTree = "<group>"; };
-		58EB65720FBDCDFE00717C36 /* ActivityDateDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDateDialogController.h; sourceTree = "<group>"; };
-		58EB65730FBDCDFE00717C36 /* ActivityDateDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDateDialogController.m; sourceTree = "<group>"; };
 		58EB65B90FBDE71100717C36 /* ActivityCommentsDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCommentsDialog.xib; sourceTree = "<group>"; };
-		58EB65DE0FBDE86800717C36 /* ActivityCommentsDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCommentsDialogController.h; sourceTree = "<group>"; };
-		58EB65DF0FBDE86800717C36 /* ActivityCommentsDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCommentsDialogController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,27 +123,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		080E96DDFE201D6D7F000001 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				580504830FA8E9B500F47490 /* ActivityListController.h */,
-				580504840FA8E9B500F47490 /* ActivityListController.m */,
-				58CA2D0B0FA77FF9007A6A65 /* LoginDialogController.h */,
-				58CA2D0C0FA77FF9007A6A65 /* LoginDialogController.m */,
-				1D3623240D0F684500981E51 /* RubyTimeAppDelegate.h */,
-				1D3623250D0F684500981E51 /* RubyTimeAppDelegate.m */,
-				58C0A0FA0FBA011C00AF8C14 /* NewActivityDialogController.h */,
-				58C0A0FB0FBA011C00AF8C14 /* NewActivityDialogController.m */,
-				586DAE610FBC912900DBCF0A /* ProjectChoiceController.h */,
-				586DAE620FBC912900DBCF0A /* ProjectChoiceController.m */,
-				58EB65720FBDCDFE00717C36 /* ActivityDateDialogController.h */,
-				58EB65730FBDCDFE00717C36 /* ActivityDateDialogController.m */,
-				58EB65DE0FBDE86800717C36 /* ActivityCommentsDialogController.h */,
-				58EB65DF0FBDE86800717C36 /* ActivityCommentsDialogController.m */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,11 +134,11 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				58CA2D3B0FA78DD8007A6A65 /* Backend */,
+				589BE9E00FD1D55C00CCFA82 /* Controllers */,
+				589BE9CC0FD1D4C800CCFA82 /* Lib */,
 				588BAB0E0FADD76E00460689 /* Views */,
 				58CA2DAB0FA7AE54007A6A65 /* Models */,
-				58CA2D3B0FA78DD8007A6A65 /* Backend */,
-				58CA2D2D0FA78D00007A6A65 /* BSJSONAdditions */,
-				080E96DDFE201D6D7F000001 /* Controllers */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -171,10 +150,10 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				29B97316FDCFA39411CA2CEA /* main.m */,
 				58C0A0F00FBA009D00AF8C14 /* Utils.h */,
 				58C0A0F10FBA009D00AF8C14 /* Utils.m */,
 				28A0AAE50D9B0CCF005BE974 /* RubyTime_Prefix.pch */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -202,37 +181,68 @@
 		588BAB0E0FADD76E00460689 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				589BE9300FD1624900CCFA82 /* SFHFEditableCell.h */,
-				589BE9310FD1624900CCFA82 /* SFHFEditableCell.m */,
-				5844CED20FC33CFE007F22FE /* ActivityFieldCell.xib */,
+				58EB65B90FBDE71100717C36 /* ActivityCommentsDialog.xib */,
 				58EB656F0FBCEF4400717C36 /* ActivityDateDialog.xib */,
 				58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */,
-				588BAB0F0FADD78B00460689 /* ActivityCell.xib */,
 				588BAB110FADD78B00460689 /* LoginDialog.xib */,
 				588BAB120FADD78B00460689 /* MainWindow.xib */,
+				586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */,
+				588BAB0F0FADD78B00460689 /* ActivityCell.xib */,
 				588BAB170FADD79B00460689 /* ActivityCell.h */,
 				588BAB180FADD79B00460689 /* ActivityCell.m */,
-				586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */,
-				58EB65B90FBDE71100717C36 /* ActivityCommentsDialog.xib */,
+				5844CED20FC33CFE007F22FE /* ActivityFieldCell.xib */,
 				5844CECB0FC33BAE007F22FE /* ActivityFieldCell.h */,
 				5844CECC0FC33BAE007F22FE /* ActivityFieldCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		58CA2D2D0FA78D00007A6A65 /* BSJSONAdditions */ = {
+		589BE9CC0FD1D4C800CCFA82 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				58B809660FCDD213002EBA8C /* BSJSONEncoder.h */,
-				58B809670FCDD213002EBA8C /* BSJSONEncoder.m */,
-				58CA2D2E0FA78D18007A6A65 /* NSArray+BSJSONAdditions.h */,
-				58CA2D2F0FA78D18007A6A65 /* NSArray+BSJSONAdditions.m */,
-				58CA2D300FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.h */,
-				58CA2D310FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.m */,
-				58CA2D320FA78D18007A6A65 /* NSScanner+BSJSONAdditions.h */,
-				58CA2D330FA78D18007A6A65 /* NSScanner+BSJSONAdditions.m */,
-				58CA2D340FA78D18007A6A65 /* NSString+BSJSONAdditions.h */,
-				58CA2D350FA78D18007A6A65 /* NSString+BSJSONAdditions.m */,
+				589BEA170FD1D5DD00CCFA82 /* BSJSONAdditions */,
+				589BE9D90FD1D52300CCFA82 /* NSDataMBBase64.h */,
+				589BE9DA0FD1D52300CCFA82 /* NSDataMBBase64.m */,
+				589BE9DB0FD1D52300CCFA82 /* SFHFEditableCell.h */,
+				589BE9DC0FD1D52300CCFA82 /* SFHFEditableCell.m */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		589BE9E00FD1D55C00CCFA82 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				589BE9E10FD1D57C00CCFA82 /* ActivityCommentsDialogController.h */,
+				589BE9E20FD1D57C00CCFA82 /* ActivityCommentsDialogController.m */,
+				589BE9E30FD1D57C00CCFA82 /* ActivityDateDialogController.h */,
+				589BE9E40FD1D57C00CCFA82 /* ActivityDateDialogController.m */,
+				589BE9E50FD1D57C00CCFA82 /* ActivityListController.h */,
+				589BE9E60FD1D57C00CCFA82 /* ActivityListController.m */,
+				589BE9E70FD1D57C00CCFA82 /* LoginDialogController.h */,
+				589BE9E80FD1D57C00CCFA82 /* LoginDialogController.m */,
+				589BE9E90FD1D57C00CCFA82 /* NewActivityDialogController.h */,
+				589BE9EA0FD1D57C00CCFA82 /* NewActivityDialogController.m */,
+				589BE9EB0FD1D57C00CCFA82 /* ProjectChoiceController.h */,
+				589BE9EC0FD1D57C00CCFA82 /* ProjectChoiceController.m */,
+				589BE9ED0FD1D57C00CCFA82 /* RubyTimeAppDelegate.h */,
+				589BE9EE0FD1D57C00CCFA82 /* RubyTimeAppDelegate.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		589BEA170FD1D5DD00CCFA82 /* BSJSONAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				589BEA180FD1D60100CCFA82 /* BSJSONEncoder.h */,
+				589BEA190FD1D60100CCFA82 /* BSJSONEncoder.m */,
+				589BEA1A0FD1D60100CCFA82 /* NSArray+BSJSONAdditions.h */,
+				589BEA1B0FD1D60100CCFA82 /* NSArray+BSJSONAdditions.m */,
+				589BEA1C0FD1D60100CCFA82 /* NSDictionary+BSJSONAdditions.h */,
+				589BEA1D0FD1D60100CCFA82 /* NSDictionary+BSJSONAdditions.m */,
+				589BEA1E0FD1D60100CCFA82 /* NSScanner+BSJSONAdditions.h */,
+				589BEA1F0FD1D60100CCFA82 /* NSScanner+BSJSONAdditions.m */,
+				589BEA200FD1D60100CCFA82 /* NSString+BSJSONAdditions.h */,
+				589BEA210FD1D60100CCFA82 /* NSString+BSJSONAdditions.m */,
 			);
 			path = BSJSONAdditions;
 			sourceTree = "<group>";
@@ -240,14 +250,12 @@
 		58CA2D3B0FA78DD8007A6A65 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
+				5831E83D0FB0B2A5008680E5 /* DataManager.h */,
+				5831E83E0FB0B2A5008680E5 /* DataManager.m */,
 				58CA2D4A0FA7995E007A6A65 /* Request.h */,
 				58CA2D4B0FA7995E007A6A65 /* Request.m */,
 				58CA2D4C0FA7995E007A6A65 /* RubyTimeConnector.h */,
 				58CA2D4D0FA7995E007A6A65 /* RubyTimeConnector.m */,
-				58CA2D3D0FA78DED007A6A65 /* NSDataMBBase64.h */,
-				58CA2D3E0FA78DED007A6A65 /* NSDataMBBase64.m */,
-				5831E83D0FB0B2A5008680E5 /* DataManager.h */,
-				5831E83E0FB0B2A5008680E5 /* DataManager.m */,
 			);
 			path = Backend;
 			sourceTree = "<group>";
@@ -333,28 +341,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				1D3623260D0F684500981E51 /* RubyTimeAppDelegate.m in Sources */,
-				58CA2D0D0FA77FF9007A6A65 /* LoginDialogController.m in Sources */,
-				58CA2D360FA78D18007A6A65 /* NSArray+BSJSONAdditions.m in Sources */,
-				58CA2D370FA78D18007A6A65 /* NSDictionary+BSJSONAdditions.m in Sources */,
-				58CA2D380FA78D18007A6A65 /* NSScanner+BSJSONAdditions.m in Sources */,
-				58CA2D390FA78D18007A6A65 /* NSString+BSJSONAdditions.m in Sources */,
-				58CA2D450FA78DED007A6A65 /* NSDataMBBase64.m in Sources */,
 				58CA2D4E0FA7995E007A6A65 /* Request.m in Sources */,
 				58CA2D4F0FA7995E007A6A65 /* RubyTimeConnector.m in Sources */,
 				58CA2DAE0FA7AE6A007A6A65 /* Activity.m in Sources */,
-				580504850FA8E9B500F47490 /* ActivityListController.m in Sources */,
 				588BAB190FADD79B00460689 /* ActivityCell.m in Sources */,
 				5831E83F0FB0B2A5008680E5 /* DataManager.m in Sources */,
 				58E9FFC10FB22F9D00CDA046 /* Project.m in Sources */,
 				58C0A0F20FBA009D00AF8C14 /* Utils.m in Sources */,
-				58C0A0FC0FBA011C00AF8C14 /* NewActivityDialogController.m in Sources */,
-				586DAE630FBC912900DBCF0A /* ProjectChoiceController.m in Sources */,
-				58EB65740FBDCDFE00717C36 /* ActivityDateDialogController.m in Sources */,
-				58EB65E00FBDE86800717C36 /* ActivityCommentsDialogController.m in Sources */,
 				5844CECD0FC33BAE007F22FE /* ActivityFieldCell.m in Sources */,
-				58B809680FCDD213002EBA8C /* BSJSONEncoder.m in Sources */,
-				589BE9320FD1624900CCFA82 /* SFHFEditableCell.m in Sources */,
+				589BE9DE0FD1D52300CCFA82 /* NSDataMBBase64.m in Sources */,
+				589BE9DF0FD1D52300CCFA82 /* SFHFEditableCell.m in Sources */,
+				589BE9EF0FD1D57C00CCFA82 /* ActivityCommentsDialogController.m in Sources */,
+				589BE9F00FD1D57C00CCFA82 /* ActivityDateDialogController.m in Sources */,
+				589BE9F10FD1D57C00CCFA82 /* ActivityListController.m in Sources */,
+				589BE9F20FD1D57C00CCFA82 /* LoginDialogController.m in Sources */,
+				589BE9F30FD1D57C00CCFA82 /* NewActivityDialogController.m in Sources */,
+				589BE9F40FD1D57C00CCFA82 /* ProjectChoiceController.m in Sources */,
+				589BE9F50FD1D57C00CCFA82 /* RubyTimeAppDelegate.m in Sources */,
+				589BEA220FD1D60100CCFA82 /* BSJSONEncoder.m in Sources */,
+				589BEA230FD1D60100CCFA82 /* NSArray+BSJSONAdditions.m in Sources */,
+				589BEA240FD1D60100CCFA82 /* NSDictionary+BSJSONAdditions.m in Sources */,
+				589BEA250FD1D60100CCFA82 /* NSScanner+BSJSONAdditions.m in Sources */,
+				589BEA260FD1D60100CCFA82 /* NSString+BSJSONAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
