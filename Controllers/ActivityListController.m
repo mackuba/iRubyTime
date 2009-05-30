@@ -48,8 +48,8 @@ OnDeallocRelease(connector, spinner);
   Observe(connector, @"authenticationSuccessful", loginSuccessful);
   Observe(connector, @"authenticate", loading);
   Observe(connector, @"loadProjects", loading);
-  Observe(connector, @"activitiesReceived", activitiesReceived:);
-  Observe(connector, @"activityCreated", activityCreated);
+  Observe(connector, @"activitiesReceived", activitiesReceived);
+  Observe(connector, @"activityCreated", activityCreated:);
   Observe(nil, @"newActivityDialogCancelled", newActivityDialogCancelled);
   
   [loadingButton release];
@@ -77,14 +77,22 @@ OnDeallocRelease(connector, spinner);
 // -------------------------------------------------------------------------------------------
 #pragma mark Action handlers
 
-- (void) scrollTextViewToTop {
-  [self.tableView setContentOffset: CGPointZero animated: YES];
-}
-
-- (void) addActivityToList {
-  [self.tableView beginUpdates];
-  [self.tableView insertRowsAtIndexPaths: RTArray(RTIndex(0, 0)) withRowAnimation: UITableViewRowAnimationTop];
-  [self.tableView endUpdates];
+- (void) addActivityToList: (Activity *) activity {
+  NSInteger index = [connector.activities indexOfObject: activity];
+  if (index != NSNotFound) {
+    UITableView *table = self.tableView;
+    NSInteger count = connector.activities.count;
+    NSIndexPath *newCellIndex = RTIndex(0, index);
+    NSIndexPath *scrollIndex = RTIndex(0, MIN(index, count - 2)); // don't scroll to the last one if it's not added yet
+    [table scrollToRowAtIndexPath: scrollIndex atScrollPosition: UITableViewScrollPositionTop animated: YES];
+    [table beginUpdates];
+    [table insertRowsAtIndexPaths: RTArray(newCellIndex) withRowAnimation: UITableViewRowAnimationTop];
+    [table endUpdates];
+    if (index == count - 1) { // now you can scroll to the last one
+      NSLog(@"last one");
+      [table scrollToRowAtIndexPath: newCellIndex atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+    }
+  }
 }
 
 - (void) loading {
@@ -117,15 +125,14 @@ OnDeallocRelease(connector, spinner);
   [self dismissModalViewControllerAnimated: YES];
 }
 
-- (void) activitiesReceived: (NSNotification *) notification {
+- (void) activitiesReceived {
   [self.tableView reloadData];
   [spinner stopAnimating];
   self.navigationItem.rightBarButtonItem.enabled = (connector.projects.count > 0);
 }
 
-- (void) activityCreated {
-  [self scrollTextViewToTop];
-  [self addActivityToList];
+- (void) activityCreated: (NSNotification *) notification {
+  [self addActivityToList: [notification.userInfo objectForKey: @"activity"]];
   [self closeNewActivityDialog];
 }
 

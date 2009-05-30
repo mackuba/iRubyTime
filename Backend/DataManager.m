@@ -33,7 +33,12 @@ OnDeallocRelease(activities, projects, projectHash);
 #pragma mark Activities
 
 - (void) addNewActivity: (Activity *) activity {
-  [activities insertObject: activity atIndex: 0];
+  NSInteger index;
+  for (index = 0; index < activities.count; index++) {
+    Activity *existing = [activities objectAtIndex: index];
+    if ([activity.date laterDate: existing.date] == activity.date) break;
+  }
+  [activities insertObject: activity atIndex: index];
 }
 
 - (Activity *) activityFromJSON: (NSDictionary *) json {
