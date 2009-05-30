@@ -24,6 +24,7 @@
 		588BAB150FADD78B00460689 /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB110FADD78B00460689 /* LoginDialog.xib */; };
 		588BAB160FADD78B00460689 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB120FADD78B00460689 /* MainWindow.xib */; };
 		588BAB190FADD79B00460689 /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 588BAB180FADD79B00460689 /* ActivityCell.m */; };
+		589BE9320FD1624900CCFA82 /* SFHFEditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9310FD1624900CCFA82 /* SFHFEditableCell.m */; };
 		58B809680FCDD213002EBA8C /* BSJSONEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B809670FCDD213002EBA8C /* BSJSONEncoder.m */; };
 		58C0A0ED0FBA000700AF8C14 /* ActivityList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */; };
 		58C0A0F20FBA009D00AF8C14 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C0A0F10FBA009D00AF8C14 /* Utils.m */; };
@@ -70,6 +71,8 @@
 		588BAB120FADD78B00460689 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		588BAB170FADD79B00460689 /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
 		588BAB180FADD79B00460689 /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
+		589BE9300FD1624900CCFA82 /* SFHFEditableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFEditableCell.h; sourceTree = "<group>"; };
+		589BE9310FD1624900CCFA82 /* SFHFEditableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFEditableCell.m; sourceTree = "<group>"; };
 		58B809660FCDD213002EBA8C /* BSJSONEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSJSONEncoder.h; sourceTree = "<group>"; };
 		58B809670FCDD213002EBA8C /* BSJSONEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSJSONEncoder.m; sourceTree = "<group>"; };
 		58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityList.xib; sourceTree = "<group>"; };
@@ -199,6 +202,8 @@
 		588BAB0E0FADD76E00460689 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				589BE9300FD1624900CCFA82 /* SFHFEditableCell.h */,
+				589BE9310FD1624900CCFA82 /* SFHFEditableCell.m */,
 				5844CED20FC33CFE007F22FE /* ActivityFieldCell.xib */,
 				58EB656F0FBCEF4400717C36 /* ActivityDateDialog.xib */,
 				58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */,
@@ -349,6 +354,7 @@
 				58EB65E00FBDE86800717C36 /* ActivityCommentsDialogController.m in Sources */,
 				5844CECD0FC33BAE007F22FE /* ActivityFieldCell.m in Sources */,
 				58B809680FCDD213002EBA8C /* BSJSONEncoder.m in Sources */,
+				589BE9320FD1624900CCFA82 /* SFHFEditableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
