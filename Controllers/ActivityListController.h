@@ -7,12 +7,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class LoginDialogController;
 @class RubyTimeConnector;
 @class ActivityCell;
 
 @interface ActivityListController : UITableViewController {
-  LoginDialogController *loginController;
   RubyTimeConnector *connector;
   ActivityCell *currentCell;
   UIActivityIndicatorView *spinner;

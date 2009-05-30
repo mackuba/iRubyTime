@@ -8,21 +8,23 @@
 #import "ActivityListController.h"
 #import "LoginDialogController.h"
 #import "RubyTimeConnector.h"
+#import "SFHFEditableCell.h"
 #import "Utils.h"
 
-// TODO: redesign with a table view
+#define LOGIN_DIALOG_CELL_TYPE @"LoginDialogCell"
 
 @implementation LoginDialogController
 
-@synthesize urlField, usernameField, passwordField, spinner;
-OnDeallocRelease(urlField, usernameField, passwordField, spinner, connector);
+@synthesize spinner, footerView, loginButton;
+OnDeallocRelease(connector, spinner, footerView, loginButton);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
 - (id) initWithConnector: (RubyTimeConnector *) rtConnector {
-  self = [super initWithNibName: @"LoginDialog" bundle: [NSBundle mainBundle]];
+  self = [super initWithStyle: UITableViewStyleGrouped];
   if (self) {
+    [[NSBundle mainBundle] loadNibNamed: @"LoginDialog" owner: self options: nil];
     connector = [rtConnector retain];
     Observe(connector, @"authenticationFailed", authenticationFailed);
     Observe(connector, @"requestFailed", requestFailed);
@@ -31,9 +33,9 @@ OnDeallocRelease(urlField, usernameField, passwordField, spinner, connector);
 }
 
 - (void) viewDidLoad {
-  urlField.text = connector.serverURL;
-  usernameField.text = connector.username;
-  passwordField.text = connector.password;
+  self.title = @"Log in to RubyTime";
+  self.tableView.scrollEnabled = NO;
+  self.tableView.tableFooterView = footerView;
 }
 
 - (void) viewDidAppear: (BOOL) animated {
@@ -52,6 +54,7 @@ OnDeallocRelease(urlField, usernameField, passwordField, spinner, connector);
     [urlField resignFirstResponder];
     [usernameField resignFirstResponder];
     [passwordField resignFirstResponder];
+    [loginButton setEnabled: NO];
     [connector setServerURL: urlField.text username: usernameField.text password: passwordField.text];
     [connector authenticate];
     [spinner startAnimating];
@@ -79,12 +82,61 @@ OnDeallocRelease(urlField, usernameField, passwordField, spinner, connector);
 
 - (void) authenticationFailed {
   [spinner stopAnimating];
+  [loginButton setEnabled: YES];
   [Utils showAlertWithTitle: @"Error" content: @"Incorrect username or password."];
 }
 
 - (void) requestFailed {
   [spinner stopAnimating];
+  [loginButton setEnabled: YES];
   [Utils showAlertWithTitle: @"Error" content: @"Can't connect to the server."];
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Table view delegate & data source
+
+- (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
+  return 3;
+}
+
+- (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
+  SFHFEditableCell *cell = (SFHFEditableCell *) [table dequeueReusableCellWithIdentifier: LOGIN_DIALOG_CELL_TYPE];
+  if (!cell) {
+    cell = [[SFHFEditableCell alloc] initWithFrame: CGRectZero reuseIdentifier: LOGIN_DIALOG_CELL_TYPE delegate: self];
+  }
+  [self setupCell: cell forRow: path.row];
+  return cell;
+}
+
+- (void) setupCell: (SFHFEditableCell *) cell forRow: (NSInteger) row {
+  switch (row) {
+    case 0:
+      [cell setLabelText: @"Server URL" andPlaceholderText: @"rubytime.org"];
+      cell.textField.keyboardType = UIKeyboardTypeURL;
+      cell.textField.returnKeyType = UIReturnKeyNext;
+      cell.textField.secureTextEntry = NO;
+      urlField = cell.textField;
+      break;
+
+    case 1:
+      [cell setLabelText: @"Username" andPlaceholderText: @"john.smith"];
+      cell.textField.keyboardType = UIKeyboardTypeEmailAddress;
+      cell.textField.returnKeyType = UIReturnKeyNext;
+      cell.textField.secureTextEntry = NO;
+      usernameField = cell.textField;
+      break;
+
+    case 2:
+      [cell setLabelText: @"Password" andPlaceholderText: @"secret"];
+      cell.textField.keyboardType = UIKeyboardTypeASCIICapable;
+      cell.textField.returnKeyType = UIReturnKeyGo;
+      cell.textField.secureTextEntry = YES;
+      passwordField = cell.textField;
+      break;
+  }
+  cell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+  cell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+  cell.textField.enablesReturnKeyAutomatically = YES;
 }
 
 @end

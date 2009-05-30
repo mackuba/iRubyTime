@@ -23,7 +23,7 @@
 @implementation ActivityListController
 
 @synthesize currentCell, connector;
-OnDeallocRelease(loginController, connector, spinner);
+OnDeallocRelease(connector, spinner);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -100,8 +100,9 @@ OnDeallocRelease(loginController, connector, spinner);
 }
 
 - (void) showLoginDialog {
-  loginController = [[LoginDialogController alloc] initWithConnector: connector];
-  [self presentModalViewController: loginController animated: YES];
+  LoginDialogController *loginController = [[LoginDialogController alloc] initWithConnector: connector];
+  UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController: loginController];
+  [self presentModalViewController: navigation animated: YES];
 }
 
 - (void) closeNewActivityDialog {
@@ -112,12 +113,8 @@ OnDeallocRelease(loginController, connector, spinner);
 #pragma mark Notification callbacks
 
 - (void) loginSuccessful {
-  if (loginController) {
-    // TODO: add a switch in list controller to see all activities or only user's
-    [self dismissModalViewControllerAnimated: YES];
-    [loginController release];
-    loginController = nil;
-  }
+  // TODO: add a switch in list controller to see all activities or only user's
+  [self dismissModalViewControllerAnimated: YES];
 }
 
 - (void) activitiesReceived: (NSNotification *) notification {
