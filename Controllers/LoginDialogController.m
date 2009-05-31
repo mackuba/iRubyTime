@@ -116,6 +116,7 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
       cell.textField.returnKeyType = UIReturnKeyNext;
       cell.textField.secureTextEntry = NO;
       urlField = cell.textField;
+      urlField.text = connector.serverURL;
       break;
 
     case 1:
@@ -124,6 +125,7 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
       cell.textField.returnKeyType = UIReturnKeyNext;
       cell.textField.secureTextEntry = NO;
       usernameField = cell.textField;
+      usernameField.text = connector.username;
       break;
 
     case 2:

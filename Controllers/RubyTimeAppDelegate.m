@@ -8,14 +8,17 @@
 #import "ActivityListController.h"
 #import "RubyTimeAppDelegate.h"
 #import "RubyTimeConnector.h"
+#import "SFHFKeychainUtils.h"
 #import "Utils.h"
 
 #define USERNAME_SETTING @"username"
 #define PASSWORD_SETTING @"password"
 #define SERVER_SETTING @"serverURL"
+#define KEYCHAIN_SERVICE_NAME @"iRubyTime"
 
 @interface RubyTimeAppDelegate()
 - (void) initApplication;
+- (RubyTimeConnector *) initializeConnector;
 - (void) loadDataFromDisk;
 @end
 
@@ -28,11 +31,7 @@ OnDeallocRelease(window, navigationController, connector, activityListController
 #pragma mark Initialization
 
 - (void) initApplication {
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *username = [settings objectForKey: USERNAME_SETTING];
-  NSString *password = [settings objectForKey: PASSWORD_SETTING];
-  NSString *serverURL = [settings objectForKey: SERVER_SETTING];
-  connector = [[RubyTimeConnector alloc] initWithServerURL: serverURL username: username password: password];
+  connector = [self initializeConnector];
   activityListController.connector = connector;
   
   NSArray *dirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -46,14 +45,44 @@ OnDeallocRelease(window, navigationController, connector, activityListController
   Observe(connector, @"activityCreated", activitiesUpdated);
 }
 
+- (RubyTimeConnector *) initializeConnector {
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSString *username = [settings objectForKey: USERNAME_SETTING];
+  NSString *serverURL = [settings objectForKey: SERVER_SETTING];
+
+  #if TARGET_IPHONE_SIMULATOR
+    NSString *password = [settings objectForKey: PASSWORD_SETTING];
+  #else
+    NSString *password = nil;
+    NSError *error;
+    if (username) {
+      password = [SFHFKeychainUtils getPasswordForUsername: username
+                                            andServiceName: KEYCHAIN_SERVICE_NAME
+                                                     error: &error];
+    }
+  #endif
+  return [[RubyTimeConnector alloc] initWithServerURL: serverURL username: username password: password];
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Instance methods
 
 - (void) saveLoginAndPassword {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings setObject: connector.username forKey: USERNAME_SETTING];
-  [settings setObject: connector.password forKey: PASSWORD_SETTING]; // TODO: encode password
   [settings setObject: connector.serverURL forKey: SERVER_SETTING];
+
+  #if TARGET_IPHONE_SIMULATOR
+    [settings setObject: connector.password forKey: PASSWORD_SETTING];
+  #else
+    NSError *error;
+    [SFHFKeychainUtils storeUsername: connector.username
+                         andPassword: connector.password
+                      forServiceName: KEYCHAIN_SERVICE_NAME
+                      updateExisting: YES
+                               error: &error];
+  #endif
+
   [settings synchronize];
 }
 
