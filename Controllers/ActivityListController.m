@@ -108,7 +108,7 @@ OnDeallocRelease(connector, spinner);
 }
 
 - (void) showLoginDialog {
-  LoginDialogController *loginController = [[LoginDialogController alloc] initWithConnector: connector];
+  LoginDialogController *loginController = [[[LoginDialogController alloc] initWithConnector: connector] autorelease];
   UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController: loginController];
   [self presentModalViewController: navigation animated: YES];
 }

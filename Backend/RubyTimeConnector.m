@@ -195,8 +195,8 @@
           lastActivityId = [[records objectAtIndex: 0] activityId];
         }
         dataManager.activities = records;
+        NotifyWithData(@"activitiesReceived", RTDict(records, @"activities"));
       }
-      NotifyWithData(@"activitiesReceived", RTDict(records, @"activities"));
       break;
     
     case RTProjectIndexRequest:
@@ -204,8 +204,8 @@
       if (trimmedString.length > 0) {
         records = [dataManager projectsFromJSONString: trimmedString];
         dataManager.projects = records;
+        NotifyWithData(@"projectsReceived", RTDict(records, @"projects"));
       }
-      NotifyWithData(@"projectsReceived", RTDict(records, @"projects"));
       break;
     
     case RTCreateActivityRequest:
