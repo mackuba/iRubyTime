@@ -34,7 +34,6 @@
                 password: (NSString *) aPassword {
   if (self = [super init]) {
     [self setServerURL: url username: aUsername password: aPassword];
-    lastActivityId = -1;
     userId = -1;
     loggedIn = NO;
     dataManager = [[DataManager alloc] initWithDelegate: self];
@@ -115,12 +114,7 @@
 
 - (void) updateActivities {
   Notify(@"updateActivities");
-  NSString *path;
-  if (lastActivityId == -1) {
-    path = RTFormat(@"/users/%d/activities?search_criteria[limit]=20", userId);
-  } else {
-    path = RTFormat(@"/users/%d/activities?search_criteria[since_activity]=%d", userId, lastActivityId);
-  }
+  NSString *path = RTFormat(@"/activities?search_criteria[limit]=20", userId);
   Request *request = [[Request alloc] initWithURL: ServerPath(path) type: RTActivityIndexRequest];
   [self sendRequest: request];
 }
@@ -191,9 +185,6 @@
     case RTActivityIndexRequest:
       if (trimmedString.length > 0) {
         records = [dataManager activitiesFromJSONString: trimmedString];
-        if (records.count > 0) {
-          lastActivityId = [[records objectAtIndex: 0] activityId];
-        }
         dataManager.activities = records;
         NotifyWithData(@"activitiesReceived", RTDict(records, @"activities"));
       }
