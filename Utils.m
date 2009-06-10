@@ -29,3 +29,24 @@
 }
 
 @end
+
+@implementation NSError (RubyTime)
+
+- (NSString *) friendlyDescription {
+  if (self.domain == NSURLErrorDomain) {
+    switch (self.code) {
+      case NSURLErrorBadURL: return @"Incorrect URL.";
+      case NSURLErrorTimedOut: return @"Server doesn't respond.";
+      case NSURLErrorCannotFindHost: return @"Server not found.";
+      case NSURLErrorCannotConnectToHost: return @"Can't connect to the server.";
+      case NSURLErrorNetworkConnectionLost: return @"Server disconnected or network connection lost.";
+      default: return @"Connection problems.";
+    }
+  } else if (self.domain == RubyTimeErrorDomain) {
+    return @"An error occurred on the server.";
+  } else {
+    return [self localizedDescription];
+  }
+}
+
+@end

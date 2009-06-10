@@ -60,12 +60,15 @@ OnDeallocRelease(connector, spinner);
   [super viewDidAppear: animated];
   if (!connector.loggedIn) {
     if (connector.username && connector.password && connector.serverURL) {
-      Observe(connector, @"requestFailed", requestFailed);
+      Observe(connector, @"requestFailed", requestFailed:);
       Observe(connector, @"authenticationFailed", authenticationFailed);
       [connector authenticate];
     } else {
       [self showLoginDialog];
     }
+  } else {
+    Observe(connector, @"requestFailed", requestFailed:);
+    Observe(connector, @"authenticationFailed", authenticationFailed);
   }
 }
 
@@ -144,9 +147,11 @@ OnDeallocRelease(connector, spinner);
   [self showLoginDialog];
 }
 
-- (void) requestFailed {
+- (void) requestFailed: (NSNotification *) notification {
   [spinner stopAnimating];
-  [Utils showAlertWithTitle: @"Error" content: @"Can't connect to the server."];
+  NSError *error = [notification.userInfo objectForKey: @"error"];
+  NSString *message = error ? [error friendlyDescription] : @"Can't connect to the server.";
+  [Utils showAlertWithTitle: @"Error" content: message];
 }
 
 // -------------------------------------------------------------------------------------------

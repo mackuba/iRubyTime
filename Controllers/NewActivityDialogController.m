@@ -14,6 +14,7 @@
 #import "ProjectChoiceController.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
+#import "NSDictionary+BSJSONAdditions.h"
 
 #define ACTIVITY_FIELD_CELL_TYPE @"ActivityFieldCell"
 
@@ -74,7 +75,7 @@
   NSInteger precision = activityLengthPicker.minuteInterval;
   activity.minutes = activity.minutes / precision * precision;
   
-  Observe(connector, @"requestFailed", activityNotCreated);
+  Observe(connector, @"requestFailed", activityNotCreated:);
   
   [cancel release];
   [back release];
@@ -94,7 +95,7 @@
 
 - (void) saveClicked {
   if ([activity.comments trimmedString].length == 0) {
-    [Utils showAlertWithTitle: @"Can't create activity"
+    [Utils showAlertWithTitle: @"Can't save activity"
                       content: @"Activity comments field is empty - please fill it first."];
   } else {
     self.navigationItem.rightBarButtonItem = loadingButton;
@@ -114,10 +115,28 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Notification callbacks
 
-- (void) activityNotCreated {
+- (void) activityNotCreated: (NSNotification *) notification {
   [spinner stopAnimating];
   self.navigationItem.rightBarButtonItem = saveButton;
-  [Utils showAlertWithTitle: @"Error" content: @"Activity could not be saved"];
+
+  NSError *error = [notification.userInfo objectForKey: @"error"];
+  NSString *text = [notification.userInfo objectForKey: @"text"];
+  NSString *message;
+  if (error && error.domain == RubyTimeErrorDomain && error.code == 400 && text) {
+    NSDictionary *result = [NSDictionary dictionaryWithJSONString: text];
+    if (result.count > 0) {
+      NSArray *errors = [result objectForKey: [[result allKeys] objectAtIndex: 0]];
+      if (errors.count > 0) {
+        message = [[errors objectAtIndex: 0] stringByAppendingString: @"."];
+      }
+    }
+  } else if (error) {
+    message = [error friendlyDescription];
+  }
+  if (!message) {
+    message = @"Activity could not be saved.";
+  }
+  [Utils showAlertWithTitle: @"Error" content: message];
 }
 
 // -------------------------------------------------------------------------------------------

@@ -165,7 +165,8 @@
   NSLog(@"finished request to %@ (%d) (status %d, text = %@)",
     request.URL, request.type, response.statusCode, request.receivedText);
   if (response.statusCode >= 400) {
-    NotifyWithData(@"requestFailed", RTDict(RTInt(response.statusCode), @"errorCode"));
+    NSError *error = [NSError errorWithDomain: RubyTimeErrorDomain code: response.statusCode userInfo: nil];
+    NotifyWithData(@"requestFailed", RTDict(error, @"error", request.receivedText, @"text"));
   } else {
     [self handleFinishedRequest: request];
   }

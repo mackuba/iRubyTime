@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define RubyTimeErrorDomain @"RubyTimeErrorDomain"
+
 #define ReleaseAll(...) \
   NSArray *_releaseList = [[NSArray alloc] initWithObjects: __VA_ARGS__, nil]; \
   for (NSObject *object in _releaseList) { \
@@ -55,4 +57,8 @@
 
 @interface NSString (RubyTime)
 - (NSString *) trimmedString;
+@end
+
+@interface NSError (RubyTime)
+- (NSString *) friendlyDescription;
 @end

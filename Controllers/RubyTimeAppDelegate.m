@@ -105,7 +105,8 @@ OnDeallocRelease(window, navigationController, connector, activityListController
 
 - (void) loginSuccessful {
   [self saveLoginAndPassword];
-  [connector loadProjects];
+  // give the activity list controller some time to hide the login dialog...
+  [connector performSelector: @selector(loadProjects) withObject: NULL afterDelay: 0.5];
 }
 
 - (void) projectsReceived {

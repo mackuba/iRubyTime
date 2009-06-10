@@ -27,7 +27,7 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
     [[NSBundle mainBundle] loadNibNamed: @"LoginDialog" owner: self options: nil];
     connector = [rtConnector retain];
     Observe(connector, @"authenticationFailed", authenticationFailed);
-    Observe(connector, @"requestFailed", requestFailed);
+    Observe(connector, @"requestFailed", requestFailed:);
   }
   return self;
 }
@@ -86,10 +86,12 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
   [Utils showAlertWithTitle: @"Error" content: @"Incorrect username or password."];
 }
 
-- (void) requestFailed {
+- (void) requestFailed: (NSNotification *) notification {
   [spinner stopAnimating];
   [loginButton setEnabled: YES];
-  [Utils showAlertWithTitle: @"Error" content: @"Can't connect to the server."];
+  NSError *error = [notification.userInfo objectForKey: @"error"];
+  NSString *message = error ? [error friendlyDescription] : @"Can't connect to the server.";
+  [Utils showAlertWithTitle: @"Error" content: message];
 }
 
 // -------------------------------------------------------------------------------------------
