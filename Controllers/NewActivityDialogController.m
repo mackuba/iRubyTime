@@ -121,7 +121,7 @@
 
   NSError *error = [notification.userInfo objectForKey: @"error"];
   NSString *text = [notification.userInfo objectForKey: @"text"];
-  NSString *message;
+  NSString *message = nil;
   if (error && error.domain == RubyTimeErrorDomain && error.code == 400 && text) {
     NSDictionary *result = [NSDictionary dictionaryWithJSONString: text];
     if (result.count > 0) {
@@ -183,6 +183,7 @@
     case 0: controller = [self activityDateDialogController]; break;
     case 1: controller = [self projectChoiceController]; break;
     case 2: controller = [self activityCommentsDialogController]; break;
+    default: return;
   }
   [self.navigationController pushViewController: controller animated: YES];
 }

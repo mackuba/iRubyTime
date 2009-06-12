@@ -18,8 +18,8 @@
 
 @interface RubyTimeAppDelegate()
 - (void) initApplication;
-- (RubyTimeConnector *) initializeConnector;
 - (void) loadDataFromDisk;
+- (RubyTimeConnector *) newConnector;
 @end
 
 @implementation RubyTimeAppDelegate
@@ -31,7 +31,7 @@ OnDeallocRelease(window, navigationController, connector, activityListController
 #pragma mark Initialization
 
 - (void) initApplication {
-  connector = [self initializeConnector];
+  connector = [self newConnector];
   activityListController.connector = connector;
   
   NSArray *dirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -45,7 +45,7 @@ OnDeallocRelease(window, navigationController, connector, activityListController
   Observe(connector, @"activityCreated", activitiesUpdated);
 }
 
-- (RubyTimeConnector *) initializeConnector {
+- (RubyTimeConnector *) newConnector {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *username = [settings objectForKey: USERNAME_SETTING];
   NSString *serverURL = [settings objectForKey: SERVER_SETTING];
