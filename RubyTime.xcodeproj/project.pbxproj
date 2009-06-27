@@ -46,6 +46,7 @@
 		58EB65700FBCEF4400717C36 /* ActivityDateDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EB656F0FBCEF4400717C36 /* ActivityDateDialog.xib */; };
 		58EB65BA0FBDE71100717C36 /* ActivityCommentsDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EB65B90FBDE71100717C36 /* ActivityCommentsDialog.xib */; };
 		58EBA4480FD45562004DBC6F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 58EBA4470FD45562004DBC6F /* Default.png */; };
+		58F47A620FF6AB5F00A1F20F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F47A610FF6AB5F00A1F20F /* Icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +114,7 @@
 		58EB656F0FBCEF4400717C36 /* ActivityDateDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityDateDialog.xib; sourceTree = "<group>"; };
 		58EB65B90FBDE71100717C36 /* ActivityCommentsDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCommentsDialog.xib; sourceTree = "<group>"; };
 		58EBA4470FD45562004DBC6F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		58F47A610FF6AB5F00A1F20F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,6 +171,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				58F47A610FF6AB5F00A1F20F /* Icon.png */,
 				5844CE610FC31FA8007F22FE /* README.markdown */,
 				588BAB020FADD47C00460689 /* MIT-LICENSE.txt */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -343,6 +346,7 @@
 				5844CE620FC31FA8007F22FE /* README.markdown in Resources */,
 				5844CED30FC33CFE007F22FE /* ActivityFieldCell.xib in Resources */,
 				58EBA4480FD45562004DBC6F /* Default.png in Resources */,
+				58F47A620FF6AB5F00A1F20F /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
