@@ -11,13 +11,13 @@
 @class Project;
 
 @interface DataManager : NSObject {
-  NSMutableArray *activities;
+  NSMutableArray *activityList;
   NSArray *projects;
   NSMutableDictionary *projectHash;
   __weak id delegate;
 }
 
-@property (nonatomic, retain) NSArray *activities;
+@property (nonatomic, copy) NSArray *activities;
 @property (nonatomic, retain) NSArray *projects;
 @property (nonatomic, assign) id delegate;
 

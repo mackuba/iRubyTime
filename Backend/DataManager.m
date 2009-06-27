@@ -13,15 +13,15 @@
 
 @implementation DataManager
 
-@synthesize activities, projects, delegate;
-OnDeallocRelease(activities, projects, projectHash);
+@synthesize projects, delegate;
+OnDeallocRelease(activityList, projects, projectHash);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
 - (id) initWithDelegate: (id) aDelegate {
   if (self = [super init]) {
-    activities = [[NSMutableArray alloc] initWithCapacity: 20];
+    activityList = [[NSMutableArray alloc] initWithCapacity: 20];
     projects = [[NSMutableArray alloc] initWithCapacity: 20];
     projectHash = [[NSMutableDictionary alloc] initWithCapacity: 20];
     delegate = aDelegate;
@@ -32,13 +32,21 @@ OnDeallocRelease(activities, projects, projectHash);
 // -------------------------------------------------------------------------------------------
 #pragma mark Activities
 
+- (void) setActivities: (NSArray *) list {
+  activityList = [list mutableCopy];
+}
+
+- (NSArray *) activities {
+  return activityList;
+}
+
 - (void) addNewActivity: (Activity *) activity {
   NSInteger index;
-  for (index = 0; index < activities.count; index++) {
-    Activity *existing = [activities objectAtIndex: index];
+  for (index = 0; index < activityList.count; index++) {
+    Activity *existing = [activityList objectAtIndex: index];
     if ([activity.date laterDate: existing.date] == activity.date) break;
   }
-  [activities insertObject: activity atIndex: index];
+  [activityList insertObject: activity atIndex: index];
 }
 
 - (Activity *) activityFromJSON: (NSDictionary *) json {
