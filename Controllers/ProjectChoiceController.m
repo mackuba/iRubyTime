@@ -42,16 +42,17 @@ OnDeallocRelease(activity, projects, recentProjects);
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
   UITableViewCell *cell = [table dequeueReusableCellWithIdentifier: PROJECT_CELL_TYPE];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithFrame: CGRectZero reuseIdentifier: PROJECT_CELL_TYPE] autorelease];
+    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
+                                   reuseIdentifier: PROJECT_CELL_TYPE] autorelease];
   }
   Project *project = (Project *) [projects objectAtIndex: path.row];
-  cell.text = project.name;
+  cell.textLabel.text = project.name;
   if ([recentProjects indexOfObject: project] != NSNotFound) {
-    cell.font = [UIFont boldSystemFontOfSize: 16];
-    cell.textColor = [UIColor blackColor];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize: 16];
+    cell.textLabel.textColor = [UIColor blackColor];
   } else {
-    cell.font = [UIFont systemFontOfSize: 16];
-    cell.textColor = [UIColor darkGrayColor];
+    cell.textLabel.font = [UIFont systemFontOfSize: 16];
+    cell.textLabel.textColor = [UIColor darkGrayColor];
   }
   return cell;
 }

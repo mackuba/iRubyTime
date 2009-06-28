@@ -8,7 +8,6 @@
 #import "Activity.h"
 #import "ActivityCommentsDialogController.h"
 #import "ActivityDateDialogController.h"
-#import "ActivityFieldCell.h"
 #import "NewActivityDialogController.h"
 #import "Project.h"
 #import "ProjectChoiceController.h"
@@ -27,7 +26,7 @@
 
 @implementation NewActivityDialogController
 
-@synthesize tableView, activityLengthPicker, currentCell, commentsCell, commentsLabel;
+@synthesize tableView, activityLengthPicker, commentsCell, commentsLabel;
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -155,15 +154,17 @@
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table fieldCellForRow: (NSInteger) row {
-  ActivityFieldCell *cell = (ActivityFieldCell *) [table dequeueReusableCellWithIdentifier: ACTIVITY_FIELD_CELL_TYPE];
+  UITableViewCell *cell = [table dequeueReusableCellWithIdentifier: ACTIVITY_FIELD_CELL_TYPE];
   if (!cell) {
-    [[NSBundle mainBundle] loadNibNamed: @"ActivityFieldCell" owner: self options: nil];
-    cell = currentCell;
+    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1
+                                   reuseIdentifier: ACTIVITY_FIELD_CELL_TYPE] autorelease];
   }
   if (row == 0) {
-    [cell displayFieldName: @"Date" value: activity.dateAsString];
+    cell.textLabel.text = @"Date";
+    cell.detailTextLabel.text = activity.dateAsString;
   } else {
-    [cell displayFieldName: @"Project" value: activity.project.name];
+    cell.textLabel.text = @"Project";
+    cell.detailTextLabel.text = activity.project.name;
   }
   return cell;
 }

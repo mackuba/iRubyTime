@@ -13,8 +13,6 @@
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		5831E83F0FB0B2A5008680E5 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831E83E0FB0B2A5008680E5 /* DataManager.m */; };
 		5844CE620FC31FA8007F22FE /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 5844CE610FC31FA8007F22FE /* README.markdown */; };
-		5844CECD0FC33BAE007F22FE /* ActivityFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5844CECC0FC33BAE007F22FE /* ActivityFieldCell.m */; };
-		5844CED30FC33CFE007F22FE /* ActivityFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5844CED20FC33CFE007F22FE /* ActivityFieldCell.xib */; };
 		586DAE120FBB68CA00DBCF0A /* NewActivityDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */; };
 		588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB020FADD47C00460689 /* MIT-LICENSE.txt */; };
 		588BAB130FADD78B00460689 /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB0F0FADD78B00460689 /* ActivityCell.xib */; };
@@ -59,9 +57,6 @@
 		5831E83D0FB0B2A5008680E5 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		5831E83E0FB0B2A5008680E5 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		5844CE610FC31FA8007F22FE /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
-		5844CECB0FC33BAE007F22FE /* ActivityFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityFieldCell.h; sourceTree = "<group>"; };
-		5844CECC0FC33BAE007F22FE /* ActivityFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityFieldCell.m; sourceTree = "<group>"; };
-		5844CED20FC33CFE007F22FE /* ActivityFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityFieldCell.xib; sourceTree = "<group>"; };
 		586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewActivityDialog.xib; sourceTree = "<group>"; };
 		588BAB020FADD47C00460689 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
 		588BAB0F0FADD78B00460689 /* ActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
@@ -203,9 +198,6 @@
 				588BAB0F0FADD78B00460689 /* ActivityCell.xib */,
 				588BAB170FADD79B00460689 /* ActivityCell.h */,
 				588BAB180FADD79B00460689 /* ActivityCell.m */,
-				5844CED20FC33CFE007F22FE /* ActivityFieldCell.xib */,
-				5844CECB0FC33BAE007F22FE /* ActivityFieldCell.h */,
-				5844CECC0FC33BAE007F22FE /* ActivityFieldCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -344,7 +336,6 @@
 				58EB65700FBCEF4400717C36 /* ActivityDateDialog.xib in Resources */,
 				58EB65BA0FBDE71100717C36 /* ActivityCommentsDialog.xib in Resources */,
 				5844CE620FC31FA8007F22FE /* README.markdown in Resources */,
-				5844CED30FC33CFE007F22FE /* ActivityFieldCell.xib in Resources */,
 				58EBA4480FD45562004DBC6F /* Default.png in Resources */,
 				58F47A620FF6AB5F00A1F20F /* Icon.png in Resources */,
 			);
@@ -365,7 +356,6 @@
 				5831E83F0FB0B2A5008680E5 /* DataManager.m in Sources */,
 				58E9FFC10FB22F9D00CDA046 /* Project.m in Sources */,
 				58C0A0F20FBA009D00AF8C14 /* Utils.m in Sources */,
-				5844CECD0FC33BAE007F22FE /* ActivityFieldCell.m in Sources */,
 				589BE9DE0FD1D52300CCFA82 /* NSDataMBBase64.m in Sources */,
 				589BE9DF0FD1D52300CCFA82 /* SFHFEditableCell.m in Sources */,
 				589BE9EF0FD1D57C00CCFA82 /* ActivityCommentsDialogController.m in Sources */,

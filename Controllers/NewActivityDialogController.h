@@ -10,7 +10,6 @@
 @class Activity;
 @class ActivityCommentsDialogController;
 @class ActivityDateDialogController;
-@class ActivityFieldCell;
 @class ProjectChoiceController;
 @class RubyTimeConnector;
 
@@ -25,14 +24,12 @@
   UIBarButtonItem *loadingButton;
   UIBarButtonItem *saveButton;
   UIActivityIndicatorView *spinner;
-  ActivityFieldCell *currentCell;
   UITableViewCell *commentsCell;
   UILabel *commentsLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UIDatePicker *activityLengthPicker;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, assign) IBOutlet ActivityFieldCell *currentCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell *commentsCell;
 @property (nonatomic, retain) IBOutlet UILabel *commentsLabel;
 
