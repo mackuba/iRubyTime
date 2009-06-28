@@ -50,3 +50,15 @@
 }
 
 @end
+
+@implementation UITableView (RubyTime)
+
+- (UITableViewCell *) cellWithStyle: (UITableViewCellStyle) style andIdentifier: (NSString *) identifier {
+  UITableViewCell *cell = [self dequeueReusableCellWithIdentifier: identifier];
+  if (!cell) {
+    cell = [[[UITableViewCell alloc] initWithStyle: style reuseIdentifier: identifier] autorelease];
+  }
+  return cell;
+}
+
+@end

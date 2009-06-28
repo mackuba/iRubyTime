@@ -62,3 +62,7 @@
 @interface NSError (RubyTime)
 - (NSString *) friendlyDescription;
 @end
+
+@interface UITableView (RubyTime)
+- (UITableViewCell *) cellWithStyle: (UITableViewCellStyle) style andIdentifier: (NSString *) identifier;
+@end

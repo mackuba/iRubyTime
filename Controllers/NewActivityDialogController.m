@@ -22,6 +22,7 @@
 - (ActivityCommentsDialogController *) activityCommentsDialogController;
 - (ProjectChoiceController *) projectChoiceController;
 - (UITableViewCell *) tableView: (UITableView *) table fieldCellForRow: (NSInteger) row;
+- (NSString *) errorMessageFromJSON: (NSString *) jsonString;
 @end
 
 @implementation NewActivityDialogController
@@ -122,13 +123,7 @@
   NSString *text = [notification.userInfo objectForKey: @"text"];
   NSString *message = nil;
   if (error && error.domain == RubyTimeErrorDomain && error.code == 400 && text) {
-    NSDictionary *result = [NSDictionary dictionaryWithJSONString: text];
-    if (result.count > 0) {
-      NSArray *errors = [result objectForKey: [[result allKeys] objectAtIndex: 0]];
-      if (errors.count > 0) {
-        message = [[errors objectAtIndex: 0] stringByAppendingString: @"."];
-      }
-    }
+    message = [self errorMessageFromJSON: text];
   } else if (error) {
     message = [error friendlyDescription];
   }
@@ -136,6 +131,18 @@
     message = @"Activity could not be saved.";
   }
   [Utils showAlertWithTitle: @"Error" content: message];
+}
+
+- (NSString *) errorMessageFromJSON: (NSString *) jsonString {
+  NSString *message = nil;
+  NSDictionary *result = [NSDictionary dictionaryWithJSONString: jsonString];
+  if (result.count > 0) {
+    NSArray *errors = [result objectForKey: [[result allKeys] objectAtIndex: 0]];
+    if (errors.count > 0) {
+      message = [[errors objectAtIndex: 0] stringByAppendingString: @"."];
+    }
+  }
+  return message;
 }
 
 // -------------------------------------------------------------------------------------------
@@ -154,11 +161,7 @@
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table fieldCellForRow: (NSInteger) row {
-  UITableViewCell *cell = [table dequeueReusableCellWithIdentifier: ACTIVITY_FIELD_CELL_TYPE];
-  if (!cell) {
-    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1
-                                   reuseIdentifier: ACTIVITY_FIELD_CELL_TYPE] autorelease];
-  }
+  UITableViewCell *cell = [table cellWithStyle: UITableViewCellStyleValue1 andIdentifier: ACTIVITY_FIELD_CELL_TYPE];
   if (row == 0) {
     cell.textLabel.text = @"Date";
     cell.detailTextLabel.text = activity.dateAsString;

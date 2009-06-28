@@ -13,6 +13,10 @@
 
 #define LOGIN_DIALOG_CELL_TYPE @"LoginDialogCell"
 
+@interface LoginDialogController ()
+- (void) showError: (NSString *) message;
+@end
+
 @implementation LoginDialogController
 
 @synthesize spinner, footerView, loginButton;
@@ -81,16 +85,17 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
 #pragma mark Notification callbacks
 
 - (void) authenticationFailed {
-  [spinner stopAnimating];
-  [loginButton setEnabled: YES];
-  [Utils showAlertWithTitle: @"Error" content: @"Incorrect username or password."];
+  [self showError: @"Incorrect username or password."];
 }
 
 - (void) requestFailed: (NSNotification *) notification {
+  NSError *error = [notification.userInfo objectForKey: @"error"];
+  [self showError: (error ? [error friendlyDescription] : @"Can't connect to the server.")];
+}
+
+- (void) showError: (NSString *) message {
   [spinner stopAnimating];
   [loginButton setEnabled: YES];
-  NSError *error = [notification.userInfo objectForKey: @"error"];
-  NSString *message = error ? [error friendlyDescription] : @"Can't connect to the server.";
   [Utils showAlertWithTitle: @"Error" content: message];
 }
 

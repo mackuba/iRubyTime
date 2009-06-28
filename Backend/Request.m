@@ -31,7 +31,6 @@ SynthesizeAndReleaseLater(response, receivedText, sentText, connection, info);
     sentText = [text copy];
     [self setValue: @"application/json" forHTTPHeaderField: @"Accept"];
     if (sentText) {
-      // [self setValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
       self.HTTPBody = [sentText dataUsingEncoding: NSUTF8StringEncoding];
     }
   }

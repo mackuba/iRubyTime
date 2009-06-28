@@ -40,11 +40,7 @@ OnDeallocRelease(activity, projects, recentProjects);
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  UITableViewCell *cell = [table dequeueReusableCellWithIdentifier: PROJECT_CELL_TYPE];
-  if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
-                                   reuseIdentifier: PROJECT_CELL_TYPE] autorelease];
-  }
+  UITableViewCell *cell = [table cellWithStyle: UITableViewCellStyleDefault andIdentifier: PROJECT_CELL_TYPE];
   Project *project = (Project *) [projects objectAtIndex: path.row];
   cell.textLabel.text = project.name;
   if ([recentProjects indexOfObject: project] != NSNotFound) {

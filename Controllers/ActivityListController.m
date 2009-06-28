@@ -18,6 +18,7 @@
 
 @interface ActivityListController ()
 - (void) showLoginDialog;
+- (void) showPopupDialog: (Class) controllerClass;
 @end
 
 @implementation ActivityListController
@@ -92,7 +93,6 @@ OnDeallocRelease(connector, spinner);
     [table insertRowsAtIndexPaths: RTArray(newCellIndex) withRowAnimation: UITableViewRowAnimationTop];
     [table endUpdates];
     if (index == count - 1) { // now you can scroll to the last one
-      NSLog(@"last one");
       [table scrollToRowAtIndexPath: newCellIndex atScrollPosition: UITableViewScrollPositionBottom animated: YES];
     }
   }
@@ -103,21 +103,23 @@ OnDeallocRelease(connector, spinner);
 }
 
 - (void) showNewActivityDialog {
-  NewActivityDialogController *dialog = [[NewActivityDialogController alloc] initWithConnector: connector];
-  UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController: dialog];
-  [self presentModalViewController: navigation animated: YES];
-  [navigation release];
-  [dialog release];
+  [self showPopupDialog: [NewActivityDialogController class]];
 }
 
 - (void) showLoginDialog {
-  LoginDialogController *loginController = [[[LoginDialogController alloc] initWithConnector: connector] autorelease];
-  UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController: loginController];
-  [self presentModalViewController: navigation animated: YES];
+  [self showPopupDialog: [LoginDialogController class]];
 }
 
 - (void) closeNewActivityDialog {
   [self dismissModalViewControllerAnimated: YES];
+}
+
+- (void) showPopupDialog: (Class) controllerClass {
+  id dialog = [[controllerClass alloc] initWithConnector: connector];
+  UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController: dialog];
+  [self presentModalViewController: navigation animated: YES];
+  [navigation release];
+  [dialog release];
 }
 
 // -------------------------------------------------------------------------------------------
