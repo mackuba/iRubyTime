@@ -13,6 +13,7 @@
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		5831E83F0FB0B2A5008680E5 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831E83E0FB0B2A5008680E5 /* DataManager.m */; };
 		5844CE620FC31FA8007F22FE /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 5844CE610FC31FA8007F22FE /* README.markdown */; };
+		586516620FFFB82500363BB2 /* ShowActivityDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586516610FFFB82500363BB2 /* ShowActivityDialogController.m */; };
 		586DAE120FBB68CA00DBCF0A /* NewActivityDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */; };
 		588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB020FADD47C00460689 /* MIT-LICENSE.txt */; };
 		588BAB130FADD78B00460689 /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB0F0FADD78B00460689 /* ActivityCell.xib */; };
@@ -57,6 +58,8 @@
 		5831E83D0FB0B2A5008680E5 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		5831E83E0FB0B2A5008680E5 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		5844CE610FC31FA8007F22FE /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
+		586516600FFFB82500363BB2 /* ShowActivityDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowActivityDialogController.h; sourceTree = "<group>"; };
+		586516610FFFB82500363BB2 /* ShowActivityDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowActivityDialogController.m; sourceTree = "<group>"; };
 		586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewActivityDialog.xib; sourceTree = "<group>"; };
 		588BAB020FADD47C00460689 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
 		588BAB0F0FADD78B00460689 /* ActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
@@ -233,6 +236,8 @@
 				589BE9EC0FD1D57C00CCFA82 /* ProjectChoiceController.m */,
 				589BE9ED0FD1D57C00CCFA82 /* RubyTimeAppDelegate.h */,
 				589BE9EE0FD1D57C00CCFA82 /* RubyTimeAppDelegate.m */,
+				586516600FFFB82500363BB2 /* ShowActivityDialogController.h */,
+				586516610FFFB82500363BB2 /* ShowActivityDialogController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -371,6 +376,7 @@
 				589BEA250FD1D60100CCFA82 /* NSScanner+BSJSONAdditions.m in Sources */,
 				589BEA260FD1D60100CCFA82 /* NSString+BSJSONAdditions.m in Sources */,
 				589BEA2A0FD1D66700CCFA82 /* SFHFKeychainUtils.m in Sources */,
+				586516620FFFB82500363BB2 /* ShowActivityDialogController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

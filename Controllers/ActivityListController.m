@@ -12,6 +12,7 @@
 #import "NewActivityDialogController.h"
 #import "RubyTimeAppDelegate.h"
 #import "RubyTimeConnector.h"
+#import "ShowActivityDialogController.h"
 #import "Utils.h"
 
 #define ACTIVITY_CELL_TYPE @"ActivityCell"
@@ -178,9 +179,12 @@ OnDeallocRelease(connector, spinner);
   return 69; // TODO: make variable height
 }
 
-- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
-  // TODO: show activity details controller
-  [tableView deselectRowAtIndexPath: indexPath animated: YES];
+- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) path {
+  Activity *activity = [connector.activities objectAtIndex: path.row];
+  UIViewController *controller = [[ShowActivityDialogController alloc] initWithActivity: activity connector: connector];
+  [self.navigationController pushViewController: controller animated: YES];
+  [tableView deselectRowAtIndexPath: path animated: YES];
+  [controller release];
 }
 
 @end
