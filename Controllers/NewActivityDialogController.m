@@ -23,6 +23,7 @@
 - (ProjectChoiceController *) projectChoiceController;
 - (UITableViewCell *) tableView: (UITableView *) table fieldCellForRow: (NSInteger) row;
 - (NSString *) errorMessageFromJSON: (NSString *) jsonString;
+- (void) setupToolbar;
 @end
 
 @implementation NewActivityDialogController
@@ -37,7 +38,6 @@
   if (self) {
     connector = [rtConnector retain];
     activity = [[Activity alloc] init];
-    activity.date = [NSDate date];
 
     if (connector.activities.count > 0) {
       activity.minutes = [[connector valueForKeyPath: @"activities.@avg.minutes"] intValue];
@@ -52,8 +52,28 @@
 
 - (void) viewDidLoad {
   [super viewDidLoad];
-  
+  [self setupToolbar];
   spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+  tableView.scrollEnabled = false;
+
+  activityLengthPicker.countDownDuration = activity.minutes * 60;
+  NSInteger precision = activityLengthPicker.minuteInterval;
+  activity.minutes = activity.minutes / precision * precision;
+  
+  Observe(connector, @"requestFailed", activityNotCreated:);
+  
+}
+
+- (void) viewWillAppear: (BOOL) animated {
+  [super viewWillAppear: animated];
+  commentsLabel.text = (activity.comments.length > 0) ? activity.comments : @"Comments";
+  commentsLabel.textColor = (activity.comments.length > 0) ? [UIColor blackColor] : [UIColor lightGrayColor];
+  [tableView reloadData];
+  NSIndexPath *selection = [tableView indexPathForSelectedRow];
+  [tableView deselectRowAtIndexPath: selection animated: YES];
+}
+
+- (void) setupToolbar {
   UIBarButtonItem *back = [[UIBarButtonItem alloc] init];
   UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel
                                                                           target: self
@@ -69,25 +89,8 @@
   self.navigationItem.backBarButtonItem = back;
   self.navigationItem.title = @"New activity";
 
-  tableView.scrollEnabled = false;
-
-  activityLengthPicker.countDownDuration = activity.minutes * 60;
-  NSInteger precision = activityLengthPicker.minuteInterval;
-  activity.minutes = activity.minutes / precision * precision;
-  
-  Observe(connector, @"requestFailed", activityNotCreated:);
-  
   [cancel release];
   [back release];
-}
-
-- (void) viewWillAppear: (BOOL) animated {
-  [super viewWillAppear: animated];
-  commentsLabel.text = (activity.comments.length > 0) ? activity.comments : @"Comments";
-  commentsLabel.textColor = (activity.comments.length > 0) ? [UIColor blackColor] : [UIColor lightGrayColor];
-  [tableView reloadData];
-  NSIndexPath *selection = [tableView indexPathForSelectedRow];
-  [tableView deselectRowAtIndexPath: selection animated: YES];
 }
 
 // -------------------------------------------------------------------------------------------

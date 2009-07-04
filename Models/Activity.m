@@ -18,6 +18,7 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project);
   self = [super init];
   if (self) {
     self.comments = @"";
+    self.date = [NSDate date];
   }
   return self;
 }
