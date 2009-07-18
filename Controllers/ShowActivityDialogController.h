@@ -16,5 +16,6 @@
 }
 
 - (id) initWithActivity: (Activity *) activity connector: (RubyTimeConnector *) connector;
+- (IBAction) deleteActivityClicked;
 
 @end

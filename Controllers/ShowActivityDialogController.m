@@ -11,6 +11,7 @@
 #import "Utils.h"
 
 #define ACTIVITY_FIELD_CELL_TYPE @"ActivityFieldCell"
+#define DELETE_ACTIVITY_CELL_TYPE @"DeleteActivityCell"
 
 @interface ShowActivityDialogController ()
 - (UITableViewCell *) tableView: (UITableView *) table fieldCellForRow: (NSInteger) row;
@@ -29,23 +30,51 @@ OnDeallocRelease(activity, connector);
     activity = [anActivity retain];
     connector = [aConnector retain];
     self.title = @"Activity details";
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
   }
   return self;
+}
+
+- (void) viewDidLoad {
+  self.tableView.allowsSelectionDuringEditing = YES;
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Action handlers
+
+- (void) deleteActivityClicked {
+  
 }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
+- (NSInteger) numberOfSectionsInTableView: (UITableView *) tableView {
+  return 2;
+}
+
 - (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section {
-  return 4;  // TODO: 5 if activity author is displayed too
+  if (section == 0) {
+    return 4; // TODO: 5 if activity author is displayed too
+  } else {
+    return (self.editing ? 1 : 0);
+  }
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  //if (path.row == 3) {
-  //  return commentsCell;
-  //} else {
-    return [self tableView: table fieldCellForRow: path.row];
-  //}
+  if (path.section == 0) {
+    //if (path.row == 3) {
+    //  return commentsCell;
+    //} else {
+      return [self tableView: table fieldCellForRow: path.row];
+    //}
+  } else {
+    UITableViewCell *cell = [table cellWithStyle: UITableViewCellStyleDefault andIdentifier: DELETE_ACTIVITY_CELL_TYPE];
+    cell.textLabel.text = @"Delete activity";
+    cell.textLabel.textAlignment = UITextAlignmentCenter;
+    cell.textLabel.textColor = [UIColor colorWithRed: 0.7 green: 0.0 blue: 0.0 alpha: 1.0];
+    return cell;
+  }
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table fieldCellForRow: (NSInteger) row {
@@ -70,18 +99,20 @@ OnDeallocRelease(activity, connector);
       cell.textLabel.text = @"Comments";
       cell.detailTextLabel.text = activity.comments;
   }
+  cell.accessoryType = UITableViewCellAccessoryNone;
+  cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
   return cell;
 }
 
-- (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
-  //return (path.row == 3) ? 92 : 44;
-  return 44;
+- (UITableViewCellEditingStyle) tableView: (UITableView *) table
+            editingStyleForRowAtIndexPath: (NSIndexPath *) path {
+  return UITableViewCellEditingStyleNone;
 }
 
-/*- (UITableViewCellAccessoryType) tableView: (UITableView *) table
-          accessoryTypeForRowWithIndexPath: (NSIndexPath *) path {
-  return UITableViewCellAccessoryDisclosureIndicator;
-}*/
+- (BOOL) tableView: (UITableView *) table
+         shouldIndentWhileEditingRowAtIndexPath: (NSIndexPath *) path {
+  return NO;
+}
 
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) path {
   [tableView deselectRowAtIndexPath: path animated: YES];
@@ -93,6 +124,19 @@ OnDeallocRelease(activity, connector);
     default: return;
   }
   [self.navigationController pushViewController: controller animated: YES];*/
+}
+
+- (void) setEditing: (BOOL) editing animated: (BOOL) animated {
+  [super setEditing: editing animated: animated];
+  [self.tableView beginUpdates];
+  [self.tableView setEditing: editing animated: animated];
+  NSArray *indexes = RTArray(RTIndex(1, 0));
+  if (editing) {
+    [self.tableView insertRowsAtIndexPaths: indexes withRowAnimation: UITableViewRowAnimationNone];
+  } else {
+    [self.tableView deleteRowsAtIndexPaths: indexes withRowAnimation: UITableViewRowAnimationNone];
+  }
+  [self.tableView endUpdates];
 }
 
 @end
