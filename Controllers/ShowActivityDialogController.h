@@ -23,6 +23,10 @@
   ActivityDateDialogController *activityDateDialogController;
   ActivityLengthDialogController *activityLengthDialogController;
   UIBarButtonItem *cancelButton;
+  UIActivityIndicatorView *spinner;
+  UIBarButtonItem *loadingButton;
+  UIBarButtonItem *editButton;
+  UIBarButtonItem *saveButton;
 }
 
 - (id) initWithActivity: (Activity *) activity connector: (RubyTimeConnector *) connector;

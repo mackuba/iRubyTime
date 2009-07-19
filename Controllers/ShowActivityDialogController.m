@@ -29,7 +29,9 @@
 
 @implementation ShowActivityDialogController
 
-OnDeallocRelease(activity, originalActivity, connector);
+OnDeallocRelease(activity, originalActivity, connector, loadingButton, editButton, saveButton, spinner, cancelButton,
+  activityCommentsDialogController, activityDateDialogController, activityLengthDialogController,
+  projectChoiceController, connector);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -41,7 +43,6 @@ OnDeallocRelease(activity, originalActivity, connector);
     originalActivity = [anActivity retain];
     connector = [aConnector retain];
     self.title = @"Activity details";
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
   }
   return self;
 }
@@ -52,6 +53,18 @@ OnDeallocRelease(activity, originalActivity, connector);
   cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel
                                                                target: self
                                                                action: @selector(cancelClicked)];
+  spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+  spinner.frame = CGRectMake(0, 0, 36, 20);
+  spinner.contentMode = UIViewContentModeCenter;
+  loadingButton = [[UIBarButtonItem alloc] initWithCustomView: spinner];
+  editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemEdit
+                                                             target: self
+                                                             action: @selector(editClicked)];
+  saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemSave
+                                                             target: self
+                                                             action: @selector(saveClicked)];
+
+  self.navigationItem.rightBarButtonItem = editButton;
 }
 
 - (void) viewWillAppear: (BOOL) animated {
@@ -77,6 +90,8 @@ OnDeallocRelease(activity, originalActivity, connector);
 - (void) actionSheet: (UIActionSheet *) sheet clickedButtonAtIndex: (NSInteger) index {
   if (index == 0) {
     // ... delete ...
+    self.navigationItem.rightBarButtonItem = loadingButton;
+    [spinner startAnimating];
   }
   [self.tableView deselectRowAtIndexPath: RTIndex(1, 0) animated: YES];
 }
@@ -86,8 +101,33 @@ OnDeallocRelease(activity, originalActivity, connector);
   activity = [originalActivity copy];
   [self.tableView reloadData];
   [self setEditing: NO animated: YES];
+  self.navigationItem.leftBarButtonItem = nil;
+  self.navigationItem.rightBarButtonItem = editButton;
+  [spinner stopAnimating];
+  // TODO: cancel request?
+
+  [activityCommentsDialogController release];
+  [activityDateDialogController release];
+  [activityLengthDialogController release];
+  [projectChoiceController release];
+  activityCommentsDialogController = nil;
+  activityDateDialogController = nil;
+  activityLengthDialogController = nil;
+  projectChoiceController = nil;
 }
 
+- (void) editClicked {
+  [self setEditing: YES animated: YES];
+  self.navigationItem.leftBarButtonItem = cancelButton;
+  self.navigationItem.rightBarButtonItem = saveButton;
+}
+
+- (void) saveClicked {
+  // TODO: save
+  self.navigationItem.rightBarButtonItem = loadingButton;
+  [spinner startAnimating];
+}
+ 
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
@@ -183,10 +223,8 @@ OnDeallocRelease(activity, originalActivity, connector);
   [self.tableView setEditing: editing animated: animated];
   NSArray *indexes = RTArray(RTIndex(1, 0));
   if (editing) {
-    self.navigationItem.leftBarButtonItem = cancelButton;
     [self.tableView insertRowsAtIndexPaths: indexes withRowAnimation: UITableViewRowAnimationNone];
   } else {
-    self.navigationItem.leftBarButtonItem = nil;
     [self.tableView deleteRowsAtIndexPaths: indexes withRowAnimation: UITableViewRowAnimationNone];
   }
   [self.tableView endUpdates];
