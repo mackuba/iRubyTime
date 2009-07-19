@@ -65,7 +65,20 @@ OnDeallocRelease(activity, originalActivity, connector);
 #pragma mark Action handlers
 
 - (void) deleteActivityClicked {
-  
+  UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle: @"Do you really want to delete this activity?"
+                                                     delegate: self
+                                            cancelButtonTitle: @"Cancel"
+                                       destructiveButtonTitle: @"Delete"
+                                            otherButtonTitles: nil];
+  [sheet showInView: self.view];
+  [sheet release];
+}
+
+- (void) actionSheet: (UIActionSheet *) sheet clickedButtonAtIndex: (NSInteger) index {
+  if (index == 0) {
+    // ... delete ...
+  }
+  [self.tableView deselectRowAtIndexPath: RTIndex(1, 0) animated: YES];
 }
 
 - (void) cancelClicked {

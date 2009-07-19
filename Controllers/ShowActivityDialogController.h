@@ -14,7 +14,7 @@
 @class ActivityLengthDialogController;
 @class ProjectChoiceController;
 
-@interface ShowActivityDialogController : UITableViewController {
+@interface ShowActivityDialogController : UITableViewController <UIActionSheetDelegate> {
   Activity *activity;
   Activity *originalActivity;
   RubyTimeConnector *connector;
