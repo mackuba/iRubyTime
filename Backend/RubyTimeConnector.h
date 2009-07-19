@@ -39,6 +39,7 @@
 - (void) loadProjects;
 - (void) createActivity: (Activity *) activity;
 - (void) editActivity: (Activity *) activity;
+- (void) deleteActivity: (Activity *) activity;
 - (void) setServerURL: (NSString *) url
              username: (NSString *) aUsername
              password: (NSString *) aPassword;

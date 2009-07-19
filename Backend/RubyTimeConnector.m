@@ -137,6 +137,15 @@
   [self sendRequest: request];
 }
 
+- (void) deleteActivity: (Activity *) activity {
+  Request *request = [[Request alloc] initWithURL: ServerPath(RTFormat(@"/activities/%d", activity.activityId))
+                                           method: @"POST"
+                                             text: @"_method=delete"
+                                             type: RTDeleteActivityRequest];
+  request.info = activity;
+  [self sendRequest: request];
+}
+
 - (void) loadProjects {
   Notify(@"loadProjects");
   Request *request = [[Request alloc] initWithURL: ServerPath(@"/projects") type: RTProjectIndexRequest];
@@ -220,6 +229,12 @@
       activity = request.info;
       [dataManager updateActivity: activity];
       NotifyWithData(@"activityEdited", RTDict(activity, @"activity"));
+      break;
+
+    case RTDeleteActivityRequest:
+      activity = request.info;
+      [dataManager deleteActivity: activity];
+      NotifyWithData(@"activityDeleted", RTDict(activity, @"activity"));
       break;
   }
 }

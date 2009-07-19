@@ -52,6 +52,7 @@ OnDeallocRelease(connector, spinner);
   Observe(connector, @"loadProjects", loading);
   Observe(connector, @"activitiesReceived", activitiesReceived);
   Observe(connector, @"activityCreated", activityCreated:);
+  Observe(connector, @"activityDeleted", activityDeleted);
   Observe(nil, @"newActivityDialogCancelled", newActivityDialogCancelled);
   
   [loadingButton release];
@@ -141,6 +142,10 @@ OnDeallocRelease(connector, spinner);
 - (void) activityCreated: (NSNotification *) notification {
   [self addActivityToList: [notification.userInfo objectForKey: @"activity"]];
   [self closeNewActivityDialog];
+}
+
+- (void) activityDeleted {
+  [self.tableView reloadData];
 }
 
 - (void) newActivityDialogCancelled {

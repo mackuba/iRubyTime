@@ -50,6 +50,11 @@ OnDeallocRelease(activityList, projects, projectHash);
 }
 
 - (void) updateActivity: (Activity *) activity {
+  [self deleteActivity: activity];
+  [self addNewActivity: activity];
+}
+
+- (void) deleteActivity: (Activity *) activity {
   NSInteger index;
   Activity *existing;
   for (index = 0; index < activityList.count; index++) {
@@ -58,7 +63,6 @@ OnDeallocRelease(activityList, projects, projectHash);
   }
   if (index < activityList.count) {
     [activityList removeObjectAtIndex: index];
-    [self addNewActivity: activity];
   }
 }
 

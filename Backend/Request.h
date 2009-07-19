@@ -12,7 +12,8 @@ typedef enum {
   RTActivityIndexRequest,
   RTProjectIndexRequest,
   RTCreateActivityRequest,
-  RTEditActivityRequest
+  RTEditActivityRequest,
+  RTDeleteActivityRequest
 } RTRequestType;
 
 @interface Request : NSMutableURLRequest {

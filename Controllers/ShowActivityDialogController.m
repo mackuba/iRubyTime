@@ -71,6 +71,7 @@ OnDeallocRelease(activity, originalActivity, connector, loadingButton, editButto
 
   Observe(connector, @"requestFailed", requestFailed:);
   Observe(connector, @"activityEdited", activityEdited);
+  Observe(connector, @"activityDeleted", activityDeleted);
 }
 
 - (void) viewWillAppear: (BOOL) animated {
@@ -95,9 +96,9 @@ OnDeallocRelease(activity, originalActivity, connector, loadingButton, editButto
 
 - (void) actionSheet: (UIActionSheet *) sheet clickedButtonAtIndex: (NSInteger) index {
   if (index == 0) {
-    // ... delete ...
     self.navigationItem.rightBarButtonItem = loadingButton;
     [spinner startAnimating];
+    [connector deleteActivity: activity];
   }
   [self.tableView deselectRowAtIndexPath: RTIndex(1, 0) animated: YES];
 }
@@ -182,6 +183,10 @@ OnDeallocRelease(activity, originalActivity, connector, loadingButton, editButto
   self.navigationItem.leftBarButtonItem = nil;
   self.navigationItem.rightBarButtonItem = editButton;
   [spinner stopAnimating];
+}
+
+- (void) activityDeleted {
+  [self.navigationController popViewControllerAnimated: YES];
 }
 
 // -------------------------------------------------------------------------------------------
