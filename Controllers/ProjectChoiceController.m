@@ -43,6 +43,7 @@ OnDeallocRelease(activity, projects, recentProjects);
   UITableViewCell *cell = [table cellWithStyle: UITableViewCellStyleDefault andIdentifier: PROJECT_CELL_TYPE];
   Project *project = (Project *) [projects objectAtIndex: path.row];
   cell.textLabel.text = project.name;
+
   if ([recentProjects indexOfObject: project] != NSNotFound) {
     cell.textLabel.font = [UIFont boldSystemFontOfSize: 16];
     cell.textLabel.textColor = [UIColor blackColor];
@@ -50,16 +51,14 @@ OnDeallocRelease(activity, projects, recentProjects);
     cell.textLabel.font = [UIFont systemFontOfSize: 16];
     cell.textLabel.textColor = [UIColor darkGrayColor];
   }
-  return cell;
-}
 
-- (UITableViewCellAccessoryType) tableView: (UITableView *) table
-          accessoryTypeForRowWithIndexPath: (NSIndexPath *) path {
-  if (activity.project == [projects objectAtIndex: path.row]) {
-    return UITableViewCellAccessoryCheckmark;
+  if (project == activity.project) {
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
   } else {
-    return UITableViewCellAccessoryNone;
+    cell.accessoryType = UITableViewCellAccessoryNone;
   }
+
+  return cell;
 }
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {

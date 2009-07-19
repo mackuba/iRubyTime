@@ -75,7 +75,7 @@ OnDeallocRelease(activityLengthPicker, commentsCell, commentsLabel);
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
-- (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section {
+- (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
   return 3;
 }
 
@@ -93,7 +93,7 @@ OnDeallocRelease(activityLengthPicker, commentsCell, commentsLabel);
   return (path.row == 2) ? 92 : 44;
 }
 
-- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) path {
+- (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
   [self pushHelperControllerForPath: path];
 }
 

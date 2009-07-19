@@ -33,12 +33,9 @@ OnDeallocRelease(connector, spinner);
 - (void) viewDidLoad {
   [super viewDidLoad];
 
-  // prepare "loading" spinner
-  spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
-  spinner.frame = CGRectMake(0, 0, 36, 20);
-  spinner.contentMode = UIViewContentModeCenter;
   
   // prepare buttons for toolbar
+  spinner = [[UIActivityIndicatorView spinnerBarButton] retain];
   UIBarButtonItem *loadingButton = [[UIBarButtonItem alloc] initWithCustomView: spinner];
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd
                                                                              target: self

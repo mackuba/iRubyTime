@@ -66,3 +66,7 @@
 @interface UITableView (RubyTime)
 - (UITableViewCell *) cellWithStyle: (UITableViewCellStyle) style andIdentifier: (NSString *) identifier;
 @end
+
+@interface UIActivityIndicatorView (RubyTime)
++ (UIActivityIndicatorView *) spinnerBarButton;
+@end

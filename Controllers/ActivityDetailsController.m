@@ -46,9 +46,7 @@
                                                              target: self
                                                              action: @selector(saveClicked)];
 
-  spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
-  spinner.frame = CGRectMake(0, 0, 36, 20);
-  spinner.contentMode = UIViewContentModeCenter;
+  spinner = [[UIActivityIndicatorView spinnerBarButton] retain];
   loadingButton = [[UIBarButtonItem alloc] initWithCustomView: spinner];
 }
 
@@ -80,6 +78,12 @@
   NSError *error = [notification.userInfo objectForKey: @"error"];
   NSString *text = [notification.userInfo objectForKey: @"text"];
   Request *request = [notification.userInfo objectForKey: @"request"];
+  NSString *message = [self errorMessageFromError: error text: text request: request];
+
+  [Utils showAlertWithTitle: @"Error" content: message];
+}
+
+- (NSString *) errorMessageFromError: (NSError *) error text: (NSString *) text request: (Request *) request {
   NSString *message = nil;
   if (error && error.domain == RubyTimeErrorDomain && error.code == 400 && text) {
     message = [self errorMessageFromJSON: text];
@@ -93,7 +97,7 @@
       message = @"Activity could not be saved.";
     }
   }
-  [Utils showAlertWithTitle: @"Error" content: message];
+  return message;
 }
 
 - (NSString *) errorMessageFromJSON: (NSString *) jsonString {

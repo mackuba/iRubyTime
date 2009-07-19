@@ -41,6 +41,7 @@
 - (UITableViewCell *) tableView: (UITableView *) table fieldCellForRow: (NSInteger) row;
 - (void) pushHelperControllerForPath: (NSIndexPath *) path;
 - (NSString *) errorMessageFromJSON: (NSString *) jsonString;
+- (NSString *) errorMessageFromError: (NSError *) error text: (NSString *) text request: (Request *) request;
 
 - (ActivityCommentsDialogController *) activityCommentsDialogController;
 - (ActivityDateDialogController *) activityDateDialogController;

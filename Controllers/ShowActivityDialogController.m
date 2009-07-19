@@ -33,7 +33,7 @@ OnDeallocRelease(originalActivity, editButton);
 
 - (void) viewDidLoad {
   [super viewDidLoad];
-  self.tableView.allowsSelectionDuringEditing = YES;
+  tableView.allowsSelectionDuringEditing = YES;
   Observe(connector, @"activityEdited", activityEdited);
   Observe(connector, @"activityDeleted", activityDeleted);
 }
@@ -66,13 +66,13 @@ OnDeallocRelease(originalActivity, editButton);
     [spinner startAnimating];
     [connector deleteActivity: activity];
   }
-  [self.tableView deselectRowAtIndexPath: RTIndex(1, 0) animated: YES];
+  [tableView deselectRowAtIndexPath: RTIndex(1, 0) animated: YES];
 }
 
 - (void) cancelClicked {
   [activity release];
   activity = [originalActivity copy];
-  [self.tableView reloadData];
+  [tableView reloadData];
   [self setEditing: NO animated: YES];
   self.navigationItem.leftBarButtonItem = nil;
   self.navigationItem.rightBarButtonItem = editButton;
@@ -119,11 +119,11 @@ OnDeallocRelease(originalActivity, editButton);
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
-- (NSInteger) numberOfSectionsInTableView: (UITableView *) tableView {
+- (NSInteger) numberOfSectionsInTableView: (UITableView *) table {
   return 2;
 }
 
-- (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section {
+- (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
   if (section == 0) {
     return 4; // TODO: 5 if activity author is displayed too
   } else {
@@ -184,15 +184,15 @@ OnDeallocRelease(originalActivity, editButton);
 
 - (void) setEditing: (BOOL) editing animated: (BOOL) animated {
   [super setEditing: editing animated: animated];
-  [self.tableView beginUpdates];
-  [self.tableView setEditing: editing animated: animated];
+  [tableView beginUpdates];
+  [tableView setEditing: editing animated: animated];
   NSArray *indexes = RTArray(RTIndex(1, 0));
   if (editing) {
-    [self.tableView insertRowsAtIndexPaths: indexes withRowAnimation: UITableViewRowAnimationNone];
+    [tableView insertRowsAtIndexPaths: indexes withRowAnimation: UITableViewRowAnimationNone];
   } else {
-    [self.tableView deleteRowsAtIndexPaths: indexes withRowAnimation: UITableViewRowAnimationNone];
+    [tableView deleteRowsAtIndexPaths: indexes withRowAnimation: UITableViewRowAnimationNone];
   }
-  [self.tableView endUpdates];
+  [tableView endUpdates];
 }
 
 @end
