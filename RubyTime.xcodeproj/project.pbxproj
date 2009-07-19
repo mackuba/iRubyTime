@@ -15,6 +15,8 @@
 		5810635110132C7200E8A540 /* ActivityLengthDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5810635010132C7200E8A540 /* ActivityLengthDialogController.m */; };
 		581063C710134B3900E8A540 /* ActivityDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 581063C610134B3900E8A540 /* ActivityDetailsController.m */; };
 		581063EB1013595100E8A540 /* ShowActivityDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581063EA1013595100E8A540 /* ShowActivityDialog.xib */; };
+		58106416101361A400E8A540 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58106415101361A400E8A540 /* QuartzCore.framework */; };
+		5810641D101362CC00E8A540 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5810641C101362CC00E8A540 /* LoadingView.m */; };
 		5831E83F0FB0B2A5008680E5 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831E83E0FB0B2A5008680E5 /* DataManager.m */; };
 		5844CE620FC31FA8007F22FE /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 5844CE610FC31FA8007F22FE /* README.markdown */; };
 		586516620FFFB82500363BB2 /* ShowActivityDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586516610FFFB82500363BB2 /* ShowActivityDialogController.m */; };
@@ -65,6 +67,9 @@
 		581063C510134B3900E8A540 /* ActivityDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDetailsController.h; sourceTree = "<group>"; };
 		581063C610134B3900E8A540 /* ActivityDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailsController.m; sourceTree = "<group>"; };
 		581063EA1013595100E8A540 /* ShowActivityDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowActivityDialog.xib; sourceTree = "<group>"; };
+		58106415101361A400E8A540 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5810641B101362CC00E8A540 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
+		5810641C101362CC00E8A540 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
 		5831E83D0FB0B2A5008680E5 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		5831E83E0FB0B2A5008680E5 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		5844CE610FC31FA8007F22FE /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
@@ -135,6 +140,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
 				589BEA350FD2A0C100CCFA82 /* Security.framework in Frameworks */,
+				58106416101361A400E8A540 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +197,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				58106415101361A400E8A540 /* QuartzCore.framework */,
 				589BEA340FD2A0C000CCFA82 /* Security.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -221,6 +228,8 @@
 			isa = PBXGroup;
 			children = (
 				589BEA170FD1D5DD00CCFA82 /* BSJSONAdditions */,
+				5810641B101362CC00E8A540 /* LoadingView.h */,
+				5810641C101362CC00E8A540 /* LoadingView.m */,
 				589BE9D90FD1D52300CCFA82 /* NSDataMBBase64.h */,
 				589BE9DA0FD1D52300CCFA82 /* NSDataMBBase64.m */,
 				589BE9DB0FD1D52300CCFA82 /* SFHFEditableCell.h */,
@@ -397,6 +406,7 @@
 				586516620FFFB82500363BB2 /* ShowActivityDialogController.m in Sources */,
 				5810635110132C7200E8A540 /* ActivityLengthDialogController.m in Sources */,
 				581063C710134B3900E8A540 /* ActivityDetailsController.m in Sources */,
+				5810641D101362CC00E8A540 /* LoadingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

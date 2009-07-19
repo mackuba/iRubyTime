@@ -18,7 +18,6 @@
 
 @interface RubyTimeAppDelegate()
 - (void) initApplication;
-- (void) loadDataFromDisk;
 - (RubyTimeConnector *) newConnector;
 @end
 
@@ -37,14 +36,8 @@ OnDeallocRelease(window, navigationController, connector, activityListController
   NSArray *dirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
   dataFile = [[[dirs objectAtIndex: 0] stringByAppendingPathComponent: @"activities.data"] retain];
   
-  [self loadDataFromDisk];
-  
   Observe(connector, @"authenticationSuccessful", loginSuccessful);
   Observe(connector, @"projectsReceived", projectsReceived);
-  Observe(connector, @"activitiesReceived", activitiesUpdated);
-  Observe(connector, @"activityCreated", activitiesUpdated);
-  Observe(connector, @"activityEdited", activitiesUpdated);
-  Observe(connector, @"activityDeleted", activitiesUpdated);
 }
 
 - (RubyTimeConnector *) newConnector {
@@ -88,20 +81,6 @@ OnDeallocRelease(window, navigationController, connector, activityListController
   [settings synchronize];
 }
 
-- (void) saveDataToDisk {
-  NSDictionary *data = RTDict(connector.projects, @"projects", connector.activities, @"activities");
-  BOOL ok = [NSKeyedArchiver archiveRootObject: data toFile: dataFile];
-  NSLog(@"saved data %@", ok ? @"OK" : @"ERROR");
-}
-
-- (void) loadDataFromDisk {
-  NSDictionary *data = [NSKeyedUnarchiver unarchiveObjectWithFile: dataFile];
-  if (data) {
-    connector.activities = [data objectForKey: @"activities"];
-    connector.projects = [data objectForKey: @"projects"];
-  }
-}
-
 // -------------------------------------------------------------------------------------------
 #pragma mark Notification callbacks
 
@@ -113,10 +92,6 @@ OnDeallocRelease(window, navigationController, connector, activityListController
 
 - (void) projectsReceived {
   [connector updateActivities];
-}
-
-- (void) activitiesUpdated {
-  [self saveDataToDisk];
 }
 
 // -------------------------------------------------------------------------------------------

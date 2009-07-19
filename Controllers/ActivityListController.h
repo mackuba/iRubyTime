@@ -7,13 +7,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class RubyTimeConnector;
 @class ActivityCell;
+@class LoadingView;
+@class RubyTimeConnector;
 
 @interface ActivityListController : UITableViewController {
-  RubyTimeConnector *connector;
   ActivityCell *currentCell;
-  UIActivityIndicatorView *spinner;
+  LoadingView *loadingView;
+  RubyTimeConnector *connector;
 }
 
 @property (nonatomic, assign) IBOutlet ActivityCell *currentCell;

@@ -8,6 +8,7 @@
 #import "Activity.h"
 #import "ActivityCell.h"
 #import "ActivityListController.h"
+#import "LoadingView.h"
 #import "LoginDialogController.h"
 #import "NewActivityDialogController.h"
 #import "RubyTimeAppDelegate.h"
@@ -20,12 +21,13 @@
 @interface ActivityListController ()
 - (void) showLoginDialog;
 - (void) showPopupDialog: (Class) controllerClass;
+- (void) stopLoading;
 @end
 
 @implementation ActivityListController
 
 @synthesize currentCell, connector;
-OnDeallocRelease(connector, spinner);
+OnDeallocRelease(connector);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -35,24 +37,20 @@ OnDeallocRelease(connector, spinner);
 
   
   // prepare buttons for toolbar
-  spinner = [[UIActivityIndicatorView spinnerBarButton] retain];
-  UIBarButtonItem *loadingButton = [[UIBarButtonItem alloc] initWithCustomView: spinner];
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd
                                                                              target: self
                                                                              action: @selector(showNewActivityDialog)];
-  self.navigationItem.leftBarButtonItem = loadingButton;
   self.navigationItem.rightBarButtonItem = addButton;
   addButton.enabled = NO;
 
   Observe(connector, @"authenticationSuccessful", loginSuccessful);
-  Observe(connector, @"authenticate", loading);
-  Observe(connector, @"loadProjects", loading);
+  Observe(connector, @"authenticate", startLoading);
+  Observe(connector, @"loadProjects", startLoading);
   Observe(connector, @"activitiesReceived", activitiesReceived);
   Observe(connector, @"activityCreated", activityCreated:);
   Observe(connector, @"activityDeleted", activityDeleted);
   Observe(nil, @"newActivityDialogCancelled", newActivityDialogCancelled);
   
-  [loadingButton release];
   [addButton release];
 }
 
@@ -98,8 +96,16 @@ OnDeallocRelease(connector, spinner);
   }
 }
 
-- (void) loading {
-  [spinner startAnimating];
+- (void) startLoading {
+  if (!loadingView) {
+    loadingView = [[LoadingView loadingViewInView: self.tableView.superview] retain];
+  }
+}
+
+- (void) stopLoading {
+  [loadingView removeView];
+  [loadingView release];
+  loadingView = nil;
 }
 
 - (void) showNewActivityDialog {
@@ -132,8 +138,8 @@ OnDeallocRelease(connector, spinner);
 
 - (void) activitiesReceived {
   [self.tableView reloadData];
-  [spinner stopAnimating];
   self.navigationItem.rightBarButtonItem.enabled = (connector.projects.count > 0);
+  [self stopLoading];
 }
 
 - (void) activityCreated: (NSNotification *) notification {
@@ -154,7 +160,7 @@ OnDeallocRelease(connector, spinner);
 }
 
 - (void) requestFailed: (NSNotification *) notification {
-  [spinner stopAnimating];
+  [self stopLoading];
   NSError *error = [notification.userInfo objectForKey: @"error"];
   NSString *message = error ? [error friendlyDescription] : @"Can't connect to the server.";
   [Utils showAlertWithTitle: @"Error" content: message];
