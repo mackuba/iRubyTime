@@ -15,7 +15,6 @@
   UINavigationController *navigationController;
   RubyTimeConnector *connector;
   ActivityListController *activityListController;
-  NSString *dataFile;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

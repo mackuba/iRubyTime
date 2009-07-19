@@ -33,9 +33,6 @@ OnDeallocRelease(window, navigationController, connector, activityListController
   connector = [self newConnector];
   activityListController.connector = connector;
   
-  NSArray *dirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-  dataFile = [[[dirs objectAtIndex: 0] stringByAppendingPathComponent: @"activities.data"] retain];
-  
   Observe(connector, @"authenticationSuccessful", loginSuccessful);
   Observe(connector, @"projectsReceived", projectsReceived);
 }
