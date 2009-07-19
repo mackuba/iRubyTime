@@ -6,27 +6,11 @@
 // -------------------------------------------------------
 
 #import <UIKit/UIKit.h>
+#import "ActivityDetailsController.h"
 
-@class Activity;
-@class RubyTimeConnector;
-@class ActivityCommentsDialogController;
-@class ActivityDateDialogController;
-@class ActivityLengthDialogController;
-@class ProjectChoiceController;
-
-@interface ShowActivityDialogController : UITableViewController <UIActionSheetDelegate> {
-  Activity *activity;
+@interface ShowActivityDialogController : ActivityDetailsController <UIActionSheetDelegate> {
   Activity *originalActivity;
-  RubyTimeConnector *connector;
-  ProjectChoiceController *projectChoiceController;
-  ActivityCommentsDialogController *activityCommentsDialogController;
-  ActivityDateDialogController *activityDateDialogController;
-  ActivityLengthDialogController *activityLengthDialogController;
-  UIBarButtonItem *cancelButton;
-  UIActivityIndicatorView *spinner;
-  UIBarButtonItem *loadingButton;
   UIBarButtonItem *editButton;
-  UIBarButtonItem *saveButton;
 }
 
 - (id) initWithActivity: (Activity *) activity connector: (RubyTimeConnector *) connector;
