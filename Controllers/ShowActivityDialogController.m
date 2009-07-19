@@ -15,11 +15,12 @@
 
 @interface ShowActivityDialogController ()
 - (UITableViewCell *) tableView: (UITableView *) table fieldCellForRow: (NSInteger) row;
+- (void) deleteActivityClicked;
 @end
 
 @implementation ShowActivityDialogController
 
-OnDeallocRelease(activity, connector);
+OnDeallocRelease(activity, originalActivity, connector);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -27,7 +28,8 @@ OnDeallocRelease(activity, connector);
 - (id) initWithActivity: (Activity *) anActivity connector: (RubyTimeConnector *) aConnector {
   self = [super initWithStyle: UITableViewStyleGrouped];
   if (self) {
-    activity = [anActivity retain];
+    activity = [anActivity copy];
+    originalActivity = [anActivity retain];
     connector = [aConnector retain];
     self.title = @"Activity details";
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -37,6 +39,10 @@ OnDeallocRelease(activity, connector);
 
 - (void) viewDidLoad {
   self.tableView.allowsSelectionDuringEditing = YES;
+  self.tableView.scrollEnabled = false;
+  cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel
+                                                               target: self
+                                                               action: @selector(cancelClicked)];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -44,6 +50,13 @@ OnDeallocRelease(activity, connector);
 
 - (void) deleteActivityClicked {
   
+}
+
+- (void) cancelClicked {
+  [activity release];
+  activity = [originalActivity copy];
+  [self.tableView reloadData];
+  [self setEditing: NO animated: YES];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -132,8 +145,10 @@ OnDeallocRelease(activity, connector);
   [self.tableView setEditing: editing animated: animated];
   NSArray *indexes = RTArray(RTIndex(1, 0));
   if (editing) {
+    self.navigationItem.leftBarButtonItem = cancelButton;
     [self.tableView insertRowsAtIndexPaths: indexes withRowAnimation: UITableViewRowAnimationNone];
   } else {
+    self.navigationItem.leftBarButtonItem = nil;
     [self.tableView deleteRowsAtIndexPaths: indexes withRowAnimation: UITableViewRowAnimationNone];
   }
   [self.tableView endUpdates];

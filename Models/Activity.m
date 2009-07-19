@@ -41,6 +41,16 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project);
   return self;
 }
 
+- (id) copyWithZone: (NSZone *) zone {
+  Activity *other = [[Activity alloc] init];
+  other.comments = self.comments;
+  other.date = self.date;
+  other.minutes = self.minutes;
+  other.activityId = self.activityId;
+  other.project = self.project;
+  return other;
+}
+
 - (NSString *) hourString {
   return RTFormat(@"%d:%02d", minutes / 60, minutes % 60);
 }

@@ -12,10 +12,11 @@
 
 @interface ShowActivityDialogController : UITableViewController {
   Activity *activity;
+  Activity *originalActivity;
   RubyTimeConnector *connector;
+  UIBarButtonItem *cancelButton;
 }
 
 - (id) initWithActivity: (Activity *) activity connector: (RubyTimeConnector *) connector;
-- (IBAction) deleteActivityClicked;
 
 @end
