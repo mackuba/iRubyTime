@@ -11,6 +11,8 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
+		5810634B10132BE600E8A540 /* ActivityLengthDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5810634A10132BE600E8A540 /* ActivityLengthDialog.xib */; };
+		5810635110132C7200E8A540 /* ActivityLengthDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5810635010132C7200E8A540 /* ActivityLengthDialogController.m */; };
 		5831E83F0FB0B2A5008680E5 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831E83E0FB0B2A5008680E5 /* DataManager.m */; };
 		5844CE620FC31FA8007F22FE /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 5844CE610FC31FA8007F22FE /* README.markdown */; };
 		586516620FFFB82500363BB2 /* ShowActivityDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586516610FFFB82500363BB2 /* ShowActivityDialogController.m */; };
@@ -55,6 +57,9 @@
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* RubyTime_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyTime_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5810634A10132BE600E8A540 /* ActivityLengthDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityLengthDialog.xib; sourceTree = "<group>"; };
+		5810634F10132C7200E8A540 /* ActivityLengthDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityLengthDialogController.h; sourceTree = "<group>"; };
+		5810635010132C7200E8A540 /* ActivityLengthDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityLengthDialogController.m; sourceTree = "<group>"; };
 		5831E83D0FB0B2A5008680E5 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		5831E83E0FB0B2A5008680E5 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		5844CE610FC31FA8007F22FE /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
@@ -201,6 +206,7 @@
 				588BAB0F0FADD78B00460689 /* ActivityCell.xib */,
 				588BAB170FADD79B00460689 /* ActivityCell.h */,
 				588BAB180FADD79B00460689 /* ActivityCell.m */,
+				5810634A10132BE600E8A540 /* ActivityLengthDialog.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -238,6 +244,8 @@
 				589BE9EE0FD1D57C00CCFA82 /* RubyTimeAppDelegate.m */,
 				586516600FFFB82500363BB2 /* ShowActivityDialogController.h */,
 				586516610FFFB82500363BB2 /* ShowActivityDialogController.m */,
+				5810634F10132C7200E8A540 /* ActivityLengthDialogController.h */,
+				5810635010132C7200E8A540 /* ActivityLengthDialogController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -343,6 +351,7 @@
 				5844CE620FC31FA8007F22FE /* README.markdown in Resources */,
 				58EBA4480FD45562004DBC6F /* Default.png in Resources */,
 				58F47A620FF6AB5F00A1F20F /* Icon.png in Resources */,
+				5810634B10132BE600E8A540 /* ActivityLengthDialog.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +386,7 @@
 				589BEA260FD1D60100CCFA82 /* NSString+BSJSONAdditions.m in Sources */,
 				589BEA2A0FD1D66700CCFA82 /* SFHFKeychainUtils.m in Sources */,
 				586516620FFFB82500363BB2 /* ShowActivityDialogController.m in Sources */,
+				5810635110132C7200E8A540 /* ActivityLengthDialogController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

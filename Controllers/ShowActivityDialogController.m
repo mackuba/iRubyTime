@@ -6,7 +6,12 @@
 // -------------------------------------------------------
 
 #import "Activity.h"
+#import "ActivityCommentsDialogController.h"
+#import "ActivityDateDialogController.h"
+#import "ActivityLengthDialogController.h"
 #import "Project.h"
+#import "ProjectChoiceController.h"
+#import "RubyTimeConnector.h"
 #import "ShowActivityDialogController.h"
 #import "Utils.h"
 
@@ -16,6 +21,10 @@
 @interface ShowActivityDialogController ()
 - (UITableViewCell *) tableView: (UITableView *) table fieldCellForRow: (NSInteger) row;
 - (void) deleteActivityClicked;
+- (ActivityCommentsDialogController *) activityCommentsDialogController;
+- (ActivityDateDialogController *) activityDateDialogController;
+- (ActivityLengthDialogController *) activityLengthDialogController;
+- (ProjectChoiceController *) projectChoiceController;
 @end
 
 @implementation ShowActivityDialogController
@@ -43,6 +52,13 @@ OnDeallocRelease(activity, originalActivity, connector);
   cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel
                                                                target: self
                                                                action: @selector(cancelClicked)];
+}
+
+- (void) viewWillAppear: (BOOL) animated {
+  [super viewWillAppear: animated];
+  [self.tableView reloadData];
+  NSIndexPath *selection = [self.tableView indexPathForSelectedRow];
+  [self.tableView deselectRowAtIndexPath: selection animated: YES];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -111,6 +127,7 @@ OnDeallocRelease(activity, originalActivity, connector);
     default:
       cell.textLabel.text = @"Comments";
       cell.detailTextLabel.text = activity.comments;
+      // TODO truncate comments value
   }
   cell.accessoryType = UITableViewCellAccessoryNone;
   cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -128,15 +145,23 @@ OnDeallocRelease(activity, originalActivity, connector);
 }
 
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) path {
-  [tableView deselectRowAtIndexPath: path animated: YES];
-  /*UIViewController *controller;
-  switch (path.row) {
-    case 0: controller = [self activityDateDialogController]; break;
-    case 1: controller = [self projectChoiceController]; break;
-    case 2: controller = [self activityCommentsDialogController]; break;
-    default: return;
+  if (self.editing) {
+    if (path.section == 0) {
+      UIViewController *controller;
+      switch (path.row) {
+        case 0: controller = [self activityDateDialogController]; break;
+        case 1: controller = [self projectChoiceController]; break;
+        case 2: controller = [self activityLengthDialogController]; break;
+        case 3: controller = [self activityCommentsDialogController]; break;
+        default: return;
+      }
+      [self.navigationController pushViewController: controller animated: YES];
+    } else {
+      [self deleteActivityClicked];
+    }
+  } else {
+    [tableView deselectRowAtIndexPath: path animated: YES];
   }
-  [self.navigationController pushViewController: controller animated: YES];*/
 }
 
 - (void) setEditing: (BOOL) editing animated: (BOOL) animated {
@@ -152,6 +177,39 @@ OnDeallocRelease(activity, originalActivity, connector);
     [self.tableView deleteRowsAtIndexPaths: indexes withRowAnimation: UITableViewRowAnimationNone];
   }
   [self.tableView endUpdates];
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Helper controllers
+
+- (ActivityCommentsDialogController *) activityCommentsDialogController {
+  if (!activityCommentsDialogController) {
+    activityCommentsDialogController = [[ActivityCommentsDialogController alloc] initWithActivity: activity];
+  }
+  return activityCommentsDialogController;
+}
+
+- (ActivityDateDialogController *) activityDateDialogController {
+  if (!activityDateDialogController) {
+    activityDateDialogController = [[ActivityDateDialogController alloc] initWithActivity: activity];
+  }
+  return activityDateDialogController;
+}
+
+- (ActivityLengthDialogController *) activityLengthDialogController {
+  if (!activityLengthDialogController) {
+    activityLengthDialogController = [[ActivityLengthDialogController alloc] initWithActivity: activity];
+  }
+  return activityLengthDialogController;
+}
+
+- (ProjectChoiceController *) projectChoiceController {
+  if (!projectChoiceController) {
+    projectChoiceController = [[ProjectChoiceController alloc] initWithActivity: activity
+                                                                    projectList: connector.projects
+                                                                 recentProjects: [connector recentProjects]];
+  }
+  return projectChoiceController;
 }
 
 @end

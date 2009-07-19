@@ -9,11 +9,19 @@
 
 @class Activity;
 @class RubyTimeConnector;
+@class ActivityCommentsDialogController;
+@class ActivityDateDialogController;
+@class ActivityLengthDialogController;
+@class ProjectChoiceController;
 
 @interface ShowActivityDialogController : UITableViewController {
   Activity *activity;
   Activity *originalActivity;
   RubyTimeConnector *connector;
+  ProjectChoiceController *projectChoiceController;
+  ActivityCommentsDialogController *activityCommentsDialogController;
+  ActivityDateDialogController *activityDateDialogController;
+  ActivityLengthDialogController *activityLengthDialogController;
   UIBarButtonItem *cancelButton;
 }
 
