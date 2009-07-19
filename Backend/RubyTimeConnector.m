@@ -127,6 +127,16 @@
   [self sendRequest: request];
 }
 
+- (void) editActivity: (Activity *) activity {
+  NSString *contents = [[activity toQueryString] stringByAppendingString: @"&_method=put"];
+  Request *request = [[Request alloc] initWithURL: ServerPath(RTFormat(@"/activities/%d", activity.activityId))
+                                           method: @"POST"
+                                             text: contents
+                                             type: RTEditActivityRequest];
+  request.info = activity;
+  [self sendRequest: request];
+}
+
 - (void) loadProjects {
   Notify(@"loadProjects");
   Request *request = [[Request alloc] initWithURL: ServerPath(@"/projects") type: RTProjectIndexRequest];
@@ -205,12 +215,18 @@
       [dataManager addNewActivity: activity];
       NotifyWithData(@"activityCreated", RTDict(activity, @"activity"));
       break;
+
+    case RTEditActivityRequest:
+      activity = request.info;
+      [dataManager updateActivity: activity];
+      NotifyWithData(@"activityEdited", RTDict(activity, @"activity"));
+      break;
   }
 }
 
 - (void) connection: (NSURLConnection *) connection didFailWithError: (NSError *) error {
   if (error.code != NSURLErrorUserCancelledAuthentication) {
-    NotifyWithData(@"requestFailed", RTDict(error, @"error"));
+    NotifyWithData(@"requestFailed", RTDict(error, @"error", currentRequest, @"request"));
     [self cleanupRequest];
   }
 }

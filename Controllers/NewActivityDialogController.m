@@ -60,7 +60,6 @@
   activity.minutes = activity.minutes / precision * precision;
   
   Observe(connector, @"requestFailed", activityNotCreated:);
-  
 }
 
 - (void) viewWillAppear: (BOOL) animated {

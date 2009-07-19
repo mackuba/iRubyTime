@@ -11,9 +11,11 @@
 #import "ActivityLengthDialogController.h"
 #import "Project.h"
 #import "ProjectChoiceController.h"
+#import "Request.h"
 #import "RubyTimeConnector.h"
 #import "ShowActivityDialogController.h"
 #import "Utils.h"
+#import "NSDictionary+BSJSONAdditions.h"
 
 #define ACTIVITY_FIELD_CELL_TYPE @"ActivityFieldCell"
 #define DELETE_ACTIVITY_CELL_TYPE @"DeleteActivityCell"
@@ -25,6 +27,7 @@
 - (ActivityDateDialogController *) activityDateDialogController;
 - (ActivityLengthDialogController *) activityLengthDialogController;
 - (ProjectChoiceController *) projectChoiceController;
+- (NSString *) errorMessageFromJSON: (NSString *) jsonString;
 @end
 
 @implementation ShowActivityDialogController
@@ -65,6 +68,9 @@ OnDeallocRelease(activity, originalActivity, connector, loadingButton, editButto
                                                              action: @selector(saveClicked)];
 
   self.navigationItem.rightBarButtonItem = editButton;
+
+  Observe(connector, @"requestFailed", requestFailed:);
+  Observe(connector, @"activityEdited", activityEdited);
 }
 
 - (void) viewWillAppear: (BOOL) animated {
@@ -129,10 +135,55 @@ OnDeallocRelease(activity, originalActivity, connector, loadingButton, editButto
   } else {
     self.navigationItem.rightBarButtonItem = loadingButton;
     [spinner startAnimating];
-    // TODO: save
+    [connector editActivity: activity];
   }
 }
- 
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Notification callbacks
+
+- (void) requestFailed: (NSNotification *) notification {
+  [spinner stopAnimating];
+  self.navigationItem.rightBarButtonItem = saveButton;
+
+  NSError *error = [notification.userInfo objectForKey: @"error"];
+  NSString *text = [notification.userInfo objectForKey: @"text"];
+  Request *request = [notification.userInfo objectForKey: @"request"];
+  NSString *message = nil;
+  if (error && error.domain == RubyTimeErrorDomain && error.code == 400 && text) {
+    message = [self errorMessageFromJSON: text];
+  } else if (error) {
+    message = [error friendlyDescription];
+  }
+  if (!message) {
+    if (request.type == RTEditActivityRequest) {
+      message = @"Activity could not be saved.";
+    } else {
+      message = @"Activity could not be deleted.";
+    }
+  }
+  [Utils showAlertWithTitle: @"Error" content: message];
+}
+
+- (NSString *) errorMessageFromJSON: (NSString *) jsonString {
+  NSString *message = nil;
+  NSDictionary *result = [NSDictionary dictionaryWithJSONString: jsonString];
+  if (result.count > 0) {
+    NSArray *errors = [result objectForKey: [[result allKeys] objectAtIndex: 0]];
+    if (errors.count > 0) {
+      message = [[errors objectAtIndex: 0] stringByAppendingString: @"."];
+    }
+  }
+  return message;
+}
+
+- (void) activityEdited {
+  [self setEditing: NO animated: YES];
+  self.navigationItem.leftBarButtonItem = nil;
+  self.navigationItem.rightBarButtonItem = editButton;
+  [spinner stopAnimating];
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 

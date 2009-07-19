@@ -43,6 +43,7 @@ OnDeallocRelease(window, navigationController, connector, activityListController
   Observe(connector, @"projectsReceived", projectsReceived);
   Observe(connector, @"activitiesReceived", activitiesUpdated);
   Observe(connector, @"activityCreated", activitiesUpdated);
+  Observe(connector, @"activityEdited", activitiesUpdated);
 }
 
 - (RubyTimeConnector *) newConnector {

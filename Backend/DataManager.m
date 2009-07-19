@@ -49,6 +49,19 @@ OnDeallocRelease(activityList, projects, projectHash);
   [activityList insertObject: activity atIndex: index];
 }
 
+- (void) updateActivity: (Activity *) activity {
+  NSInteger index;
+  Activity *existing;
+  for (index = 0; index < activityList.count; index++) {
+    existing = [activityList objectAtIndex: index];
+    if (existing.activityId == activity.activityId) break;
+  }
+  if (index < activityList.count) {
+    [activityList removeObjectAtIndex: index];
+    [self addNewActivity: activity];
+  }
+}
+
 - (Activity *) activityFromJSON: (NSDictionary *) json {
   Activity *activity = [[Activity alloc] init];
   activity.comments = [json objectForKey: @"comments"];

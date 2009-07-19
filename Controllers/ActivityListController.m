@@ -60,6 +60,7 @@ OnDeallocRelease(connector, spinner);
 
 - (void) viewDidAppear: (BOOL) animated {
   [super viewDidAppear: animated];
+  [self.tableView reloadData];
   if (!connector.loggedIn) {
     if (connector.username && connector.password && connector.serverURL) {
       Observe(connector, @"requestFailed", requestFailed:);
