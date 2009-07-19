@@ -53,7 +53,6 @@
 - (void) viewDidLoad {
   [super viewDidLoad];
   [self setupToolbar];
-  spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
   tableView.scrollEnabled = false;
 
   activityLengthPicker.countDownDuration = activity.minutes * 60;
@@ -81,6 +80,9 @@
   saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemSave
                                                              target: self
                                                              action: @selector(saveClicked)];
+  spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+  spinner.frame = CGRectMake(0, 0, 36, 20);
+  spinner.contentMode = UIViewContentModeCenter;
   loadingButton = [[UIBarButtonItem alloc] initWithCustomView: spinner];
   back.title = @"Back";
   
