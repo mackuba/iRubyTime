@@ -123,9 +123,14 @@ OnDeallocRelease(activity, originalActivity, connector, loadingButton, editButto
 }
 
 - (void) saveClicked {
-  // TODO: save
-  self.navigationItem.rightBarButtonItem = loadingButton;
-  [spinner startAnimating];
+  if ([activity.comments trimmedString].length == 0) {
+    [Utils showAlertWithTitle: @"Can't save activity"
+                      content: @"Activity comments field is empty - please fill it first."];
+  } else {
+    self.navigationItem.rightBarButtonItem = loadingButton;
+    [spinner startAnimating];
+    // TODO: save
+  }
 }
  
 // -------------------------------------------------------------------------------------------
