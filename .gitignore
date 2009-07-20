@@ -2,4 +2,5 @@ build
 *.tm_build_errors
 RubyTime.xcodeproj/*.pbxuser
 RubyTime.xcodeproj/*.perspective*
+RubyTime.xcodeproj/*.mode1v3
 ._*

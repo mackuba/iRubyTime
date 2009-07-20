@@ -42,6 +42,7 @@
 		589BEA260FD1D60100CCFA82 /* NSString+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA210FD1D60100CCFA82 /* NSString+BSJSONAdditions.m */; };
 		589BEA2A0FD1D66700CCFA82 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA290FD1D66700CCFA82 /* SFHFKeychainUtils.m */; };
 		589BEA350FD2A0C100CCFA82 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 589BEA340FD2A0C000CCFA82 /* Security.framework */; };
+		58ACEFA71014ED9100426EA8 /* CommentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58ACEFA61014ED9100426EA8 /* CommentsCell.xib */; };
 		58C0A0ED0FBA000700AF8C14 /* ActivityList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */; };
 		58C0A0F20FBA009D00AF8C14 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C0A0F10FBA009D00AF8C14 /* Utils.m */; };
 		58CA2D4E0FA7995E007A6A65 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4B0FA7995E007A6A65 /* Request.m */; };
@@ -113,6 +114,7 @@
 		589BEA280FD1D66700CCFA82 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		589BEA290FD1D66700CCFA82 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		589BEA340FD2A0C000CCFA82 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		58ACEFA61014ED9100426EA8 /* CommentsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentsCell.xib; sourceTree = "<group>"; };
 		58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityList.xib; sourceTree = "<group>"; };
 		58C0A0F00FBA009D00AF8C14 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		58C0A0F10FBA009D00AF8C14 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				588BAB180FADD79B00460689 /* ActivityCell.m */,
 				5810634A10132BE600E8A540 /* ActivityLengthDialog.xib */,
 				581063EA1013595100E8A540 /* ShowActivityDialog.xib */,
+				58ACEFA61014ED9100426EA8 /* CommentsCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				58F47A620FF6AB5F00A1F20F /* Icon.png in Resources */,
 				5810634B10132BE600E8A540 /* ActivityLengthDialog.xib in Resources */,
 				581063EB1013595100E8A540 /* ShowActivityDialog.xib in Resources */,
+				58ACEFA71014ED9100426EA8 /* CommentsCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -185,7 +185,7 @@ OnDeallocRelease(connector);
 }
 
 - (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
-  return 69; // TODO: make variable height
+  return 69;
 }
 
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) path {

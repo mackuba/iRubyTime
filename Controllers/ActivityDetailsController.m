@@ -11,7 +11,7 @@
 
 @implementation ActivityDetailsController
 
-@synthesize tableView;
+@synthesize tableView, commentsCell, commentsLabel;
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -19,6 +19,7 @@
 - (id) initWithConnector: (RubyTimeConnector *) rtConnector nibName: (NSString *) nib {
   self = [super initWithNibName: nib bundle: [NSBundle mainBundle]];
   if (self) {
+    [[NSBundle mainBundle] loadNibNamed: @"CommentsCell" owner: self options: nil];
     connector = [rtConnector retain];
     activity = nil;
   }
@@ -26,13 +27,14 @@
 }
 
 - (void) viewDidLoad {
-  tableView.scrollEnabled = false;
   [self setupToolbar];
   Observe(connector, @"requestFailed", requestFailed:);
 }
 
 - (void) viewWillAppear: (BOOL) animated {
   [super viewWillAppear: animated];
+  commentsLabel.text = (activity.comments.length > 0) ? activity.comments : @"Comments";
+  commentsLabel.textColor = (activity.comments.length > 0) ? [UIColor blackColor] : [UIColor lightGrayColor];
   [tableView reloadData];
   NSIndexPath *selection = [tableView indexPathForSelectedRow];
   [tableView deselectRowAtIndexPath: selection animated: YES];
@@ -136,7 +138,6 @@
     default:
       cell.textLabel.text = @"Comments";
       cell.detailTextLabel.text = activity.comments;
-      // TODO truncate comments value
   }
   return cell;
 }
@@ -193,7 +194,7 @@
   StopObservingAll();
   ReleaseAll(tableView, activity, connector, spinner, saveButton, loadingButton, cancelButton,
     projectChoiceController, activityCommentsDialogController, activityDateDialogController,
-    activityLengthDialogController);
+    activityLengthDialogController, commentsCell, commentsLabel);
   [super dealloc];
 }
 

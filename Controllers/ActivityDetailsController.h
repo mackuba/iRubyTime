@@ -18,6 +18,9 @@
 #import "Utils.h"
 #import "NSDictionary+BSJSONAdditions.h"
 
+#define COMMENTS_CELL_HEIGHT 92
+#define STANDARD_CELL_HEIGHT 44
+
 // ABSTRACT CLASS
 
 @interface ActivityDetailsController : UIViewController {
@@ -32,9 +35,13 @@
   UIBarButtonItem *loadingButton;
   UIBarButtonItem *saveButton;
   UITableView *tableView;
+  UITableViewCell *commentsCell;
+  UILabel *commentsLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) IBOutlet UITableViewCell *commentsCell;
+@property (nonatomic, retain) IBOutlet UILabel *commentsLabel;
 
 - (id) initWithConnector: (RubyTimeConnector *) rtConnector nibName: (NSString *) nib;
 - (void) setupToolbar;

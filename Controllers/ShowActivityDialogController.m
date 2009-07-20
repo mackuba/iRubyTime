@@ -132,21 +132,33 @@ OnDeallocRelease(originalActivity, editButton);
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
+  UITableViewCell *cell;
   if (path.section == 0) {
-    //if (path.row == 3) {
-    //  return commentsCell;
-    //} else {
-      UITableViewCell *cell = [self tableView: table fieldCellForRow: path.row];
-      cell.accessoryType = UITableViewCellAccessoryNone;
-      cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
-      return cell;
-    //}
+    if (path.row == 3) {
+      cell = commentsCell;
+    } else {
+      cell = [self tableView: table fieldCellForRow: path.row];
+    }
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
   } else {
-    UITableViewCell *cell = [table cellWithStyle: UITableViewCellStyleDefault andIdentifier: DELETE_ACTIVITY_CELL_TYPE];
+    cell = [table cellWithStyle: UITableViewCellStyleDefault andIdentifier: DELETE_ACTIVITY_CELL_TYPE];
     cell.textLabel.text = @"Delete activity";
     cell.textLabel.textAlignment = UITextAlignmentCenter;
     cell.textLabel.textColor = [UIColor colorWithRed: 0.7 green: 0.0 blue: 0.0 alpha: 1.0];
-    return cell;
+  }
+  return cell;
+}
+
+- (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
+  if (path.row == 3) {
+    CGSize rect = [activity.comments sizeWithFont: commentsLabel.font
+                                constrainedToSize: CGSizeMake(commentsLabel.bounds.size.width, 200)
+                                    lineBreakMode: UILineBreakModeWordWrap];
+    CGFloat requiredHeight = rect.height + 2 * commentsLabel.frame.origin.y + 5;
+    return MAX(STANDARD_CELL_HEIGHT, requiredHeight);
+  } else {
+    return STANDARD_CELL_HEIGHT;
   }
 }
 

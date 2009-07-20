@@ -9,8 +9,7 @@
 
 @implementation NewActivityDialogController
 
-@synthesize activityLengthPicker, commentsCell, commentsLabel;
-OnDeallocRelease(activityLengthPicker, commentsCell, commentsLabel);
+SynthesizeAndReleaseLater(activityLengthPicker);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -33,15 +32,10 @@ OnDeallocRelease(activityLengthPicker, commentsCell, commentsLabel);
 
 - (void) viewDidLoad {
   [super viewDidLoad];
+  tableView.scrollEnabled = false;
   activityLengthPicker.countDownDuration = activity.minutes * 60;
   NSInteger precision = activityLengthPicker.minuteInterval;
   activity.minutes = activity.minutes / precision * precision;
-}
-
-- (void) viewWillAppear: (BOOL) animated {
-  commentsLabel.text = (activity.comments.length > 0) ? activity.comments : @"Comments";
-  commentsLabel.textColor = (activity.comments.length > 0) ? [UIColor blackColor] : [UIColor lightGrayColor];
-  [super viewWillAppear: animated];
 }
 
 - (void) setupToolbar {
@@ -90,7 +84,7 @@ OnDeallocRelease(activityLengthPicker, commentsCell, commentsLabel);
 }
 
 - (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
-  return (path.row == 2) ? 92 : 44;
+  return (path.row == 2) ? COMMENTS_CELL_HEIGHT : STANDARD_CELL_HEIGHT;
 }
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
