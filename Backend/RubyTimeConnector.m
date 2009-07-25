@@ -181,8 +181,7 @@
   [self cleanupRequest];
   
   NSHTTPURLResponse *response = (NSHTTPURLResponse *) request.response;
-  NSLog(@"finished request to %@ (%d) (status %d, text = %@)",
-    request.URL, request.type, response.statusCode, request.receivedText);
+  NSLog(@"finished request to %@ (%d) (status %d)", request.URL, request.type, response.statusCode);
   if (response.statusCode >= 400) {
     NSError *error = [NSError errorWithDomain: RubyTimeErrorDomain code: response.statusCode userInfo: nil];
     NotifyWithData(@"requestFailed", RTDict(error, @"error", request.receivedText, @"text"));
