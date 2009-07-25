@@ -28,6 +28,5 @@
 - (NSString *) hourString;
 - (BOOL) isEqualToActivity: (Activity *) other;
 - (NSString *) toQueryString;
-- (NSString *) userFriendlyDateDescription: (NSDate *) aDate;
 
 @end

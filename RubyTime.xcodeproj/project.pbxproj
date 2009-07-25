@@ -43,6 +43,7 @@
 		589BEA2A0FD1D66700CCFA82 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA290FD1D66700CCFA82 /* SFHFKeychainUtils.m */; };
 		589BEA350FD2A0C100CCFA82 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 589BEA340FD2A0C000CCFA82 /* Security.framework */; };
 		58ACEFA71014ED9100426EA8 /* CommentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58ACEFA61014ED9100426EA8 /* CommentsCell.xib */; };
+		58B082FD101BBB3B00D30C73 /* ActivityDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B082FC101BBB3B00D30C73 /* ActivityDateFormatter.m */; };
 		58C0A0ED0FBA000700AF8C14 /* ActivityList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */; };
 		58C0A0F20FBA009D00AF8C14 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C0A0F10FBA009D00AF8C14 /* Utils.m */; };
 		58CA2D4E0FA7995E007A6A65 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4B0FA7995E007A6A65 /* Request.m */; };
@@ -115,6 +116,8 @@
 		589BEA290FD1D66700CCFA82 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		589BEA340FD2A0C000CCFA82 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		58ACEFA61014ED9100426EA8 /* CommentsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentsCell.xib; sourceTree = "<group>"; };
+		58B082FB101BBB3B00D30C73 /* ActivityDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDateFormatter.h; sourceTree = "<group>"; };
+		58B082FC101BBB3B00D30C73 /* ActivityDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDateFormatter.m; sourceTree = "<group>"; };
 		58C0A0EC0FBA000700AF8C14 /* ActivityList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityList.xib; sourceTree = "<group>"; };
 		58C0A0F00FBA009D00AF8C14 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		58C0A0F10FBA009D00AF8C14 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
@@ -307,6 +310,8 @@
 				58CA2DAD0FA7AE6A007A6A65 /* Activity.m */,
 				58E9FFBF0FB22F9D00CDA046 /* Project.h */,
 				58E9FFC00FB22F9D00CDA046 /* Project.m */,
+				58B082FB101BBB3B00D30C73 /* ActivityDateFormatter.h */,
+				58B082FC101BBB3B00D30C73 /* ActivityDateFormatter.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -411,6 +416,7 @@
 				5810635110132C7200E8A540 /* ActivityLengthDialogController.m in Sources */,
 				581063C710134B3900E8A540 /* ActivityDetailsController.m in Sources */,
 				5810641D101362CC00E8A540 /* LoadingView.m in Sources */,
+				58B082FD101BBB3B00D30C73 /* ActivityDateFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

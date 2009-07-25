@@ -6,6 +6,7 @@
 // -------------------------------------------------------
 
 #import "Activity.h"
+#import "ActivityDateFormatter.h"
 #import "Project.h"
 #import "Utils.h"
 
@@ -60,46 +61,11 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project);
   date = [newDate copy];
 
   [dateAsString release];
-  dateAsString = [[self userFriendlyDateDescription: date] retain];
+  dateAsString = [[[ActivityDateFormatter sharedFormatter] formatDate: date] retain];
 }
 
 - (void) setDateAsString: (NSString *) dateString {
-  NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-  inputFormatter.dateFormat = @"yyyy-MM-dd";
-  self.date = [inputFormatter dateFromString: dateString];
-  [inputFormatter release];
-}
-
-- (NSString *) userFriendlyDateDescription: (NSDate *) aDate {
-  NSCalendar *calendar = [NSCalendar currentCalendar];
-  NSUInteger dateUnits = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
-  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-  NSDateComponents *oneDayBack = [[NSDateComponents alloc] init];
-  oneDayBack.day = -1;
-  NSString *result;
-
-  NSDate *today = [NSDate date];
-  NSDate *yesterday = [calendar dateByAddingComponents: oneDayBack toDate: today options: 0];
-
-  NSDateComponents *dateComponents = [calendar components: dateUnits fromDate: aDate];
-  NSDateComponents *nowComponents = [calendar components: dateUnits fromDate: [NSDate date]];
-  NSDateComponents *yesterdayComponents = [calendar components: dateUnits fromDate: yesterday];
-
-  if ([dateComponents isEqual: nowComponents]) {
-    result = @"Today";
-  } else if ([dateComponents isEqual: yesterdayComponents]) {
-    result = @"Yesterday";
-  } else if ([dateComponents year] != [nowComponents year]) {
-    formatter.dateFormat = @"E d MMM yyyy";
-    result = [formatter stringFromDate: aDate];
-  } else {
-    formatter.dateFormat = @"E d MMM";
-    result = [formatter stringFromDate: aDate];
-  }
-  
-  [formatter release];
-  [oneDayBack release];
-  return result;
+  self.date = [[ActivityDateFormatter sharedFormatter] parseDate: dateString];
 }
 
 - (BOOL) isEqualToActivity: (Activity *) other {
