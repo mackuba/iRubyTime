@@ -9,16 +9,19 @@ What's done:
 * logging in, remembering login&password
 * list of recent activities
 * adding new activity
+* viewing/editing/deleting existing activities
 
-What will be done in near future:
+Plans for future versions:
 
-* editing/deleting existing activities
+* admin view (showing all users' activities)
+* client's view
+
 
 ## Screenshots
 
-<a href="http://psionides.github.com/iRubyTime/screen_activity_list_18.05.09.png"><img src="http://psionides.github.com/iRubyTime/screen_activity_list_18.05.09.png" width="225" /></a> <a href="http://psionides.github.com/iRubyTime/screen_new_activity_18.05.09.png"><img src="http://psionides.github.com/iRubyTime/screen_new_activity_18.05.09.png" width="225" /></a>
+<a href="http://psionides.github.com/iRubyTime/screen_activity_list_18.05.09.png"><img src="http://psionides.github.com/iRubyTime/screen_activity_list_18.05.09.png" width="225" /></a> <a href="http://psionides.github.com/iRubyTime/screen_new_activity_25.07.09.png"><img src="http://psionides.github.com/iRubyTime/screen_new_activity_25.07.09.png" width="225" /></a> <a href="http://psionides.github.com/iRubyTime/screen_edit_activity_25.07.09.png"><img src="http://psionides.github.com/iRubyTime/screen_edit_activity_25.07.09.png" width="225" /></a>
 
 ## License
 
 Copyright by Jakub Suder (Psionides) <jakub.suder at gmail.com>. Licensed under MIT license.
-Includes open source libraries NSData+MBBase64 by MiloBird, BSJSONAdditions by Blake Seely, and scifihifi-iphone by Buzz Andersen.
+Includes open source libraries NSData+MBBase64 by MiloBird, BSJSONAdditions by Blake Seely, scifihifi-iphone by Buzz Andersen, and LoadingView by Matt Gallagher.

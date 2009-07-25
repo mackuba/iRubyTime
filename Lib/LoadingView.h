@@ -1,7 +1,7 @@
 // -------------------------------------------------------
 // LoadingView.h
 //
-// Created by Matt Galagher
+// Created by Matt Gallagher
 // http://cocoawithlove.com/2009/04/showing-message-over-iphone-keyboard.html
 // -------------------------------------------------------
 
