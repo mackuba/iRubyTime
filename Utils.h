@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class Activity;
+
 #define RubyTimeErrorDomain @"RubyTimeErrorDomain"
 
 #define ReleaseAll(...) \
@@ -69,4 +71,8 @@
 
 @interface UIActivityIndicatorView (RubyTime)
 + (UIActivityIndicatorView *) spinnerBarButton;
+@end
+
+@interface UIViewController (RubyTime)
+- (void) initializeLengthPicker: (UIDatePicker *) picker usingActivity: (Activity *) activity;
 @end

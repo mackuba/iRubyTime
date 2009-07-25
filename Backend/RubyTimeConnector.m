@@ -211,7 +211,6 @@
       break;
     
     case RTProjectIndexRequest:
-      trimmedString = [request.receivedText trimmedString];
       if (trimmedString.length > 0) {
         records = [dataManager projectsFromJSONString: trimmedString];
         dataManager.projects = records;

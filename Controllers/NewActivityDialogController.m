@@ -32,10 +32,8 @@ SynthesizeAndReleaseLater(activityLengthPicker);
 
 - (void) viewDidLoad {
   [super viewDidLoad];
+  [self initializeLengthPicker: activityLengthPicker usingActivity: activity];
   tableView.scrollEnabled = false;
-  activityLengthPicker.countDownDuration = activity.minutes * 60;
-  NSInteger precision = activityLengthPicker.minuteInterval;
-  activity.minutes = activity.minutes / precision * precision;
 }
 
 - (void) setupToolbar {

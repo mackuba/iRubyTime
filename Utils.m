@@ -5,6 +5,7 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "Activity.h"
 #import "Utils.h"
 
 @implementation Utils
@@ -71,6 +72,16 @@
   spinner.frame = CGRectMake(0, 0, 36, 20);
   spinner.contentMode = UIViewContentModeCenter;
   return [spinner autorelease];
+}
+
+@end
+
+@implementation UIViewController (RubyTime)
+
+- (void) initializeLengthPicker: (UIDatePicker *) picker usingActivity: (Activity *) activity {
+  picker.countDownDuration = activity.minutes * 60;
+  NSInteger precision = picker.minuteInterval;
+  activity.minutes = activity.minutes / precision * precision;
 }
 
 @end
