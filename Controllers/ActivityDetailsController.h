@@ -54,6 +54,7 @@
 - (ActivityDateDialogController *) activityDateDialogController;
 - (ActivityLengthDialogController *) activityLengthDialogController;
 - (ProjectChoiceController *) projectChoiceController;
+- (void) clearHelperControllers;
 
 // ABSTRACT METHODS
 - (void) executeSave;

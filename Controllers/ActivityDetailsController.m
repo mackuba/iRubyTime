@@ -157,6 +157,17 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Helper controllers
 
+- (void) clearHelperControllers {
+  [activityCommentsDialogController release];
+  [activityDateDialogController release];
+  [activityLengthDialogController release];
+  [projectChoiceController release];
+  activityCommentsDialogController = nil;
+  activityDateDialogController = nil;
+  activityLengthDialogController = nil;
+  projectChoiceController = nil;
+}
+
 - (ActivityCommentsDialogController *) activityCommentsDialogController {
   if (!activityCommentsDialogController) {
     activityCommentsDialogController = [[ActivityCommentsDialogController alloc] initWithActivity: activity];
@@ -189,6 +200,10 @@
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Cleanup
+
+- (void) didReceiveMemoryWarning {
+  [self clearHelperControllers];
+}
 
 - (void) dealloc {
   StopObservingAll();

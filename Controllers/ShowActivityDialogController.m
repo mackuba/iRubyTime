@@ -11,7 +11,6 @@
 
 @interface ShowActivityDialogController ()
 - (void) deleteActivityClicked;
-- (void) clearHelperControllers;
 @end;
 
 
@@ -79,17 +78,6 @@ OnDeallocRelease(originalActivity, editButton);
   [spinner stopAnimating];
   [self clearHelperControllers];
   // TODO: cancel request?
-}
-
-- (void) clearHelperControllers {
-  [activityCommentsDialogController release];
-  [activityDateDialogController release];
-  [activityLengthDialogController release];
-  [projectChoiceController release];
-  activityCommentsDialogController = nil;
-  activityDateDialogController = nil;
-  activityLengthDialogController = nil;
-  projectChoiceController = nil;
 }
 
 - (void) editClicked {
