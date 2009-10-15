@@ -81,9 +81,12 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project);
   NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
   formatter.dateFormat = @"yyyy-MM-dd";
   NSString *query = RTFormat(@"activity[date]=%@&activity[comments]=%@&activity[hours]=%@&activity[project_id]=%d",
-    [formatter stringFromDate: date], self.comments, [self hourString], self.project.projectId);
+    [formatter stringFromDate: date],
+    [self.comments stringWithPercentEscapesForFormValues],
+    [self hourString],
+    self.project.projectId);
   [formatter release];
-  return [query stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+  return query;
 }
 
 @end

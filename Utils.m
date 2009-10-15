@@ -29,6 +29,14 @@
   return [self stringByTrimmingCharactersInSet: whitespace];
 }
 
+- (NSString *) stringWithPercentEscapesForFormValues {
+  CFStringRef escapedSymbols = CFSTR("￼=,!$&'()*+;@?\n\"<>#\t :/");
+  CFStringRef string = (CFStringRef) [[self mutableCopy] autorelease];
+  NSString *escaped =
+    (NSString *) CFURLCreateStringByAddingPercentEscapes(NULL, string, NULL, escapedSymbols, kCFStringEncodingUTF8);
+  return [escaped autorelease];
+}
+
 @end
 
 @implementation NSError (RubyTime)

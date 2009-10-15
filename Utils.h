@@ -59,6 +59,7 @@
 
 @interface NSString (RubyTime)
 - (NSString *) trimmedString;
+- (NSString *) stringWithPercentEscapesForFormValues;
 @end
 
 @interface NSError (RubyTime)
