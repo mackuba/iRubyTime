@@ -85,12 +85,16 @@ OnDeallocRelease(connector);
     UITableView *table = self.tableView;
     NSInteger count = connector.activities.count;
     NSIndexPath *newCellIndex = RTIndex(0, index);
-    NSIndexPath *scrollIndex = RTIndex(0, MIN(index, count - 2)); // don't scroll to the last one if it's not added yet
-    [table scrollToRowAtIndexPath: scrollIndex atScrollPosition: UITableViewScrollPositionTop animated: YES];
+    if (count > 1) {
+      // don't scroll to the last one if it's not added yet (don't scroll at all if it's the first activity)
+      NSIndexPath *scrollIndex = RTIndex(0, MIN(index, count - 2));
+      [table scrollToRowAtIndexPath: scrollIndex atScrollPosition: UITableViewScrollPositionTop animated: YES];
+    }
     [table beginUpdates];
     [table insertRowsAtIndexPaths: RTArray(newCellIndex) withRowAnimation: UITableViewRowAnimationTop];
     [table endUpdates];
-    if (index == count - 1) { // now you can scroll to the last one
+    if (index == count - 1) {
+      // now you can scroll to the last one
       [table scrollToRowAtIndexPath: newCellIndex atScrollPosition: UITableViewScrollPositionBottom animated: YES];
     }
   }
