@@ -31,8 +31,8 @@
 @synthesize textField = m_textField;
 @synthesize label = m_label;
 
-- (id) initWithFrame: (CGRect)frame reuseIdentifier: (NSString *) reuseIdentifier delegate: (id) delegate {
-  if (self = [super initWithFrame: frame reuseIdentifier: reuseIdentifier]) {
+- (id) initWithReuseIdentifier: (NSString *) reuseIdentifier delegate: (id) delegate {
+  if (self = [super initWithStyle: UITableViewCellStyleDefault reuseIdentifier: reuseIdentifier]) {
     m_label = [[UILabel alloc] initWithFrame: CGRectZero];
 		m_label.font = [UIFont boldSystemFontOfSize: 16.0];
 		m_label.textColor = [UIColor darkTextColor];

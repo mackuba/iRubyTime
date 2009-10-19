@@ -109,7 +109,7 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
   SFHFEditableCell *cell = (SFHFEditableCell *) [table dequeueReusableCellWithIdentifier: LOGIN_DIALOG_CELL_TYPE];
   if (!cell) {
-    cell = [[SFHFEditableCell alloc] initWithFrame: CGRectZero reuseIdentifier: LOGIN_DIALOG_CELL_TYPE delegate: self];
+    cell = [[SFHFEditableCell alloc] initWithReuseIdentifier: LOGIN_DIALOG_CELL_TYPE delegate: self];
   }
   [self setupCell: cell forRow: path.row];
   return cell;
