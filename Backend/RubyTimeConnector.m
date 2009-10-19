@@ -114,7 +114,7 @@
 
 - (void) updateActivities {
   Notify(@"updateActivities");
-  NSString *path = RTFormat(@"/activities?search_criteria[limit]=20", userId);
+  NSString *path = RTFormat(@"/users/%d/activities?search_criteria[limit]=20", userId);
   Request *request = [[Request alloc] initWithURL: ServerPath(path) type: RTActivityIndexRequest];
   [self sendRequest: request];
 }
