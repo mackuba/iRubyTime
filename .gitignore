@@ -3,4 +3,5 @@ build
 RubyTime.xcodeproj/*.pbxuser
 RubyTime.xcodeproj/*.perspective*
 RubyTime.xcodeproj/*.mode1v3
+RubyTime.xcodeproj/*.mode2v3
 ._*
