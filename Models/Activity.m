@@ -24,24 +24,6 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project);
   return self;
 }
 
-- (void) encodeWithCoder: (NSCoder *) coder {
-  [coder encodeObject: comments forKey: @"comments"];
-  [coder encodeObject: date forKey: @"date"];
-  [coder encodeInt: minutes forKey: @"minutes"];
-  [coder encodeInt: activityId forKey: @"activityId"];
-  [coder encodeObject: project forKey: @"project"];
-}
-
-- (id) initWithCoder: (NSCoder *) coder {
-  self = [super init];
-  self.comments = [coder decodeObjectForKey: @"comments"];
-  self.date = [coder decodeObjectForKey: @"date"];
-  minutes = [coder decodeIntForKey: @"minutes"];
-  activityId = [coder decodeIntForKey: @"activityId"];
-  self.project = [coder decodeObjectForKey: @"project"];
-  return self;
-}
-
 - (id) copyWithZone: (NSZone *) zone {
   Activity *other = [[Activity alloc] init];
   other.comments = self.comments;

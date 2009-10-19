@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Project : NSObject <NSCoding> {
+@interface Project : NSObject {
   NSString *name;
   NSInteger projectId;
 }

@@ -9,7 +9,7 @@
 
 @class Project;
 
-@interface Activity : NSObject <NSCoding> {
+@interface Activity : NSObject {
   NSString *comments;
   NSDate *date;
   NSString *dateAsString;
