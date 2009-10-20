@@ -7,6 +7,19 @@
 
 #import <Foundation/Foundation.h>
 
+#define AuthenticatingNotification @"AuthenticatingNotification"
+#define UpdatingActivitiesNotification @"UpdatingActivitiesNotification"
+#define LoadingProjectsNotification @"LoadingProjectsNotification"
+
+#define AuthenticationSuccessfulNotification @"AuthenticationSuccessfulNotification"
+#define AuthenticationFailedNotification @"AuthenticationFailedNotification"
+#define ActivitiesReceivedNotification @"ActivitiesReceivedNotification"
+#define ProjectsReceivedNotification @"ProjectsReceivedNotification"
+#define ActivityCreatedNotification @"ActivityCreatedNotification"
+#define ActivityUpdatedNotification @"ActivityUpdatedNotification"
+#define ActivityDeletedNotification @"ActivityDeletedNotification"
+#define RequestFailedNotification @"RequestFailedNotification"
+
 @class Activity;
 @class DataManager;
 @class Request;
@@ -38,7 +51,7 @@
 - (void) updateActivities;
 - (void) loadProjects;
 - (void) createActivity: (Activity *) activity;
-- (void) editActivity: (Activity *) activity;
+- (void) updateActivity: (Activity *) activity;
 - (void) deleteActivity: (Activity *) activity;
 - (void) setServerURL: (NSString *) url
              username: (NSString *) aUsername

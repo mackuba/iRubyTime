@@ -8,6 +8,8 @@
 #import <UIKit/UIKit.h>
 #import "ActivityDetailsController.h"
 
+#define ActivityDialogCancelledNotification @"ActivityDialogCancelledNotification"
+
 @interface NewActivityDialogController : ActivityDetailsController {
   UIDatePicker *activityLengthPicker;
 }

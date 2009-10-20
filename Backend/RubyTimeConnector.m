@@ -106,14 +106,14 @@
 #pragma mark Request sending
 
 - (void) authenticate {
-  Notify(@"authenticate");
+  Notify(AuthenticatingNotification);
   Request *request = [[Request alloc] initWithURL: ServerPath(@"/users/authenticate")
                                              type: RTAuthenticationRequest];
   [self sendRequest: request];
 }
 
 - (void) updateActivities {
-  Notify(@"updateActivities");
+  Notify(UpdatingActivitiesNotification);
   NSString *path = RTFormat(@"/users/%d/activities?search_criteria[limit]=20", userId);
   Request *request = [[Request alloc] initWithURL: ServerPath(path) type: RTActivityIndexRequest];
   [self sendRequest: request];
@@ -127,12 +127,12 @@
   [self sendRequest: request];
 }
 
-- (void) editActivity: (Activity *) activity {
+- (void) updateActivity: (Activity *) activity {
   NSString *contents = [[activity toQueryString] stringByAppendingString: @"&_method=put"];
   Request *request = [[Request alloc] initWithURL: ServerPath(RTFormat(@"/activities/%d", activity.activityId))
                                            method: @"POST"
                                              text: contents
-                                             type: RTEditActivityRequest];
+                                             type: RTUpdateActivityRequest];
   request.info = activity;
   [self sendRequest: request];
 }
@@ -147,7 +147,7 @@
 }
 
 - (void) loadProjects {
-  Notify(@"loadProjects");
+  Notify(LoadingProjectsNotification);
   Request *request = [[Request alloc] initWithURL: ServerPath(@"/projects") type: RTProjectIndexRequest];
   [self sendRequest: request];
 }
@@ -184,7 +184,7 @@
   NSLog(@"finished request to %@ (%d) (status %d)", request.URL, request.type, response.statusCode);
   if (response.statusCode >= 400) {
     NSError *error = [NSError errorWithDomain: RubyTimeErrorDomain code: response.statusCode userInfo: nil];
-    NotifyWithData(@"requestFailed", RTDict(error, @"error", request.receivedText, @"text"));
+    NotifyWithData(RequestFailedNotification, RTDict(error, @"error", request.receivedText, @"text"));
   } else {
     [self handleFinishedRequest: request];
   }
@@ -196,7 +196,7 @@
   Activity *activity;
   switch (request.type) {
     case RTAuthenticationRequest:
-      Notify(@"authenticationSuccessful");
+      Notify(AuthenticationSuccessfulNotification);
       loggedIn = YES;
       userId = [trimmedString intValue];
       break;
@@ -205,7 +205,7 @@
       if (trimmedString.length > 0) {
         records = [dataManager activitiesFromJSONString: trimmedString];
         dataManager.activities = records;
-        NotifyWithData(@"activitiesReceived", RTDict(records, @"activities"));
+        NotifyWithData(ActivitiesReceivedNotification, RTDict(records, @"activities"));
       }
       break;
     
@@ -213,40 +213,40 @@
       if (trimmedString.length > 0) {
         records = [dataManager projectsFromJSONString: trimmedString];
         dataManager.projects = records;
-        NotifyWithData(@"projectsReceived", RTDict(records, @"projects"));
+        NotifyWithData(ProjectsReceivedNotification, RTDict(records, @"projects"));
       }
       break;
     
     case RTCreateActivityRequest:
       activity = [dataManager activityFromJSONString: trimmedString];
       [dataManager addNewActivity: activity];
-      NotifyWithData(@"activityCreated", RTDict(activity, @"activity"));
+      NotifyWithData(ActivityCreatedNotification, RTDict(activity, @"activity"));
       break;
 
-    case RTEditActivityRequest:
+    case RTUpdateActivityRequest:
       activity = request.info;
       [dataManager updateActivity: activity];
-      NotifyWithData(@"activityEdited", RTDict(activity, @"activity"));
+      NotifyWithData(ActivityUpdatedNotification, RTDict(activity, @"activity"));
       break;
 
     case RTDeleteActivityRequest:
       activity = request.info;
       [dataManager deleteActivity: activity];
-      NotifyWithData(@"activityDeleted", RTDict(activity, @"activity"));
+      NotifyWithData(ActivityDeletedNotification, RTDict(activity, @"activity"));
       break;
   }
 }
 
 - (void) connection: (NSURLConnection *) connection didFailWithError: (NSError *) error {
   if (error.code != NSURLErrorUserCancelledAuthentication) {
-    NotifyWithData(@"requestFailed", RTDict(error, @"error", currentRequest, @"request"));
+    NotifyWithData(RequestFailedNotification, RTDict(error, @"error", currentRequest, @"request"));
     [self cleanupRequest];
   }
 }
 
 - (void) connection: (NSURLConnection *) connection
          didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *) challenge {
-  Notify(@"authenticationFailed");
+  Notify(AuthenticationFailedNotification);
   // TODO: let the user try again and reuse the connection
   [[challenge sender] cancelAuthenticationChallenge: challenge];
   [self cleanupRequest];

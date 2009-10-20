@@ -33,8 +33,8 @@ OnDeallocRelease(originalActivity, editButton);
 - (void) viewDidLoad {
   [super viewDidLoad];
   tableView.allowsSelectionDuringEditing = YES;
-  Observe(connector, @"activityEdited", activityEdited);
-  Observe(connector, @"activityDeleted", activityDeleted);
+  Observe(connector, ActivityUpdatedNotification, activityUpdated);
+  Observe(connector, ActivityDeletedNotification, activityDeleted);
 }
 
 - (void) setupToolbar {
@@ -87,13 +87,13 @@ OnDeallocRelease(originalActivity, editButton);
 }
 
 - (void) executeSave {
-  [connector editActivity: activity];
+  [connector updateActivity: activity];
 }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Notification callbacks
 
-- (void) activityEdited {
+- (void) activityUpdated {
   [self setEditing: NO animated: YES];
   self.navigationItem.leftBarButtonItem = nil;
   self.navigationItem.rightBarButtonItem = editButton;

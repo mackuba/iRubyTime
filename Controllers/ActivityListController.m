@@ -43,13 +43,13 @@ OnDeallocRelease(connector);
   self.navigationItem.rightBarButtonItem = addButton;
   addButton.enabled = NO;
 
-  Observe(connector, @"authenticationSuccessful", loginSuccessful);
-  Observe(connector, @"authenticate", startLoading);
-  Observe(connector, @"loadProjects", startLoading);
-  Observe(connector, @"activitiesReceived", activitiesReceived);
-  Observe(connector, @"activityCreated", activityCreated:);
-  Observe(connector, @"activityDeleted", activityDeleted);
-  Observe(nil, @"newActivityDialogCancelled", newActivityDialogCancelled);
+  Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);
+  Observe(connector, AuthenticatingNotification, startLoading);
+  Observe(connector, LoadingProjectsNotification, startLoading);
+  Observe(connector, ActivitiesReceivedNotification, activitiesReceived);
+  Observe(connector, ActivityCreatedNotification, activityCreated:);
+  Observe(connector, ActivityDeletedNotification, activityDeleted);
+  Observe(nil, ActivityDialogCancelledNotification, newActivityDialogCancelled);
   
   [addButton release];
 }
@@ -59,21 +59,21 @@ OnDeallocRelease(connector);
   [self.tableView reloadData];
   if (!connector.loggedIn) {
     if (connector.username && connector.password && connector.serverURL) {
-      Observe(connector, @"requestFailed", requestFailed:);
-      Observe(connector, @"authenticationFailed", authenticationFailed);
+      Observe(connector, RequestFailedNotification, requestFailed:);
+      Observe(connector, AuthenticationFailedNotification, authenticationFailed);
       [connector authenticate];
     } else {
       [self showLoginDialog];
     }
   } else {
-    Observe(connector, @"requestFailed", requestFailed:);
-    Observe(connector, @"authenticationFailed", authenticationFailed);
+    Observe(connector, RequestFailedNotification, requestFailed:);
+    Observe(connector, AuthenticationFailedNotification, authenticationFailed);
   }
 }
 
 - (void) viewWillDisappear: (BOOL) animated {
-  StopObserving(connector, @"requestFailed");
-  StopObserving(connector, @"authenticationFailed");
+  StopObserving(connector, RequestFailedNotification);
+  StopObserving(connector, AuthenticationFailedNotification);
 }
 
 // -------------------------------------------------------------------------------------------
@@ -167,7 +167,7 @@ OnDeallocRelease(connector);
   [self stopLoading];
   NSError *error = [notification.userInfo objectForKey: @"error"];
   NSString *message = error ? [error friendlyDescription] : @"Can't connect to the server.";
-  [Utils showAlertWithTitle: @"Error" content: message];
+  [UIAlertView showAlertWithTitle: @"Error" content: message];
 }
 
 // -------------------------------------------------------------------------------------------

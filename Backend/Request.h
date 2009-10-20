@@ -12,7 +12,7 @@ typedef enum {
   RTActivityIndexRequest,
   RTProjectIndexRequest,
   RTCreateActivityRequest,
-  RTEditActivityRequest,
+  RTUpdateActivityRequest,
   RTDeleteActivityRequest
 } RTRequestType;
 

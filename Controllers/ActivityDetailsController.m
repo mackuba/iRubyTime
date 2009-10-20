@@ -28,7 +28,7 @@
 
 - (void) viewDidLoad {
   [self setupToolbar];
-  Observe(connector, @"requestFailed", requestFailed:);
+  Observe(connector, RequestFailedNotification, requestFailed:);
 }
 
 - (void) viewWillAppear: (BOOL) animated {
@@ -57,8 +57,8 @@
 
 - (void) saveClicked {
   if ([activity.comments trimmedString].length == 0) {
-    [Utils showAlertWithTitle: @"Can't save activity"
-                      content: @"Activity comments field is empty - please fill it first."];
+    [UIAlertView showAlertWithTitle: @"Can't save activity"
+                            content: @"Activity comments field is empty - please fill it first."];
   } else {
     self.navigationItem.rightBarButtonItem = loadingButton;
     [spinner startAnimating];
@@ -82,7 +82,7 @@
   Request *request = [notification.userInfo objectForKey: @"request"];
   NSString *message = [self errorMessageFromError: error text: text request: request];
 
-  [Utils showAlertWithTitle: @"Error" content: message];
+  [UIAlertView showAlertWithTitle: @"Error" content: message];
 }
 
 - (NSString *) errorMessageFromError: (NSError *) error text: (NSString *) text request: (Request *) request {

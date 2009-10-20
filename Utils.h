@@ -53,7 +53,7 @@
 #define RTInt(i) [NSNumber numberWithInt: i]
 #define RTIndex(sec, row) [NSIndexPath indexPathForRow: row inSection: sec]
 
-@interface Utils : NSObject
+@interface UIAlertView (RubyTime)
 + (void) showAlertWithTitle: (NSString *) title content: (NSString *) content;
 @end
 

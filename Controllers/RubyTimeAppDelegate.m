@@ -33,8 +33,8 @@ OnDeallocRelease(window, navigationController, connector, activityListController
   connector = [self newConnector];
   activityListController.connector = connector;
   
-  Observe(connector, @"authenticationSuccessful", loginSuccessful);
-  Observe(connector, @"projectsReceived", projectsReceived);
+  Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);
+  Observe(connector, ProjectsReceivedNotification, projectsReceived);
 }
 
 - (RubyTimeConnector *) newConnector {

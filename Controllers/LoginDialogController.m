@@ -30,8 +30,8 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
   if (self) {
     [[NSBundle mainBundle] loadNibNamed: @"LoginDialog" owner: self options: nil];
     connector = [rtConnector retain];
-    Observe(connector, @"authenticationFailed", authenticationFailed);
-    Observe(connector, @"requestFailed", requestFailed:);
+    Observe(connector, AuthenticationFailedNotification, authenticationFailed);
+    Observe(connector, RequestFailedNotification, requestFailed:);
   }
   return self;
 }
@@ -96,7 +96,7 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
 - (void) showError: (NSString *) message {
   [spinner stopAnimating];
   [loginButton setEnabled: YES];
-  [Utils showAlertWithTitle: @"Error" content: message];
+  [UIAlertView showAlertWithTitle: @"Error" content: message];
 }
 
 // -------------------------------------------------------------------------------------------

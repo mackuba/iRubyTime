@@ -57,7 +57,7 @@ SynthesizeAndReleaseLater(activityLengthPicker);
 }
 
 - (void) cancelClicked {
-  Notify(@"newActivityDialogCancelled");
+  Notify(ActivityDialogCancelledNotification);
 }
 
 - (IBAction) timeChanged {

@@ -8,7 +8,7 @@
 #import "Activity.h"
 #import "Utils.h"
 
-@implementation Utils
+@implementation UIAlertView (RubyTime)
 
 + (void) showAlertWithTitle: (NSString *) title content: (NSString *) content {
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle: title
