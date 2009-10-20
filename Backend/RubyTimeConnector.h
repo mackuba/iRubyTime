@@ -20,6 +20,12 @@
 #define ActivityDeletedNotification @"ActivityDeletedNotification"
 #define RequestFailedNotification @"RequestFailedNotification"
 
+typedef enum {
+  Employee = 0,
+  ClientUser,
+  Admin
+} UserType;
+
 @class Activity;
 @class DataManager;
 @class Request;
@@ -31,6 +37,7 @@
   NSString *password;
   NSString *authenticationString;
   NSInteger userId;
+  UserType userType;
   Request *currentRequest;
   DataManager *dataManager;
 }
@@ -41,6 +48,7 @@
 @property (nonatomic, readonly) NSString *password;
 @property (nonatomic, retain) NSArray *activities;
 @property (nonatomic, retain) NSArray *projects;
+@property (nonatomic, readonly) UserType userType;
 
 - (id) init;
 - (id) initWithServerURL: (NSString *) url

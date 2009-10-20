@@ -11,6 +11,7 @@
 #import "RubyTimeConnector.h"
 #import "Utils.h"
 #import "NSDataMBBase64.h"
+#import "NSDictionary+BSJSONAdditions.h"
 
 #define ServerPath(...) [serverURL stringByAppendingFormat: __VA_ARGS__]
 
@@ -20,11 +21,12 @@
 - (void) handleFinishedRequest: (Request *) request;
 - (void) cleanupRequest;
 - (void) sendRequest: (Request *) request;
+- (UserType) userTypeFromString: (NSString *) typeString;
 @end
 
 @implementation RubyTimeConnector
 
-@synthesize serverURL, username, password, loggedIn;
+@synthesize serverURL, username, password, loggedIn, userType;
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -193,14 +195,17 @@
 - (void) handleFinishedRequest: (Request *) request {
   NSString *trimmedString = [request.receivedText trimmedString];
   NSArray *records;
+  NSDictionary *hash;
   Activity *activity;
   switch (request.type) {
     case RTAuthenticationRequest:
       Notify(AuthenticationSuccessfulNotification);
       loggedIn = YES;
-      userId = [trimmedString intValue];
+      hash = [NSDictionary dictionaryWithJSONString: trimmedString];
+      userId = [[hash objectForKey: @"id"] intValue];
+      userType = [self userTypeFromString: [hash objectForKey: @"type"]];
       break;
-    
+
     case RTActivityIndexRequest:
       if (trimmedString.length > 0) {
         records = [dataManager activitiesFromJSONString: trimmedString];
@@ -250,6 +255,16 @@
   // TODO: let the user try again and reuse the connection
   [[challenge sender] cancelAuthenticationChallenge: challenge];
   [self cleanupRequest];
+}
+
+- (UserType) userTypeFromString: (NSString *) typeString {
+  if ([typeString isEqualToString: @"client"]) {
+    return ClientUser;
+  } else if ([typeString isEqualToString: @"admin"]) {
+    return Admin;
+  } else {
+    return Employee;
+  }
 }
 
 // -------------------------------------------------------------------------------------------
