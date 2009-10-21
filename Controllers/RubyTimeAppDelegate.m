@@ -25,8 +25,8 @@
 
 @implementation RubyTimeAppDelegate
 
-@synthesize window, navigationController, activityListController;
-OnDeallocRelease(window, navigationController, connector, activityListController);
+@synthesize window, tabBarController, activityListController;
+OnDeallocRelease(window, tabBarController, connector, activityListController);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -97,7 +97,7 @@ OnDeallocRelease(window, navigationController, connector, activityListController
 
 - (void) applicationDidFinishLaunching: (UIApplication *) application {
   [self initApplication];
-  [window addSubview: [navigationController view]];
+  [window addSubview: [tabBarController view]];
   [window makeKeyAndVisible];
 }
 
