@@ -22,7 +22,15 @@
 @interface RubyTimeConnector ()
 - (void) handleFinishedRequest: (Request *) request;
 - (void) cleanupRequest;
-- (void) sendRequest: (Request *) request;
+- (void) setAccount: (Account *) account;
+- (void) sendPostRequestToPath: (NSString *) path type: (RTRequestType) type text: (NSString *) text;
+- (void) sendGetRequestToPath: (NSString *) path type: (RTRequestType) type text: (NSString *) text;
+- (void) sendGetRequestToPath: (NSString *) path type: (RTRequestType) type;
+- (void) sendRequestToPath: (NSString *) path
+                    method: (NSString *) method
+                      type: (RTRequestType) type
+                      text: (NSString *) text
+                      info: (id) info;
 @end
 
 
@@ -79,66 +87,72 @@
 }
 
 // -------------------------------------------------------------------------------------------
-#pragma mark Request sending
+#pragma mark General request sending helpers
+
+- (void) sendRequestToPath: (NSString *) path
+                    method: (NSString *) method
+                      type: (RTRequestType) type
+                      text: (NSString *) text
+                      info: (id) info {
+  if (currentRequest) {
+    [currentRequest.connection cancel];
+    [self cleanupRequest];
+  }
+  NSString *url = [account.serverURL stringByAppendingString: path];
+  currentRequest = [[Request alloc] initWithURL: url method: method type: type text: text];
+  if (info) {
+    currentRequest.info = info;
+  }
+  NSLog(@"sending %@ to %@ (type %d) with '%@'", method, url, type, text);
+  [currentRequest setValue: account.authenticationString forHTTPHeaderField: @"Authorization"];
+  currentRequest.connection = [NSURLConnection connectionWithRequest: currentRequest delegate: self];
+}
+
+- (void) sendPostRequestToPath: (NSString *) path type: (RTRequestType) type text: (NSString *) text {
+  [self sendRequestToPath: path method: @"POST" type: type text: text info: nil];
+}
+
+- (void) sendGetRequestToPath: (NSString *) path type: (RTRequestType) type text: (NSString *) text {
+  [self sendRequestToPath: path method: @"GET" type: type text: text info: nil];
+}
+
+- (void) sendGetRequestToPath: (NSString *) path type: (RTRequestType) type {
+  [self sendRequestToPath: path method: @"GET" type: type text: nil info: nil];
+}
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Request sending methods
 
 - (void) authenticateWithAccount: (Account *) userAccount {
   Notify(AuthenticatingNotification);
   [self setAccount: userAccount];
-
-  Request *request = [[Request alloc] initWithURL: ServerPath(@"/users/authenticate")
-                                             type: RTAuthenticationRequest];
-  [self sendRequest: request];
+  [self sendGetRequestToPath: @"/users/authenticate" type: RTAuthenticationRequest];
 }
 
 - (void) updateActivities {
   Notify(UpdatingActivitiesNotification);
   NSString *path = RTFormat(@"/users/%d/activities?search_criteria[limit]=20", account.userId);
-  Request *request = [[Request alloc] initWithURL: ServerPath(path) type: RTActivityIndexRequest];
-  [self sendRequest: request];
+  [self sendGetRequestToPath: path type: RTActivityIndexRequest];
 }
 
 - (void) createActivity: (Activity *) activity {
-  Request *request = [[Request alloc] initWithURL: ServerPath(@"/activities")
-                                           method: @"POST"
-                                             text: [activity toQueryString]
-                                             type: RTCreateActivityRequest];
-  [self sendRequest: request];
+  [self sendPostRequestToPath: @"/activities" type: RTCreateActivityRequest text: [activity toQueryString]];
 }
 
 - (void) updateActivity: (Activity *) activity {
-  NSString *contents = [[activity toQueryString] stringByAppendingString: @"&_method=put"];
-  Request *request = [[Request alloc] initWithURL: ServerPath(RTFormat(@"/activities/%d", activity.activityId))
-                                           method: @"POST"
-                                             text: contents
-                                             type: RTUpdateActivityRequest];
-  request.info = activity;
-  [self sendRequest: request];
+  NSString *contents = [activity toQueryString];
+  NSString *path = RTFormat(@"/activities/%d", activity.activityId);
+  [self sendRequestToPath: path method: @"PUT" type: RTUpdateActivityRequest text: contents info: activity];
 }
 
 - (void) deleteActivity: (Activity *) activity {
-  Request *request = [[Request alloc] initWithURL: ServerPath(RTFormat(@"/activities/%d", activity.activityId))
-                                           method: @"POST"
-                                             text: @"_method=delete"
-                                             type: RTDeleteActivityRequest];
-  request.info = activity;
-  [self sendRequest: request];
+  NSString *path = RTFormat(@"/activities/%d", activity.activityId);
+  [self sendRequestToPath: path method: @"DELETE" type: RTDeleteActivityRequest text: nil info: activity];
 }
 
 - (void) loadProjects {
   Notify(LoadingProjectsNotification);
-  Request *request = [[Request alloc] initWithURL: ServerPath(@"/projects") type: RTProjectIndexRequest];
-  [self sendRequest: request];
-}
-
-- (void) sendRequest: (Request *) request {
-  if (currentRequest) {
-    [currentRequest.connection cancel];
-    [self cleanupRequest];
-  }
-  currentRequest = request;
-  NSLog(@"sending %@ to %@ (type %d) with '%@'", request.HTTPMethod, request.URL, request.type, request.sentText);
-  [request setValue: account.authenticationString forHTTPHeaderField: @"Authorization"];
-  request.connection = [NSURLConnection connectionWithRequest: request delegate: self];
+  [self sendGetRequestToPath: @"/projects" type: RTProjectIndexRequest];
 }
 
 // -------------------------------------------------------------------------------------------

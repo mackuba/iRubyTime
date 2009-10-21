@@ -19,11 +19,10 @@ SynthesizeAndReleaseLater(response, receivedText, sentText, connection, info);
 
 - (id) initWithURL: (NSString *) url
             method: (NSString *) method
-              text: (NSString *) text
-              type: (RTRequestType) requestType {
-  self = [super initWithURL: [NSURL URLWithString: url]
-                cachePolicy: NSURLRequestReloadIgnoringLocalCacheData
-            timeoutInterval: 15];
+              type: (RTRequestType) requestType
+              text: (NSString *) text {
+  NSURL *wrappedUrl = [NSURL URLWithString: url];
+  self = [super initWithURL: wrappedUrl cachePolicy: NSURLRequestReloadIgnoringLocalCacheData timeoutInterval: 15];
   if (self) {
     self.type = requestType;
     self.HTTPMethod = method;
@@ -32,20 +31,10 @@ SynthesizeAndReleaseLater(response, receivedText, sentText, connection, info);
     [self setValue: @"application/json" forHTTPHeaderField: @"Accept"];
     if (sentText) {
       self.HTTPBody = [sentText dataUsingEncoding: NSUTF8StringEncoding];
+      [self setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
     }
   }
   return self;
-}
-
-- (id) initWithURL: (NSString *) url
-            method: (NSString *) method
-              type: (RTRequestType) requestType {
-  return [self initWithURL: url method: method text: @"" type: requestType];
-}
-
-- (id) initWithURL: (NSString *) url
-              type: (RTRequestType) requestType {
-  return [self initWithURL: url method: @"GET" text: @"" type: requestType];
 }
 
 // -------------------------------------------------------------------------------------------

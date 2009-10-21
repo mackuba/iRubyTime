@@ -34,15 +34,8 @@ typedef enum {
 
 - (id) initWithURL: (NSString *) url
             method: (NSString *) method
-              text: (NSString *) text
-              type: (RTRequestType) type;
-
-- (id) initWithURL: (NSString *) url
-            method: (NSString *) method
-              type: (RTRequestType) type;
-
-- (id) initWithURL: (NSString *) url
-              type: (RTRequestType) type;
+              type: (RTRequestType) type
+              text: (NSString *) text;
 
 - (void) appendReceivedText: (NSString *) text;
 
