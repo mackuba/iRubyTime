@@ -33,11 +33,11 @@
 
 @property (nonatomic, retain) NSArray *activities;
 @property (nonatomic, retain) NSArray *projects;
-@property (nonatomic, readonly) Account *account;
+@property (nonatomic, retain) Account *account;
 
 - (id) initWithAccount: (Account *) userAccount;
-- (void) authenticateWithAccount: (Account *) account;
-- (void) updateActivities;
+- (void) authenticate;
+- (void) loadActivities;
 - (void) loadProjects;
 - (void) createActivity: (Activity *) activity;
 - (void) updateActivity: (Activity *) activity;

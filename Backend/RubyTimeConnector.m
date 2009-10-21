@@ -22,7 +22,6 @@
 @interface RubyTimeConnector ()
 - (void) handleFinishedRequest: (Request *) request;
 - (void) cleanupRequest;
-- (void) setAccount: (Account *) account;
 - (void) sendPostRequestToPath: (NSString *) path type: (RTRequestType) type text: (NSString *) text;
 - (void) sendGetRequestToPath: (NSString *) path type: (RTRequestType) type text: (NSString *) text;
 - (void) sendGetRequestToPath: (NSString *) path type: (RTRequestType) type;
@@ -44,11 +43,7 @@
 - (id) initWithAccount: (Account *) userAccount {
   if (self = [super init]) {
     dataManager = [[DataManager alloc] init];
-    if ([userAccount canLogIn]) {
-      [self authenticateWithAccount: userAccount];
-    } else {
-      [self setAccount: userAccount];
-    }
+    self.account = userAccount;
   }
   return self;
 }
@@ -81,10 +76,6 @@
   return [dataManager valueForKeyPath: @"activities.@distinctUnionOfObjects.project"];
 }
 
-- (void) setAccount: (Account *) userAccount {
-  [account release];
-  account = [userAccount retain];
-}
 
 // -------------------------------------------------------------------------------------------
 #pragma mark General request sending helpers
@@ -123,13 +114,14 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Request sending methods
 
-- (void) authenticateWithAccount: (Account *) userAccount {
-  Notify(AuthenticatingNotification);
-  [self setAccount: userAccount];
-  [self sendGetRequestToPath: @"/users/authenticate" type: RTAuthenticationRequest];
+- (void) authenticate {
+  if (account.canLogIn) {
+    Notify(AuthenticatingNotification);
+    [self sendGetRequestToPath: @"/users/authenticate" type: RTAuthenticationRequest];
+  }
 }
 
-- (void) updateActivities {
+- (void) loadActivities {
   Notify(UpdatingActivitiesNotification);
   NSString *path = RTFormat(@"/users/%d/activities?search_criteria[limit]=20", account.userId);
   [self sendGetRequestToPath: path type: RTActivityIndexRequest];

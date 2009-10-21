@@ -60,10 +60,10 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
     [usernameField resignFirstResponder];
     [passwordField resignFirstResponder];
     [loginButton setEnabled: NO];
-    Account *account = [[Account alloc] initWithServerURL: urlField.text
-                                                 username: usernameField.text
-                                                 password: passwordField.text];
-    [connector authenticateWithAccount: account];
+    connector.account = [[[Account alloc] initWithServerURL: urlField.text
+                                                   username: usernameField.text
+                                                   password: passwordField.text] autorelease];
+    [connector authenticate];
     [spinner startAnimating];
   }
 }

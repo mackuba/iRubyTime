@@ -34,9 +34,12 @@ OnDeallocRelease(window, tabBarController, connector, activityListController);
 - (void) initApplication {
   connector = [[RubyTimeConnector alloc] initWithAccount: [self loadAccountData]];
   activityListController.connector = connector;
-  
+
   Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);
-  Observe(connector, ProjectsReceivedNotification, projectsReceived);
+  if ([connector.account canLogIn]) {
+    [connector authenticate];
+  }
+  // else -> activity list controller will show the login screen
 }
 
 - (Account *) loadAccountData {
@@ -85,11 +88,12 @@ OnDeallocRelease(window, tabBarController, connector, activityListController);
 
 - (void) loginSuccessful {
   [self saveAccountData];
+  Observe(connector, ProjectsReceivedNotification, projectsReceived);
   [connector loadProjects];
 }
 
 - (void) projectsReceived {
-  [connector updateActivities];
+  [connector loadActivities];
 }
 
 // -------------------------------------------------------------------------------------------
