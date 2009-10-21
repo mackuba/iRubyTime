@@ -13,18 +13,17 @@
 
 @implementation DataManager
 
-@synthesize projects, delegate;
+@synthesize projects;
 OnDeallocRelease(activityList, projects, projectHash);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithDelegate: (id) aDelegate {
+- (id) init {
   if (self = [super init]) {
     activityList = [[NSMutableArray alloc] initWithCapacity: 20];
     projects = [[NSMutableArray alloc] initWithCapacity: 20];
     projectHash = [[NSMutableDictionary alloc] initWithCapacity: 20];
-    delegate = aDelegate;
   }
   return self;
 }

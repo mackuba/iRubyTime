@@ -20,6 +20,4 @@
 @property (nonatomic, assign) IBOutlet ActivityCell *currentCell;
 @property (nonatomic, retain) IBOutlet RubyTimeConnector *connector;
 
-- (void) loginSuccessful;
-
 @end

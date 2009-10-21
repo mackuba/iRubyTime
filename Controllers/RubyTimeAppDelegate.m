@@ -5,6 +5,7 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "Account.h"
 #import "ActivityListController.h"
 #import "RubyTimeAppDelegate.h"
 #import "RubyTimeConnector.h"
@@ -18,7 +19,8 @@
 
 @interface RubyTimeAppDelegate()
 - (void) initApplication;
-- (RubyTimeConnector *) newConnector;
+- (Account *) loadAccountData;
+- (void) saveAccountData;
 @end
 
 @implementation RubyTimeAppDelegate
@@ -30,14 +32,14 @@ OnDeallocRelease(window, navigationController, connector, activityListController
 #pragma mark Initialization
 
 - (void) initApplication {
-  connector = [self newConnector];
+  connector = [[RubyTimeConnector alloc] initWithAccount: [self loadAccountData]];
   activityListController.connector = connector;
   
   Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);
   Observe(connector, ProjectsReceivedNotification, projectsReceived);
 }
 
-- (RubyTimeConnector *) newConnector {
+- (Account *) loadAccountData {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *username = [settings objectForKey: USERNAME_SETTING];
   NSString *serverURL = [settings objectForKey: SERVER_SETTING];
@@ -53,23 +55,23 @@ OnDeallocRelease(window, navigationController, connector, activityListController
                                                      error: &error];
     }
   #endif
-  return [[RubyTimeConnector alloc] initWithServerURL: serverURL username: username password: password];
+  return [[Account alloc] initWithServerURL: serverURL username: username password: password];
 }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Instance methods
 
-- (void) saveLoginAndPassword {
+- (void) saveAccountData {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings setObject: connector.username forKey: USERNAME_SETTING];
-  [settings setObject: connector.serverURL forKey: SERVER_SETTING];
+  [settings setObject: connector.account.username forKey: USERNAME_SETTING];
+  [settings setObject: connector.account.serverURL forKey: SERVER_SETTING];
 
   #if TARGET_IPHONE_SIMULATOR
-    [settings setObject: connector.password forKey: PASSWORD_SETTING];
+    [settings setObject: connector.account.password forKey: PASSWORD_SETTING];
   #else
     NSError *error;
-    [SFHFKeychainUtils storeUsername: connector.username
-                         andPassword: connector.password
+    [SFHFKeychainUtils storeUsername: connector.account.username
+                         andPassword: connector.account.password
                       forServiceName: KEYCHAIN_SERVICE_NAME
                       updateExisting: YES
                                error: &error];
@@ -82,9 +84,8 @@ OnDeallocRelease(window, navigationController, connector, activityListController
 #pragma mark Notification callbacks
 
 - (void) loginSuccessful {
-  [self saveLoginAndPassword];
-  // give the activity list controller some time to hide the login dialog...
-  [connector performSelector: @selector(loadProjects) withObject: NULL afterDelay: 0.5];
+  [self saveAccountData];
+  [connector loadProjects];
 }
 
 - (void) projectsReceived {

@@ -5,6 +5,7 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "Account.h"
 #import "ActivityListController.h"
 #import "LoginDialogController.h"
 #import "RubyTimeConnector.h"
@@ -59,8 +60,10 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
     [usernameField resignFirstResponder];
     [passwordField resignFirstResponder];
     [loginButton setEnabled: NO];
-    [connector setServerURL: urlField.text username: usernameField.text password: passwordField.text];
-    [connector authenticate];
+    Account *account = [[Account alloc] initWithServerURL: urlField.text
+                                                 username: usernameField.text
+                                                 password: passwordField.text];
+    [connector authenticateWithAccount: account];
     [spinner startAnimating];
   }
 }
@@ -123,7 +126,7 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
       cell.textField.returnKeyType = UIReturnKeyNext;
       cell.textField.secureTextEntry = NO;
       urlField = cell.textField;
-      urlField.text = connector.serverURL;
+      urlField.text = connector.account.serverURL;
       break;
 
     case 1:
@@ -132,7 +135,7 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
       cell.textField.returnKeyType = UIReturnKeyNext;
       cell.textField.secureTextEntry = NO;
       usernameField = cell.textField;
-      usernameField.text = connector.username;
+      usernameField.text = connector.account.username;
       break;
 
     case 2:

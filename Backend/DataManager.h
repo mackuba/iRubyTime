@@ -14,14 +14,10 @@
   NSMutableArray *activityList;
   NSArray *projects;
   NSMutableDictionary *projectHash;
-  __weak id delegate;
 }
 
 @property (nonatomic, copy) NSArray *activities;
 @property (nonatomic, retain) NSArray *projects;
-@property (nonatomic, assign) id delegate;
-
-- (id) initWithDelegate: (id) delegate;
 
 - (void) addNewActivity: (Activity *) activity;
 - (Activity *) activityFromJSON: (NSDictionary *) json;

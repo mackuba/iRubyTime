@@ -5,6 +5,7 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "Account.h"
 #import "Activity.h"
 #import "ActivityCell.h"
 #import "ActivityListController.h"
@@ -21,7 +22,8 @@
 @interface ActivityListController ()
 - (void) showLoginDialog;
 - (void) showPopupDialog: (Class) controllerClass;
-- (void) stopLoading;
+- (void) showLoadingMessage;
+- (void) hideLoadingMessage;
 @end
 
 @implementation ActivityListController
@@ -44,8 +46,8 @@ OnDeallocRelease(connector);
   addButton.enabled = NO;
 
   Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);
-  Observe(connector, AuthenticatingNotification, startLoading);
-  Observe(connector, LoadingProjectsNotification, startLoading);
+  Observe(connector, AuthenticatingNotification, showLoadingMessage);
+  Observe(connector, LoadingProjectsNotification, showLoadingMessage);
   Observe(connector, ActivitiesReceivedNotification, activitiesReceived);
   Observe(connector, ActivityCreatedNotification, activityCreated:);
   Observe(connector, ActivityDeletedNotification, activityDeleted);
@@ -57,17 +59,20 @@ OnDeallocRelease(connector);
 - (void) viewDidAppear: (BOOL) animated {
   [super viewDidAppear: animated];
   [self.tableView reloadData];
-  if (!connector.loggedIn) {
-    if (connector.username && connector.password && connector.serverURL) {
-      Observe(connector, RequestFailedNotification, requestFailed:);
-      Observe(connector, AuthenticationFailedNotification, authenticationFailed);
-      [connector authenticate];
-    } else {
-      [self showLoginDialog];
+
+  if (connector.account.canLogIn) {
+    // we have all the necessary data - we're logging in or already logged in
+    Observe(connector, RequestFailedNotification, requestFailed:);
+    if ([connector hasOpenConnections]) {
+      [self showLoadingMessage];
+      if (!connector.account.loggedIn) {
+        // still logging in
+        Observe(connector, AuthenticationFailedNotification, authenticationFailed);
+      }
     }
   } else {
-    Observe(connector, RequestFailedNotification, requestFailed:);
-    Observe(connector, AuthenticationFailedNotification, authenticationFailed);
+    // we need more data
+    [self showLoginDialog];
   }
 }
 
@@ -100,13 +105,13 @@ OnDeallocRelease(connector);
   }
 }
 
-- (void) startLoading {
+- (void) showLoadingMessage {
   if (!loadingView) {
     loadingView = [[LoadingView loadingViewInView: self.tableView.superview] retain];
   }
 }
 
-- (void) stopLoading {
+- (void) hideLoadingMessage {
   [loadingView removeView];
   [loadingView release];
   loadingView = nil;
@@ -143,7 +148,7 @@ OnDeallocRelease(connector);
 - (void) activitiesReceived {
   [self.tableView reloadData];
   self.navigationItem.rightBarButtonItem.enabled = (connector.projects.count > 0);
-  [self stopLoading];
+  [self hideLoadingMessage];
 }
 
 - (void) activityCreated: (NSNotification *) notification {
@@ -164,7 +169,7 @@ OnDeallocRelease(connector);
 }
 
 - (void) requestFailed: (NSNotification *) notification {
-  [self stopLoading];
+  [self hideLoadingMessage];
   NSError *error = [notification.userInfo objectForKey: @"error"];
   NSString *message = error ? [error friendlyDescription] : @"Can't connect to the server.";
   [UIAlertView showAlertWithTitle: @"Error" content: message];

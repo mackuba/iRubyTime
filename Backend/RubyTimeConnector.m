@@ -5,83 +5,52 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "Account.h"
 #import "Activity.h"
 #import "DataManager.h"
 #import "Request.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
-#import "NSDataMBBase64.h"
 #import "NSDictionary+BSJSONAdditions.h"
 
-#define ServerPath(...) [serverURL stringByAppendingFormat: __VA_ARGS__]
+#define ServerPath(...) [account.serverURL stringByAppendingFormat: __VA_ARGS__]
+
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Private interface
 
 @interface RubyTimeConnector ()
-- (NSString *) generateAuthStringFromUsername: (NSString *) username password: (NSString *) password;
-- (NSString *) fixURL: (NSString *) url;
 - (void) handleFinishedRequest: (Request *) request;
 - (void) cleanupRequest;
 - (void) sendRequest: (Request *) request;
-- (UserType) userTypeFromString: (NSString *) typeString;
 @end
+
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Implementation
 
 @implementation RubyTimeConnector
 
-@synthesize serverURL, username, password, loggedIn, userType;
+@synthesize account;
 
-// -------------------------------------------------------------------------------------------
-#pragma mark Initialization
-
-- (id) initWithServerURL: (NSString *) url
-                username: (NSString *) aUsername
-                password: (NSString *) aPassword {
+- (id) initWithAccount: (Account *) userAccount {
   if (self = [super init]) {
-    [self setServerURL: url username: aUsername password: aPassword];
-    userId = -1;
-    loggedIn = NO;
-    dataManager = [[DataManager alloc] initWithDelegate: self];
+    dataManager = [[DataManager alloc] init];
+    if ([userAccount canLogIn]) {
+      [self authenticateWithAccount: userAccount];
+    } else {
+      [self setAccount: userAccount];
+    }
   }
   return self;
 }
 
-- (id) init {
-  return [self initWithServerURL: nil username: nil password: nil];
-}
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Instance methods
 
-- (void) setServerURL: (NSString *) url
-             username: (NSString *) aUsername
-             password: (NSString *) aPassword {
-  [username autorelease];
-  [password autorelease];
-  [serverURL autorelease];
-  username = [aUsername copy];
-  password = [aPassword copy];
-  serverURL = url ? [[self fixURL: url] retain] : nil;
-  authenticationString = [[self generateAuthStringFromUsername: username password: password] retain];
-}
-
-- (NSString *) generateAuthStringFromUsername: (NSString *) aUsername password: (NSString *) aPassword {
-  if (!aUsername || !aPassword) return nil;
-
-  NSString *authString = RTFormat(@"%@:%@", aUsername, aPassword);
-  NSData *data = [authString dataUsingEncoding: NSUTF8StringEncoding];
-  NSString *encoded = RTFormat(@"Basic %@", [data base64Encoding]);
-  return encoded;
-}
-
-- (NSString *) fixURL: (NSString *) url {
-  url = [[url copy] autorelease];
-
-  if (![url hasPrefix: @"http://"]) {
-    url = [@"http://" stringByAppendingString: url];
-  }
-  if ([url hasSuffix: @"/"]) {
-    url = [url substringToIndex: url.length - 1];
-  }
-  
-  return url;
+- (BOOL) hasOpenConnections {
+  return currentRequest ? YES : NO;
 }
 
 - (NSArray *) activities {
@@ -104,11 +73,18 @@
   return [dataManager valueForKeyPath: @"activities.@distinctUnionOfObjects.project"];
 }
 
+- (void) setAccount: (Account *) userAccount {
+  [account release];
+  account = [userAccount retain];
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Request sending
 
-- (void) authenticate {
+- (void) authenticateWithAccount: (Account *) userAccount {
   Notify(AuthenticatingNotification);
+  [self setAccount: userAccount];
+
   Request *request = [[Request alloc] initWithURL: ServerPath(@"/users/authenticate")
                                              type: RTAuthenticationRequest];
   [self sendRequest: request];
@@ -116,7 +92,7 @@
 
 - (void) updateActivities {
   Notify(UpdatingActivitiesNotification);
-  NSString *path = RTFormat(@"/users/%d/activities?search_criteria[limit]=20", userId);
+  NSString *path = RTFormat(@"/users/%d/activities?search_criteria[limit]=20", account.userId);
   Request *request = [[Request alloc] initWithURL: ServerPath(path) type: RTActivityIndexRequest];
   [self sendRequest: request];
 }
@@ -161,7 +137,7 @@
   }
   currentRequest = request;
   NSLog(@"sending %@ to %@ (type %d) with '%@'", request.HTTPMethod, request.URL, request.type, request.sentText);
-  [request setValue: authenticationString forHTTPHeaderField: @"Authorization"];
+  [request setValue: account.authenticationString forHTTPHeaderField: @"Authorization"];
   request.connection = [NSURLConnection connectionWithRequest: request delegate: self];
 }
 
@@ -184,6 +160,7 @@
   
   NSHTTPURLResponse *response = (NSHTTPURLResponse *) request.response;
   NSLog(@"finished request to %@ (%d) (status %d)", request.URL, request.type, response.statusCode);
+  NSLog(@"text = \"%@\"", request.receivedText);
   if (response.statusCode >= 400) {
     NSError *error = [NSError errorWithDomain: RubyTimeErrorDomain code: response.statusCode userInfo: nil];
     NotifyWithData(RequestFailedNotification, RTDict(error, @"error", request.receivedText, @"text"));
@@ -195,15 +172,11 @@
 - (void) handleFinishedRequest: (Request *) request {
   NSString *trimmedString = [request.receivedText trimmedString];
   NSArray *records;
-  NSDictionary *hash;
   Activity *activity;
   switch (request.type) {
     case RTAuthenticationRequest:
       Notify(AuthenticationSuccessfulNotification);
-      loggedIn = YES;
-      hash = [NSDictionary dictionaryWithJSONString: trimmedString];
-      userId = [[hash objectForKey: @"id"] intValue];
-      userType = [self userTypeFromString: [hash objectForKey: @"type"]];
+      [account logInWithResponse: [NSDictionary dictionaryWithJSONString: trimmedString]];
       break;
 
     case RTActivityIndexRequest:
@@ -251,20 +224,11 @@
 
 - (void) connection: (NSURLConnection *) connection
          didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *) challenge {
-  Notify(AuthenticationFailedNotification);
   // TODO: let the user try again and reuse the connection
   [[challenge sender] cancelAuthenticationChallenge: challenge];
   [self cleanupRequest];
-}
-
-- (UserType) userTypeFromString: (NSString *) typeString {
-  if ([typeString isEqualToString: @"client"]) {
-    return ClientUser;
-  } else if ([typeString isEqualToString: @"admin"]) {
-    return Admin;
-  } else {
-    return Employee;
-  }
+  account.password = nil; // make sure that canLogIn returns NO
+  Notify(AuthenticationFailedNotification);
 }
 
 // -------------------------------------------------------------------------------------------
@@ -278,8 +242,8 @@
 - (void) dealloc {
   [currentRequest.connection cancel];
   [self cleanupRequest];
-  dataManager.delegate = nil;
-  ReleaseAll(serverURL, username, password, authenticationString, dataManager);
+  [dataManager release];
+  [account release];
   [super dealloc];
 }
 
