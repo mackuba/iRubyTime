@@ -9,13 +9,11 @@
 #import "ActivityListController.h"
 #import "RubyTimeAppDelegate.h"
 #import "RubyTimeConnector.h"
-#import "SFHFKeychainUtils.h"
 #import "Utils.h"
 
 #define USERNAME_SETTING @"username"
 #define PASSWORD_SETTING @"password"
 #define SERVER_SETTING @"serverURL"
-#define KEYCHAIN_SERVICE_NAME @"iRubyTime"
 
 @interface RubyTimeAppDelegate()
 - (void) initApplication;
@@ -46,40 +44,22 @@ OnDeallocRelease(window, tabBarController, connector, activityListController);
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *username = [settings objectForKey: USERNAME_SETTING];
   NSString *serverURL = [settings objectForKey: SERVER_SETTING];
-
-  #if TARGET_IPHONE_SIMULATOR
-    NSString *password = [settings objectForKey: PASSWORD_SETTING];
-  #else
-    NSString *password = nil;
-    NSError *error;
-    if (username) {
-      password = [SFHFKeychainUtils getPasswordForUsername: username
-                                            andServiceName: KEYCHAIN_SERVICE_NAME
-                                                     error: &error];
-    }
-  #endif
-  return [[Account alloc] initWithServerURL: serverURL username: username password: password];
+  NSString *password = [settings passwordForKey: PASSWORD_SETTING andUsername: username];
+  Account *account = [[Account alloc] initWithServerURL: serverURL username: username password: password];
+  return [account autorelease];
 }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Instance methods
 
 - (void) saveAccountData {
+  NSString *username = connector.account.username;
+  NSString *password = connector.account.password;
+  NSString *serverURL = connector.account.serverURL;
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings setObject: connector.account.username forKey: USERNAME_SETTING];
-  [settings setObject: connector.account.serverURL forKey: SERVER_SETTING];
-
-  #if TARGET_IPHONE_SIMULATOR
-    [settings setObject: connector.account.password forKey: PASSWORD_SETTING];
-  #else
-    NSError *error;
-    [SFHFKeychainUtils storeUsername: connector.account.username
-                         andPassword: connector.account.password
-                      forServiceName: KEYCHAIN_SERVICE_NAME
-                      updateExisting: YES
-                               error: &error];
-  #endif
-
+  [settings setObject: username forKey: USERNAME_SETTING];
+  [settings setObject: serverURL forKey: SERVER_SETTING];
+  [settings setPassword: password forKey: PASSWORD_SETTING andUsername: username];
   [settings synchronize];
 }
 

@@ -53,6 +53,10 @@
 #define RTInt(i) [NSNumber numberWithInt: i]
 #define RTIndex(sec, row) [NSIndexPath indexPathForRow: row inSection: sec]
 
+#define AbstractVoidMethod() [self doesNotRecognizeSelector: _cmd];
+#define AbstractMethod() AbstractVoidMethod(); return nil;
+
+
 @interface UIAlertView (RubyTime)
 + (void) showAlertWithTitle: (NSString *) title content: (NSString *) content;
 @end
@@ -76,4 +80,9 @@
 
 @interface UIViewController (RubyTime)
 - (void) initializeLengthPicker: (UIDatePicker *) picker usingActivity: (Activity *) activity;
+@end
+
+@interface NSUserDefaults (RubyTime)
+- (NSString *) passwordForKey: (NSString *) key andUsername: (NSString *) username;
+- (void) setPassword: (NSString *) password forKey: (NSString *) key andUsername: (NSString *) username;
 @end

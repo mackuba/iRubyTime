@@ -66,9 +66,7 @@
   }
 }
 
-- (void) executeSave {
-  [self doesNotRecognizeSelector: _cmd];
-}
+- (void) executeSave { AbstractVoidMethod() }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Notification callbacks
@@ -149,10 +147,7 @@
   }
 }
 
-- (UIViewController *) helperControllerForRow: (NSInteger) row {
-  [self doesNotRecognizeSelector: _cmd];
-  return nil;
-}
+- (UIViewController *) helperControllerForRow: (NSInteger) row { AbstractMethod() }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Helper controllers

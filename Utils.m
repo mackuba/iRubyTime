@@ -7,6 +7,9 @@
 
 #import "Activity.h"
 #import "Utils.h"
+#import "SFHFKeychainUtils.h"
+
+#define KEYCHAIN_SERVICE_NAME @"iRubyTime"
 
 @implementation UIAlertView (RubyTime)
 
@@ -90,6 +93,38 @@
   picker.countDownDuration = activity.minutes * 60;
   NSInteger precision = picker.minuteInterval;
   activity.minutes = activity.minutes / precision * precision;
+}
+
+@end
+
+@implementation NSUserDefaults (RubyTime)
+
+- (NSString *) passwordForKey: (NSString *) key andUsername: (NSString *) username {
+  #if TARGET_IPHONE_SIMULATOR
+    return [self objectForKey: key];
+  #else
+    NSString *password = nil;
+    NSError *error;
+    if (username) {
+      password = [SFHFKeychainUtils getPasswordForUsername: username
+                                            andServiceName: KEYCHAIN_SERVICE_NAME
+                                                     error: &error];
+    }
+    return password;
+  #endif
+}
+
+- (void) setPassword: (NSString *) password forKey: (NSString *) key andUsername: (NSString *) username {
+  #if TARGET_IPHONE_SIMULATOR
+    [self setObject: password forKey: key];
+  #else
+    NSError *error;
+    [SFHFKeychainUtils storeUsername: username
+                         andPassword: password
+                      forServiceName: KEYCHAIN_SERVICE_NAME
+                      updateExisting: YES
+                               error: &error];
+  #endif
 }
 
 @end

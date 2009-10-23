@@ -43,7 +43,8 @@ OnDeallocRelease(connector);
                                                                              target: self
                                                                              action: @selector(showNewActivityDialog)];
   self.navigationItem.rightBarButtonItem = addButton;
-  addButton.enabled = NO;
+  [addButton setEnabled: NO];
+  [addButton release];
 
   Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);
   Observe(connector, AuthenticatingNotification, showLoadingMessage);
@@ -197,11 +198,11 @@ OnDeallocRelease(connector);
   return 69;
 }
 
-- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) path {
+- (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
   Activity *activity = [connector.activities objectAtIndex: path.row];
   UIViewController *controller = [[ShowActivityDialogController alloc] initWithActivity: activity connector: connector];
   [self.navigationController pushViewController: controller animated: YES];
-  [tableView deselectRowAtIndexPath: path animated: YES];
+  [table deselectRowAtIndexPath: path animated: YES];
   [controller release];
 }
 

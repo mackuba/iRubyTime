@@ -13,8 +13,9 @@
 #import "Utils.h"
 #import "NSDictionary+BSJSONAdditions.h"
 
-#define ServerPath(...) [account.serverURL stringByAppendingFormat: __VA_ARGS__]
-
+#define ActivityPath(activity) RTFormat(@"/activities/%d", activity.activityId)
+#define ActivitiesPath @"/activities"
+#define ProjectsPath @"/projects"
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Private interface
@@ -116,35 +117,37 @@
 
 - (void) authenticate {
   if (account.canLogIn) {
-    Notify(AuthenticatingNotification);
     [self sendGetRequestToPath: @"/users/authenticate" type: RTAuthenticationRequest];
   }
 }
 
 - (void) loadActivities {
-  Notify(UpdatingActivitiesNotification);
-  NSString *path = RTFormat(@"/users/%d/activities?search_criteria[limit]=20", account.userId);
-  [self sendGetRequestToPath: path type: RTActivityIndexRequest];
+  [self sendGetRequestToPath: RTFormat(@"/users/%d/activities?search_criteria[limit]=20", account.userId)
+                        type: RTActivityIndexRequest];
 }
 
 - (void) createActivity: (Activity *) activity {
-  [self sendPostRequestToPath: @"/activities" type: RTCreateActivityRequest text: [activity toQueryString]];
+  [self sendPostRequestToPath: ActivitiesPath type: RTCreateActivityRequest text: [activity toQueryString]];
 }
 
 - (void) updateActivity: (Activity *) activity {
-  NSString *contents = [activity toQueryString];
-  NSString *path = RTFormat(@"/activities/%d", activity.activityId);
-  [self sendRequestToPath: path method: @"PUT" type: RTUpdateActivityRequest text: contents info: activity];
+  [self sendRequestToPath: ActivityPath(activity)
+                   method: @"PUT"
+                     type: RTUpdateActivityRequest
+                     text: [activity toQueryString]
+                     info: activity];
 }
 
 - (void) deleteActivity: (Activity *) activity {
-  NSString *path = RTFormat(@"/activities/%d", activity.activityId);
-  [self sendRequestToPath: path method: @"DELETE" type: RTDeleteActivityRequest text: nil info: activity];
+  [self sendRequestToPath: ActivityPath(activity)
+                   method: @"DELETE"
+                     type: RTDeleteActivityRequest
+                     text: nil
+                     info: activity];
 }
 
 - (void) loadProjects {
-  Notify(LoadingProjectsNotification);
-  [self sendGetRequestToPath: @"/projects" type: RTProjectIndexRequest];
+  [self sendGetRequestToPath: ProjectsPath type: RTProjectIndexRequest];
 }
 
 // -------------------------------------------------------------------------------------------

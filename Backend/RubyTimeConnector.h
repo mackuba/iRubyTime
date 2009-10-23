@@ -7,10 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-#define AuthenticatingNotification @"AuthenticatingNotification"
-#define UpdatingActivitiesNotification @"UpdatingActivitiesNotification"
-#define LoadingProjectsNotification @"LoadingProjectsNotification"
-
 #define AuthenticationSuccessfulNotification @"AuthenticationSuccessfulNotification"
 #define AuthenticationFailedNotification @"AuthenticationFailedNotification"
 #define ActivitiesReceivedNotification @"ActivitiesReceivedNotification"
