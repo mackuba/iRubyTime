@@ -24,4 +24,4 @@ Plans for future versions:
 ## License
 
 Copyright by Jakub Suder (Psionides) <jakub.suder at gmail.com>. Licensed under MIT license.
-Includes open source libraries NSData+MBBase64 by MiloBird, BSJSONAdditions by Blake Seely, scifihifi-iphone by Buzz Andersen, and LoadingView by Matt Gallagher.
+Includes open source libraries NSData+MBBase64 by MiloBird, BSJSONAdditions by Blake Seely, scifihifi-iphone by Buzz Andersen, and LoadingView by Matt Gallagher. Icons by Joseph Wain (<a href="http://glyphish.com">glyphish.com</a>).
