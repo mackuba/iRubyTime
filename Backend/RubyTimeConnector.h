@@ -38,5 +38,6 @@
 - (void) updateActivity: (Activity *) activity;
 - (void) deleteActivity: (Activity *) activity;
 - (BOOL) hasOpenConnections;
+- (void) dropCurrentConnection;
 
 @end

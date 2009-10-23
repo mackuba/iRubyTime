@@ -14,6 +14,7 @@
 @interface ActivityListController : BaseViewController {
   ActivityCell *currentCell;
   ActivityManager *manager;
+  BOOL dataIsLoaded;
 }
 
 @property (nonatomic, assign) IBOutlet ActivityCell *currentCell;

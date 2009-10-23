@@ -8,6 +8,7 @@
 #import "Account.h"
 #import "ActivityListController.h"
 #import "LoginDialogController.h"
+#import "ProjectListController.h"
 #import "RubyTimeAppDelegate.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
@@ -20,6 +21,7 @@
 
 @interface RubyTimeAppDelegate()
 - (void) buildGuiForUserType: (UserType) type;
+- (void) initializeCurrentController;
 - (void) initApplication;
 - (void) saveAccountData;
 - (Account *) loadAccountData;
@@ -89,7 +91,7 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
   }
   [tabBarController setViewControllers: navigationControllers animated: NO];
   [navigationControllers release];
-  self.currentController = (BaseViewController *) [viewControllers objectAtIndex: 0];
+  self.currentController = [viewControllers objectAtIndex: 0];
 }
 
 - (NSArray *) viewControllersForUserType: (UserType) type {
@@ -104,7 +106,7 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 
 - (NSArray *) viewControllerClassesForUserType: (UserType) type {
   // TODO: add switch and more options
-  return RTArray([ActivityListController class]);
+  return RTArray([ActivityListController class], [ProjectListController class]);
 }
 
 // -------------------------------------------------------------------------------------------
@@ -126,17 +128,33 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 - (void) projectsReceived {
   // TODO: load users too (unless type == employee)
   StopObservingAll();
-  if ([currentController needsOwnData]) {
-    [currentController fetchData];
+  initialDataIsLoaded = YES;
+  [self initializeCurrentController];
+}
+
+- (void) initializeCurrentController {
+  if (initialDataIsLoaded) {
+    [connector dropCurrentConnection];
+    [currentController fetchDataIfNeeded];
   } else {
-    [currentController initializeView];
+    [currentController showLoadingMessage];
   }
 }
 
 // -------------------------------------------------------------------------------------------
-#pragma mark UIApplication callbacks
+#pragma mark Delegate callbacks
+
+- (void) tabBarController: (UITabBarController *) tabBarController
+  didSelectViewController: (UIViewController *) viewController {
+
+  [currentController hideLoadingMessage];
+  UINavigationController *navigation = (UINavigationController *) viewController;
+  self.currentController = (BaseViewController *) [navigation topViewController];
+  [self initializeCurrentController];
+}
 
 - (void) applicationDidFinishLaunching: (UIApplication *) application {
+  initialDataIsLoaded = NO;
   [window addSubview: [tabBarController view]];
   [window makeKeyAndVisible];
   [self initApplication];

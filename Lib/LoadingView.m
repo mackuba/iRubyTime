@@ -52,11 +52,6 @@
   	activityIndicatorRect.origin.x = 0.5 * (loadingView.frame.size.width - activityIndicatorRect.size.width);
   	activityIndicatorRect.origin.y = loadingLabel.frame.origin.y + loadingLabel.frame.size.height;
   	activityIndicatorView.frame = activityIndicatorRect;
-
-    // Set up the fade-in animation
-    CATransition *animation = [CATransition animation];
-    [animation setType: kCATransitionFade];
-    [[aSuperview layer] addAnimation: animation forKey: @"layerAnimation"];
   }
   return loadingView;
 }

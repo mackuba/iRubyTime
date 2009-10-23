@@ -68,6 +68,15 @@ OnDeallocRelease(connector, loadingView);
 - (void) fetchData {
 }
 
+- (void) fetchDataIfNeeded {
+  if ([self needsOwnData]) {
+    [self showLoadingMessage];
+    [self fetchData];
+  } else {
+    [self initializeView];
+  }
+}
+
 - (void) initializeView {
   [tableView reloadData];
   [self hideLoadingMessage];

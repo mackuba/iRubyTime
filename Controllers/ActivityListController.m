@@ -31,6 +31,7 @@ OnDeallocRelease(manager);
     self.title = @"My activities";
     self.tabBarItem.image = [UIImage loadImageFromBundle: @"clock.png"];
     manager = [[ActivityManager alloc] init];
+    dataIsLoaded = NO;
   }
   return self;
 }
@@ -54,7 +55,7 @@ OnDeallocRelease(manager);
 }
 
 - (BOOL) needsOwnData {
-  return YES;
+  return !dataIsLoaded;
 }
 
 - (void) fetchData {
@@ -97,6 +98,7 @@ OnDeallocRelease(manager);
 #pragma mark Notification callbacks
 
 - (void) activitiesReceived: (NSNotification *) notification {
+  dataIsLoaded = YES;
   NSArray *activities = [notification.userInfo objectForKey: @"activities"];
   [manager setActivities: activities];
   [self initializeView];

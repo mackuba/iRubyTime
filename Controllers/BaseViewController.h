@@ -25,6 +25,7 @@
 - (void) hidePopupView;
 - (BOOL) needsOwnData;
 - (void) fetchData;
+- (void) fetchDataIfNeeded;
 - (void) initializeView;
 
 @property (nonatomic, retain) RubyTimeConnector *connector;

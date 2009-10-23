@@ -15,4 +15,6 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic) NSInteger projectId;
 
+- (BOOL) isEqual: (id) other;
+
 @end

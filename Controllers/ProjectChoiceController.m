@@ -10,7 +10,7 @@
 #import "ProjectChoiceController.h"
 #import "Utils.h"
 
-#define PROJECT_CELL_TYPE @"ProjectCell"
+#define PROJECT_CELL_TYPE @"ActivityProjectCell"
 
 @implementation ProjectChoiceController
 

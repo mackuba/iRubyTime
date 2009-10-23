@@ -16,6 +16,7 @@
   UITabBarController *tabBarController;
   BaseViewController *currentController;
   RubyTimeConnector *connector;
+  BOOL initialDataIsLoaded;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

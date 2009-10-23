@@ -231,9 +231,13 @@
   currentRequest = nil;
 }
 
-- (void) dealloc {
+- (void) dropCurrentConnection {
   [currentRequest.connection cancel];
   [self cleanupRequest];
+}
+
+- (void) dealloc {
+  [self dropCurrentConnection];
   [dataManager release];
   [account release];
   [super dealloc];

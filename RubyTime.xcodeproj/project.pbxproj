@@ -50,6 +50,7 @@
 		58B082FD101BBB3B00D30C73 /* ActivityDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B082FC101BBB3B00D30C73 /* ActivityDateFormatter.m */; };
 		58B2D0271091A30E00F7A801 /* GTMUIView+SubtreeDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B2D0261091A30E00F7A801 /* GTMUIView+SubtreeDescription.m */; };
 		58B2D0CB1091CA6C00F7A801 /* ActivityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B2D0CA1091CA6C00F7A801 /* ActivityManager.m */; };
+		58B2D1351091DCCC00F7A801 /* ProjectListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B2D1341091DCCC00F7A801 /* ProjectListController.m */; };
 		58C0A0F20FBA009D00AF8C14 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C0A0F10FBA009D00AF8C14 /* Utils.m */; };
 		58CA2D4E0FA7995E007A6A65 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4B0FA7995E007A6A65 /* Request.m */; };
 		58CA2D4F0FA7995E007A6A65 /* RubyTimeConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4D0FA7995E007A6A65 /* RubyTimeConnector.m */; };
@@ -133,6 +134,8 @@
 		58B2D0261091A30E00F7A801 /* GTMUIView+SubtreeDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMUIView+SubtreeDescription.m"; sourceTree = "<group>"; };
 		58B2D0C91091CA6C00F7A801 /* ActivityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityManager.h; sourceTree = "<group>"; };
 		58B2D0CA1091CA6C00F7A801 /* ActivityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityManager.m; sourceTree = "<group>"; };
+		58B2D1331091DCCC00F7A801 /* ProjectListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectListController.h; sourceTree = "<group>"; };
+		58B2D1341091DCCC00F7A801 /* ProjectListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectListController.m; sourceTree = "<group>"; };
 		58C0A0F00FBA009D00AF8C14 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		58C0A0F10FBA009D00AF8C14 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		58CA2D4A0FA7995E007A6A65 /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 				589BE9EA0FD1D57C00CCFA82 /* NewActivityDialogController.m */,
 				589BE9EB0FD1D57C00CCFA82 /* ProjectChoiceController.h */,
 				589BE9EC0FD1D57C00CCFA82 /* ProjectChoiceController.m */,
+				58B2D1331091DCCC00F7A801 /* ProjectListController.h */,
+				58B2D1341091DCCC00F7A801 /* ProjectListController.m */,
 				589BE9ED0FD1D57C00CCFA82 /* RubyTimeAppDelegate.h */,
 				589BE9EE0FD1D57C00CCFA82 /* RubyTimeAppDelegate.m */,
 				586516600FFFB82500363BB2 /* ShowActivityDialogController.h */,
@@ -445,6 +450,7 @@
 				588867231090753E00EEFCF9 /* BaseViewController.m in Sources */,
 				58B2D0271091A30E00F7A801 /* GTMUIView+SubtreeDescription.m in Sources */,
 				58B2D0CB1091CA6C00F7A801 /* ActivityManager.m in Sources */,
+				58B2D1351091DCCC00F7A801 /* ProjectListController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
