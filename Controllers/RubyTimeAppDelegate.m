@@ -14,6 +14,8 @@
 #define USERNAME_SETTING @"username"
 #define PASSWORD_SETTING @"password"
 #define SERVER_SETTING @"serverURL"
+#define USER_TYPE_SETTING @"userType"
+
 
 @interface RubyTimeAppDelegate()
 - (void) initApplication;
@@ -44,8 +46,10 @@ OnDeallocRelease(window, tabBarController, connector, activityListController);
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *username = [settings objectForKey: USERNAME_SETTING];
   NSString *serverURL = [settings objectForKey: SERVER_SETTING];
+  NSString *userType = [settings objectForKey: USER_TYPE_SETTING];
   NSString *password = [settings passwordForKey: PASSWORD_SETTING andUsername: username];
   Account *account = [[Account alloc] initWithServerURL: serverURL username: username password: password];
+  [account setUserTypeFromString: userType];
   return [account autorelease];
 }
 
@@ -56,9 +60,11 @@ OnDeallocRelease(window, tabBarController, connector, activityListController);
   NSString *username = connector.account.username;
   NSString *password = connector.account.password;
   NSString *serverURL = connector.account.serverURL;
+  NSString *userType = [connector.account userTypeToString];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings setObject: username forKey: USERNAME_SETTING];
   [settings setObject: serverURL forKey: SERVER_SETTING];
+  [settings setObject: userType forKey: USER_TYPE_SETTING];
   [settings setPassword: password forKey: PASSWORD_SETTING andUsername: username];
   [settings synchronize];
 }

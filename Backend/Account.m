@@ -15,7 +15,6 @@
 @interface Account ()
 - (NSString *) fixURL: (NSString *) url;
 - (void) generateAuthenticationString;
-- (UserType) userTypeFromString: (NSString *) typeString;
 @end
 
 
@@ -68,20 +67,29 @@ OnDeallocRelease(serverURL, username, password, authenticationString);
   }
 }
 
-- (UserType) userTypeFromString: (NSString *) typeString {
+- (void) setUserTypeFromString: (NSString *) typeString {
   if ([typeString isEqualToString: @"client"]) {
-    return ClientUser;
+    userType = ClientUser;
   } else if ([typeString isEqualToString: @"admin"]) {
-    return Admin;
+    userType = Admin;
   } else {
-    return Employee;
+    userType = Employee;
+  }
+}
+
+- (NSString *) userTypeToString {
+  switch (userType) {
+    case Employee: return @"employee";
+    case Admin: return @"admin";
+    case ClientUser: return @"client";
+    default: return @"";
   }
 }
 
 - (void) logInWithResponse: (NSDictionary *) dictionary {
   loggedIn = YES;
   userId = [[dictionary objectForKey: @"id"] intValue];
-  userType = [self userTypeFromString: [dictionary objectForKey: @"type"]];
+  [self setUserTypeFromString: [dictionary objectForKey: @"type"]];
 }
 
 @end
