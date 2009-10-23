@@ -7,6 +7,7 @@
 
 #import "Account.h"
 #import "ActivityListController.h"
+#import "LoginDialogController.h"
 #import "RubyTimeAppDelegate.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
@@ -18,29 +19,39 @@
 
 
 @interface RubyTimeAppDelegate()
+- (void) buildGuiForUserType: (UserType) type;
 - (void) initApplication;
-- (Account *) loadAccountData;
 - (void) saveAccountData;
+- (Account *) loadAccountData;
+- (NSArray *) viewControllersForUserType: (UserType) type;
+- (NSArray *) viewControllerClassesForUserType: (UserType) type;
 @end
+
 
 @implementation RubyTimeAppDelegate
 
-@synthesize window, tabBarController, activityListController;
-OnDeallocRelease(window, tabBarController, connector, activityListController);
+@synthesize window, tabBarController, currentController;
+OnDeallocRelease(window, tabBarController, connector, currentController);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
 - (void) initApplication {
   connector = [[RubyTimeConnector alloc] initWithAccount: [self loadAccountData]];
-  activityListController.connector = connector;
 
   Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);
   if ([connector.account canLogIn]) {
+    [self buildGuiForUserType: connector.account.userType];
+    [currentController showLoadingMessage];
     [connector authenticate];
+  } else {
+    currentController.connector = connector;
+    [currentController showPopupView: [LoginDialogController class]];
   }
-  // else -> activity list controller will show the login screen
 }
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Instance methods
 
 - (Account *) loadAccountData {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -52,9 +63,6 @@ OnDeallocRelease(window, tabBarController, connector, activityListController);
   [account setUserTypeFromString: userType];
   return [account autorelease];
 }
-
-// -------------------------------------------------------------------------------------------
-#pragma mark Instance methods
 
 - (void) saveAccountData {
   NSString *username = connector.account.username;
@@ -69,26 +77,67 @@ OnDeallocRelease(window, tabBarController, connector, activityListController);
   [settings synchronize];
 }
 
+- (void) buildGuiForUserType: (UserType) type {
+  NSArray *viewControllers = [self viewControllersForUserType: type];
+  NSMutableArray *navigationControllers = [[NSMutableArray alloc] initWithCapacity: viewControllers.count];
+  for (BaseViewController *actualController in viewControllers) {
+    UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController: actualController];
+    [navigationControllers addObject: navigation];
+    [navigation release];
+  }
+  [tabBarController setViewControllers: navigationControllers animated: NO];
+  [navigationControllers release];
+  self.currentController = (BaseViewController *) [viewControllers objectAtIndex: 0];
+}
+
+- (NSArray *) viewControllersForUserType: (UserType) type {
+  NSArray *classes = [self viewControllerClassesForUserType: type];
+  NSMutableArray *controllers = [[NSMutableArray alloc] initWithCapacity: classes.count];
+  for (Class controllerClass in classes) {
+    BaseViewController *controller = [[[controllerClass alloc] initWithConnector: connector] autorelease];
+    [controllers addObject: controller];
+  }
+  return [controllers autorelease];
+}
+
+- (NSArray *) viewControllerClassesForUserType: (UserType) type {
+  // TODO: add switch and more options
+  return RTArray([ActivityListController class]);
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Notification callbacks
 
 - (void) loginSuccessful {
-  [self saveAccountData];
+  if (currentController.modalViewController) {
+    // login controller was shown previously
+    [self saveAccountData];
+    [currentController hidePopupView];
+    [self buildGuiForUserType: connector.account.userType];
+    [currentController showLoadingMessage];
+  }
+  // TODO: handle the case where a user's type was changed in the meantime
   Observe(connector, ProjectsReceivedNotification, projectsReceived);
   [connector loadProjects];
 }
 
 - (void) projectsReceived {
-  [connector loadActivities];
+  // TODO: load users too (unless type == employee)
+  StopObservingAll();
+  if ([currentController needsOwnData]) {
+    [currentController fetchData];
+  } else {
+    [currentController initializeView];
+  }
 }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark UIApplication callbacks
 
 - (void) applicationDidFinishLaunching: (UIApplication *) application {
-  [self initApplication];
   [window addSubview: [tabBarController view]];
   [window makeKeyAndVisible];
+  [self initApplication];
 }
 
 @end

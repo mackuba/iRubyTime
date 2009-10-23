@@ -5,81 +5,57 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "Account.h"
 #import "Activity.h"
 #import "ActivityCell.h"
 #import "ActivityListController.h"
-#import "LoadingView.h"
-#import "LoginDialogController.h"
+#import "BaseViewController.h"
 #import "NewActivityDialogController.h"
-#import "RubyTimeAppDelegate.h"
 #import "RubyTimeConnector.h"
 #import "ShowActivityDialogController.h"
 #import "Utils.h"
 
 #define ACTIVITY_CELL_TYPE @"ActivityCell"
 
-@interface ActivityListController ()
-- (void) showLoginDialog;
-- (void) showPopupDialog: (Class) controllerClass;
-- (void) showLoadingMessage;
-- (void) hideLoadingMessage;
-@end
-
 @implementation ActivityListController
 
-@synthesize currentCell, connector;
-OnDeallocRelease(connector);
+@synthesize currentCell;
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
+- (id) initWithConnector: (RubyTimeConnector *) rtConnector {
+  self = [super initWithConnector: rtConnector andStyle: UITableViewStylePlain];
+  if (self) {
+    self.title = @"My activities";
+    self.tabBarItem.image = [UIImage loadImageFromBundle: @"clock.png"];
+  }
+  return self;
+}
+
 - (void) viewDidLoad {
   [super viewDidLoad];
-
-  
-  // prepare buttons for toolbar
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd
                                                                              target: self
                                                                              action: @selector(showNewActivityDialog)];
   self.navigationItem.rightBarButtonItem = addButton;
   [addButton setEnabled: NO];
   [addButton release];
+}
 
-  Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);
-  Observe(connector, AuthenticatingNotification, showLoadingMessage);
-  Observe(connector, LoadingProjectsNotification, showLoadingMessage);
-  Observe(connector, ActivitiesReceivedNotification, activitiesReceived);
+- (void) initializeView {
+  [super initializeView];
   Observe(connector, ActivityCreatedNotification, activityCreated:);
   Observe(connector, ActivityDeletedNotification, activityDeleted);
-  Observe(nil, ActivityDialogCancelledNotification, newActivityDialogCancelled);
-  
-  [addButton release];
+  Observe(nil, ActivityDialogCancelledNotification, hidePopupView);
 }
 
-- (void) viewDidAppear: (BOOL) animated {
-  [super viewDidAppear: animated];
-  [self.tableView reloadData];
-
-  if (connector.account.canLogIn) {
-    // we have all the necessary data - we're logging in or already logged in
-    Observe(connector, RequestFailedNotification, requestFailed:);
-    if ([connector hasOpenConnections]) {
-      [self showLoadingMessage];
-      if (!connector.account.loggedIn) {
-        // still logging in
-        Observe(connector, AuthenticationFailedNotification, authenticationFailed);
-      }
-    }
-  } else {
-    // we need more data
-    [self showLoginDialog];
-  }
+- (BOOL) needsOwnData {
+  return YES;
 }
 
-- (void) viewWillDisappear: (BOOL) animated {
-  StopObserving(connector, RequestFailedNotification);
-  StopObserving(connector, AuthenticationFailedNotification);
+- (void) fetchData {
+  Observe(connector, ActivitiesReceivedNotification, activitiesReceived);
+  [connector loadActivities];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -88,92 +64,43 @@ OnDeallocRelease(connector);
 - (void) addActivityToList: (Activity *) activity {
   NSInteger index = [connector.activities indexOfObject: activity];
   if (index != NSNotFound) {
-    UITableView *table = self.tableView;
     NSInteger count = connector.activities.count;
     NSIndexPath *newCellIndex = RTIndex(0, index);
     if (count > 1) {
       // don't scroll to the last one if it's not added yet (don't scroll at all if it's the first activity)
       NSIndexPath *scrollIndex = RTIndex(0, MIN(index, count - 2));
-      [table scrollToRowAtIndexPath: scrollIndex atScrollPosition: UITableViewScrollPositionTop animated: YES];
+      [tableView scrollToRowAtIndexPath: scrollIndex atScrollPosition: UITableViewScrollPositionTop animated: YES];
     }
-    [table beginUpdates];
-    [table insertRowsAtIndexPaths: RTArray(newCellIndex) withRowAnimation: UITableViewRowAnimationTop];
-    [table endUpdates];
+    [tableView beginUpdates];
+    [tableView insertRowsAtIndexPaths: RTArray(newCellIndex) withRowAnimation: UITableViewRowAnimationTop];
+    [tableView endUpdates];
     if (index == count - 1) {
       // now you can scroll to the last one
-      [table scrollToRowAtIndexPath: newCellIndex atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+      [tableView scrollToRowAtIndexPath: newCellIndex atScrollPosition: UITableViewScrollPositionBottom animated: YES];
     }
   }
-}
-
-- (void) showLoadingMessage {
-  if (!loadingView) {
-    loadingView = [[LoadingView loadingViewInView: self.tableView.superview] retain];
-  }
-}
-
-- (void) hideLoadingMessage {
-  [loadingView removeView];
-  [loadingView release];
-  loadingView = nil;
 }
 
 - (void) showNewActivityDialog {
-  [self showPopupDialog: [NewActivityDialogController class]];
-}
-
-- (void) showLoginDialog {
-  [self showPopupDialog: [LoginDialogController class]];
-}
-
-- (void) closeNewActivityDialog {
-  [self dismissModalViewControllerAnimated: YES];
-}
-
-- (void) showPopupDialog: (Class) controllerClass {
-  id dialog = [[controllerClass alloc] initWithConnector: connector];
-  UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController: dialog];
-  [self presentModalViewController: navigation animated: YES];
-  [navigation release];
-  [dialog release];
+  [self showPopupView: [NewActivityDialogController class]];
 }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Notification callbacks
 
-- (void) loginSuccessful {
-  // TODO: add a switch in list controller to see all activities or only user's
-  [self dismissModalViewControllerAnimated: YES];
-}
-
 - (void) activitiesReceived {
-  [self.tableView reloadData];
+  [self initializeView];
   self.navigationItem.rightBarButtonItem.enabled = (connector.projects.count > 0);
-  [self hideLoadingMessage];
+  StopObserving(connector, ActivitiesReceivedNotification);
 }
 
 - (void) activityCreated: (NSNotification *) notification {
   [self addActivityToList: [notification.userInfo objectForKey: @"activity"]];
-  [self closeNewActivityDialog];
+  [self hidePopupView];
 }
 
 - (void) activityDeleted {
-  [self.tableView reloadData];
-}
-
-- (void) newActivityDialogCancelled {
-  [self closeNewActivityDialog];
-}
-
-- (void) authenticationFailed {
-  [self showLoginDialog];
-}
-
-- (void) requestFailed: (NSNotification *) notification {
-  [self hideLoadingMessage];
-  NSError *error = [notification.userInfo objectForKey: @"error"];
-  NSString *message = error ? [error friendlyDescription] : @"Can't connect to the server.";
-  [UIAlertView showAlertWithTitle: @"Error" content: message];
+  [tableView reloadData];
 }
 
 // -------------------------------------------------------------------------------------------

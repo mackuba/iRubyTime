@@ -6,18 +6,14 @@
 // -------------------------------------------------------
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
 @class ActivityCell;
-@class LoadingView;
-@class RubyTimeConnector;
 
-@interface ActivityListController : UITableViewController {
+@interface ActivityListController : BaseViewController {
   ActivityCell *currentCell;
-  LoadingView *loadingView;
-  RubyTimeConnector *connector;
 }
 
 @property (nonatomic, assign) IBOutlet ActivityCell *currentCell;
-@property (nonatomic, retain) IBOutlet RubyTimeConnector *connector;
 
 @end

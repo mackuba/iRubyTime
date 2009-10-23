@@ -87,6 +87,14 @@
 
 @end
 
+@implementation UIImage (RubyTime)
+
++ (UIImage *) loadImageFromBundle: (NSString *) imageName {
+  return [UIImage imageNamed: RTFormat(@"Images/%@", imageName)];
+}
+
+@end
+
 @implementation UIViewController (RubyTime)
 
 - (void) initializeLengthPicker: (UIDatePicker *) picker usingActivity: (Activity *) activity {

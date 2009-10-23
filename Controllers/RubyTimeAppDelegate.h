@@ -7,18 +7,19 @@
 
 #import <UIKit/UIKit.h>
 
-@class RubyTimeConnector;
 @class ActivityListController;
+@class BaseViewController;
+@class RubyTimeConnector;
 
 @interface RubyTimeAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
   UIWindow *window;
   UITabBarController *tabBarController;
+  BaseViewController *currentController;
   RubyTimeConnector *connector;
-  ActivityListController *activityListController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
-@property (nonatomic, retain) IBOutlet ActivityListController *activityListController;
+@property (nonatomic, retain) IBOutlet BaseViewController *currentController;
 
 @end
