@@ -46,7 +46,9 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
     [connector authenticate];
   } else {
     currentController.connector = connector;
-    [currentController showPopupView: [LoginDialogController class]];
+    LoginDialogController *loginDialog = [[LoginDialogController alloc] initWithConnector: connector];
+    [currentController showPopupView: loginDialog];
+    [loginDialog release];
   }
 }
 

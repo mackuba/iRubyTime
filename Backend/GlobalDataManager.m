@@ -1,12 +1,12 @@
 // -------------------------------------------------------
-// DataManager.m
+// GlobalDataManager.m
 //
 // Copyright (c) 2009 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under MIT license
 // -------------------------------------------------------
 
 #import "Activity.h"
-#import "DataManager.h"
+#import "GlobalDataManager.h"
 #import "Project.h"
 #import "Utils.h"
 #import "NSArray+BSJSONAdditions.h"
@@ -14,14 +14,13 @@
 @implementation DataManager
 
 @synthesize projects;
-OnDeallocRelease(activityList, projects, projectHash);
+OnDeallocRelease(projects, projectHash);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
 - (id) init {
   if (self = [super init]) {
-    activityList = [[NSMutableArray alloc] initWithCapacity: 20];
     projects = [[NSMutableArray alloc] initWithCapacity: 20];
     projectHash = [[NSMutableDictionary alloc] initWithCapacity: 20];
   }
@@ -30,40 +29,6 @@ OnDeallocRelease(activityList, projects, projectHash);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Activities
-
-- (void) setActivities: (NSArray *) list {
-  activityList = [list mutableCopy];
-}
-
-- (NSArray *) activities {
-  return activityList;
-}
-
-- (void) addNewActivity: (Activity *) activity {
-  NSInteger index;
-  for (index = 0; index < activityList.count; index++) {
-    Activity *existing = [activityList objectAtIndex: index];
-    if ([activity.date laterDate: existing.date] == activity.date) break;
-  }
-  [activityList insertObject: activity atIndex: index];
-}
-
-- (void) updateActivity: (Activity *) activity {
-  [self deleteActivity: activity];
-  [self addNewActivity: activity];
-}
-
-- (void) deleteActivity: (Activity *) activity {
-  NSInteger index;
-  Activity *existing;
-  for (index = 0; index < activityList.count; index++) {
-    existing = [activityList objectAtIndex: index];
-    if (existing.activityId == activity.activityId) break;
-  }
-  if (index < activityList.count) {
-    [activityList removeObjectAtIndex: index];
-  }
-}
 
 - (Activity *) activityFromJSON: (NSDictionary *) json {
   Activity *activity = [[Activity alloc] init];

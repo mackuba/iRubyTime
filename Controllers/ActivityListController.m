@@ -8,6 +8,7 @@
 #import "Activity.h"
 #import "ActivityCell.h"
 #import "ActivityListController.h"
+#import "ActivityManager.h"
 #import "BaseViewController.h"
 #import "NewActivityDialogController.h"
 #import "RubyTimeConnector.h"
@@ -19,6 +20,7 @@
 @implementation ActivityListController
 
 @synthesize currentCell;
+OnDeallocRelease(manager);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -28,6 +30,7 @@
   if (self) {
     self.title = @"My activities";
     self.tabBarItem.image = [UIImage loadImageFromBundle: @"clock.png"];
+    manager = [[ActivityManager alloc] init];
   }
   return self;
 }
@@ -45,7 +48,8 @@
 - (void) initializeView {
   [super initializeView];
   Observe(connector, ActivityCreatedNotification, activityCreated:);
-  Observe(connector, ActivityDeletedNotification, activityDeleted);
+  Observe(connector, ActivityDeletedNotification, activityDeleted:);
+  Observe(connector, ActivityUpdatedNotification, activityUpdated:);
   Observe(nil, ActivityDialogCancelledNotification, hidePopupView);
 }
 
@@ -54,7 +58,7 @@
 }
 
 - (void) fetchData {
-  Observe(connector, ActivitiesReceivedNotification, activitiesReceived);
+  Observe(connector, ActivitiesReceivedNotification, activitiesReceived:);
   [connector loadActivities];
 }
 
@@ -62,9 +66,10 @@
 #pragma mark Action handlers
 
 - (void) addActivityToList: (Activity *) activity {
-  NSInteger index = [connector.activities indexOfObject: activity];
+  [manager addNewActivity: activity];
+  NSInteger index = [manager.activities indexOfObject: activity];
   if (index != NSNotFound) {
-    NSInteger count = connector.activities.count;
+    NSInteger count = manager.activities.count;
     NSIndexPath *newCellIndex = RTIndex(0, index);
     if (count > 1) {
       // don't scroll to the last one if it's not added yet (don't scroll at all if it's the first activity)
@@ -82,24 +87,38 @@
 }
 
 - (void) showNewActivityDialog {
-  [self showPopupView: [NewActivityDialogController class]];
+  NewActivityDialogController *dialog =
+    [[NewActivityDialogController alloc] initWithConnector: connector andActivityList: manager.activities];
+  [self showPopupView: dialog];
+  [dialog release];
 }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Notification callbacks
 
-- (void) activitiesReceived {
+- (void) activitiesReceived: (NSNotification *) notification {
+  NSArray *activities = [notification.userInfo objectForKey: @"activities"];
+  [manager setActivities: activities];
   [self initializeView];
   self.navigationItem.rightBarButtonItem.enabled = (connector.projects.count > 0);
   StopObserving(connector, ActivitiesReceivedNotification);
 }
 
 - (void) activityCreated: (NSNotification *) notification {
-  [self addActivityToList: [notification.userInfo objectForKey: @"activity"]];
+  Activity *activity = [notification.userInfo objectForKey: @"activity"];
+  [self addActivityToList: activity];
   [self hidePopupView];
 }
 
-- (void) activityDeleted {
+- (void) activityDeleted: (NSNotification *) notification {
+  Activity *activity = [notification.userInfo objectForKey: @"activity"];
+  [manager deleteActivity: activity];
+  [tableView reloadData];
+}
+
+- (void) activityUpdated: (NSNotification *) notification {
+  Activity *activity = [notification.userInfo objectForKey: @"activity"];
+  [manager updateActivity: activity];
   [tableView reloadData];
 }
 
@@ -107,11 +126,11 @@
 #pragma mark Table view delegate & data source
 
 - (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
-  return connector.activities.count;
+  return manager.activities.count;
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  Activity *activity = [connector.activities objectAtIndex: path.row];
+  Activity *activity = [manager.activities objectAtIndex: path.row];
   ActivityCell *cell = (ActivityCell *) [table dequeueReusableCellWithIdentifier: ACTIVITY_CELL_TYPE];
   if (!cell) {
     [[NSBundle mainBundle] loadNibNamed: @"ActivityCell" owner: self options: nil];
@@ -126,7 +145,7 @@
 }
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
-  Activity *activity = [connector.activities objectAtIndex: path.row];
+  Activity *activity = [manager.activities objectAtIndex: path.row];
   UIViewController *controller = [[ShowActivityDialogController alloc] initWithActivity: activity connector: connector];
   [self.navigationController pushViewController: controller animated: YES];
   [table deselectRowAtIndexPath: path animated: YES];

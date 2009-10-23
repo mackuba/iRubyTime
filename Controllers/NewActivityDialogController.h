@@ -12,11 +12,12 @@
 
 @interface NewActivityDialogController : ActivityDetailsController {
   UIDatePicker *activityLengthPicker;
+  NSArray *activityList;
 }
 
 @property (nonatomic, retain) IBOutlet UIDatePicker *activityLengthPicker;
 
-- (id) initWithConnector: (RubyTimeConnector *) connector;
+- (id) initWithConnector: (RubyTimeConnector *) rtConnector andActivityList: (NSArray *) activities;
 - (IBAction) timeChanged;
 
 @end

@@ -9,9 +9,11 @@
 #import "BaseViewController.h"
 
 @class ActivityCell;
+@class ActivityManager;
 
 @interface ActivityListController : BaseViewController {
   ActivityCell *currentCell;
+  ActivityManager *manager;
 }
 
 @property (nonatomic, assign) IBOutlet ActivityCell *currentCell;

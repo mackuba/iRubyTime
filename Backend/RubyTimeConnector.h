@@ -27,7 +27,6 @@
   Account *account;
 }
 
-@property (nonatomic, retain) NSArray *activities;
 @property (nonatomic, retain) NSArray *projects;
 @property (nonatomic, retain) Account *account;
 

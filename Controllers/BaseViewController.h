@@ -21,7 +21,7 @@
 - (id) initWithConnector: (RubyTimeConnector *) rtConnector andStyle: (UITableViewStyle) style;
 - (void) showLoadingMessage;
 - (void) hideLoadingMessage;
-- (void) showPopupView: (Class) controllerClass;
+- (void) showPopupView: (UIViewController *) controllerClass;
 - (void) hidePopupView;
 - (BOOL) needsOwnData;
 - (void) fetchData;

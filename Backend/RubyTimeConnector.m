@@ -7,7 +7,7 @@
 
 #import "Account.h"
 #import "Activity.h"
-#import "DataManager.h"
+#import "GlobalDataManager.h"
 #import "Request.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
@@ -55,14 +55,6 @@
 
 - (BOOL) hasOpenConnections {
   return currentRequest ? YES : NO;
-}
-
-- (NSArray *) activities {
-  return dataManager.activities;
-}
-
-- (void) setActivities: (NSArray *) activities {
-  if (activities) dataManager.activities = activities;
 }
 
 - (NSArray *) projects {
@@ -191,7 +183,6 @@
     case RTActivityIndexRequest:
       if (trimmedString.length > 0) {
         records = [dataManager activitiesFromJSONString: trimmedString];
-        dataManager.activities = records;
         NotifyWithData(ActivitiesReceivedNotification, RTDict(records, @"activities"));
       }
       break;
@@ -206,19 +197,16 @@
     
     case RTCreateActivityRequest:
       activity = [dataManager activityFromJSONString: trimmedString];
-      [dataManager addNewActivity: activity];
       NotifyWithData(ActivityCreatedNotification, RTDict(activity, @"activity"));
       break;
 
     case RTUpdateActivityRequest:
       activity = request.info;
-      [dataManager updateActivity: activity];
       NotifyWithData(ActivityUpdatedNotification, RTDict(activity, @"activity"));
       break;
 
     case RTDeleteActivityRequest:
       activity = request.info;
-      [dataManager deleteActivity: activity];
       NotifyWithData(ActivityDeletedNotification, RTDict(activity, @"activity"));
       break;
   }

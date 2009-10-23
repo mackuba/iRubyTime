@@ -49,13 +49,10 @@ OnDeallocRelease(connector, loadingView);
   loadingView = nil;
 }
 
-- (void) showPopupView: (Class) controllerClass {
-  id dialog = [controllerClass alloc];
-  dialog = [dialog initWithConnector: connector];
-  UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController: dialog];
+- (void) showPopupView: (UIViewController *) controller {
+  UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController: controller];
   [self presentModalViewController: navigation animated: YES];
   [navigation release];
-  [dialog release];
 }
 
 - (void) hidePopupView {
