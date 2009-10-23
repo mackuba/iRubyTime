@@ -88,7 +88,7 @@ OnDeallocRelease(manager);
 
 - (void) showNewActivityDialog {
   NewActivityDialogController *dialog =
-    [[NewActivityDialogController alloc] initWithConnector: connector andActivityList: manager.activities];
+    [[NewActivityDialogController alloc] initWithConnector: connector andActivityManager: manager];
   [self showPopupView: dialog];
   [dialog release];
 }
@@ -146,7 +146,8 @@ OnDeallocRelease(manager);
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
   Activity *activity = [manager.activities objectAtIndex: path.row];
-  UIViewController *controller = [[ShowActivityDialogController alloc] initWithActivity: activity connector: connector];
+  UIViewController *controller =
+    [[ShowActivityDialogController alloc] initWithActivity: activity connector: connector activityManager: manager];
   [self.navigationController pushViewController: controller animated: YES];
   [table deselectRowAtIndexPath: path animated: YES];
   [controller release];

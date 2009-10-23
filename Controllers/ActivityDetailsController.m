@@ -16,12 +16,15 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector nibName: (NSString *) nib {
+- (id) initWithConnector: (RubyTimeConnector *) rtConnector
+                 nibName: (NSString *) nib
+         activityManager: (ActivityManager *) manager {
   self = [super initWithNibName: nib bundle: [NSBundle mainBundle]];
   if (self) {
     [[NSBundle mainBundle] loadNibNamed: @"CommentsCell" owner: self options: nil];
     connector = [rtConnector retain];
     activity = nil;
+    activityManager = manager;
   }
   return self;
 }
@@ -188,7 +191,7 @@
   if (!projectChoiceController) {
     projectChoiceController = [[ProjectChoiceController alloc] initWithActivity: activity
                                                                     projectList: connector.projects
-                                                                 recentProjects: [connector recentProjects]];
+                                                                 recentProjects: [activityManager recentProjects]];
   }
   return projectChoiceController;
 }

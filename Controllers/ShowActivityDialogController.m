@@ -21,8 +21,10 @@ OnDeallocRelease(originalActivity, editButton);
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithActivity: (Activity *) anActivity connector: (RubyTimeConnector *) rtConnector {
-  self = [super initWithConnector: rtConnector nibName: @"ShowActivityDialog"];
+- (id) initWithActivity: (Activity *) anActivity
+              connector: (RubyTimeConnector *) rtConnector
+        activityManager: (ActivityManager *) manager {
+  self = [super initWithConnector: rtConnector nibName: @"ShowActivityDialog" activityManager: manager];
   if (self) {
     activity = [anActivity copy];
     originalActivity = [anActivity retain];

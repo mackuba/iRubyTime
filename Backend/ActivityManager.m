@@ -54,4 +54,8 @@ OnDeallocRelease(activityList);
   }
 }
 
+- (NSArray *) recentProjects {
+  return [self valueForKeyPath: @"activities.@distinctUnionOfObjects.project"];
+}
+
 @end

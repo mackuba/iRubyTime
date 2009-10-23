@@ -18,5 +18,6 @@
 - (void) addNewActivity: (Activity *) activity;
 - (void) updateActivity: (Activity *) activity;
 - (void) deleteActivity: (Activity *) activity;
+- (NSArray *) recentProjects;
 
 @end

@@ -65,11 +65,6 @@
   if (projects) dataManager.projects = projects;
 }
 
-- (NSArray *) recentProjects {
-  return [dataManager valueForKeyPath: @"activities.@distinctUnionOfObjects.project"];
-}
-
-
 // -------------------------------------------------------------------------------------------
 #pragma mark General request sending helpers
 

@@ -11,6 +11,7 @@
 #import "ActivityCommentsDialogController.h"
 #import "ActivityDateDialogController.h"
 #import "ActivityLengthDialogController.h"
+#import "ActivityManager.h"
 #import "Project.h"
 #import "ProjectChoiceController.h"
 #import "Request.h"
@@ -25,6 +26,7 @@
 
 @interface ActivityDetailsController : UIViewController {
   Activity *activity;
+  ActivityManager *activityManager;
   ActivityCommentsDialogController *activityCommentsDialogController;
   ActivityDateDialogController *activityDateDialogController;
   ActivityLengthDialogController *activityLengthDialogController;
@@ -43,7 +45,10 @@
 @property (nonatomic, retain) IBOutlet UITableViewCell *commentsCell;
 @property (nonatomic, retain) IBOutlet UILabel *commentsLabel;
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector nibName: (NSString *) nib;
+- (id) initWithConnector: (RubyTimeConnector *) rtConnector
+                 nibName: (NSString *) nib
+         activityManager: (ActivityManager *) manager;
+
 - (void) setupToolbar;
 - (UITableViewCell *) tableView: (UITableView *) table fieldCellForRow: (NSInteger) row;
 - (void) pushHelperControllerForPath: (NSIndexPath *) path;

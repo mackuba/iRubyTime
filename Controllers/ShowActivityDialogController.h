@@ -13,6 +13,8 @@
   UIBarButtonItem *editButton;
 }
 
-- (id) initWithActivity: (Activity *) activity connector: (RubyTimeConnector *) connector;
+- (id) initWithActivity: (Activity *) activity
+              connector: (RubyTimeConnector *) connector
+        activityManager: (ActivityManager *) manager;
 
 @end
