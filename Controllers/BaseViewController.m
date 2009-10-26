@@ -99,7 +99,9 @@ OnDeallocRelease(connector, loadingView);
 }
 
 // implement in subclasses
-- (NSInteger) tableView: (UITableView *) t numberOfRowsInSection: (NSInteger) s { AbstractVoidMethod(); return 0; }
+- (NSInteger) tableView: (UITableView *) t numberOfRowsInSection: (NSInteger) s {
+  return 0;
+}
 
 // implement in subclasses
 - (UITableViewCell *) tableView: (UITableView *) t cellForRowAtIndexPath: (NSIndexPath *) p { AbstractMethod(); }
