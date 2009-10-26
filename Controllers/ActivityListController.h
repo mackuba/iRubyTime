@@ -19,4 +19,6 @@
 
 @property (nonatomic, assign) IBOutlet ActivityCell *currentCell;
 
+- (BOOL) hasNewActivityButton;
+
 @end

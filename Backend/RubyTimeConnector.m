@@ -8,14 +8,13 @@
 #import "Account.h"
 #import "Activity.h"
 #import "GlobalDataManager.h"
+#import "Project.h"
 #import "Request.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
 #import "NSDictionary+BSJSONAdditions.h"
 
 #define ActivityPath(activity) RTFormat(@"/activities/%d", activity.activityId)
-#define ActivitiesPath @"/activities"
-#define ProjectsPath @"/projects"
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Private interface
@@ -108,13 +107,18 @@
   }
 }
 
-- (void) loadActivities {
+- (void) loadMyActivities {
   [self sendGetRequestToPath: RTFormat(@"/users/%d/activities?search_criteria[limit]=20", account.userId)
                         type: RTActivityIndexRequest];
 }
 
+- (void) loadActivitiesForProject: (Project *) project {
+  [self sendGetRequestToPath: RTFormat(@"/projects/%d/activities?search_criteria[limit]=20", project.projectId)
+                        type: RTActivityIndexRequest];
+}
+
 - (void) createActivity: (Activity *) activity {
-  [self sendPostRequestToPath: ActivitiesPath type: RTCreateActivityRequest text: [activity toQueryString]];
+  [self sendPostRequestToPath: @"/activities" type: RTCreateActivityRequest text: [activity toQueryString]];
 }
 
 - (void) updateActivity: (Activity *) activity {
@@ -134,7 +138,7 @@
 }
 
 - (void) loadProjects {
-  [self sendGetRequestToPath: ProjectsPath type: RTProjectIndexRequest];
+  [self sendGetRequestToPath: @"/projects" type: RTProjectIndexRequest];
 }
 
 // -------------------------------------------------------------------------------------------

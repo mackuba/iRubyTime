@@ -28,8 +28,6 @@ OnDeallocRelease(manager);
 - (id) initWithConnector: (RubyTimeConnector *) rtConnector {
   self = [super initWithConnector: rtConnector andStyle: UITableViewStylePlain];
   if (self) {
-    self.title = @"My activities";
-    self.tabBarItem.image = [UIImage loadImageFromBundle: @"clock.png"];
     manager = [[ActivityManager alloc] init];
     dataIsLoaded = NO;
   }
@@ -38,12 +36,20 @@ OnDeallocRelease(manager);
 
 - (void) viewDidLoad {
   [super viewDidLoad];
-  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd
-                                                                             target: self
-                                                                             action: @selector(showNewActivityDialog)];
-  self.navigationItem.rightBarButtonItem = addButton;
-  [addButton setEnabled: NO];
-  [addButton release];
+  if ([self hasNewActivityButton]) {
+    UIBarButtonItem *addButton =
+      [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd
+                                                    target: self
+                                                    action: @selector(showNewActivityDialog)];
+    self.navigationItem.rightBarButtonItem = addButton;
+    [addButton setEnabled: NO];
+    [addButton release];
+  }
+}
+
+// override in subclasses
+- (BOOL) hasNewActivityButton {
+  return NO;
 }
 
 - (void) initializeView {
@@ -52,15 +58,16 @@ OnDeallocRelease(manager);
   Observe(connector, ActivityDeletedNotification, activityDeleted:);
   Observe(connector, ActivityUpdatedNotification, activityUpdated:);
   Observe(nil, ActivityDialogCancelledNotification, hidePopupView);
+  // TODO: should these be unobserved when view hides?
 }
 
 - (BOOL) needsOwnData {
   return !dataIsLoaded;
 }
 
+// override in subclasses and call super
 - (void) fetchData {
   Observe(connector, ActivitiesReceivedNotification, activitiesReceived:);
-  [connector loadActivities];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -140,10 +147,6 @@ OnDeallocRelease(manager);
   }
   [cell displayActivity: activity];
   return cell;
-}
-
-- (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
-  return 69;
 }
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {

@@ -6,11 +6,11 @@
 // -------------------------------------------------------
 
 #import "Account.h"
-#import "ActivityListController.h"
 #import "LoginDialogController.h"
 #import "ProjectListController.h"
 #import "RubyTimeAppDelegate.h"
 #import "RubyTimeConnector.h"
+#import "UserActivitiesController.h"
 #import "Utils.h"
 
 #define USERNAME_SETTING @"username"
@@ -106,7 +106,7 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 
 - (NSArray *) viewControllerClassesForUserType: (UserType) type {
   // TODO: add switch and more options
-  return RTArray([ActivityListController class], [ProjectListController class]);
+  return RTArray([UserActivitiesController class], [ProjectListController class]);
 }
 
 // -------------------------------------------------------------------------------------------

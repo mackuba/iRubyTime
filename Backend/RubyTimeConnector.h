@@ -19,6 +19,7 @@
 @class Account;
 @class Activity;
 @class DataManager;
+@class Project;
 @class Request;
 
 @interface RubyTimeConnector : NSObject {
@@ -32,7 +33,8 @@
 
 - (id) initWithAccount: (Account *) userAccount;
 - (void) authenticate;
-- (void) loadActivities;
+- (void) loadMyActivities;
+- (void) loadActivitiesForProject: (Project *) project;
 - (void) loadProjects;
 - (void) createActivity: (Activity *) activity;
 - (void) updateActivity: (Activity *) activity;

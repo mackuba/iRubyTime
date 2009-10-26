@@ -5,8 +5,8 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "ActivityListController.h"
 #import "Project.h"
+#import "ProjectActivitiesController.h"
 #import "ProjectListController.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
@@ -14,7 +14,7 @@
 #define PROJECT_CELL_TYPE @"ProjectCell"
 
 @interface ProjectListController ()
-- (ActivityListController *) controllerForProject: (Project *) project;
+- (ProjectActivitiesController *) controllerForProject: (Project *) project;
 @end
 
 @implementation ProjectListController
@@ -56,11 +56,10 @@
   [controller fetchDataIfNeeded];
 }
 
-- (ActivityListController *) controllerForProject: (Project *) project {
-  ActivityListController *controller = [projectActivityListControllers objectForKey: project];
+- (ProjectActivitiesController *) controllerForProject: (Project *) project {
+  ProjectActivitiesController *controller = [projectActivityListControllers objectForKey: project];
   if (!controller) {
-    controller = [[ActivityListController alloc] initWithConnector: connector];
-    controller.title = RTFormat(@"%@ activities", project.name);
+    controller = [[ProjectActivitiesController alloc] initWithConnector: connector project: project];
     [projectActivityListControllers setObject: controller forKey: project];
     [controller release];
   }
