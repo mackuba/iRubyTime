@@ -8,6 +8,17 @@
 #import <UIKit/UIKit.h>
 #import "ActivityListController.h"
 
-@interface UserActivitiesController : ActivityListController {}
+@class User;
+
+@interface UserActivitiesController : ActivityListController {
+  User *displayedUser;
+  BOOL isAccountOwner;
+}
+
+// for other user
+- (id) initWithConnector: (RubyTimeConnector *) rtConnector user: (User *) user;
+
+// for my own activities
+- (id) initWithConnector: (RubyTimeConnector *) rtConnector;
 
 @end

@@ -11,6 +11,7 @@ typedef enum {
   RTAuthenticationRequest = 1,
   RTActivityIndexRequest,
   RTProjectIndexRequest,
+  RTUserIndexRequest,
   RTCreateActivityRequest,
   RTUpdateActivityRequest,
   RTDeleteActivityRequest

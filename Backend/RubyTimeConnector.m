@@ -60,8 +60,8 @@
   return dataManager.projects;
 }
 
-- (void) setProjects: (NSArray *) projects {
-  if (projects) dataManager.projects = projects;
+- (NSArray *) users {
+  return dataManager.users;
 }
 
 // -------------------------------------------------------------------------------------------
@@ -107,8 +107,8 @@
   }
 }
 
-- (void) loadMyActivities {
-  [self sendGetRequestToPath: RTFormat(@"/users/%d/activities?search_criteria[limit]=20", account.userId)
+- (void) loadActivitiesForUser: (User *) user {
+  [self sendGetRequestToPath: RTFormat(@"/users/%d/activities?search_criteria[limit]=20", user.userId)
                         type: RTActivityIndexRequest];
 }
 
@@ -139,6 +139,10 @@
 
 - (void) loadProjects {
   [self sendGetRequestToPath: @"/projects" type: RTProjectIndexRequest];
+}
+
+- (void) loadUsers {
+  [self sendGetRequestToPath: @"/users" type: RTUserIndexRequest];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -191,6 +195,14 @@
         records = [dataManager projectsFromJSONString: trimmedString];
         dataManager.projects = records;
         NotifyWithData(ProjectsReceivedNotification, RTDict(records, @"projects"));
+      }
+      break;
+
+    case RTUserIndexRequest:
+      if (trimmedString.length > 0) {
+        records = [dataManager usersFromJSONString: trimmedString];
+        dataManager.users = records;
+        NotifyWithData(UsersReceivedNotification, RTDict(records, @"users"));
       }
       break;
     

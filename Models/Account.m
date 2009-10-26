@@ -23,16 +23,16 @@
 
 @implementation Account
 
-@synthesize serverURL, username, password, loggedIn, userType, userId, authenticationString;
+@synthesize serverURL, username, password, loggedIn, userType, authenticationString;
 OnDeallocRelease(serverURL, username, password, authenticationString);
 
 - (id) initWithServerURL: (NSString *) url
-                username: (NSString *) name
+                username: (NSString *) user
                 password: (NSString *) pass {
   if (self = [super init]) {
     userId = -1;
     loggedIn = NO;
-    username = [name copy];
+    username = [user copy];
     password = [pass copy];
     serverURL = [[self fixURL: url] retain];
     [self generateAuthenticationString];

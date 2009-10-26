@@ -11,6 +11,7 @@
 #define AuthenticationFailedNotification @"AuthenticationFailedNotification"
 #define ActivitiesReceivedNotification @"ActivitiesReceivedNotification"
 #define ProjectsReceivedNotification @"ProjectsReceivedNotification"
+#define UsersReceivedNotification @"UsersReceivedNotification"
 #define ActivityCreatedNotification @"ActivityCreatedNotification"
 #define ActivityUpdatedNotification @"ActivityUpdatedNotification"
 #define ActivityDeletedNotification @"ActivityDeletedNotification"
@@ -21,6 +22,7 @@
 @class DataManager;
 @class Project;
 @class Request;
+@class User;
 
 @interface RubyTimeConnector : NSObject {
   Request *currentRequest;
@@ -28,14 +30,16 @@
   Account *account;
 }
 
-@property (nonatomic, retain) NSArray *projects;
+@property (nonatomic, readonly) NSArray *projects;
+@property (nonatomic, readonly) NSArray *users;
 @property (nonatomic, retain) Account *account;
 
 - (id) initWithAccount: (Account *) userAccount;
 - (void) authenticate;
-- (void) loadMyActivities;
+- (void) loadActivitiesForUser: (User *) user;
 - (void) loadActivitiesForProject: (Project *) project;
 - (void) loadProjects;
+- (void) loadUsers;
 - (void) createActivity: (Activity *) activity;
 - (void) updateActivity: (Activity *) activity;
 - (void) deleteActivity: (Activity *) activity;

@@ -11,6 +11,7 @@
 #import "RubyTimeAppDelegate.h"
 #import "RubyTimeConnector.h"
 #import "UserActivitiesController.h"
+#import "UserListController.h"
 #import "Utils.h"
 
 #define USERNAME_SETTING @"username"
@@ -23,6 +24,7 @@
 - (void) buildGuiForUserType: (UserType) type;
 - (void) initializeCurrentController;
 - (void) initApplication;
+- (void) initialDataLoaded;
 - (void) saveAccountData;
 - (Account *) loadAccountData;
 - (NSArray *) viewControllersForUserType: (UserType) type;
@@ -105,8 +107,29 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 }
 
 - (NSArray *) viewControllerClassesForUserType: (UserType) type {
-  // TODO: add switch and more options
-  return RTArray([UserActivitiesController class], [ProjectListController class]);
+  switch (type) {
+    case Employee:
+      return RTArray(
+        [UserActivitiesController class],
+        [ProjectListController class]
+      );
+
+    case Admin:
+      return RTArray(
+        [ProjectListController class],
+        [UserListController class]
+      );
+
+    case ClientUser:
+      return RTArray(
+        [ProjectListController class],
+        [UserListController class]
+      );
+
+    default:
+      // shouldn't happen
+      return [NSArray array];
+  }
 }
 
 // -------------------------------------------------------------------------------------------
@@ -126,7 +149,15 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 }
 
 - (void) projectsReceived {
-  // TODO: load users too (unless type == employee)
+  if (connector.account.userType == Employee) {
+    [self initialDataLoaded];
+  } else {
+    Observe(connector, UsersReceivedNotification, initialDataLoaded);
+    [connector loadUsers];
+  }
+}
+
+- (void) initialDataLoaded {
   StopObservingAll();
   initialDataIsLoaded = YES;
   [self initializeCurrentController];

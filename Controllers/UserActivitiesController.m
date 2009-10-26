@@ -5,7 +5,9 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "Account.h"
 #import "RubyTimeConnector.h"
+#import "User.h"
 #import "UserActivitiesController.h"
 #import "Utils.h"
 
@@ -14,22 +16,32 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector {
+- (id) initWithConnector: (RubyTimeConnector *) rtConnector user: (User *) user {
   self = [super initWithConnector: rtConnector];
   if (self) {
-    self.title = @"My activities";
-    self.tabBarItem.image = [UIImage loadImageFromBundle: @"clock.png"];
+    displayedUser = [user retain];
+    isAccountOwner = [user isEqual: rtConnector.account];
+    if (isAccountOwner) {
+      self.title = @"My activities";
+      self.tabBarItem.image = [UIImage loadImageFromBundle: @"clock.png"];
+    } else {
+      self.title = RTFormat(@"%@'s activities", user.name);
+    }
   }
   return self;
 }
 
+- (id) initWithConnector: (RubyTimeConnector *) rtConnector {
+  return [self initWithConnector: rtConnector user: rtConnector.account];
+}
+
 - (BOOL) hasNewActivityButton {
-  return YES;
+  return isAccountOwner;
 }
 
 - (void) fetchData {
   [super fetchData];
-  [connector loadMyActivities];
+  [connector loadActivitiesForUser: displayedUser];
 }
 
 // -------------------------------------------------------------------------------------------

@@ -6,21 +6,20 @@
 // -------------------------------------------------------
 
 #import <Foundation/Foundation.h>
+#import "User.h"
 
 typedef enum { Employee, ClientUser, Admin } UserType;
 
-@interface Account : NSObject {
+@interface Account : User {
   BOOL loggedIn;
   NSString *serverURL;
   NSString *username;
   NSString *password;
   NSString *authenticationString;
-  NSInteger userId;
   UserType userType;
 }
 
 @property (nonatomic) BOOL loggedIn;
-@property (nonatomic) NSInteger userId;
 @property (nonatomic, readonly) UserType userType;
 @property (nonatomic, readonly) NSString *serverURL;
 @property (nonatomic, readonly) NSString *username;

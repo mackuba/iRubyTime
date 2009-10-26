@@ -8,13 +8,14 @@
 #import "Activity.h"
 #import "GlobalDataManager.h"
 #import "Project.h"
+#import "User.h"
 #import "Utils.h"
 #import "NSArray+BSJSONAdditions.h"
 
 @implementation DataManager
 
-@synthesize projects;
-OnDeallocRelease(projects, projectHash);
+@synthesize projects, users;
+OnDeallocRelease(projects, users, projectHash);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -28,7 +29,19 @@ OnDeallocRelease(projects, projectHash);
 }
 
 // -------------------------------------------------------------------------------------------
-#pragma mark Activities
+#pragma mark JSON conversions
+
+- (NSArray *) objectsOfClass: (Class) klass fromJSONString: (NSString *) jsonString {
+  NSArray *records = [NSArray arrayWithJSONString: jsonString];
+  NSMutableArray *list = [NSMutableArray arrayWithCapacity: records.count];
+  for (NSDictionary *record in records) {
+    NSString *methodName = [[NSStringFromClass(klass) lowercaseString] stringByAppendingString: @"FromJSON:"];
+    SEL method = NSSelectorFromString(methodName);
+    id object = [self performSelector: method withObject: record];
+    [list addObject: object];
+  }
+  return list;
+}
 
 - (Activity *) activityFromJSON: (NSDictionary *) json {
   Activity *activity = [[Activity alloc] init];
@@ -46,27 +59,7 @@ OnDeallocRelease(projects, projectHash);
 }
 
 - (NSArray *) activitiesFromJSONString: (NSString *) jsonString {
-  NSArray *records = [NSArray arrayWithJSONString: jsonString];
-  NSMutableArray *list = [NSMutableArray arrayWithCapacity: records.count];
-  for (NSDictionary *record in records) {
-    Activity *activity = [self activityFromJSON: record];
-    [list addObject: activity];
-  }
-  return list;
-}
-
-// -------------------------------------------------------------------------------------------
-#pragma mark Projects
-
-- (void) setProjects: (NSArray *) projectList {
-  if (projects != projectList) {
-    [projects release];
-    projects = [projectList retain];
-    [projectHash removeAllObjects];
-    for (Project *project in projects) {
-      [projectHash setObject: project forKey: RTInt(project.projectId)];
-    }
-  }
+  return [self objectsOfClass: [Activity class] fromJSONString: jsonString];
 }
 
 - (Project *) projectFromJSON: (NSDictionary *) json {
@@ -77,13 +70,18 @@ OnDeallocRelease(projects, projectHash);
 }
 
 - (NSArray *) projectsFromJSONString: (NSString *) jsonString {
-  NSArray *records = [NSArray arrayWithJSONString: jsonString];
-  NSMutableArray *list = [NSMutableArray arrayWithCapacity: records.count];
-  for (NSDictionary *record in records) {
-    Project *project = [self projectFromJSON: record];
-    [list addObject: project];
-  }
-  return list;
+  return [self objectsOfClass: [Project class] fromJSONString: jsonString];
+}
+
+- (User *) userFromJSON: (NSDictionary *) json {
+  User *user = [[User alloc] init];
+  user.name = [json objectForKey: @"name"];
+  user.userId = [[json objectForKey: @"id"] intValue];
+  return [user autorelease];
+}
+
+- (NSArray *) usersFromJSONString: (NSString *) jsonString {
+  return [self objectsOfClass: [User class] fromJSONString: jsonString];
 }
 
 @end
