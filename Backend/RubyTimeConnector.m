@@ -175,8 +175,8 @@
   Activity *activity;
   switch (request.type) {
     case RTAuthenticationRequest:
-      Notify(AuthenticationSuccessfulNotification);
       [account logInWithResponse: [NSDictionary dictionaryWithJSONString: trimmedString]];
+      Notify(AuthenticationSuccessfulNotification);
       break;
 
     case RTActivityIndexRequest:

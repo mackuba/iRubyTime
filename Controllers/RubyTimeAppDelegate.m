@@ -113,9 +113,9 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 #pragma mark Notification callbacks
 
 - (void) loginSuccessful {
+  [self saveAccountData];
   if (currentController.modalViewController) {
     // login controller was shown previously
-    [self saveAccountData];
     [currentController hidePopupView];
     [self buildGuiForUserType: connector.account.userType];
     [currentController showLoadingMessage];
