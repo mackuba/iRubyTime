@@ -55,7 +55,10 @@
       default: return @"Connection problems.";
     }
   } else if (self.domain == RubyTimeErrorDomain) {
-    return @"An error occurred on the server.";
+    switch (self.code) {
+      case 403: return @"Access denied - please contact your administrator.";
+      default: return @"An error occurred on the server.";
+    }
   } else {
     return [self localizedDescription];
   }
