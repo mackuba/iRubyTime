@@ -151,4 +151,14 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
   cell.textField.enablesReturnKeyAutomatically = YES;
 }
 
+- (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
+  switch (path.row) {
+    case 0: [urlField becomeFirstResponder]; break;
+    case 1: [usernameField becomeFirstResponder]; break;
+    case 2: [passwordField becomeFirstResponder]; break;
+    default: break;
+  }
+  [table deselectRowAtIndexPath: path animated: NO];
+}
+
 @end
