@@ -96,4 +96,11 @@ OnDeallocRelease(projects, users, projectHash);
   return [self objectsOfClass: [User class] fromJSONString: jsonString];
 }
 
+- (void) addSelfToTopOfUsers: (User *) user {
+  NSMutableArray *userList = [users mutableCopy];
+  [userList removeObject: user];
+  [userList insertObject: user atIndex: 0];
+  self.users = [NSArray arrayWithArray: userList];
+}
+
 @end

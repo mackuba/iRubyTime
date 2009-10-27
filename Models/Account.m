@@ -89,7 +89,8 @@ OnDeallocRelease(serverURL, username, password, authenticationString);
 - (void) logInWithResponse: (NSDictionary *) dictionary {
   loggedIn = YES;
   userId = [[dictionary objectForKey: @"id"] intValue];
-  [self setUserTypeFromString: [dictionary objectForKey: @"type"]];
+  self.name = [dictionary objectForKey: @"name"];
+  [self setUserTypeFromString: [dictionary objectForKey: @"iphone_user_type"]];
 }
 
 @end

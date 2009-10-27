@@ -27,5 +27,6 @@
 - (NSArray *) projectsFromJSONString: (NSString *) jsonString;
 - (User *) userFromJSON: (NSDictionary *) json;
 - (NSArray *) usersFromJSONString: (NSString *) jsonString;
+- (void) addSelfToTopOfUsers: (User *) user;
 
 @end

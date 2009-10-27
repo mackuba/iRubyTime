@@ -142,7 +142,7 @@
 }
 
 - (void) loadUsers {
-  [self sendGetRequestToPath: @"/users" type: RTUserIndexRequest];
+  [self sendGetRequestToPath: @"/users/with_activities" type: RTUserIndexRequest];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -202,6 +202,9 @@
       if (trimmedString.length > 0) {
         records = [dataManager usersFromJSONString: trimmedString];
         dataManager.users = records;
+        if (account.userType == Admin) {
+          [dataManager addSelfToTopOfUsers: account];
+        }
         NotifyWithData(UsersReceivedNotification, RTDict(records, @"users"));
       }
       break;
