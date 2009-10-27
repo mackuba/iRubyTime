@@ -26,6 +26,7 @@
 - (void) initApplication;
 - (void) initialDataLoaded;
 - (void) saveAccountData;
+- (void) showLoginDialog;
 - (Account *) loadAccountData;
 - (NSArray *) viewControllersForUserType: (UserType) type;
 - (NSArray *) viewControllerClassesForUserType: (UserType) type;
@@ -42,17 +43,16 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 
 - (void) initApplication {
   connector = [[RubyTimeConnector alloc] initWithAccount: [self loadAccountData]];
+  currentController.connector = connector;
 
   Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);
   if ([connector.account canLogIn]) {
     [self buildGuiForUserType: connector.account.userType];
     [currentController showLoadingMessage];
+    Observe(connector, AuthenticationFailedNotification, loginFailed);
     [connector authenticate];
   } else {
-    currentController.connector = connector;
-    LoginDialogController *loginDialog = [[LoginDialogController alloc] initWithConnector: connector];
-    [currentController showPopupView: loginDialog];
-    [loginDialog release];
+    [self showLoginDialog];
   }
 }
 
@@ -132,6 +132,12 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
   }
 }
 
+- (void) showLoginDialog {
+  LoginDialogController *loginDialog = [[LoginDialogController alloc] initWithConnector: connector];
+  [currentController showPopupView: loginDialog];
+  [loginDialog release];
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Notification callbacks
 
@@ -146,6 +152,10 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
   // TODO: handle the case where a user's type was changed in the meantime
   Observe(connector, ProjectsReceivedNotification, projectsReceived);
   [connector loadProjects];
+}
+
+- (void) loginFailed {
+  [self showLoginDialog];
 }
 
 - (void) projectsReceived {
