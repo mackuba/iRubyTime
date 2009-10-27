@@ -28,6 +28,18 @@ OnDeallocRelease(projects, users, projectHash);
   return self;
 }
 
+- (void) setProjects: (NSArray *) projectList {
+  // set projects and initialize projectHash too
+  if (projects != projectList) {
+    [projects release];
+    projects = [projectList retain];
+    [projectHash removeAllObjects];
+    for (Project *project in projects) {
+      [projectHash setObject: project forKey: RTInt(project.projectId)];
+    }
+  }
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark JSON conversions
 
