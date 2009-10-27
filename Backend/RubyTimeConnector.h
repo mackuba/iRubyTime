@@ -38,6 +38,7 @@
 - (void) authenticate;
 - (void) loadActivitiesForUser: (User *) user;
 - (void) loadActivitiesForProject: (Project *) project;
+- (void) loadAllActivities;
 - (void) loadProjects;
 - (void) loadUsers;
 - (void) createActivity: (Activity *) activity;

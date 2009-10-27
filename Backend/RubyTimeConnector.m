@@ -108,13 +108,17 @@
 }
 
 - (void) loadActivitiesForUser: (User *) user {
-  [self sendGetRequestToPath: RTFormat(@"/users/%d/activities?search_criteria[limit]=20", user.userId)
+  [self sendGetRequestToPath: RTFormat(@"/users/%d/activities?search_criteria[limit]=30", user.userId)
                         type: RTActivityIndexRequest];
 }
 
 - (void) loadActivitiesForProject: (Project *) project {
-  [self sendGetRequestToPath: RTFormat(@"/projects/%d/activities?search_criteria[limit]=20", project.projectId)
+  [self sendGetRequestToPath: RTFormat(@"/projects/%d/activities?search_criteria[limit]=30", project.projectId)
                         type: RTActivityIndexRequest];
+}
+
+- (void) loadAllActivities {
+  [self sendGetRequestToPath: @"/activities?search_criteria[limit]=30" type: RTActivityIndexRequest];
 }
 
 - (void) createActivity: (Activity *) activity {

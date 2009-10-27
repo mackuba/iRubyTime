@@ -1,37 +1,35 @@
 // -------------------------------------------------------
-// UserActivitiesController.m
+// AllActivitiesController.m
 //
 // Copyright (c) 2009 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "Account.h"
+#import "AllActivitiesController.h"
 #import "RubyTimeConnector.h"
-#import "User.h"
-#import "UserActivitiesController.h"
 #import "Utils.h"
 
-@implementation UserActivitiesController
+@implementation AllActivitiesController
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector user: (User *) user {
+- (id) initWithConnector: (RubyTimeConnector *) rtConnector {
   self = [super initWithConnector: rtConnector];
   if (self) {
-    displayedUser = [user retain];
-    self.title = RTFormat(@"%@'s activities", user.name);
+    self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem: UITabBarSystemItemRecents tag: 0];
+    self.title = @"Recent activities";
   }
   return self;
 }
 
 - (BOOL) hasNewActivityButton {
-  return NO;
+  return YES;
 }
 
 - (void) fetchData {
   [super fetchData];
-  [connector loadActivitiesForUser: displayedUser];
+  [connector loadAllActivities];
 }
 
 // -------------------------------------------------------------------------------------------

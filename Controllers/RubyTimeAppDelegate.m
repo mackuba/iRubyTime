@@ -6,6 +6,7 @@
 // -------------------------------------------------------
 
 #import "Account.h"
+#import "AllActivitiesController.h"
 #import "LoginDialogController.h"
 #import "ProjectListController.h"
 #import "RubyTimeAppDelegate.h"
@@ -107,28 +108,17 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 }
 
 - (NSArray *) viewControllerClassesForUserType: (UserType) type {
-  switch (type) {
-    case Employee:
-      return RTArray(
-        [UserActivitiesController class],
-        [ProjectListController class]
-      );
-
-    case Admin:
-      return RTArray(
-        [ProjectListController class],
-        [UserListController class]
-      );
-
-    case ClientUser:
-      return RTArray(
-        [ProjectListController class],
-        [UserListController class]
-      );
-
-    default:
-      // shouldn't happen
-      return [NSArray array];
+  if (type == Admin || type == ClientUser) {
+    return RTArray(
+      [AllActivitiesController class],
+      [ProjectListController class],
+      [UserListController class]
+    );
+  } else {
+    return RTArray(
+      [AllActivitiesController class],
+      [ProjectListController class]
+    );
   }
 }
 
