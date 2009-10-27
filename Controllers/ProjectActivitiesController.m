@@ -5,6 +5,7 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "Account.h"
 #import "Project.h"
 #import "ProjectActivitiesController.h"
 #import "RubyTimeConnector.h"
@@ -25,7 +26,7 @@
 }
 
 - (BOOL) hasNewActivityButton {
-  return YES;
+  return (connector.account.userType != ClientUser);
 }
 
 - (void) fetchData {

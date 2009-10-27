@@ -26,7 +26,7 @@
 }
 
 - (BOOL) hasNewActivityButton {
-  return NO;
+  return ([displayedUser isEqual: connector.account]);
 }
 
 - (void) fetchData {
