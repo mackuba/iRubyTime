@@ -8,15 +8,17 @@
 #import "Activity.h"
 #import "ActivityDateFormatter.h"
 #import "Project.h"
+#import "User.h"
 #import "Utils.h"
 
 @implementation Activity
 
 @synthesize minutes;
-SynthesizeAndReleaseLater(date, dateAsString, comments, project);
+SynthesizeAndReleaseLater(date, dateAsString, comments, project, user);
 
 - (id) init {
-  self = [super initWithModelName: @"Activity" properties: RTArray(@"comments", @"date", @"minutes", @"project")];
+  self = [super initWithModelName: @"Activity"
+                       properties: RTArray(@"comments", @"date", @"minutes", @"project", @"user")];
   if (self) {
     self.comments = @"";
     self.date = [NSDate date];

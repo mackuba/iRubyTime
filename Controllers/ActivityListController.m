@@ -5,6 +5,7 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "Account.h"
 #import "Activity.h"
 #import "ActivityCell.h"
 #import "ActivityListController.h"
@@ -151,8 +152,10 @@ OnDeallocRelease(manager);
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
   Activity *activity = [manager.activities objectAtIndex: path.row];
-  UIViewController *controller =
-    [[ShowActivityDialogController alloc] initWithActivity: activity connector: connector activityManager: manager];
+  ShowActivityDialogController *controller = [[ShowActivityDialogController alloc] initWithActivity: activity
+                                                                                          connector: connector
+                                                                                    activityManager: manager];
+  controller.displaysActivityUser = (connector.account.userType != Employee);
   [self.navigationController pushViewController: controller animated: YES];
   [table deselectRowAtIndexPath: path animated: YES];
   [controller release];

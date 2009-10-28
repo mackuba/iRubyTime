@@ -18,6 +18,7 @@
 
 @implementation ShowActivityDialogController
 
+@synthesize displaysActivityUser;
 OnDeallocRelease(originalActivity, editButton);
 
 // -------------------------------------------------------------------------------------------
@@ -30,6 +31,7 @@ OnDeallocRelease(originalActivity, editButton);
   if (self) {
     activity = [anActivity copy];
     originalActivity = [anActivity retain];
+    displaysActivityUser = NO;
   }
   return self;
 }
@@ -115,7 +117,11 @@ OnDeallocRelease(originalActivity, editButton);
 
 - (IntArray *) rowTypesInSection: (NSInteger) section {
   if (section == 0) {
-    return [IntArray arrayOfSize: 4 integers: DateRow, ProjectRow, LengthRow, CommentsRow];
+    if (displaysActivityUser) {
+      return [IntArray arrayOfSize: 5 integers: DateRow, ProjectRow, UserRow, LengthRow, CommentsRow];
+    } else {
+      return [IntArray arrayOfSize: 4 integers: DateRow, ProjectRow, LengthRow, CommentsRow];
+    }
   } else {
     if (self.editing) {
       return [IntArray arrayOfSize: 1 integers: DeleteButtonRow];
@@ -139,7 +145,8 @@ OnDeallocRelease(originalActivity, editButton);
   } else {
     cell = [super cellForRowType: rowType];
     cell.accessoryType = UITableViewCellAccessoryNone;
-    cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.editingAccessoryType =
+     (rowType == UserRow) ? UITableViewCellAccessoryNone : UITableViewCellAccessoryDisclosureIndicator;
   }
   return cell;
 }
@@ -169,7 +176,11 @@ OnDeallocRelease(originalActivity, editButton);
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
   if (self.editing) {
     if (path.section == 0) {
-      [super tableView: table didSelectRowAtIndexPath: path];
+      if ([self rowTypeAtIndexPath: path] != UserRow) {
+        [super tableView: table didSelectRowAtIndexPath: path];
+      } else {
+        [table deselectRowAtIndexPath: path animated: YES];
+      }
     } else {
       [self deleteActivityClicked];
     }

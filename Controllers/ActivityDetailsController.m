@@ -168,6 +168,11 @@
       cell.detailTextLabel.text = activity.project.name;
       break;
 
+    case UserRow:
+      cell.textLabel.text = @"User";
+      cell.detailTextLabel.text = activity.user.name;
+      break;
+
     case LengthRow:
       cell.textLabel.text = @"Length";
       cell.detailTextLabel.text = [activity hourString];

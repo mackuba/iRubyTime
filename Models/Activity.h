@@ -8,6 +8,7 @@
 #import "Model.h"
 
 @class Project;
+@class User;
 
 @interface Activity : Model {
   NSString *comments;
@@ -15,6 +16,7 @@
   NSString *dateAsString;
   NSInteger minutes;
   Project *project;
+  User *user;
 }
 
 @property (nonatomic, copy) NSString *comments;
@@ -22,6 +24,7 @@
 @property (nonatomic, copy) NSString *dateAsString;
 @property (nonatomic) NSInteger minutes;
 @property (nonatomic, retain) Project *project;
+@property (nonatomic, retain) User *user;
 
 - (NSString *) hourString;
 - (BOOL) isEqualToActivity: (Activity *) other;

@@ -11,7 +11,10 @@
 @interface ShowActivityDialogController : ActivityDetailsController <UIActionSheetDelegate> {
   Activity *originalActivity;
   UIBarButtonItem *editButton;
+  BOOL displaysActivityUser;
 }
+
+@property (nonatomic) BOOL displaysActivityUser;
 
 - (id) initWithActivity: (Activity *) activity
               connector: (RubyTimeConnector *) connector
