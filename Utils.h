@@ -53,9 +53,21 @@
 #define RTInt(i) [NSNumber numberWithInt: i]
 #define RTIndex(sec, row) [NSIndexPath indexPathForRow: row inSection: sec]
 
-#define AbstractVoidMethod() [self doesNotRecognizeSelector: _cmd];
-#define AbstractMethod() AbstractVoidMethod(); return nil;
+#define AbstractMethod(returnStatement) { [self doesNotRecognizeSelector: _cmd]; returnStatement; }
 
+@interface IntArray : NSObject {
+  NSInteger *values;
+  NSInteger size;
+}
+
+@property (nonatomic, readonly) NSInteger size;
+
++ (IntArray *) arrayOfSize: (NSInteger) size integers: (NSInteger) first, ...;
++ (IntArray *) emptyArray;
+- (id) initWithSize: (NSInteger) size;
+- (void) setInteger: (NSInteger) value atIndex: (NSInteger) index;
+- (NSInteger) integerAtIndex: (NSInteger) index;
+@end
 
 @interface UIAlertView (RubyTime)
 + (void) showAlertWithTitle: (NSString *) title content: (NSString *) content;

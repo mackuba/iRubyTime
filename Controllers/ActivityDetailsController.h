@@ -8,12 +8,8 @@
 #import <UIKit/UIKit.h>
 
 #import "Activity.h"
-#import "ActivityCommentsDialogController.h"
-#import "ActivityDateDialogController.h"
-#import "ActivityLengthDialogController.h"
 #import "ActivityManager.h"
 #import "Project.h"
-#import "ProjectChoiceController.h"
 #import "Request.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
@@ -22,15 +18,14 @@
 #define COMMENTS_CELL_HEIGHT 92
 #define STANDARD_CELL_HEIGHT 44
 
+typedef enum { DateRow, ProjectRow, LengthRow, CommentsRow, DeleteButtonRow } RowType;
+
 // ABSTRACT CLASS
 
-@interface ActivityDetailsController : UIViewController {
+@interface ActivityDetailsController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
   Activity *activity;
   ActivityManager *activityManager;
-  ActivityCommentsDialogController *activityCommentsDialogController;
-  ActivityDateDialogController *activityDateDialogController;
-  ActivityLengthDialogController *activityLengthDialogController;
-  ProjectChoiceController *projectChoiceController;
+  NSMutableDictionary *subcontrollers;
   RubyTimeConnector *connector;
   UIActivityIndicatorView *spinner;
   UIBarButtonItem *cancelButton;
@@ -50,19 +45,17 @@
          activityManager: (ActivityManager *) manager;
 
 - (void) setupToolbar;
-- (UITableViewCell *) tableView: (UITableView *) table fieldCellForRow: (NSInteger) row;
-- (void) pushHelperControllerForPath: (NSIndexPath *) path;
 - (NSString *) errorMessageFromJSON: (NSString *) jsonString;
 - (NSString *) errorMessageFromError: (NSError *) error text: (NSString *) text request: (Request *) request;
-
-- (ActivityCommentsDialogController *) activityCommentsDialogController;
-- (ActivityDateDialogController *) activityDateDialogController;
-- (ActivityLengthDialogController *) activityLengthDialogController;
-- (ProjectChoiceController *) projectChoiceController;
 - (void) clearHelperControllers;
+- (void) pushSubcontrollerForPath: (NSIndexPath *) path;
+- (RowType) rowTypeAtIndexPath: (NSIndexPath *) path;
+- (UITableViewCell *) cellForRowType: (RowType) rowType;
+- (UIViewController *) subcontrollerForRowType: (RowType) rowType;
 
 // ABSTRACT METHODS
 - (void) executeSave;
-- (UIViewController *) helperControllerForRow: (NSInteger) row;
+- (CGFloat) heightForRowOfType: (RowType) rowType;
+- (IntArray *) rowTypesInSection: (NSInteger) section;
 
 @end

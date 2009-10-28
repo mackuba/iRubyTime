@@ -5,7 +5,11 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "ActivityCommentsDialogController.h"
 #import "ActivityDetailsController.h"
+#import "ActivityDateDialogController.h"
+#import "ActivityLengthDialogController.h"
+#import "ProjectChoiceController.h"
 
 #define ACTIVITY_FIELD_CELL_TYPE @"ActivityFieldCell"
 
@@ -25,6 +29,7 @@
     connector = [rtConnector retain];
     activity = nil;
     activityManager = manager;
+    subcontrollers = [[NSMutableDictionary alloc] init];
   }
   return self;
 }
@@ -69,7 +74,7 @@
   }
 }
 
-- (void) executeSave { AbstractVoidMethod() }
+- (void) executeSave { AbstractMethod() }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Notification callbacks
@@ -118,82 +123,105 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
-- (UITableViewCell *) tableView: (UITableView *) table fieldCellForRow: (NSInteger) row {
-  UITableViewCell *cell = [table cellWithStyle: UITableViewCellStyleValue1 andIdentifier: ACTIVITY_FIELD_CELL_TYPE];
-  switch(row) {
-    case 0:
+// original delegate methods
+
+- (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
+  return [[self rowTypesInSection: section] size];
+}
+
+- (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
+  return [self cellForRowType: [self rowTypeAtIndexPath: path]];
+}
+
+- (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
+  return [self heightForRowOfType: [self rowTypeAtIndexPath: path]];
+}
+
+- (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
+  [self pushSubcontrollerForPath: path];
+}
+
+
+// abstract methods that the subclasses need to define
+
+- (IntArray *) rowTypesInSection: (NSInteger) section { AbstractMethod(return nil); }
+
+- (CGFloat) heightForRowOfType: (RowType) rowType { AbstractMethod(return 0); }
+
+
+// helper methods
+
+- (RowType) rowTypeAtIndexPath: (NSIndexPath *) path {
+  return [[self rowTypesInSection: path.section] integerAtIndex: path.row];
+}
+
+- (UITableViewCell *) cellForRowType: (RowType) rowType {
+  UITableViewCell *cell = [tableView cellWithStyle: UITableViewCellStyleValue1 andIdentifier: ACTIVITY_FIELD_CELL_TYPE];
+  switch (rowType) {
+    case DateRow:
       cell.textLabel.text = @"Date";
       cell.detailTextLabel.text = activity.dateAsString;
       break;
 
-    case 1:
+    case ProjectRow:
       cell.textLabel.text = @"Project";
       cell.detailTextLabel.text = activity.project.name;
       break;
 
-    case 2:
+    case LengthRow:
       cell.textLabel.text = @"Length";
       cell.detailTextLabel.text = [activity hourString];
       break;
-      
+
+    case CommentsRow:
+      cell = commentsCell;
+
     default:
-      cell.textLabel.text = @"Comments";
-      cell.detailTextLabel.text = activity.comments;
+      break;
   }
   return cell;
 }
 
-- (void) pushHelperControllerForPath: (NSIndexPath *) path {
-  UIViewController *controller = [self helperControllerForRow: path.row];
+- (void) pushSubcontrollerForPath: (NSIndexPath *) path {
+  UIViewController *controller = [self subcontrollerForRowType: [self rowTypeAtIndexPath: path]];
   if (controller) {
     [self.navigationController pushViewController: controller animated: YES];
   }
 }
 
-- (UIViewController *) helperControllerForRow: (NSInteger) row { AbstractMethod() }
+- (Class) subcontrollerClassForRowType: (RowType) rowType {
+  switch (rowType) {
+    case DateRow:
+      return [ActivityDateDialogController class];
+    case ProjectRow:
+      return [ProjectChoiceController class];
+    case LengthRow:
+      return [ActivityLengthDialogController class];
+    case CommentsRow:
+      return [ActivityCommentsDialogController class];
+    default:
+      return nil;
+  }
+}
 
-// -------------------------------------------------------------------------------------------
-#pragma mark Helper controllers
+- (UIViewController *) subcontrollerForRowType: (RowType) rowType {
+  UIViewController *controller = [subcontrollers objectForKey: RTInt(rowType)];
+  if (!controller) {
+    Class controllerClass = [self subcontrollerClassForRowType: rowType];
+    if (controllerClass == [ProjectChoiceController class]) {
+      controller = [[ProjectChoiceController alloc] initWithActivity: activity projectList: connector.projects];
+    } else {
+      controller = [[controllerClass alloc] initWithActivity: activity];
+    }
+    [subcontrollers setObject: controller forKey: RTInt(rowType)];
+    [controller release];
+  }
+  return controller;
+}
 
 - (void) clearHelperControllers {
-  [activityCommentsDialogController release];
-  [activityDateDialogController release];
-  [activityLengthDialogController release];
-  [projectChoiceController release];
-  activityCommentsDialogController = nil;
-  activityDateDialogController = nil;
-  activityLengthDialogController = nil;
-  projectChoiceController = nil;
-}
-
-- (ActivityCommentsDialogController *) activityCommentsDialogController {
-  if (!activityCommentsDialogController) {
-    activityCommentsDialogController = [[ActivityCommentsDialogController alloc] initWithActivity: activity];
-  }
-  return activityCommentsDialogController;
-}
-
-- (ActivityDateDialogController *) activityDateDialogController {
-  if (!activityDateDialogController) {
-    activityDateDialogController = [[ActivityDateDialogController alloc] initWithActivity: activity];
-  }
-  return activityDateDialogController;
-}
-
-- (ActivityLengthDialogController *) activityLengthDialogController {
-  if (!activityLengthDialogController) {
-    activityLengthDialogController = [[ActivityLengthDialogController alloc] initWithActivity: activity];
-  }
-  return activityLengthDialogController;
-}
-
-- (ProjectChoiceController *) projectChoiceController {
-  if (!projectChoiceController) {
-    projectChoiceController = [[ProjectChoiceController alloc] initWithActivity: activity
-                                                                    projectList: connector.projects
-                                                                 recentProjects: [activityManager recentProjects]];
-  }
-  return projectChoiceController;
+  [subcontrollers release];
+  subcontrollers = [[NSMutableDictionary alloc] init];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -206,8 +234,7 @@
 - (void) dealloc {
   StopObservingAll();
   ReleaseAll(tableView, activity, connector, spinner, saveButton, loadingButton, cancelButton,
-    projectChoiceController, activityCommentsDialogController, activityDateDialogController,
-    activityLengthDialogController, commentsCell, commentsLabel);
+    subcontrollers, commentsCell, commentsLabel);
   [super dealloc];
 }
 

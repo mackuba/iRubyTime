@@ -11,12 +11,9 @@
 
 @interface ProjectChoiceController : UITableViewController {
   NSArray *projects;
-  NSArray *recentProjects;
   Activity *activity;
 }
 
-- (id) initWithActivity: (Activity *) newActivity
-            projectList: (NSArray *) projectList
-         recentProjects: (NSArray *) recentProjects;
+- (id) initWithActivity: (Activity *) newActivity projectList: (NSArray *) projectList;
 
 @end

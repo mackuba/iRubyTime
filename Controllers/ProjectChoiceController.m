@@ -14,19 +14,16 @@
 
 @implementation ProjectChoiceController
 
-OnDeallocRelease(activity, projects, recentProjects);
+OnDeallocRelease(activity, projects);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithActivity: (Activity *) newActivity
-            projectList: (NSArray *) projectList
-         recentProjects: (NSArray *) recent {
+- (id) initWithActivity: (Activity *) newActivity projectList: (NSArray *) projectList {
   self = [super initWithStyle: UITableViewStyleGrouped];
   if (self) {
     activity = [newActivity retain];
     projects = [projectList retain];
-    recentProjects = [recent retain];
     self.title = @"Choose project";
   }
   return self;
@@ -43,14 +40,8 @@ OnDeallocRelease(activity, projects, recentProjects);
   UITableViewCell *cell = [table cellWithStyle: UITableViewCellStyleDefault andIdentifier: PROJECT_CELL_TYPE];
   Project *project = (Project *) [projects objectAtIndex: path.row];
   cell.textLabel.text = project.name;
-
-  if ([recentProjects indexOfObject: project] != NSNotFound) {
-    cell.textLabel.font = [UIFont boldSystemFontOfSize: 16];
-    cell.textLabel.textColor = [UIColor blackColor];
-  } else {
-    cell.textLabel.font = [UIFont systemFontOfSize: 16];
-    cell.textLabel.textColor = [UIColor darkGrayColor];
-  }
+  cell.textLabel.font = [UIFont systemFontOfSize: 16];
+  cell.textLabel.textColor = [UIColor darkGrayColor];
 
   if (project == activity.project) {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;

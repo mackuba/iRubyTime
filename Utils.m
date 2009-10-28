@@ -11,6 +11,47 @@
 
 #define KEYCHAIN_SERVICE_NAME @"iRubyTime"
 
+@implementation IntArray
+
+@synthesize size;
+
++ (IntArray *) arrayOfSize: (NSInteger) size integers: (NSInteger) first, ... {
+  IntArray *array = [[IntArray alloc] initWithSize: size];
+  [array setInteger: first atIndex: 0];
+  va_list args;
+  va_start(args, first);
+  NSInteger next;
+  for (NSInteger i = 1; i < size; i++) {
+    next = va_arg(args, NSInteger);
+    [array setInteger: next atIndex: i];
+  }
+  va_end(args);
+  return [array autorelease];
+}
+
++ (IntArray *) emptyArray {
+  return [[[IntArray alloc] initWithSize: 0] autorelease];
+}
+
+- (id) initWithSize: (NSInteger) arraySize {
+  self = [super init];
+  if (self) {
+    values = malloc(sizeof(NSInteger) * arraySize);
+    size = arraySize;
+  }
+  return self;
+}
+
+- (void) setInteger: (NSInteger) value atIndex: (NSInteger) index {
+  values[index] = value;
+}
+
+- (NSInteger) integerAtIndex: (NSInteger) index {
+  return values[index];
+}
+
+@end
+
 @implementation UIAlertView (RubyTime)
 
 + (void) showAlertWithTitle: (NSString *) title content: (NSString *) content {

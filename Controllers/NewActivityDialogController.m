@@ -67,35 +67,18 @@ SynthesizeAndReleaseLater(activityLengthPicker);
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
-- (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
-  return 3;
+- (IntArray *) rowTypesInSection: (NSInteger) section {
+  return [IntArray arrayOfSize: 3 integers: DateRow, ProjectRow, CommentsRow];
 }
 
-- (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  if (path.row == 2) {
-    return commentsCell;
-  } else {
-    UITableViewCell *cell = [self tableView: table fieldCellForRow: path.row];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    return cell;
-  }
+- (UITableViewCell *) cellForRowType: (RowType) rowType {
+  UITableViewCell *cell = [super cellForRowType: rowType];
+  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  return cell;
 }
 
-- (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
-  return (path.row == 2) ? COMMENTS_CELL_HEIGHT : STANDARD_CELL_HEIGHT;
-}
-
-- (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
-  [self pushHelperControllerForPath: path];
-}
-
-- (UIViewController *) helperControllerForRow: (NSInteger) row {
-  switch (row) {
-    case 0: return [self activityDateDialogController];
-    case 1: return [self projectChoiceController];
-    case 2: return [self activityCommentsDialogController];
-    default: return nil;
-  }
+- (CGFloat) heightForRowOfType: (RowType) rowType {
+  return (rowType == CommentsRow) ? COMMENTS_CELL_HEIGHT : STANDARD_CELL_HEIGHT;
 }
 
 @end

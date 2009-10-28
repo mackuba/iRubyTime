@@ -109,39 +109,39 @@ OnDeallocRelease(originalActivity, editButton);
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
+- (IntArray *) rowTypesInSection: (NSInteger) section {
+  if (section == 0) {
+    return [IntArray arrayOfSize: 4 integers: DateRow, ProjectRow, LengthRow, CommentsRow];
+  } else {
+    if (self.editing) {
+      return [IntArray arrayOfSize: 1 integers: DeleteButtonRow];
+    } else {
+      return [IntArray emptyArray];
+    }
+  }
+}
+
 - (NSInteger) numberOfSectionsInTableView: (UITableView *) table {
   return 2;
 }
 
-- (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
-  if (section == 0) {
-    return 4; // TODO: 5 if activity author is displayed too
-  } else {
-    return (self.editing ? 1 : 0);
-  }
-}
-
-- (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
+- (UITableViewCell *) cellForRowType: (RowType) rowType {
   UITableViewCell *cell;
-  if (path.section == 0) {
-    if (path.row == 3) {
-      cell = commentsCell;
-    } else {
-      cell = [self tableView: table fieldCellForRow: path.row];
-    }
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  } else {
-    cell = [table cellWithStyle: UITableViewCellStyleDefault andIdentifier: DELETE_ACTIVITY_CELL_TYPE];
+  if (rowType == DeleteButtonRow) {
+    cell = [tableView cellWithStyle: UITableViewCellStyleDefault andIdentifier: DELETE_ACTIVITY_CELL_TYPE];
     cell.textLabel.text = @"Delete activity";
     cell.textLabel.textAlignment = UITextAlignmentCenter;
     cell.textLabel.textColor = [UIColor colorWithRed: 0.7 green: 0.0 blue: 0.0 alpha: 1.0];
+  } else {
+    cell = [super cellForRowType: rowType];
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
   return cell;
 }
 
-- (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
-  if (path.row == 3) {
+- (CGFloat) heightForRowOfType: (RowType) rowType {
+  if (rowType == CommentsRow) {
     CGSize rect = [activity.comments sizeWithFont: commentsLabel.font
                                 constrainedToSize: CGSizeMake(commentsLabel.bounds.size.width, 200)
                                     lineBreakMode: UILineBreakModeWordWrap];
@@ -165,22 +165,12 @@ OnDeallocRelease(originalActivity, editButton);
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
   if (self.editing) {
     if (path.section == 0) {
-      [self pushHelperControllerForPath: path];
+      [super tableView: table didSelectRowAtIndexPath: path];
     } else {
       [self deleteActivityClicked];
     }
   } else {
     [table deselectRowAtIndexPath: path animated: YES];
-  }
-}
-
-- (UIViewController *) helperControllerForRow: (NSInteger) row {
-  switch (row) {
-    case 0: return [self activityDateDialogController];
-    case 1: return [self projectChoiceController];
-    case 2: return [self activityLengthDialogController];
-    case 3: return [self activityCommentsDialogController];
-    default: return nil;
   }
 }
 

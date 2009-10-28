@@ -16,7 +16,7 @@
 @synthesize connector;
 OnDeallocRelease(connector, loadingView);
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector { AbstractMethod() }
+- (id) initWithConnector: (RubyTimeConnector *) rtConnector { AbstractMethod(return nil) }
 
 - (id) initWithConnector: (RubyTimeConnector *) rtConnector andStyle: (UITableViewStyle) style {
   self = [super init];
@@ -104,6 +104,6 @@ OnDeallocRelease(connector, loadingView);
 }
 
 // implement in subclasses
-- (UITableViewCell *) tableView: (UITableView *) t cellForRowAtIndexPath: (NSIndexPath *) p { AbstractMethod(); }
+- (UITableViewCell *) tableView: (UITableView *) t cellForRowAtIndexPath: (NSIndexPath *) p {AbstractMethod(return nil)}
 
 @end
