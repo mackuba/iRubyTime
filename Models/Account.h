@@ -5,7 +5,6 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import <Foundation/Foundation.h>
 #import "User.h"
 
 typedef enum { Employee, ClientUser, Admin } UserType;

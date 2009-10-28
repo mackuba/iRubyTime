@@ -10,27 +10,16 @@
 
 @implementation User
 
-@synthesize userId;
 SynthesizeAndReleaseLater(name);
 
-- (id) copyWithZone: (NSZone *) zone {
-  User *other = [[User alloc] init];
-  other.name = self.name;
-  other.userId = self.userId;
-  return other;
+- (id) init {
+  return [super initWithModelName: @"User" properties: RTArray(@"name")];
 }
 
-- (BOOL) isEqual: (id) other {
-  if ([other isKindOfClass: [User class]]) {
-    User *otherUser = (User *) other;
-    return otherUser.userId == self.userId;
-  } else {
-    return false;
-  }
-}
-
-- (NSUInteger) hash {
-  return userId;
++ (void) addSelfToTopOfUsers: (User *) user {
+  NSMutableArray *userList = [self list];
+  [userList removeObject: user];
+  [userList insertObject: user atIndex: 0];
 }
 
 @end

@@ -13,7 +13,6 @@
 		581063C710134B3900E8A540 /* ActivityDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 581063C610134B3900E8A540 /* ActivityDetailsController.m */; };
 		581063EB1013595100E8A540 /* ShowActivityDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581063EA1013595100E8A540 /* ShowActivityDialog.xib */; };
 		5810641D101362CC00E8A540 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5810641C101362CC00E8A540 /* LoadingView.m */; };
-		5831E83F0FB0B2A5008680E5 /* GlobalDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831E83E0FB0B2A5008680E5 /* GlobalDataManager.m */; };
 		5833BE5B1095BC4D00A5530E /* UserActivitiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BE5A1095BC4D00A5530E /* UserActivitiesController.m */; };
 		5833BE5E1095C29000A5530E /* ProjectActivitiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BE5D1095C29000A5530E /* ProjectActivitiesController.m */; };
 		5833BEB41095D9C800A5530E /* UserListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BEB31095D9C800A5530E /* UserListController.m */; };
@@ -27,6 +26,8 @@
 		5844CE620FC31FA8007F22FE /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 5844CE610FC31FA8007F22FE /* README.markdown */; };
 		586516620FFFB82500363BB2 /* ShowActivityDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586516610FFFB82500363BB2 /* ShowActivityDialogController.m */; };
 		586DAE120FBB68CA00DBCF0A /* NewActivityDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */; };
+		586E34EB10987AB9005EB2C8 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E34EA10987AB9005EB2C8 /* Model.m */; };
+		586E368F10989EAE005EB2C8 /* ModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E368E10989EAE005EB2C8 /* ModelManager.m */; };
 		588867231090753E00EEFCF9 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588867221090753E00EEFCF9 /* BaseViewController.m */; };
 		5888687D1090AEF700EEFCF9 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 5888687A1090AEF700EEFCF9 /* Images */; };
 		588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB020FADD47C00460689 /* MIT-LICENSE.txt */; };
@@ -78,8 +79,6 @@
 		581063EA1013595100E8A540 /* ShowActivityDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowActivityDialog.xib; sourceTree = "<group>"; };
 		5810641B101362CC00E8A540 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
 		5810641C101362CC00E8A540 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
-		5831E83D0FB0B2A5008680E5 /* GlobalDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalDataManager.h; sourceTree = "<group>"; };
-		5831E83E0FB0B2A5008680E5 /* GlobalDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalDataManager.m; sourceTree = "<group>"; };
 		5833BE591095BC4D00A5530E /* UserActivitiesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserActivitiesController.h; sourceTree = "<group>"; };
 		5833BE5A1095BC4D00A5530E /* UserActivitiesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserActivitiesController.m; sourceTree = "<group>"; };
 		5833BE5C1095C29000A5530E /* ProjectActivitiesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectActivitiesController.h; sourceTree = "<group>"; };
@@ -99,6 +98,10 @@
 		586516600FFFB82500363BB2 /* ShowActivityDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowActivityDialogController.h; sourceTree = "<group>"; };
 		586516610FFFB82500363BB2 /* ShowActivityDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowActivityDialogController.m; sourceTree = "<group>"; };
 		586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewActivityDialog.xib; sourceTree = "<group>"; };
+		586E34E910987AB9005EB2C8 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		586E34EA10987AB9005EB2C8 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
+		586E368D10989EAE005EB2C8 /* ModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelManager.h; sourceTree = "<group>"; };
+		586E368E10989EAE005EB2C8 /* ModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelManager.m; sourceTree = "<group>"; };
 		588867211090753E00EEFCF9 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		588867221090753E00EEFCF9 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		5888687A1090AEF700EEFCF9 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
@@ -337,8 +340,6 @@
 			children = (
 				58B2D0C91091CA6C00F7A801 /* ActivityManager.h */,
 				58B2D0CA1091CA6C00F7A801 /* ActivityManager.m */,
-				5831E83D0FB0B2A5008680E5 /* GlobalDataManager.h */,
-				5831E83E0FB0B2A5008680E5 /* GlobalDataManager.m */,
 				58CA2D4A0FA7995E007A6A65 /* Request.h */,
 				58CA2D4B0FA7995E007A6A65 /* Request.m */,
 				58CA2D4C0FA7995E007A6A65 /* RubyTimeConnector.h */,
@@ -356,6 +357,10 @@
 				58CA2DAD0FA7AE6A007A6A65 /* Activity.m */,
 				58B082FB101BBB3B00D30C73 /* ActivityDateFormatter.h */,
 				58B082FC101BBB3B00D30C73 /* ActivityDateFormatter.m */,
+				586E34E910987AB9005EB2C8 /* Model.h */,
+				586E34EA10987AB9005EB2C8 /* Model.m */,
+				586E368D10989EAE005EB2C8 /* ModelManager.h */,
+				586E368E10989EAE005EB2C8 /* ModelManager.m */,
 				58E9FFBF0FB22F9D00CDA046 /* Project.h */,
 				58E9FFC00FB22F9D00CDA046 /* Project.m */,
 				5833BEBF1095E7F600A5530E /* User.h */,
@@ -443,7 +448,6 @@
 				58CA2D4F0FA7995E007A6A65 /* RubyTimeConnector.m in Sources */,
 				58CA2DAE0FA7AE6A007A6A65 /* Activity.m in Sources */,
 				588BAB190FADD79B00460689 /* ActivityCell.m in Sources */,
-				5831E83F0FB0B2A5008680E5 /* GlobalDataManager.m in Sources */,
 				58E9FFC10FB22F9D00CDA046 /* Project.m in Sources */,
 				58C0A0F20FBA009D00AF8C14 /* Utils.m in Sources */,
 				589BE9DE0FD1D52300CCFA82 /* NSDataMBBase64.m in Sources */,
@@ -475,6 +479,8 @@
 				5833BEC11095E7F600A5530E /* User.m in Sources */,
 				5833BED01095EA4400A5530E /* Account.m in Sources */,
 				58EAC0F410973A5D00CDF02B /* AllActivitiesController.m in Sources */,
+				586E34EB10987AB9005EB2C8 /* Model.m in Sources */,
+				586E368F10989EAE005EB2C8 /* ModelManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

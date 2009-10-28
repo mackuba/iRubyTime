@@ -109,7 +109,7 @@ OnDeallocRelease(manager);
   NSArray *activities = [notification.userInfo objectForKey: @"activities"];
   [manager setActivities: activities];
   [self initializeView];
-  self.navigationItem.rightBarButtonItem.enabled = (connector.projects.count > 0);
+  self.navigationItem.rightBarButtonItem.enabled = ([Project count] > 0);
   StopObserving(connector, ActivitiesReceivedNotification);
 }
 

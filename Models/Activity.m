@@ -12,11 +12,11 @@
 
 @implementation Activity
 
-@synthesize minutes, activityId;
+@synthesize minutes;
 SynthesizeAndReleaseLater(date, dateAsString, comments, project);
 
 - (id) init {
-  self = [super init];
+  self = [super initWithModelName: @"Activity" properties: RTArray(@"comments", @"date", @"minutes", @"project")];
   if (self) {
     self.comments = @"";
     self.date = [NSDate date];
@@ -24,21 +24,19 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project);
   return self;
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-  Activity *other = [[Activity alloc] init];
-  other.comments = self.comments;
-  other.date = self.date;
-  other.minutes = self.minutes;
-  other.activityId = self.activityId;
-  other.project = self.project;
-  return other;
-}
-
 - (NSString *) hourString {
   return RTFormat(@"%d:%02d", minutes / 60, minutes % 60);
 }
 
-- (void) setDate: (NSDate *) newDate {
+- (void) setDate: (id) newDate {
+  if ([newDate isKindOfClass: [NSString class]]) {
+    [self setDateAsString: newDate];
+  } else {
+    [self setDateAsDate: newDate];
+  }
+}
+
+- (void) setDateAsDate: (NSDate *) newDate {
   [date release];
   date = [newDate copy];
 
@@ -52,7 +50,7 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project);
 
 - (BOOL) isEqualToActivity: (Activity *) other {
   return other &&
-    other.activityId == self.activityId &&
+    other.recordId == self.recordId &&
     other.minutes == self.minutes &&
     other.project == self.project &&
     [other.date isEqualToDate: self.date] &&
@@ -66,7 +64,7 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project);
     [formatter stringFromDate: date],
     [self.comments stringWithPercentEscapesForFormValues],
     [self hourString],
-    self.project.projectId);
+    self.project.recordId);
   [formatter release];
   return query;
 }

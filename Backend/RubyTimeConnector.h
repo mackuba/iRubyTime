@@ -19,19 +19,15 @@
 
 @class Account;
 @class Activity;
-@class DataManager;
 @class Project;
 @class Request;
 @class User;
 
 @interface RubyTimeConnector : NSObject {
   Request *currentRequest;
-  DataManager *dataManager;
   Account *account;
 }
 
-@property (nonatomic, readonly) NSArray *projects;
-@property (nonatomic, readonly) NSArray *users;
 @property (nonatomic, retain) Account *account;
 
 - (id) initWithAccount: (Account *) userAccount;

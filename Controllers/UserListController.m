@@ -36,12 +36,12 @@
 #pragma mark Table view delegate & data source
 
 - (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
-  return connector.users.count;
+  return [User count];
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
   UITableViewCell *cell = [table cellWithStyle: UITableViewCellStyleDefault andIdentifier: USER_CELL_TYPE];
-  User *user = [connector.users objectAtIndex: path.row];
+  User *user = [[User list] objectAtIndex: path.row];
   cell.textLabel.text = user.name;
   if ([user isEqual: connector.account]) {
     cell.textLabel.font = [UIFont boldSystemFontOfSize: 16];
@@ -53,7 +53,7 @@
 }
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
-  User *user = [connector.users objectAtIndex: path.row];
+  User *user = [[User list] objectAtIndex: path.row];
   ActivityListController *controller = [self subcontrollerForUser: user];
   [self.navigationController pushViewController: controller animated: YES];
   [table deselectRowAtIndexPath: path animated: YES];

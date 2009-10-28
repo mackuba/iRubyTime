@@ -47,7 +47,7 @@ OnDeallocRelease(activityList);
   Activity *existing;
   for (index = 0; index < activityList.count; index++) {
     existing = [activityList objectAtIndex: index];
-    if (existing.activityId == activity.activityId) break;
+    if (existing.recordId == activity.recordId) break;
   }
   if (index < activityList.count) {
     [activityList removeObjectAtIndex: index];

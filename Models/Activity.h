@@ -5,16 +5,15 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import <Foundation/Foundation.h>
+#import "Model.h"
 
 @class Project;
 
-@interface Activity : NSObject {
+@interface Activity : Model {
   NSString *comments;
   NSDate *date;
   NSString *dateAsString;
   NSInteger minutes;
-  NSInteger activityId;
   Project *project;
 }
 
@@ -22,11 +21,11 @@
 @property (nonatomic, copy) NSDate *date;
 @property (nonatomic, copy) NSString *dateAsString;
 @property (nonatomic) NSInteger minutes;
-@property (nonatomic) NSInteger activityId;
 @property (nonatomic, retain) Project *project;
 
 - (NSString *) hourString;
 - (BOOL) isEqualToActivity: (Activity *) other;
 - (NSString *) toQueryString;
+- (void) setDateAsDate: (NSDate *) newDate;
 
 @end

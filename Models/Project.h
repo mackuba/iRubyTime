@@ -5,16 +5,12 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import <Foundation/Foundation.h>
+#import "Model.h"
 
-@interface Project : NSObject {
+@interface Project : Model {
   NSString *name;
-  NSInteger projectId;
 }
 
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic) NSInteger projectId;
-
-- (BOOL) isEqual: (id) other;
 
 @end

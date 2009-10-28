@@ -36,20 +36,19 @@
 #pragma mark Table view delegate & data source
 
 - (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
-  // TODO: show only projects that have any activities visible to you?
-  return connector.projects.count;
+  return [Project count];
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
   UITableViewCell *cell = [table cellWithStyle: UITableViewCellStyleDefault andIdentifier: PROJECT_CELL_TYPE];
-  Project *project = [connector.projects objectAtIndex: path.row];
+  Project *project = [[Project list] objectAtIndex: path.row];
   cell.textLabel.text = project.name;
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   return cell;
 }
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
-  Project *project = [connector.projects objectAtIndex: path.row];
+  Project *project = [[Project list] objectAtIndex: path.row];
   ActivityListController *controller = [self subcontrollerForProject: project];
   [self.navigationController pushViewController: controller animated: YES];
   [table deselectRowAtIndexPath: path animated: YES];

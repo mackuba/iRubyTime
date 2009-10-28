@@ -14,16 +14,15 @@
 
 @implementation ProjectChoiceController
 
-OnDeallocRelease(activity, projects);
+OnDeallocRelease(activity);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithActivity: (Activity *) newActivity projectList: (NSArray *) projectList {
+- (id) initWithActivity: (Activity *) newActivity {
   self = [super initWithStyle: UITableViewStyleGrouped];
   if (self) {
     activity = [newActivity retain];
-    projects = [projectList retain];
     self.title = @"Choose project";
   }
   return self;
@@ -33,15 +32,14 @@ OnDeallocRelease(activity, projects);
 #pragma mark Table view delegate & data source
 
 - (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section {
-  return projects.count;
+  return [Project count];
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
   UITableViewCell *cell = [table cellWithStyle: UITableViewCellStyleDefault andIdentifier: PROJECT_CELL_TYPE];
-  Project *project = (Project *) [projects objectAtIndex: path.row];
+  Project *project = [[Project list] objectAtIndex: path.row];
   cell.textLabel.text = project.name;
   cell.textLabel.font = [UIFont systemFontOfSize: 16];
-  cell.textLabel.textColor = [UIColor darkGrayColor];
 
   if (project == activity.project) {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -53,8 +51,8 @@ OnDeallocRelease(activity, projects);
 }
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
-  if (activity.project != [projects objectAtIndex: path.row]) {
-    NSInteger oldIndex = [projects indexOfObject: activity.project];
+  if (activity.project != [[Project list] objectAtIndex: path.row]) {
+    NSInteger oldIndex = [[Project list] indexOfObject: activity.project];
     if (oldIndex != NSNotFound) {
       UITableViewCell *oldCell = [table cellForRowAtIndexPath: RTIndex(0, oldIndex)];
       oldCell.accessoryType = UITableViewCellAccessoryNone;
@@ -62,7 +60,7 @@ OnDeallocRelease(activity, projects);
     UITableViewCell *cell = [table cellForRowAtIndexPath: RTIndex(0, path.row)];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
       
-    activity.project = [projects objectAtIndex: path.row];
+    activity.project = [[Project list] objectAtIndex: path.row];
   } 
 
   [table deselectRowAtIndexPath: path animated: YES];

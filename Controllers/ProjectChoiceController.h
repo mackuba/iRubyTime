@@ -10,10 +10,9 @@
 @class Activity;
 
 @interface ProjectChoiceController : UITableViewController {
-  NSArray *projects;
   Activity *activity;
 }
 
-- (id) initWithActivity: (Activity *) newActivity projectList: (NSArray *) projectList;
+- (id) initWithActivity: (Activity *) newActivity;
 
 @end

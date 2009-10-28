@@ -24,7 +24,7 @@ SynthesizeAndReleaseLater(activityLengthPicker);
       activity.project = [[manager.activities objectAtIndex: 0] project];
     } else {
       activity.minutes = 7 * 60;
-      activity.project = [connector.projects objectAtIndex: 0];
+      activity.project = [[Project list] objectAtIndex: 0];
     }
   }
   return self;

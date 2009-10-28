@@ -10,27 +10,10 @@
 
 @implementation Project
 
-@synthesize projectId;
 SynthesizeAndReleaseLater(name);
 
-- (id) copyWithZone: (NSZone *) zone {
-  Project *other = [[Project alloc] init];
-  other.name = self.name;
-  other.projectId = self.projectId;
-  return other;
-}
-
-- (BOOL) isEqual: (id) other {
-  if ([other isKindOfClass: [Project class]]) {
-    Project *otherProject = (Project *) other;
-    return otherProject.projectId == self.projectId;
-  } else {
-    return false;
-  }
-}
-
-- (NSUInteger) hash {
-  return projectId;
+- (id) init {
+  return [super initWithModelName: @"Project" properties: RTArray(@"name")];
 }
 
 @end

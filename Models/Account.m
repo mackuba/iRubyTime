@@ -30,7 +30,7 @@ OnDeallocRelease(serverURL, username, password, authenticationString);
                 username: (NSString *) user
                 password: (NSString *) pass {
   if (self = [super init]) {
-    userId = -1;
+    recordId = -1;
     loggedIn = NO;
     username = [user copy];
     password = [pass copy];
@@ -88,7 +88,7 @@ OnDeallocRelease(serverURL, username, password, authenticationString);
 
 - (void) logInWithResponse: (NSDictionary *) dictionary {
   loggedIn = YES;
-  userId = [[dictionary objectForKey: @"id"] intValue];
+  self.recordId = [[dictionary objectForKey: @"id"] intValue];
   self.name = [dictionary objectForKey: @"name"];
   [self setUserTypeFromString: [dictionary objectForKey: @"iphone_user_type"]];
 }

@@ -7,14 +7,13 @@
 
 #import "Account.h"
 #import "Activity.h"
-#import "GlobalDataManager.h"
 #import "Project.h"
 #import "Request.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
 #import "NSDictionary+BSJSONAdditions.h"
 
-#define ActivityPath(activity) RTFormat(@"/activities/%d", activity.activityId)
+#define ActivityPath(activity) RTFormat(@"/activities/%d", activity.recordId)
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Private interface
@@ -42,7 +41,6 @@
 
 - (id) initWithAccount: (Account *) userAccount {
   if (self = [super init]) {
-    dataManager = [[DataManager alloc] init];
     self.account = userAccount;
   }
   return self;
@@ -54,14 +52,6 @@
 
 - (BOOL) hasOpenConnections {
   return currentRequest ? YES : NO;
-}
-
-- (NSArray *) projects {
-  return dataManager.projects;
-}
-
-- (NSArray *) users {
-  return dataManager.users;
 }
 
 // -------------------------------------------------------------------------------------------
@@ -108,12 +98,12 @@
 }
 
 - (void) loadActivitiesForUser: (User *) user {
-  [self sendGetRequestToPath: RTFormat(@"/users/%d/activities?search_criteria[limit]=30", user.userId)
+  [self sendGetRequestToPath: RTFormat(@"/users/%d/activities?search_criteria[limit]=30", user.recordId)
                         type: RTActivityIndexRequest];
 }
 
 - (void) loadActivitiesForProject: (Project *) project {
-  [self sendGetRequestToPath: RTFormat(@"/projects/%d/activities?search_criteria[limit]=30", project.projectId)
+  [self sendGetRequestToPath: RTFormat(@"/projects/%d/activities?search_criteria[limit]=30", project.recordId)
                         type: RTActivityIndexRequest];
 }
 
@@ -189,32 +179,32 @@
 
     case RTActivityIndexRequest:
       if (trimmedString.length > 0) {
-        records = [dataManager activitiesFromJSONString: trimmedString];
+        records = [Activity objectsFromJSONString: trimmedString];
         NotifyWithData(ActivitiesReceivedNotification, RTDict(records, @"activities"));
       }
       break;
     
     case RTProjectIndexRequest:
       if (trimmedString.length > 0) {
-        records = [dataManager projectsFromJSONString: trimmedString];
-        dataManager.projects = records;
+        records = [Project objectsFromJSONString: trimmedString];
+        [Project appendObjectsToList: records];
         NotifyWithData(ProjectsReceivedNotification, RTDict(records, @"projects"));
       }
       break;
 
     case RTUserIndexRequest:
       if (trimmedString.length > 0) {
-        records = [dataManager usersFromJSONString: trimmedString];
-        dataManager.users = records;
+        records = [User objectsFromJSONString: trimmedString];
+        [User appendObjectsToList: records];
         if (account.userType == Admin) {
-          [dataManager addSelfToTopOfUsers: account];
+          [User addSelfToTopOfUsers: account];
         }
         NotifyWithData(UsersReceivedNotification, RTDict(records, @"users"));
       }
       break;
     
     case RTCreateActivityRequest:
-      activity = [dataManager activityFromJSONString: trimmedString];
+      activity = [Activity objectFromJSONString: trimmedString];
       NotifyWithData(ActivityCreatedNotification, RTDict(activity, @"activity"));
       break;
 
@@ -261,7 +251,6 @@
 
 - (void) dealloc {
   [self dropCurrentConnection];
-  [dataManager release];
   [account release];
   [super dealloc];
 }

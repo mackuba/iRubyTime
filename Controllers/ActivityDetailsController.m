@@ -208,11 +208,7 @@
   UIViewController *controller = [subcontrollers objectForKey: RTInt(rowType)];
   if (!controller) {
     Class controllerClass = [self subcontrollerClassForRowType: rowType];
-    if (controllerClass == [ProjectChoiceController class]) {
-      controller = [[ProjectChoiceController alloc] initWithActivity: activity projectList: connector.projects];
-    } else {
-      controller = [[controllerClass alloc] initWithActivity: activity];
-    }
+    controller = [[controllerClass alloc] initWithActivity: activity];
     [subcontrollers setObject: controller forKey: RTInt(rowType)];
     [controller release];
   }

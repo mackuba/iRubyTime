@@ -5,16 +5,14 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import <Foundation/Foundation.h>
+#import "Model.h"
 
-@interface User : NSObject {
+@interface User : Model {
   NSString *name;
-  NSInteger userId;
 }
 
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic) NSInteger userId;
 
-- (BOOL) isEqual: (id) other;
++ (void) addSelfToTopOfUsers: (User *) user;
 
 @end
