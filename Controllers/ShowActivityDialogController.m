@@ -5,9 +5,11 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "Account.h"
 #import "ShowActivityDialogController.h"
 
 #define DELETE_ACTIVITY_CELL_TYPE @"DeleteActivityCell"
+
 
 @interface ShowActivityDialogController ()
 - (void) deleteActivityClicked;
@@ -41,11 +43,13 @@ OnDeallocRelease(originalActivity, editButton);
 
 - (void) setupToolbar {
   [super setupToolbar];
-  editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemEdit
-                                                             target: self
-                                                             action: @selector(editClicked)];
-  self.navigationItem.rightBarButtonItem = editButton;
   self.navigationItem.title = @"Activity details";
+  if (connector.account.userType != ClientUser) {
+    editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemEdit
+                                                               target: self
+                                                               action: @selector(editClicked)];
+    self.navigationItem.rightBarButtonItem = editButton;
+  }
 }
 
 // -------------------------------------------------------------------------------------------
