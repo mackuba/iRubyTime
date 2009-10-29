@@ -22,7 +22,7 @@ SynthesizeAndReleaseLater(response, receivedText, sentText, connection, info);
               type: (RTRequestType) requestType
               text: (NSString *) text {
   NSURL *wrappedUrl = [NSURL URLWithString: url];
-  self = [super initWithURL: wrappedUrl cachePolicy: NSURLRequestReloadIgnoringLocalCacheData timeoutInterval: 15];
+  self = [super initWithURL: wrappedUrl cachePolicy: NSURLRequestReloadIgnoringLocalCacheData timeoutInterval: 20];
   if (self) {
     self.type = requestType;
     self.HTTPMethod = method;
