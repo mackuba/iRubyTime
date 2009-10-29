@@ -33,6 +33,7 @@ OnDeallocRelease(connector, loadingView);
   tableView = [[UITableView alloc] initWithFrame: windowSize style: tableStyle];
   tableView.delegate = self;
   tableView.dataSource = self;
+  tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
   [wrapperView addSubview: tableView];
   self.view = [wrapperView autorelease];
 }

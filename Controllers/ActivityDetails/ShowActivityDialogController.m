@@ -63,7 +63,7 @@ OnDeallocRelease(originalActivity, editButton);
                                             cancelButtonTitle: @"Cancel"
                                        destructiveButtonTitle: @"Delete"
                                             otherButtonTitles: nil];
-  [sheet showInView: self.view];
+  [sheet showInView: self.view.window];
   [sheet release];
 }
 
