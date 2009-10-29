@@ -14,18 +14,14 @@ SynthesizeAndReleaseLater(activityLengthPicker);
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector andActivityManager: (ActivityManager *) manager {
-  self = [super initWithConnector: rtConnector nibName: @"NewActivityDialog" activityManager: manager];
+- (id) initWithConnector: (RubyTimeConnector *) rtConnector
+          defaultProject: (Project *) project
+           defaultLength: (NSInteger) minutes {
+  self = [super initWithConnector: rtConnector nibName: @"NewActivityDialog"];
   if (self) {
     activity = [[Activity alloc] init];
-
-    if (manager.activities.count > 0) {
-      activity.minutes = [[manager.activities valueForKeyPath: @"@avg.minutes"] intValue];
-      activity.project = [[manager.activities objectAtIndex: 0] project];
-    } else {
-      activity.minutes = 7 * 60;
-      activity.project = [[Project list] objectAtIndex: 0];
-    }
+    activity.minutes = minutes;
+    activity.project = project;
   }
   return self;
 }

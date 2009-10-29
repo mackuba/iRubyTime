@@ -29,6 +29,10 @@
   return (connector.account.userType != ClientUser);
 }
 
+- (Project *) defaultProjectForNewActivity {
+  return displayedProject;
+}
+
 - (void) fetchData {
   [super fetchData];
   [connector loadActivitiesForProject: displayedProject];

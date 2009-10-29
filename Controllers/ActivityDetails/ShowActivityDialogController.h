@@ -16,8 +16,6 @@
 
 @property (nonatomic) BOOL displaysActivityUser;
 
-- (id) initWithActivity: (Activity *) activity
-              connector: (RubyTimeConnector *) connector
-        activityManager: (ActivityManager *) manager;
+- (id) initWithActivity: (Activity *) activity connector: (RubyTimeConnector *) connector;
 
 @end

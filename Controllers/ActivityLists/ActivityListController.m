@@ -24,7 +24,7 @@
 OnDeallocRelease(manager);
 
 // -------------------------------------------------------------------------------------------
-#pragma mark Initialization
+#pragma mark Initialization and settings
 
 - (id) initWithConnector: (RubyTimeConnector *) rtConnector {
   self = [super initWithConnector: rtConnector andStyle: UITableViewStylePlain];
@@ -33,6 +33,15 @@ OnDeallocRelease(manager);
     dataIsLoaded = NO;
   }
   return self;
+}
+
+- (void) initializeView {
+  [super initializeView];
+  Observe(connector, ActivityCreatedNotification, activityCreated:);
+  Observe(connector, ActivityDeletedNotification, activityDeleted:);
+  Observe(connector, ActivityUpdatedNotification, activityUpdated:);
+  Observe(nil, ActivityDialogCancelledNotification, hidePopupView);
+  // TODO: should these be unobserved when view hides?
 }
 
 - (void) viewDidLoad {
@@ -53,15 +62,6 @@ OnDeallocRelease(manager);
   return NO;
 }
 
-- (void) initializeView {
-  [super initializeView];
-  Observe(connector, ActivityCreatedNotification, activityCreated:);
-  Observe(connector, ActivityDeletedNotification, activityDeleted:);
-  Observe(connector, ActivityUpdatedNotification, activityUpdated:);
-  Observe(nil, ActivityDialogCancelledNotification, hidePopupView);
-  // TODO: should these be unobserved when view hides?
-}
-
 - (BOOL) needsOwnData {
   return !dataIsLoaded;
 }
@@ -69,6 +69,22 @@ OnDeallocRelease(manager);
 // override in subclasses and call super
 - (void) fetchData {
   Observe(connector, ActivitiesReceivedNotification, activitiesReceived:);
+}
+
+- (NSInteger) defaultLengthForNewActivity {
+  if (manager.activities.count > 0) {
+    return [[manager.activities valueForKeyPath: @"@avg.minutes"] intValue];
+  } else {
+    return 7 * 60;
+  }
+}
+
+- (Project *) defaultProjectForNewActivity {
+  if (manager.activities.count > 0) {
+    return [[manager.activities objectAtIndex: 0] project];
+  } else {
+    return [[Project list] objectAtIndex: 0];
+  }
 }
 
 // -------------------------------------------------------------------------------------------
@@ -96,8 +112,10 @@ OnDeallocRelease(manager);
 }
 
 - (void) showNewActivityDialog {
-  NewActivityDialogController *dialog =
-    [[NewActivityDialogController alloc] initWithConnector: connector andActivityManager: manager];
+  NewActivityDialogController *dialog;
+  dialog = [[NewActivityDialogController alloc] initWithConnector: connector
+                                                   defaultProject: [self defaultProjectForNewActivity]
+                                                    defaultLength: [self defaultLengthForNewActivity]];
   [self showPopupView: dialog];
   [dialog release];
 }
@@ -152,9 +170,8 @@ OnDeallocRelease(manager);
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
   Activity *activity = [manager.activities objectAtIndex: path.row];
-  ShowActivityDialogController *controller = [[ShowActivityDialogController alloc] initWithActivity: activity
-                                                                                          connector: connector
-                                                                                    activityManager: manager];
+  ShowActivityDialogController *controller =
+    [[ShowActivityDialogController alloc] initWithActivity: activity connector: connector];
   controller.displaysActivityUser = (connector.account.userType != Employee);
   [self.navigationController pushViewController: controller animated: YES];
   [table deselectRowAtIndexPath: path animated: YES];

@@ -16,7 +16,9 @@
 
 @property (nonatomic, retain) IBOutlet UIDatePicker *activityLengthPicker;
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector andActivityManager: (ActivityManager *) manager;
+- (id) initWithConnector: (RubyTimeConnector *) rtConnector
+          defaultProject: (Project *) project
+           defaultLength: (NSInteger) minutes;
 - (IBAction) timeChanged;
 
 @end

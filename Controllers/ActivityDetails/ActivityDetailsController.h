@@ -8,7 +8,6 @@
 #import <UIKit/UIKit.h>
 
 #import "Activity.h"
-#import "ActivityManager.h"
 #import "Project.h"
 #import "Request.h"
 #import "RubyTimeConnector.h"
@@ -25,7 +24,6 @@ typedef enum { DateRow, ProjectRow, UserRow, LengthRow, CommentsRow, DeleteButto
 
 @interface ActivityDetailsController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
   Activity *activity;
-  ActivityManager *activityManager;
   NSMutableDictionary *subcontrollers;
   RubyTimeConnector *connector;
   UIActivityIndicatorView *spinner;
@@ -41,9 +39,7 @@ typedef enum { DateRow, ProjectRow, UserRow, LengthRow, CommentsRow, DeleteButto
 @property (nonatomic, retain) IBOutlet UITableViewCell *commentsCell;
 @property (nonatomic, retain) IBOutlet UILabel *commentsLabel;
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector
-                 nibName: (NSString *) nib
-         activityManager: (ActivityManager *) manager;
+- (id) initWithConnector: (RubyTimeConnector *) rtConnector nibName: (NSString *) nib;
 
 - (void) setupToolbar;
 - (NSString *) errorMessageFromJSON: (NSString *) jsonString;
