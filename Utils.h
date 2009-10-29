@@ -96,6 +96,7 @@
 
 @interface UIViewController (RubyTime)
 - (void) initializeLengthPicker: (UIDatePicker *) picker usingActivity: (Activity *) activity;
+- (void) setBackButtonTitle: (NSString *) title;
 @end
 
 @interface NSUserDefaults (RubyTime)

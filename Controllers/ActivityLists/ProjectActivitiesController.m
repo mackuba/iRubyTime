@@ -20,7 +20,7 @@
   self = [super initWithConnector: rtConnector];
   if (self) {
     displayedProject = [project retain];
-    self.title = RTFormat(@"%@ activities", project.name);
+    self.title = project.name;
   }
   return self;
 }

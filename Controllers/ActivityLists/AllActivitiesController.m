@@ -21,6 +21,7 @@
   if (self) {
     self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem: UITabBarSystemItemRecents tag: 0];
     self.title = @"Recent activities";
+    [self setBackButtonTitle: @"Recent"];
   }
   return self;
 }

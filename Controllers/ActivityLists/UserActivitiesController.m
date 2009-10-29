@@ -20,7 +20,11 @@
   self = [super initWithConnector: rtConnector];
   if (self) {
     displayedUser = [user retain];
-    self.title = RTFormat(@"%@'s activities", user.name);
+    self.title = user.name;
+    if (user.name.length > 11) {
+      NSString *firstName = [[user.name componentsSeparatedByString: @" "] objectAtIndex: 0];
+      [self setBackButtonTitle: firstName];
+    }
   }
   return self;
 }

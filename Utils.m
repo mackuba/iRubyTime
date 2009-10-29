@@ -147,6 +147,14 @@
   activity.minutes = activity.minutes / precision * precision;
 }
 
+- (void) setBackButtonTitle: (NSString *) title {
+  UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle: title
+                                                             style: UIBarButtonItemStyleDone
+                                                            target: nil
+                                                            action: nil];
+  self.navigationItem.backBarButtonItem = [button autorelease];
+}
+
 @end
 
 @implementation NSUserDefaults (RubyTime)
