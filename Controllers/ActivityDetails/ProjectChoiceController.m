@@ -39,7 +39,6 @@ OnDeallocRelease(activity);
   UITableViewCell *cell = [table cellWithStyle: UITableViewCellStyleDefault andIdentifier: PROJECT_CELL_TYPE];
   Project *project = [[Project list] objectAtIndex: path.row];
   cell.textLabel.text = project.name;
-  cell.textLabel.font = [UIFont systemFontOfSize: 16];
 
   if (project == activity.project) {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
