@@ -9,12 +9,8 @@
 /* Begin PBXBuildFile section */
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		5810634B10132BE600E8A540 /* ActivityLengthDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5810634A10132BE600E8A540 /* ActivityLengthDialog.xib */; };
-		5810635110132C7200E8A540 /* ActivityLengthDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5810635010132C7200E8A540 /* ActivityLengthDialogController.m */; };
-		581063C710134B3900E8A540 /* ActivityDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 581063C610134B3900E8A540 /* ActivityDetailsController.m */; };
 		581063EB1013595100E8A540 /* ShowActivityDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581063EA1013595100E8A540 /* ShowActivityDialog.xib */; };
 		5810641D101362CC00E8A540 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5810641C101362CC00E8A540 /* LoadingView.m */; };
-		5833BE5B1095BC4D00A5530E /* UserActivitiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BE5A1095BC4D00A5530E /* UserActivitiesController.m */; };
-		5833BE5E1095C29000A5530E /* ProjectActivitiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BE5D1095C29000A5530E /* ProjectActivitiesController.m */; };
 		5833BEB41095D9C800A5530E /* UserListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BEB31095D9C800A5530E /* UserListController.m */; };
 		5833BEC11095E7F600A5530E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BEC01095E7F600A5530E /* User.m */; };
 		5833BED01095EA4400A5530E /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BECF1095EA4400A5530E /* Account.m */; };
@@ -24,10 +20,22 @@
 		5833BF751095F91800A5530E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5833BF741095F91800A5530E /* Security.framework */; };
 		5833C0D11095F98A00A5530E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5833C0D01095F98A00A5530E /* Foundation.framework */; };
 		5844CE620FC31FA8007F22FE /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 5844CE610FC31FA8007F22FE /* README.markdown */; };
-		586516620FFFB82500363BB2 /* ShowActivityDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586516610FFFB82500363BB2 /* ShowActivityDialogController.m */; };
 		586DAE120FBB68CA00DBCF0A /* NewActivityDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */; };
 		586E34EB10987AB9005EB2C8 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E34EA10987AB9005EB2C8 /* Model.m */; };
 		586E368F10989EAE005EB2C8 /* ModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E368E10989EAE005EB2C8 /* ModelManager.m */; };
+		586E37111098A8EB005EB2C8 /* RubyTimeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E37101098A8EB005EB2C8 /* RubyTimeAppDelegate.m */; };
+		586E37171098A936005EB2C8 /* ActivityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E37161098A936005EB2C8 /* ActivityManager.m */; };
+		586E373E10999A60005EB2C8 /* ActivityCommentsDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E373110999A60005EB2C8 /* ActivityCommentsDialogController.m */; };
+		586E373F10999A60005EB2C8 /* ActivityDateDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E373310999A60005EB2C8 /* ActivityDateDialogController.m */; };
+		586E374010999A60005EB2C8 /* ActivityDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E373510999A60005EB2C8 /* ActivityDetailsController.m */; };
+		586E374110999A60005EB2C8 /* ActivityLengthDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E373710999A60005EB2C8 /* ActivityLengthDialogController.m */; };
+		586E374210999A60005EB2C8 /* NewActivityDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E373910999A60005EB2C8 /* NewActivityDialogController.m */; };
+		586E374310999A60005EB2C8 /* ProjectChoiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E373B10999A60005EB2C8 /* ProjectChoiceController.m */; };
+		586E374410999A60005EB2C8 /* ShowActivityDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E373D10999A60005EB2C8 /* ShowActivityDialogController.m */; };
+		586E374E10999A6A005EB2C8 /* ActivityListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E374710999A6A005EB2C8 /* ActivityListController.m */; };
+		586E374F10999A6A005EB2C8 /* AllActivitiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E374910999A6A005EB2C8 /* AllActivitiesController.m */; };
+		586E375010999A6A005EB2C8 /* ProjectActivitiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E374B10999A6A005EB2C8 /* ProjectActivitiesController.m */; };
+		586E375110999A6A005EB2C8 /* UserActivitiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E374D10999A6A005EB2C8 /* UserActivitiesController.m */; };
 		588867231090753E00EEFCF9 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588867221090753E00EEFCF9 /* BaseViewController.m */; };
 		5888687D1090AEF700EEFCF9 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 5888687A1090AEF700EEFCF9 /* Images */; };
 		588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB020FADD47C00460689 /* MIT-LICENSE.txt */; };
@@ -37,13 +45,7 @@
 		588BAB190FADD79B00460689 /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 588BAB180FADD79B00460689 /* ActivityCell.m */; };
 		589BE9DE0FD1D52300CCFA82 /* NSDataMBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9DA0FD1D52300CCFA82 /* NSDataMBBase64.m */; };
 		589BE9DF0FD1D52300CCFA82 /* SFHFEditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9DC0FD1D52300CCFA82 /* SFHFEditableCell.m */; };
-		589BE9EF0FD1D57C00CCFA82 /* ActivityCommentsDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9E20FD1D57C00CCFA82 /* ActivityCommentsDialogController.m */; };
-		589BE9F00FD1D57C00CCFA82 /* ActivityDateDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9E40FD1D57C00CCFA82 /* ActivityDateDialogController.m */; };
-		589BE9F10FD1D57C00CCFA82 /* ActivityListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9E60FD1D57C00CCFA82 /* ActivityListController.m */; };
 		589BE9F20FD1D57C00CCFA82 /* LoginDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9E80FD1D57C00CCFA82 /* LoginDialogController.m */; };
-		589BE9F30FD1D57C00CCFA82 /* NewActivityDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9EA0FD1D57C00CCFA82 /* NewActivityDialogController.m */; };
-		589BE9F40FD1D57C00CCFA82 /* ProjectChoiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9EC0FD1D57C00CCFA82 /* ProjectChoiceController.m */; };
-		589BE9F50FD1D57C00CCFA82 /* RubyTimeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9EE0FD1D57C00CCFA82 /* RubyTimeAppDelegate.m */; };
 		589BEA220FD1D60100CCFA82 /* BSJSONEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA190FD1D60100CCFA82 /* BSJSONEncoder.m */; };
 		589BEA230FD1D60100CCFA82 /* NSArray+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA1B0FD1D60100CCFA82 /* NSArray+BSJSONAdditions.m */; };
 		589BEA240FD1D60100CCFA82 /* NSDictionary+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA1D0FD1D60100CCFA82 /* NSDictionary+BSJSONAdditions.m */; };
@@ -53,14 +55,12 @@
 		58ACEFA71014ED9100426EA8 /* CommentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58ACEFA61014ED9100426EA8 /* CommentsCell.xib */; };
 		58AD921D1050335F007A5175 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58AD921C1050335F007A5175 /* Entitlements.plist */; };
 		58B082FD101BBB3B00D30C73 /* ActivityDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B082FC101BBB3B00D30C73 /* ActivityDateFormatter.m */; };
-		58B2D0CB1091CA6C00F7A801 /* ActivityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B2D0CA1091CA6C00F7A801 /* ActivityManager.m */; };
 		58B2D1351091DCCC00F7A801 /* ProjectListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B2D1341091DCCC00F7A801 /* ProjectListController.m */; };
 		58C0A0F20FBA009D00AF8C14 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C0A0F10FBA009D00AF8C14 /* Utils.m */; };
 		58CA2D4E0FA7995E007A6A65 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4B0FA7995E007A6A65 /* Request.m */; };
 		58CA2D4F0FA7995E007A6A65 /* RubyTimeConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4D0FA7995E007A6A65 /* RubyTimeConnector.m */; };
 		58CA2DAE0FA7AE6A007A6A65 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2DAD0FA7AE6A007A6A65 /* Activity.m */; };
 		58E9FFC10FB22F9D00CDA046 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E9FFC00FB22F9D00CDA046 /* Project.m */; };
-		58EAC0F410973A5D00CDF02B /* AllActivitiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58EAC0F310973A5D00CDF02B /* AllActivitiesController.m */; };
 		58EB65700FBCEF4400717C36 /* ActivityDateDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EB656F0FBCEF4400717C36 /* ActivityDateDialog.xib */; };
 		58EB65BA0FBDE71100717C36 /* ActivityCommentsDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EB65B90FBDE71100717C36 /* ActivityCommentsDialog.xib */; };
 		58EBA4480FD45562004DBC6F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 58EBA4470FD45562004DBC6F /* Default.png */; };
@@ -72,17 +72,9 @@
 		28A0AAE50D9B0CCF005BE974 /* RubyTime_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyTime_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5810634A10132BE600E8A540 /* ActivityLengthDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityLengthDialog.xib; sourceTree = "<group>"; };
-		5810634F10132C7200E8A540 /* ActivityLengthDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityLengthDialogController.h; sourceTree = "<group>"; };
-		5810635010132C7200E8A540 /* ActivityLengthDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityLengthDialogController.m; sourceTree = "<group>"; };
-		581063C510134B3900E8A540 /* ActivityDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDetailsController.h; sourceTree = "<group>"; };
-		581063C610134B3900E8A540 /* ActivityDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailsController.m; sourceTree = "<group>"; };
 		581063EA1013595100E8A540 /* ShowActivityDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowActivityDialog.xib; sourceTree = "<group>"; };
 		5810641B101362CC00E8A540 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
 		5810641C101362CC00E8A540 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
-		5833BE591095BC4D00A5530E /* UserActivitiesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserActivitiesController.h; sourceTree = "<group>"; };
-		5833BE5A1095BC4D00A5530E /* UserActivitiesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserActivitiesController.m; sourceTree = "<group>"; };
-		5833BE5C1095C29000A5530E /* ProjectActivitiesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectActivitiesController.h; sourceTree = "<group>"; };
-		5833BE5D1095C29000A5530E /* ProjectActivitiesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectActivitiesController.m; sourceTree = "<group>"; };
 		5833BEB21095D9C800A5530E /* UserListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListController.h; sourceTree = "<group>"; };
 		5833BEB31095D9C800A5530E /* UserListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListController.m; sourceTree = "<group>"; };
 		5833BEBF1095E7F600A5530E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -95,13 +87,37 @@
 		5833BF741095F91800A5530E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		5833C0D01095F98A00A5530E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5844CE610FC31FA8007F22FE /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
-		586516600FFFB82500363BB2 /* ShowActivityDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowActivityDialogController.h; sourceTree = "<group>"; };
-		586516610FFFB82500363BB2 /* ShowActivityDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowActivityDialogController.m; sourceTree = "<group>"; };
 		586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewActivityDialog.xib; sourceTree = "<group>"; };
 		586E34E910987AB9005EB2C8 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		586E34EA10987AB9005EB2C8 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		586E368D10989EAE005EB2C8 /* ModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelManager.h; sourceTree = "<group>"; };
 		586E368E10989EAE005EB2C8 /* ModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelManager.m; sourceTree = "<group>"; };
+		586E37101098A8EB005EB2C8 /* RubyTimeAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyTimeAppDelegate.m; sourceTree = "<group>"; };
+		586E37151098A936005EB2C8 /* ActivityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityManager.h; sourceTree = "<group>"; };
+		586E37161098A936005EB2C8 /* ActivityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityManager.m; sourceTree = "<group>"; };
+		586E37261098A953005EB2C8 /* RubyTimeAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyTimeAppDelegate.h; sourceTree = "<group>"; };
+		586E373010999A60005EB2C8 /* ActivityCommentsDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCommentsDialogController.h; sourceTree = "<group>"; };
+		586E373110999A60005EB2C8 /* ActivityCommentsDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCommentsDialogController.m; sourceTree = "<group>"; };
+		586E373210999A60005EB2C8 /* ActivityDateDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDateDialogController.h; sourceTree = "<group>"; };
+		586E373310999A60005EB2C8 /* ActivityDateDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDateDialogController.m; sourceTree = "<group>"; };
+		586E373410999A60005EB2C8 /* ActivityDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDetailsController.h; sourceTree = "<group>"; };
+		586E373510999A60005EB2C8 /* ActivityDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailsController.m; sourceTree = "<group>"; };
+		586E373610999A60005EB2C8 /* ActivityLengthDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityLengthDialogController.h; sourceTree = "<group>"; };
+		586E373710999A60005EB2C8 /* ActivityLengthDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityLengthDialogController.m; sourceTree = "<group>"; };
+		586E373810999A60005EB2C8 /* NewActivityDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewActivityDialogController.h; sourceTree = "<group>"; };
+		586E373910999A60005EB2C8 /* NewActivityDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewActivityDialogController.m; sourceTree = "<group>"; };
+		586E373A10999A60005EB2C8 /* ProjectChoiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectChoiceController.h; sourceTree = "<group>"; };
+		586E373B10999A60005EB2C8 /* ProjectChoiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectChoiceController.m; sourceTree = "<group>"; };
+		586E373C10999A60005EB2C8 /* ShowActivityDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowActivityDialogController.h; sourceTree = "<group>"; };
+		586E373D10999A60005EB2C8 /* ShowActivityDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowActivityDialogController.m; sourceTree = "<group>"; };
+		586E374610999A6A005EB2C8 /* ActivityListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityListController.h; sourceTree = "<group>"; };
+		586E374710999A6A005EB2C8 /* ActivityListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityListController.m; sourceTree = "<group>"; };
+		586E374810999A6A005EB2C8 /* AllActivitiesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllActivitiesController.h; sourceTree = "<group>"; };
+		586E374910999A6A005EB2C8 /* AllActivitiesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllActivitiesController.m; sourceTree = "<group>"; };
+		586E374A10999A6A005EB2C8 /* ProjectActivitiesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectActivitiesController.h; sourceTree = "<group>"; };
+		586E374B10999A6A005EB2C8 /* ProjectActivitiesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectActivitiesController.m; sourceTree = "<group>"; };
+		586E374C10999A6A005EB2C8 /* UserActivitiesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserActivitiesController.h; sourceTree = "<group>"; };
+		586E374D10999A6A005EB2C8 /* UserActivitiesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserActivitiesController.m; sourceTree = "<group>"; };
 		588867211090753E00EEFCF9 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		588867221090753E00EEFCF9 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		5888687A1090AEF700EEFCF9 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
@@ -115,20 +131,8 @@
 		589BE9DA0FD1D52300CCFA82 /* NSDataMBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMBBase64.m; sourceTree = "<group>"; };
 		589BE9DB0FD1D52300CCFA82 /* SFHFEditableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFEditableCell.h; sourceTree = "<group>"; };
 		589BE9DC0FD1D52300CCFA82 /* SFHFEditableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFEditableCell.m; sourceTree = "<group>"; };
-		589BE9E10FD1D57C00CCFA82 /* ActivityCommentsDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCommentsDialogController.h; sourceTree = "<group>"; };
-		589BE9E20FD1D57C00CCFA82 /* ActivityCommentsDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCommentsDialogController.m; sourceTree = "<group>"; };
-		589BE9E30FD1D57C00CCFA82 /* ActivityDateDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDateDialogController.h; sourceTree = "<group>"; };
-		589BE9E40FD1D57C00CCFA82 /* ActivityDateDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDateDialogController.m; sourceTree = "<group>"; };
-		589BE9E50FD1D57C00CCFA82 /* ActivityListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityListController.h; sourceTree = "<group>"; };
-		589BE9E60FD1D57C00CCFA82 /* ActivityListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityListController.m; sourceTree = "<group>"; };
 		589BE9E70FD1D57C00CCFA82 /* LoginDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDialogController.h; sourceTree = "<group>"; };
 		589BE9E80FD1D57C00CCFA82 /* LoginDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDialogController.m; sourceTree = "<group>"; };
-		589BE9E90FD1D57C00CCFA82 /* NewActivityDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewActivityDialogController.h; sourceTree = "<group>"; };
-		589BE9EA0FD1D57C00CCFA82 /* NewActivityDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewActivityDialogController.m; sourceTree = "<group>"; };
-		589BE9EB0FD1D57C00CCFA82 /* ProjectChoiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectChoiceController.h; sourceTree = "<group>"; };
-		589BE9EC0FD1D57C00CCFA82 /* ProjectChoiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectChoiceController.m; sourceTree = "<group>"; };
-		589BE9ED0FD1D57C00CCFA82 /* RubyTimeAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyTimeAppDelegate.h; sourceTree = "<group>"; };
-		589BE9EE0FD1D57C00CCFA82 /* RubyTimeAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyTimeAppDelegate.m; sourceTree = "<group>"; };
 		589BEA180FD1D60100CCFA82 /* BSJSONEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSJSONEncoder.h; sourceTree = "<group>"; };
 		589BEA190FD1D60100CCFA82 /* BSJSONEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSJSONEncoder.m; sourceTree = "<group>"; };
 		589BEA1A0FD1D60100CCFA82 /* NSArray+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BSJSONAdditions.h"; sourceTree = "<group>"; };
@@ -145,8 +149,6 @@
 		58AD921C1050335F007A5175 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		58B082FB101BBB3B00D30C73 /* ActivityDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDateFormatter.h; sourceTree = "<group>"; };
 		58B082FC101BBB3B00D30C73 /* ActivityDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDateFormatter.m; sourceTree = "<group>"; };
-		58B2D0C91091CA6C00F7A801 /* ActivityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityManager.h; sourceTree = "<group>"; };
-		58B2D0CA1091CA6C00F7A801 /* ActivityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityManager.m; sourceTree = "<group>"; };
 		58B2D1331091DCCC00F7A801 /* ProjectListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectListController.h; sourceTree = "<group>"; };
 		58B2D1341091DCCC00F7A801 /* ProjectListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectListController.m; sourceTree = "<group>"; };
 		58C0A0F00FBA009D00AF8C14 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -159,8 +161,6 @@
 		58CA2DAD0FA7AE6A007A6A65 /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
 		58E9FFBF0FB22F9D00CDA046 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
 		58E9FFC00FB22F9D00CDA046 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
-		58EAC0F210973A5D00CDF02B /* AllActivitiesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllActivitiesController.h; sourceTree = "<group>"; };
-		58EAC0F310973A5D00CDF02B /* AllActivitiesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllActivitiesController.m; sourceTree = "<group>"; };
 		58EB656F0FBCEF4400717C36 /* ActivityDateDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityDateDialog.xib; sourceTree = "<group>"; };
 		58EB65B90FBDE71100717C36 /* ActivityCommentsDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCommentsDialog.xib; sourceTree = "<group>"; };
 		58EBA4470FD45562004DBC6F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -245,6 +245,42 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		586E372D1098A967005EB2C8 /* ActivityLists */ = {
+			isa = PBXGroup;
+			children = (
+				586E374610999A6A005EB2C8 /* ActivityListController.h */,
+				586E374710999A6A005EB2C8 /* ActivityListController.m */,
+				586E374810999A6A005EB2C8 /* AllActivitiesController.h */,
+				586E374910999A6A005EB2C8 /* AllActivitiesController.m */,
+				586E374A10999A6A005EB2C8 /* ProjectActivitiesController.h */,
+				586E374B10999A6A005EB2C8 /* ProjectActivitiesController.m */,
+				586E374C10999A6A005EB2C8 /* UserActivitiesController.h */,
+				586E374D10999A6A005EB2C8 /* UserActivitiesController.m */,
+			);
+			path = ActivityLists;
+			sourceTree = "<group>";
+		};
+		586E372F10999A47005EB2C8 /* ActivityDetails */ = {
+			isa = PBXGroup;
+			children = (
+				586E373010999A60005EB2C8 /* ActivityCommentsDialogController.h */,
+				586E373110999A60005EB2C8 /* ActivityCommentsDialogController.m */,
+				586E373210999A60005EB2C8 /* ActivityDateDialogController.h */,
+				586E373310999A60005EB2C8 /* ActivityDateDialogController.m */,
+				586E373410999A60005EB2C8 /* ActivityDetailsController.h */,
+				586E373510999A60005EB2C8 /* ActivityDetailsController.m */,
+				586E373610999A60005EB2C8 /* ActivityLengthDialogController.h */,
+				586E373710999A60005EB2C8 /* ActivityLengthDialogController.m */,
+				586E373810999A60005EB2C8 /* NewActivityDialogController.h */,
+				586E373910999A60005EB2C8 /* NewActivityDialogController.m */,
+				586E373A10999A60005EB2C8 /* ProjectChoiceController.h */,
+				586E373B10999A60005EB2C8 /* ProjectChoiceController.m */,
+				586E373C10999A60005EB2C8 /* ShowActivityDialogController.h */,
+				586E373D10999A60005EB2C8 /* ShowActivityDialogController.m */,
+			);
+			path = ActivityDetails;
+			sourceTree = "<group>";
+		};
 		588BAB0E0FADD76E00460689 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,36 +318,14 @@
 		589BE9E00FD1D55C00CCFA82 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				589BE9E10FD1D57C00CCFA82 /* ActivityCommentsDialogController.h */,
-				589BE9E20FD1D57C00CCFA82 /* ActivityCommentsDialogController.m */,
-				589BE9E30FD1D57C00CCFA82 /* ActivityDateDialogController.h */,
-				589BE9E40FD1D57C00CCFA82 /* ActivityDateDialogController.m */,
-				581063C510134B3900E8A540 /* ActivityDetailsController.h */,
-				581063C610134B3900E8A540 /* ActivityDetailsController.m */,
-				5810634F10132C7200E8A540 /* ActivityLengthDialogController.h */,
-				5810635010132C7200E8A540 /* ActivityLengthDialogController.m */,
-				589BE9E50FD1D57C00CCFA82 /* ActivityListController.h */,
-				589BE9E60FD1D57C00CCFA82 /* ActivityListController.m */,
-				58EAC0F210973A5D00CDF02B /* AllActivitiesController.h */,
-				58EAC0F310973A5D00CDF02B /* AllActivitiesController.m */,
+				586E372F10999A47005EB2C8 /* ActivityDetails */,
+				586E372D1098A967005EB2C8 /* ActivityLists */,
 				588867211090753E00EEFCF9 /* BaseViewController.h */,
 				588867221090753E00EEFCF9 /* BaseViewController.m */,
 				589BE9E70FD1D57C00CCFA82 /* LoginDialogController.h */,
 				589BE9E80FD1D57C00CCFA82 /* LoginDialogController.m */,
-				589BE9E90FD1D57C00CCFA82 /* NewActivityDialogController.h */,
-				589BE9EA0FD1D57C00CCFA82 /* NewActivityDialogController.m */,
-				5833BE5C1095C29000A5530E /* ProjectActivitiesController.h */,
-				5833BE5D1095C29000A5530E /* ProjectActivitiesController.m */,
-				589BE9EB0FD1D57C00CCFA82 /* ProjectChoiceController.h */,
-				589BE9EC0FD1D57C00CCFA82 /* ProjectChoiceController.m */,
 				58B2D1331091DCCC00F7A801 /* ProjectListController.h */,
 				58B2D1341091DCCC00F7A801 /* ProjectListController.m */,
-				589BE9ED0FD1D57C00CCFA82 /* RubyTimeAppDelegate.h */,
-				589BE9EE0FD1D57C00CCFA82 /* RubyTimeAppDelegate.m */,
-				586516600FFFB82500363BB2 /* ShowActivityDialogController.h */,
-				586516610FFFB82500363BB2 /* ShowActivityDialogController.m */,
-				5833BE591095BC4D00A5530E /* UserActivitiesController.h */,
-				5833BE5A1095BC4D00A5530E /* UserActivitiesController.m */,
 				5833BEB21095D9C800A5530E /* UserListController.h */,
 				5833BEB31095D9C800A5530E /* UserListController.m */,
 			);
@@ -338,10 +352,10 @@
 		58CA2D3B0FA78DD8007A6A65 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
-				58B2D0C91091CA6C00F7A801 /* ActivityManager.h */,
-				58B2D0CA1091CA6C00F7A801 /* ActivityManager.m */,
 				58CA2D4A0FA7995E007A6A65 /* Request.h */,
 				58CA2D4B0FA7995E007A6A65 /* Request.m */,
+				586E37261098A953005EB2C8 /* RubyTimeAppDelegate.h */,
+				586E37101098A8EB005EB2C8 /* RubyTimeAppDelegate.m */,
 				58CA2D4C0FA7995E007A6A65 /* RubyTimeConnector.h */,
 				58CA2D4D0FA7995E007A6A65 /* RubyTimeConnector.m */,
 			);
@@ -357,6 +371,8 @@
 				58CA2DAD0FA7AE6A007A6A65 /* Activity.m */,
 				58B082FB101BBB3B00D30C73 /* ActivityDateFormatter.h */,
 				58B082FC101BBB3B00D30C73 /* ActivityDateFormatter.m */,
+				586E37151098A936005EB2C8 /* ActivityManager.h */,
+				586E37161098A936005EB2C8 /* ActivityManager.m */,
 				586E34E910987AB9005EB2C8 /* Model.h */,
 				586E34EA10987AB9005EB2C8 /* Model.m */,
 				586E368D10989EAE005EB2C8 /* ModelManager.h */,
@@ -452,35 +468,35 @@
 				58C0A0F20FBA009D00AF8C14 /* Utils.m in Sources */,
 				589BE9DE0FD1D52300CCFA82 /* NSDataMBBase64.m in Sources */,
 				589BE9DF0FD1D52300CCFA82 /* SFHFEditableCell.m in Sources */,
-				589BE9EF0FD1D57C00CCFA82 /* ActivityCommentsDialogController.m in Sources */,
-				589BE9F00FD1D57C00CCFA82 /* ActivityDateDialogController.m in Sources */,
-				589BE9F10FD1D57C00CCFA82 /* ActivityListController.m in Sources */,
 				589BE9F20FD1D57C00CCFA82 /* LoginDialogController.m in Sources */,
-				589BE9F30FD1D57C00CCFA82 /* NewActivityDialogController.m in Sources */,
-				589BE9F40FD1D57C00CCFA82 /* ProjectChoiceController.m in Sources */,
-				589BE9F50FD1D57C00CCFA82 /* RubyTimeAppDelegate.m in Sources */,
 				589BEA220FD1D60100CCFA82 /* BSJSONEncoder.m in Sources */,
 				589BEA230FD1D60100CCFA82 /* NSArray+BSJSONAdditions.m in Sources */,
 				589BEA240FD1D60100CCFA82 /* NSDictionary+BSJSONAdditions.m in Sources */,
 				589BEA250FD1D60100CCFA82 /* NSScanner+BSJSONAdditions.m in Sources */,
 				589BEA260FD1D60100CCFA82 /* NSString+BSJSONAdditions.m in Sources */,
 				589BEA2A0FD1D66700CCFA82 /* SFHFKeychainUtils.m in Sources */,
-				586516620FFFB82500363BB2 /* ShowActivityDialogController.m in Sources */,
-				5810635110132C7200E8A540 /* ActivityLengthDialogController.m in Sources */,
-				581063C710134B3900E8A540 /* ActivityDetailsController.m in Sources */,
 				5810641D101362CC00E8A540 /* LoadingView.m in Sources */,
 				58B082FD101BBB3B00D30C73 /* ActivityDateFormatter.m in Sources */,
 				588867231090753E00EEFCF9 /* BaseViewController.m in Sources */,
-				58B2D0CB1091CA6C00F7A801 /* ActivityManager.m in Sources */,
 				58B2D1351091DCCC00F7A801 /* ProjectListController.m in Sources */,
-				5833BE5B1095BC4D00A5530E /* UserActivitiesController.m in Sources */,
-				5833BE5E1095C29000A5530E /* ProjectActivitiesController.m in Sources */,
 				5833BEB41095D9C800A5530E /* UserListController.m in Sources */,
 				5833BEC11095E7F600A5530E /* User.m in Sources */,
 				5833BED01095EA4400A5530E /* Account.m in Sources */,
-				58EAC0F410973A5D00CDF02B /* AllActivitiesController.m in Sources */,
 				586E34EB10987AB9005EB2C8 /* Model.m in Sources */,
 				586E368F10989EAE005EB2C8 /* ModelManager.m in Sources */,
+				586E37111098A8EB005EB2C8 /* RubyTimeAppDelegate.m in Sources */,
+				586E37171098A936005EB2C8 /* ActivityManager.m in Sources */,
+				586E373E10999A60005EB2C8 /* ActivityCommentsDialogController.m in Sources */,
+				586E373F10999A60005EB2C8 /* ActivityDateDialogController.m in Sources */,
+				586E374010999A60005EB2C8 /* ActivityDetailsController.m in Sources */,
+				586E374110999A60005EB2C8 /* ActivityLengthDialogController.m in Sources */,
+				586E374210999A60005EB2C8 /* NewActivityDialogController.m in Sources */,
+				586E374310999A60005EB2C8 /* ProjectChoiceController.m in Sources */,
+				586E374410999A60005EB2C8 /* ShowActivityDialogController.m in Sources */,
+				586E374E10999A6A005EB2C8 /* ActivityListController.m in Sources */,
+				586E374F10999A6A005EB2C8 /* AllActivitiesController.m in Sources */,
+				586E375010999A6A005EB2C8 /* ProjectActivitiesController.m in Sources */,
+				586E375110999A6A005EB2C8 /* UserActivitiesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
