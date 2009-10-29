@@ -48,7 +48,6 @@ typedef enum { DateRow, ProjectRow, UserRow, LengthRow, CommentsRow, DeleteButto
 - (void) setupToolbar;
 - (NSString *) errorMessageFromJSON: (NSString *) jsonString;
 - (NSString *) errorMessageFromError: (NSError *) error text: (NSString *) text request: (Request *) request;
-- (void) clearHelperControllers;
 - (void) pushSubcontrollerForPath: (NSIndexPath *) path;
 - (RowType) rowTypeAtIndexPath: (NSIndexPath *) path;
 - (UITableViewCell *) cellForRowType: (RowType) rowType;

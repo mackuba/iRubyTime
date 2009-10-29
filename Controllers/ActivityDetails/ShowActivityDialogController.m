@@ -84,7 +84,7 @@ OnDeallocRelease(originalActivity, editButton);
   self.navigationItem.leftBarButtonItem = nil;
   self.navigationItem.rightBarButtonItem = editButton;
   [spinner stopAnimating];
-  [self clearHelperControllers];
+  [subcontrollers removeAllObjects];
   // TODO: cancel request?
 }
 

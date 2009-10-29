@@ -70,4 +70,11 @@
   return controller;
 }
 
+// -------------------------------------------------------------------------------------------
+#pragma mark Cleanup
+
+- (void) didReceiveMemoryWarning {
+  [subcontrollers removeAllObjects];
+}
+
 @end

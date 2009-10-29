@@ -220,16 +220,11 @@
   return controller;
 }
 
-- (void) clearHelperControllers {
-  [subcontrollers release];
-  subcontrollers = [[NSMutableDictionary alloc] init];
-}
-
 // -------------------------------------------------------------------------------------------
 #pragma mark Cleanup
 
 - (void) didReceiveMemoryWarning {
-  [self clearHelperControllers];
+  [subcontrollers removeAllObjects];
 }
 
 - (void) dealloc {

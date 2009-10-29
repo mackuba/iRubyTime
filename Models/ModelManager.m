@@ -29,6 +29,7 @@
   if (!manager) {
     manager = [[ModelManager alloc] init];
     [managers setObject: manager forKey: className];
+    [manager release];
   }
   return manager;
 }
