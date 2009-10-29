@@ -180,7 +180,7 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 
   [currentController hideLoadingMessage];
   UINavigationController *navigation = (UINavigationController *) viewController;
-  self.currentController = (BaseViewController *) [navigation topViewController];
+  self.currentController = [[navigation viewControllers] objectAtIndex: 0];
   [self initializeCurrentController];
 }
 
