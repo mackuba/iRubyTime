@@ -7,6 +7,7 @@
 
 #import "Account.h"
 #import "AllActivitiesController.h"
+#import "Project.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
 
@@ -26,6 +27,16 @@
 
 - (BOOL) hasNewActivityButton {
   return (connector.account.userType != ClientUser);
+}
+
+- (NSString *) cellNibName {
+  if (connector.account.userType == Employee) {
+    return @"ActivityCellWithProject";
+  } else if ([Project count] == 1) {
+    return @"ActivityCellWithUser";
+  } else {
+    return @"ActivityCellWithBoth";
+  }
 }
 
 - (void) fetchData {

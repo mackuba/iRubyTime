@@ -33,6 +33,10 @@
   return displayedProject;
 }
 
+- (NSString *) cellNibName {
+  return (connector.account.userType == Employee) ? @"ActivityCellWithProject" : @"ActivityCellWithUser";
+}
+
 - (void) fetchData {
   [super fetchData];
   [connector loadActivitiesForProject: displayedProject];

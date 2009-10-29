@@ -71,6 +71,11 @@ OnDeallocRelease(manager);
   Observe(connector, ActivitiesReceivedNotification, activitiesReceived:);
 }
 
+// override in subclasses
+- (NSString *) cellNibName {
+  return @"ActivityCellWithProject";
+}
+
 - (NSInteger) defaultLengthForNewActivity {
   if (manager.activities.count > 0) {
     return [[manager.activities valueForKeyPath: @"@avg.minutes"] intValue];
@@ -161,7 +166,7 @@ OnDeallocRelease(manager);
   Activity *activity = [manager.activities objectAtIndex: path.row];
   ActivityCell *cell = (ActivityCell *) [table dequeueReusableCellWithIdentifier: ACTIVITY_CELL_TYPE];
   if (!cell) {
-    [[NSBundle mainBundle] loadNibNamed: @"ActivityCell" owner: self options: nil];
+    [[NSBundle mainBundle] loadNibNamed: [self cellNibName] owner: self options: nil];
     cell = currentCell;
   }
   [cell displayActivity: activity];

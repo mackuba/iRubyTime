@@ -14,12 +14,14 @@
   UILabel *hoursLabel;
   UILabel *commentsLabel;
   UILabel *projectLabel;
+  UILabel *userLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *dateLabel;
 @property (nonatomic, retain) IBOutlet UILabel *hoursLabel;
 @property (nonatomic, retain) IBOutlet UILabel *commentsLabel;
 @property (nonatomic, retain) IBOutlet UILabel *projectLabel;
+@property (nonatomic, retain) IBOutlet UILabel *userLabel;
 
 - (void) displayActivity: (Activity *) activity;
 
