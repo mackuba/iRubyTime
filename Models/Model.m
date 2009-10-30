@@ -20,24 +20,41 @@ SynthesizeAndReleaseLater(properties, modelName);
 
 + (id) objectFromJSON: (NSDictionary *) json {
   // create a blank object
-  id object = [[self alloc] init];
+  Model *object = [[self alloc] init];
+  NSArray *properties = [object properties];
 
   // set all properties
-  for (NSString *property in [object properties]) {
-    // 'id' from json will be stored as 'recordId'
-    NSString *key = ([property isEqual: RECORD_ID] ? @"id" : property);
-    id value = [json objectForKey: key];
+  for (NSString *key in [json allKeys]) {
+    id value;
+    NSString *property;
 
-    // if we have a property 'prop', but there's 'prop_id' in json, it means it's a belongs_to relation
-    id relationValue = [json objectForKey: RTFormat(@"%@_id", property)];
-    if (!value && relationValue) {
-      // then find the object in the other model
+    if ([key hasSuffix: @"_id"]) {
+      // for names ending with _id, find an associated object in another Model
+      property = [key substringToIndex: key.length - 3];
+      id associationId = [json objectForKey: key];
       Class targetClass = NSClassFromString([property capitalizedString]);
-      NSInteger objectId = [relationValue intValue];
-      value = [targetClass objectWithId: objectId];
+      if (associationId != [NSNull null] && [targetClass respondsToSelector: @selector(objectWithId:)]) {
+        value = [targetClass objectWithId: [associationId intValue]];
+      }
+    } else {
+      // for other names, assign the value as is to a correct property
+      value = [json objectForKey: key];
+
+      if ([key isEqual: @"id"]) {
+        // 'id' is saved as 'record_id'
+        property = RECORD_ID;
+      } else if ([key hasSuffix: @"?"]) {
+        // 'foo?' is saved as 'foo'
+        property = [key substringToIndex: key.length - 1];
+      } else {
+        // normal property
+        property = key;
+      }
     }
 
-    [object setValue: value forKey: property];
+    if (value != nil && [properties containsObject: property]) {
+      [object setValue: value forKey: property];
+    }
   }
 
   return [object autorelease];
