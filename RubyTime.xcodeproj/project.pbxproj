@@ -11,6 +11,7 @@
 		5810634B10132BE600E8A540 /* ActivityLengthDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5810634A10132BE600E8A540 /* ActivityLengthDialog.xib */; };
 		581063EB1013595100E8A540 /* ShowActivityDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581063EA1013595100E8A540 /* ShowActivityDialog.xib */; };
 		5810641D101362CC00E8A540 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5810641C101362CC00E8A540 /* LoadingView.m */; };
+		58224823109AF5D50071D3BA /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 5822481E109AF5D50071D3BA /* Images */; };
 		5833BEB41095D9C800A5530E /* UserListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BEB31095D9C800A5530E /* UserListController.m */; };
 		5833BEC11095E7F600A5530E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BEC01095E7F600A5530E /* User.m */; };
 		5833BED01095EA4400A5530E /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BECF1095EA4400A5530E /* Account.m */; };
@@ -40,7 +41,6 @@
 		586E37AB1099D74A005EB2C8 /* ActivityCellWithProject.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586E37AA1099D74A005EB2C8 /* ActivityCellWithProject.xib */; };
 		586E37AD1099D769005EB2C8 /* ActivityCellWithBoth.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586E37AC1099D769005EB2C8 /* ActivityCellWithBoth.xib */; };
 		588867231090753E00EEFCF9 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588867221090753E00EEFCF9 /* BaseViewController.m */; };
-		5888687D1090AEF700EEFCF9 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 5888687A1090AEF700EEFCF9 /* Images */; };
 		588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB020FADD47C00460689 /* MIT-LICENSE.txt */; };
 		588BAB150FADD78B00460689 /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB110FADD78B00460689 /* LoginDialog.xib */; };
 		588BAB160FADD78B00460689 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB120FADD78B00460689 /* MainWindow.xib */; };
@@ -77,6 +77,7 @@
 		581063EA1013595100E8A540 /* ShowActivityDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowActivityDialog.xib; sourceTree = "<group>"; };
 		5810641B101362CC00E8A540 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
 		5810641C101362CC00E8A540 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
+		5822481E109AF5D50071D3BA /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 		5833BEB21095D9C800A5530E /* UserListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListController.h; sourceTree = "<group>"; };
 		5833BEB31095D9C800A5530E /* UserListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListController.m; sourceTree = "<group>"; };
 		5833BEBF1095E7F600A5530E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -125,7 +126,6 @@
 		586E37AC1099D769005EB2C8 /* ActivityCellWithBoth.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCellWithBoth.xib; sourceTree = "<group>"; };
 		588867211090753E00EEFCF9 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		588867221090753E00EEFCF9 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		5888687A1090AEF700EEFCF9 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 		588BAB020FADD47C00460689 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
 		588BAB110FADD78B00460689 /* LoginDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginDialog.xib; sourceTree = "<group>"; };
 		588BAB120FADD78B00460689 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -226,7 +226,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5888687A1090AEF700EEFCF9 /* Images */,
+				5822481E109AF5D50071D3BA /* Images */,
 				58AD921C1050335F007A5175 /* Entitlements.plist */,
 				58F47A610FF6AB5F00A1F20F /* Icon.png */,
 				5844CE610FC31FA8007F22FE /* README.markdown */,
@@ -453,10 +453,10 @@
 				581063EB1013595100E8A540 /* ShowActivityDialog.xib in Resources */,
 				58ACEFA71014ED9100426EA8 /* CommentsCell.xib in Resources */,
 				58AD921D1050335F007A5175 /* Entitlements.plist in Resources */,
-				5888687D1090AEF700EEFCF9 /* Images in Resources */,
 				586E37A91099D721005EB2C8 /* ActivityCellWithUser.xib in Resources */,
 				586E37AB1099D74A005EB2C8 /* ActivityCellWithProject.xib in Resources */,
 				586E37AD1099D769005EB2C8 /* ActivityCellWithBoth.xib in Resources */,
+				58224823109AF5D50071D3BA /* Images in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

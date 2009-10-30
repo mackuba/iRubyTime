@@ -13,12 +13,12 @@
 
 @implementation Activity
 
-@synthesize minutes;
+@synthesize minutes, locked;
 SynthesizeAndReleaseLater(date, dateAsString, comments, project, user);
 
 - (id) init {
   self = [super initWithModelName: @"Activity"
-                       properties: RTArray(@"comments", @"date", @"minutes", @"project", @"user")];
+                       properties: RTArray(@"comments", @"date", @"minutes", @"project", @"user", @"locked")];
   if (self) {
     self.comments = @"";
     self.date = [NSDate date];

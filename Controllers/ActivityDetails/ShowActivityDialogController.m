@@ -45,7 +45,7 @@ OnDeallocRelease(originalActivity, editButton);
   [super setupToolbar];
   self.navigationItem.title = @"Activity details";
   [self setBackButtonTitle: @"Activity"];
-  if (connector.account.userType != ClientUser) {
+  if ((connector.account.userType != ClientUser) && (!activity.isLocked)) {
     editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemEdit
                                                                target: self
                                                                action: @selector(editClicked)];
