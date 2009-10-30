@@ -97,20 +97,19 @@
   }
 }
 
-// TODO: pass the limit in parameter
-
-- (void) loadActivitiesForUser: (User *) user {
-  [self sendGetRequestToPath: RTFormat(@"/users/%d/activities?search_criteria[limit]=20", user.recordId)
+- (void) loadActivitiesForUser: (User *) user limit: (NSInteger) limit {
+  [self sendGetRequestToPath: RTFormat(@"/users/%d/activities?search_criteria[limit]=%d", user.recordId, limit)
                         type: RTActivityIndexRequest];
 }
 
-- (void) loadActivitiesForProject: (Project *) project {
-  [self sendGetRequestToPath: RTFormat(@"/projects/%d/activities?search_criteria[limit]=20", project.recordId)
+- (void) loadActivitiesForProject: (Project *) project limit: (NSInteger) limit {
+  [self sendGetRequestToPath: RTFormat(@"/projects/%d/activities?search_criteria[limit]=%d", project.recordId, limit)
                         type: RTActivityIndexRequest];
 }
 
-- (void) loadAllActivities {
-  [self sendGetRequestToPath: @"/activities?search_criteria[limit]=20" type: RTActivityIndexRequest];
+- (void) loadAllActivitiesWithLimit: (NSInteger) limit {
+  [self sendGetRequestToPath: RTFormat(@"/activities?search_criteria[limit]=%d", limit)
+                        type: RTActivityIndexRequest];
 }
 
 - (void) createActivity: (Activity *) activity {

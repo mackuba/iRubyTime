@@ -35,7 +35,7 @@
 
 - (void) fetchData {
   [super fetchData];
-  [connector loadActivitiesForUser: displayedUser];
+  [connector loadActivitiesForUser: displayedUser limit: 20];
 }
 
 // -------------------------------------------------------------------------------------------

@@ -42,7 +42,20 @@
 
 - (void) fetchData {
   [super fetchData];
-  [connector loadAllActivities];
+  NSInteger limit;
+  switch (connector.account.userType) {
+    case ClientUser:
+      limit = 30;
+      break;
+    case Admin:
+      limit = 40;
+      break;
+    case Employee:
+    default:
+      limit = 20;
+      break;
+  }
+  [connector loadAllActivitiesWithLimit: limit];
 }
 
 // -------------------------------------------------------------------------------------------

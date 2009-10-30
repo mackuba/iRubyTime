@@ -39,7 +39,8 @@
 
 - (void) fetchData {
   [super fetchData];
-  [connector loadActivitiesForProject: displayedProject];
+  NSInteger limit = (connector.account.userType == Employee) ? 20 : 25;
+  [connector loadActivitiesForProject: displayedProject limit: limit];
 }
 
 // -------------------------------------------------------------------------------------------
