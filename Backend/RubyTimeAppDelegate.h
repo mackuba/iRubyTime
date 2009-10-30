@@ -14,13 +14,14 @@
 @interface RubyTimeAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
   UIWindow *window;
   UITabBarController *tabBarController;
-  BaseViewController *currentController;
+  id currentController;
   RubyTimeConnector *connector;
   BOOL initialDataIsLoaded;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
-@property (nonatomic, retain) IBOutlet BaseViewController *currentController;
+@property (nonatomic, retain) IBOutlet id currentController;
+@property (nonatomic, readonly) BOOL initialDataIsLoaded;
 
 @end

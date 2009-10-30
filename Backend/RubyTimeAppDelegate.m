@@ -23,7 +23,6 @@
 
 @interface RubyTimeAppDelegate()
 - (void) buildGuiForUserType: (UserType) type;
-- (void) initializeCurrentController;
 - (void) initApplication;
 - (void) initialDataLoaded;
 - (void) saveAccountData;
@@ -36,7 +35,7 @@
 
 @implementation RubyTimeAppDelegate
 
-@synthesize window, tabBarController, currentController;
+@synthesize window, tabBarController, currentController, initialDataIsLoaded;
 OnDeallocRelease(window, tabBarController, connector, currentController);
 
 // -------------------------------------------------------------------------------------------
@@ -44,7 +43,7 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 
 - (void) initApplication {
   connector = [[RubyTimeConnector alloc] initWithAccount: [self loadAccountData]];
-  currentController.connector = connector;
+  [currentController setConnector: connector];
 
   Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);
   if ([connector.account canLogIn]) {
@@ -133,7 +132,7 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 
 - (void) loginSuccessful {
   [self saveAccountData];
-  if (currentController.modalViewController) {
+  if ([currentController modalViewController]) {
     // login controller was shown previously
     [currentController hidePopupView];
     [self buildGuiForUserType: connector.account.userType];
@@ -160,16 +159,7 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 - (void) initialDataLoaded {
   StopObservingAll();
   initialDataIsLoaded = YES;
-  [self initializeCurrentController];
-}
-
-- (void) initializeCurrentController {
-  if (initialDataIsLoaded) {
-    [connector dropCurrentConnection];
-    [currentController fetchDataIfNeeded];
-  } else {
-    [currentController showLoadingMessage];
-  }
+  [currentController fetchDataIfNeeded];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -178,10 +168,8 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 - (void) tabBarController: (UITabBarController *) tabBarController
   didSelectViewController: (UIViewController *) viewController {
 
-  [currentController hideLoadingMessage];
   UINavigationController *navigation = (UINavigationController *) viewController;
-  self.currentController = [[navigation viewControllers] objectAtIndex: 0];
-  [self initializeCurrentController];
+  self.currentController = [navigation topViewController];
 }
 
 - (void) applicationDidFinishLaunching: (UIApplication *) application {

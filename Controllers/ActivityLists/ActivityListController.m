@@ -18,6 +18,10 @@
 
 #define ACTIVITY_CELL_TYPE @"ActivityCell"
 
+@interface ActivityListController ()
+- (void) showActivityDetailsDialogForActivity: (Activity *) activity;
+@end
+
 @implementation ActivityListController
 
 @synthesize currentCell;
@@ -33,15 +37,6 @@ OnDeallocRelease(manager);
     dataIsLoaded = NO;
   }
   return self;
-}
-
-- (void) initializeView {
-  [super initializeView];
-  Observe(connector, ActivityCreatedNotification, activityCreated:);
-  Observe(connector, ActivityDeletedNotification, activityDeleted:);
-  Observe(connector, ActivityUpdatedNotification, activityUpdated:);
-  Observe(nil, ActivityDialogCancelledNotification, hidePopupView);
-  // TODO: should these be unobserved when view hides?
 }
 
 - (void) viewDidLoad {
@@ -122,7 +117,19 @@ OnDeallocRelease(manager);
                                                    defaultProject: [self defaultProjectForNewActivity]
                                                     defaultLength: [self defaultLengthForNewActivity]];
   [self showPopupView: dialog];
+  Observe(connector, ActivityCreatedNotification, activityCreated:);
+  Observe(dialog, ActivityDialogCancelledNotification, hidePopupView);
   [dialog release];
+}
+
+- (void) showActivityDetailsDialogForActivity: (Activity *) activity {
+  ShowActivityDialogController *controller =
+    [[ShowActivityDialogController alloc] initWithActivity: activity connector: connector];
+  controller.displaysActivityUser = (connector.account.userType != Employee);
+  [self.navigationController pushViewController: controller animated: YES];
+  [controller release];
+  Observe(connector, ActivityDeletedNotification, activityDeleted:);
+  Observe(connector, ActivityUpdatedNotification, activityUpdated:);
 }
 
 // -------------------------------------------------------------------------------------------
@@ -175,12 +182,8 @@ OnDeallocRelease(manager);
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
   Activity *activity = [manager.activities objectAtIndex: path.row];
-  ShowActivityDialogController *controller =
-    [[ShowActivityDialogController alloc] initWithActivity: activity connector: connector];
-  controller.displaysActivityUser = (connector.account.userType != Employee);
-  [self.navigationController pushViewController: controller animated: YES];
+  [self showActivityDetailsDialogForActivity: activity];
   [table deselectRowAtIndexPath: path animated: YES];
-  [controller release];
 }
 
 @end

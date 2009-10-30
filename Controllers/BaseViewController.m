@@ -8,6 +8,7 @@
 #import "BaseViewController.h"
 #import "LoadingView.h"
 #import "LoginDialogController.h"
+#import "RubyTimeAppDelegate.h"
 #import "RubyTimeConnector.h"
 #import "Utils.h"
 
@@ -70,7 +71,10 @@ OnDeallocRelease(connector, loadingView);
 }
 
 - (void) fetchDataIfNeeded {
-  if ([self needsOwnData]) {
+  id delegate = [[UIApplication sharedApplication] delegate];
+  if (![delegate initialDataIsLoaded]) {
+    [self showLoadingMessage];
+  } else if ([self needsOwnData]) {
     [self showLoadingMessage];
     [self fetchData];
   } else {
@@ -84,12 +88,19 @@ OnDeallocRelease(connector, loadingView);
 }
 
 - (void) viewWillAppear: (BOOL) animated {
+  StopObservingAll();
   Observe(connector, RequestFailedNotification, requestFailed:);
   [tableView reloadData];
+  [self fetchDataIfNeeded];
 }
 
 - (void) viewWillDisappear: (BOOL) animated {
-  StopObserving(connector, RequestFailedNotification);
+  StopObservingAll();
+  [self hideLoadingMessage];
+  id delegate = [[UIApplication sharedApplication] delegate];
+  if ([delegate initialDataIsLoaded]) {
+    [connector dropCurrentConnection];
+  }
 }
 
 - (void) requestFailed: (NSNotification *) notification {

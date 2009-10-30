@@ -52,7 +52,6 @@
   ActivityListController *controller = [self subcontrollerForProject: project];
   [self.navigationController pushViewController: controller animated: YES];
   [table deselectRowAtIndexPath: path animated: YES];
-  [controller fetchDataIfNeeded];
 }
 
 - (ProjectActivitiesController *) subcontrollerForProject: (Project *) project {

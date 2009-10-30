@@ -57,7 +57,6 @@
   ActivityListController *controller = [self subcontrollerForUser: user];
   [self.navigationController pushViewController: controller animated: YES];
   [table deselectRowAtIndexPath: path animated: YES];
-  [controller fetchDataIfNeeded];
 }
 
 - (UserActivitiesController *) subcontrollerForUser: (User *) user {
