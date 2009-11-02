@@ -97,19 +97,26 @@
   }
 }
 
-- (void) loadActivitiesForUser: (User *) user limit: (NSInteger) limit {
-  [self sendGetRequestToPath: RTFormat(@"/users/%d/activities?search_criteria[limit]=%d", user.recordId, limit)
-                        type: RTActivityIndexRequest];
+- (void) loadActivitiesForUser: (User *) user
+                         limit: (NSInteger) limit
+                        offset: (NSInteger) offset {
+  NSString *path = RTFormat(@"/users/%d/activities?search_criteria[limit]=%d&search_criteria[offset]=%d",
+    user.recordId, limit, offset);
+  [self sendGetRequestToPath: path type: RTActivityIndexRequest];
 }
 
-- (void) loadActivitiesForProject: (Project *) project limit: (NSInteger) limit {
-  [self sendGetRequestToPath: RTFormat(@"/projects/%d/activities?search_criteria[limit]=%d", project.recordId, limit)
-                        type: RTActivityIndexRequest];
+- (void) loadActivitiesForProject: (Project *) project
+                            limit: (NSInteger) limit
+                           offset: (NSInteger) offset {
+  NSString *path = RTFormat(@"/projects/%d/activities?search_criteria[limit]=%d&search_criteria[offset]=%d",
+    project.recordId, limit, offset);
+  [self sendGetRequestToPath: path type: RTActivityIndexRequest];
 }
 
-- (void) loadAllActivitiesWithLimit: (NSInteger) limit {
-  [self sendGetRequestToPath: RTFormat(@"/activities?search_criteria[limit]=%d", limit)
-                        type: RTActivityIndexRequest];
+- (void) loadAllActivitiesWithLimit: (NSInteger) limit
+                             offset: (NSInteger) offset {
+  NSString *path = RTFormat(@"/activities?search_criteria[limit]=%d&search_criteria[offset]=%d", limit, offset);
+  [self sendGetRequestToPath: path type: RTActivityIndexRequest];
 }
 
 - (void) createActivity: (Activity *) activity {

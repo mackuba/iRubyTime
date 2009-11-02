@@ -40,29 +40,21 @@
   }
 }
 
-- (void) fetchData {
-  [super fetchData];
-  NSInteger limit;
+- (NSInteger) activityBatchSize {
   switch (connector.account.userType) {
     case ClientUser:
-      limit = 30;
-      break;
+      return 30;
     case Admin:
-      limit = 40;
-      break;
+      return 40;
     case Employee:
     default:
-      limit = 20;
-      break;
+      return 20;
   }
-  [connector loadAllActivitiesWithLimit: limit];
 }
 
-// -------------------------------------------------------------------------------------------
-#pragma mark Table view delegate & data source
-
-- (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
-  return 69;
+- (void) fetchData {
+  [super fetchData];
+  [connector loadAllActivitiesWithLimit: [self activityBatchSize] offset: listOffset];
 }
 
 @end

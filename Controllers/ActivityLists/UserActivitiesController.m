@@ -33,16 +33,13 @@
   return ([displayedUser isEqual: connector.account]);
 }
 
-- (void) fetchData {
-  [super fetchData];
-  [connector loadActivitiesForUser: displayedUser limit: 20];
+- (NSInteger) activityBatchSize {
+  return 20;
 }
 
-// -------------------------------------------------------------------------------------------
-#pragma mark Table view delegate & data source
-
-- (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
-  return 69;
+- (void) fetchData {
+  [super fetchData];
+  [connector loadActivitiesForUser: displayedUser limit: [self activityBatchSize] offset: listOffset];
 }
 
 @end

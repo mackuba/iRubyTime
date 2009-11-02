@@ -37,17 +37,13 @@
   return (connector.account.userType == Employee) ? @"ActivityCellWithProject" : @"ActivityCellWithUser";
 }
 
-- (void) fetchData {
-  [super fetchData];
-  NSInteger limit = (connector.account.userType == Employee) ? 20 : 25;
-  [connector loadActivitiesForProject: displayedProject limit: limit];
+- (NSInteger) activityBatchSize {
+  return (connector.account.userType == Employee) ? 20 : 25;
 }
 
-// -------------------------------------------------------------------------------------------
-#pragma mark Table view delegate & data source
-
-- (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
-  return 69;
+- (void) fetchData {
+  [super fetchData];
+  [connector loadActivitiesForProject: displayedProject limit: [self activityBatchSize] offset: listOffset];
 }
 
 @end

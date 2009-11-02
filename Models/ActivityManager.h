@@ -13,11 +13,12 @@
   NSMutableArray *activityList;
 }
 
-@property (nonatomic, copy) NSArray *activities;
+@property (nonatomic, readonly) NSArray *activities;
 
 - (void) addNewActivity: (Activity *) activity;
 - (void) updateActivity: (Activity *) activity;
 - (void) deleteActivity: (Activity *) activity;
 - (NSArray *) recentProjects;
+- (void) appendActivities: (NSArray *) activities;
 
 @end

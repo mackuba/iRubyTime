@@ -20,9 +20,8 @@ OnDeallocRelease(activityList);
   return self;
 }
 
-- (void) setActivities: (NSArray *) list {
-  [activityList autorelease];
-  activityList = [list mutableCopy];
+- (void) appendActivities: (NSArray *) activities {
+  [activityList addObjectsFromArray: activities];
 }
 
 - (NSArray *) activities {

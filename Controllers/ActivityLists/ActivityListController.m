@@ -20,12 +20,13 @@
 
 @interface ActivityListController ()
 - (void) showActivityDetailsDialogForActivity: (Activity *) activity;
+- (void) loadMore;
 @end
 
 @implementation ActivityListController
 
-@synthesize currentCell;
-OnDeallocRelease(manager);
+@synthesize currentCell, loadMoreSpinner, loadMoreCell, loadMoreLabel;
+OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization and settings
@@ -33,8 +34,13 @@ OnDeallocRelease(manager);
 - (id) initWithConnector: (RubyTimeConnector *) rtConnector {
   self = [super initWithConnector: rtConnector andStyle: UITableViewStylePlain];
   if (self) {
+    [[NSBundle mainBundle] loadNibNamed: @"ShowMoreCell" owner: self options: nil];
     manager = [[ActivityManager alloc] init];
     dataIsLoaded = NO;
+    hasMoreActivities = YES;
+    loadMoreRequestSent = NO;
+    loadMoreLabelColor = [[loadMoreLabel textColor] retain];
+    listOffset = 0;
   }
   return self;
 }
@@ -49,6 +55,13 @@ OnDeallocRelease(manager);
     self.navigationItem.rightBarButtonItem = addButton;
     [addButton setEnabled: NO];
     [addButton release];
+  }
+}
+
+- (void) initializeView {
+  [super initializeView];
+  if (loadMoreRequestSent) {
+    [self loadMore];
   }
 }
 
@@ -70,6 +83,9 @@ OnDeallocRelease(manager);
 - (NSString *) cellNibName {
   return @"ActivityCellWithProject";
 }
+
+// override in subclasses
+- (NSInteger) activityBatchSize { AbstractMethod(return 0); }
 
 - (NSInteger) defaultLengthForNewActivity {
   if (manager.activities.count > 0) {
@@ -132,13 +148,29 @@ OnDeallocRelease(manager);
   Observe(connector, ActivityUpdatedNotification, activityUpdated:);
 }
 
+- (void) loadMore {
+  loadMoreRequestSent = YES;
+  loadMoreLabel.textColor = [UIColor lightGrayColor];
+  [loadMoreSpinner startAnimating];
+  [self fetchData];
+}
+
+- (void) restoreLoadMoreLabel {
+  loadMoreRequestSent = NO;
+  loadMoreLabel.textColor = loadMoreLabelColor;
+  [loadMoreSpinner stopAnimating];
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Notification callbacks
 
 - (void) activitiesReceived: (NSNotification *) notification {
   dataIsLoaded = YES;
   NSArray *activities = [notification.userInfo objectForKey: @"activities"];
-  [manager setActivities: activities];
+  [manager appendActivities: activities];
+  hasMoreActivities = (activities.count == [self activityBatchSize]);
+  listOffset += activities.count;
+  [self restoreLoadMoreLabel];
   [self initializeView];
   self.navigationItem.rightBarButtonItem.enabled = ([Project count] > 0);
   StopObserving(connector, ActivitiesReceivedNotification);
@@ -166,24 +198,51 @@ OnDeallocRelease(manager);
 #pragma mark Table view delegate & data source
 
 - (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
-  return manager.activities.count;
+  // show 'load more' cell too, but only if it makes sense
+  NSInteger activityCount = manager.activities.count;
+  return (dataIsLoaded && hasMoreActivities) ? activityCount + 1 : activityCount;
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  Activity *activity = [manager.activities objectAtIndex: path.row];
-  ActivityCell *cell = (ActivityCell *) [table dequeueReusableCellWithIdentifier: ACTIVITY_CELL_TYPE];
-  if (!cell) {
-    [[NSBundle mainBundle] loadNibNamed: [self cellNibName] owner: self options: nil];
-    cell = currentCell;
+  if (path.row < manager.activities.count) {
+    Activity *activity = [manager.activities objectAtIndex: path.row];
+    ActivityCell *cell = (ActivityCell *) [table dequeueReusableCellWithIdentifier: ACTIVITY_CELL_TYPE];
+    if (!cell) {
+      [[NSBundle mainBundle] loadNibNamed: [self cellNibName] owner: self options: nil];
+      cell = currentCell;
+    }
+    [cell displayActivity: activity];
+    return cell;
+  } else {
+    return loadMoreCell;
   }
-  [cell displayActivity: activity];
-  return cell;
+}
+
+- (NSIndexPath*) tableView: (UITableView *) table willSelectRowAtIndexPath: (NSIndexPath *) path {
+  if (path.row == manager.activities.count && loadMoreRequestSent) {
+    // don't allow selecting 'load more' cell if the spinner is spinning
+    return nil;
+  } else {
+    return path;
+  }
 }
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
-  Activity *activity = [manager.activities objectAtIndex: path.row];
-  [self showActivityDetailsDialogForActivity: activity];
+  if (path.row < manager.activities.count) {
+    Activity *activity = [manager.activities objectAtIndex: path.row];
+    [self showActivityDetailsDialogForActivity: activity];
+  } else {
+    [self loadMore];
+  }
   [table deselectRowAtIndexPath: path animated: YES];
+}
+
+- (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
+  if (path.row < manager.activities.count) {
+    return 69;
+  } else {
+    return loadMoreCell.frame.size.height;
+  }
 }
 
 @end

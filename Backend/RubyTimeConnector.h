@@ -32,9 +32,14 @@
 
 - (id) initWithAccount: (Account *) userAccount;
 - (void) authenticate;
-- (void) loadActivitiesForUser: (User *) user limit: (NSInteger) limit;
-- (void) loadActivitiesForProject: (Project *) project limit: (NSInteger) limit;
-- (void) loadAllActivitiesWithLimit: (NSInteger) limit;
+- (void) loadActivitiesForUser: (User *) user
+                         limit: (NSInteger) limit
+                        offset: (NSInteger) offset;
+- (void) loadActivitiesForProject: (Project *) project
+                            limit: (NSInteger) limit
+                           offset: (NSInteger) offset;
+- (void) loadAllActivitiesWithLimit: (NSInteger) limit
+                             offset: (NSInteger) offset;
 - (void) loadProjects;
 - (void) loadUsers;
 - (void) createActivity: (Activity *) activity;

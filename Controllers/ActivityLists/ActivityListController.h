@@ -15,9 +15,19 @@
   ActivityCell *currentCell;
   ActivityManager *manager;
   BOOL dataIsLoaded;
+  BOOL hasMoreActivities;
+  UIActivityIndicatorView *loadMoreSpinner;
+  UITableViewCell *loadMoreCell;
+  UILabel *loadMoreLabel;
+  UIColor *loadMoreLabelColor;
+  BOOL loadMoreRequestSent;
+  NSInteger listOffset;
 }
 
 @property (nonatomic, assign) IBOutlet ActivityCell *currentCell;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loadMoreSpinner;
+@property (nonatomic, retain) IBOutlet UITableViewCell *loadMoreCell;
+@property (nonatomic, retain) IBOutlet UILabel *loadMoreLabel;
 
 - (BOOL) hasNewActivityButton;
 
