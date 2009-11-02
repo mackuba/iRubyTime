@@ -18,8 +18,8 @@
 
 @implementation ShowActivityDialogController
 
-@synthesize displaysActivityUser;
-OnDeallocRelease(originalActivity, editButton);
+@synthesize displaysActivityUser, lockedActivityInfo;
+OnDeallocRelease(originalActivity, editButton, lockedActivityInfo);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -37,6 +37,9 @@ OnDeallocRelease(originalActivity, editButton);
 - (void) viewDidLoad {
   [super viewDidLoad];
   tableView.allowsSelectionDuringEditing = YES;
+  if (activity.isLocked) {
+    tableView.tableFooterView = lockedActivityInfo;
+  }
   Observe(connector, ActivityUpdatedNotification, activityUpdated);
   Observe(connector, ActivityDeletedNotification, activityDeleted);
 }
@@ -131,7 +134,7 @@ OnDeallocRelease(originalActivity, editButton);
 }
 
 - (NSInteger) numberOfSectionsInTableView: (UITableView *) table {
-  return 2;
+  return (activity.isLocked) ? 1 : 2;
 }
 
 - (UITableViewCell *) cellForRowType: (RowType) rowType {

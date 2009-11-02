@@ -12,9 +12,11 @@
   Activity *originalActivity;
   UIBarButtonItem *editButton;
   BOOL displaysActivityUser;
+  UIView *lockedActivityInfo;
 }
 
 @property (nonatomic) BOOL displaysActivityUser;
+@property (nonatomic, retain) IBOutlet UIView *lockedActivityInfo;
 
 - (id) initWithActivity: (Activity *) activity connector: (RubyTimeConnector *) connector;
 
