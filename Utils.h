@@ -73,6 +73,10 @@
 + (void) showAlertWithTitle: (NSString *) title content: (NSString *) content;
 @end
 
+@interface NSArray (RubyTime)
+- (NSDictionary *) groupByKey: (NSString *) key;
+@end
+
 @interface NSString (RubyTime)
 - (NSString *) trimmedString;
 - (NSString *) stringWithPercentEscapesForFormValues;

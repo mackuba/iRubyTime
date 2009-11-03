@@ -8,6 +8,7 @@
 #import "Account.h"
 #import "Activity.h"
 #import "ActivityCell.h"
+#import "ActivityDateFormatter.h"
 #import "ActivityListController.h"
 #import "ActivityManager.h"
 #import "BaseViewController.h"
@@ -197,15 +198,39 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
+- (Activity *) activityAtPath: (NSIndexPath *) path {
+  NSDate *date = [manager.allDates objectAtIndex: path.section];
+  return [[manager activitiesOnDay: date] objectAtIndex: path.row];
+}
+
+- (NSInteger) numberOfSectionsInTableView: (UITableView *) table {
+  return (dataIsLoaded && hasMoreActivities) ? (manager.allDates.count + 1) : manager.allDates.count;
+}
+
+- (NSString *) tableView: (UITableView *) table titleForHeaderInSection: (NSInteger) section {
+  if (section == manager.allDates.count) {
+    return nil;
+  } else {
+    NSDate *date = [manager.allDates objectAtIndex: section];
+    return [[ActivityDateFormatter sharedFormatter] formatDate: date];
+  }
+}
+
 - (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
   // show 'load more' cell too, but only if it makes sense
-  NSInteger activityCount = manager.activities.count;
-  return (dataIsLoaded && hasMoreActivities) ? activityCount + 1 : activityCount;
+  if (section == manager.allDates.count) {
+    return 1;
+  } else {
+    NSDate *date = [manager.allDates objectAtIndex: section];
+    return [[manager activitiesOnDay: date] count];
+  }
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  if (path.row < manager.activities.count) {
-    Activity *activity = [manager.activities objectAtIndex: path.row];
+  if (path.section == manager.allDates.count) {
+    return loadMoreCell;
+  } else {
+    Activity *activity = [self activityAtPath: path];
     ActivityCell *cell = (ActivityCell *) [table dequeueReusableCellWithIdentifier: ACTIVITY_CELL_TYPE];
     if (!cell) {
       [[NSBundle mainBundle] loadNibNamed: [self cellNibName] owner: self options: nil];
@@ -213,13 +238,11 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
     }
     [cell displayActivity: activity];
     return cell;
-  } else {
-    return loadMoreCell;
   }
 }
 
 - (NSIndexPath*) tableView: (UITableView *) table willSelectRowAtIndexPath: (NSIndexPath *) path {
-  if (path.row == manager.activities.count && loadMoreRequestSent) {
+  if (path.section == manager.allDates.count && loadMoreRequestSent) {
     // don't allow selecting 'load more' cell if the spinner is spinning
     return nil;
   } else {
@@ -228,20 +251,19 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
 }
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
-  if (path.row < manager.activities.count) {
-    Activity *activity = [manager.activities objectAtIndex: path.row];
-    [self showActivityDetailsDialogForActivity: activity];
-  } else {
+  if (path.section == manager.allDates.count) {
     [self loadMore];
+  } else {
+    [self showActivityDetailsDialogForActivity: [self activityAtPath: path]];
   }
   [table deselectRowAtIndexPath: path animated: YES];
 }
 
 - (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
-  if (path.row < manager.activities.count) {
-    return 69;
-  } else {
+  if (path.section == manager.allDates.count) {
     return loadMoreCell.frame.size.height;
+  } else {
+    return 69;
   }
 }
 

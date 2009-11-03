@@ -11,47 +11,63 @@
 
 @implementation ActivityManager
 
-OnDeallocRelease(activityList);
+@synthesize allDates, activities;
+OnDeallocRelease(allDates, activities, dateGroups);
 
 - (id) init {
   if (self = [super init]) {
-    activityList = [[NSMutableArray alloc] initWithCapacity: 20];
+    activities = [[NSMutableArray alloc] initWithCapacity: 50];
+    dateGroups = [[NSMutableDictionary alloc] initWithCapacity: 50];
+    allDates = [[NSArray alloc] init];
   }
   return self;
 }
 
-- (void) appendActivities: (NSArray *) activities {
-  [activityList addObjectsFromArray: activities];
+- (void) recreateDateGroups {
+  [dateGroups release];
+  dateGroups = [[activities groupByKey: @"date"] retain];
+  NSArray *unsortedDates = [dateGroups allKeys];
+  [allDates release];
+  allDates = [[[unsortedDates sortedArrayUsingSelector: @selector(compare:)] reverseObjectEnumerator] allObjects];
+  [allDates retain];
 }
 
-- (NSArray *) activities {
-  return activityList;
+- (NSArray *) activitiesOnDay: (NSDate *) date {
+  return [dateGroups objectForKey: date];
+}
+
+- (void) appendActivities: (NSArray *) activityList {
+  [activities addObjectsFromArray: activityList];
+  [self recreateDateGroups];
 }
 
 - (void) addNewActivity: (Activity *) activity {
   NSInteger index;
-  for (index = 0; index < activityList.count; index++) {
-    Activity *existing = [activityList objectAtIndex: index];
+  for (index = 0; index < activities.count; index++) {
+    Activity *existing = [activities objectAtIndex: index];
     if ([activity.date laterDate: existing.date] == activity.date) break;
   }
-  [activityList insertObject: activity atIndex: index];
+  [activities insertObject: activity atIndex: index];
+  [self recreateDateGroups];
 }
 
 - (void) updateActivity: (Activity *) activity {
   [self deleteActivity: activity];
   [self addNewActivity: activity];
+  [self recreateDateGroups];
 }
 
 - (void) deleteActivity: (Activity *) activity {
   NSInteger index;
   Activity *existing;
-  for (index = 0; index < activityList.count; index++) {
-    existing = [activityList objectAtIndex: index];
+  for (index = 0; index < activities.count; index++) {
+    existing = [activities objectAtIndex: index];
     if (existing.recordId == activity.recordId) break;
   }
-  if (index < activityList.count) {
-    [activityList removeObjectAtIndex: index];
+  if (index < activities.count) {
+    [activities removeObjectAtIndex: index];
   }
+  [self recreateDateGroups];
 }
 
 - (NSArray *) recentProjects {

@@ -66,6 +66,24 @@
 
 @end
 
+@implementation NSArray (RubyTime)
+
+- (NSDictionary *) groupByKey: (NSString *) key {
+  NSMutableDictionary *groups = [[NSMutableDictionary alloc] init];
+  for (id object in self) {
+    id keyForObject = [object valueForKey: key];
+    NSMutableArray *list = [groups objectForKey: keyForObject];
+    if (!list) {
+      list = [NSMutableArray array];
+      [groups setObject: list forKey: keyForObject];
+    }
+    [list addObject: object];
+  }
+  return [groups autorelease];
+}
+
+@end
+
 @implementation NSString (RubyTime)
 
 - (NSString *) trimmedString {

@@ -10,15 +10,19 @@
 @class Activity;
 
 @interface ActivityManager : NSObject {
-  NSMutableArray *activityList;
+  NSMutableArray *activities;
+  NSMutableDictionary *dateGroups;
+  NSArray *allDates;
 }
 
 @property (nonatomic, readonly) NSArray *activities;
+@property (nonatomic, readonly) NSArray *allDates;
 
 - (void) addNewActivity: (Activity *) activity;
 - (void) updateActivity: (Activity *) activity;
 - (void) deleteActivity: (Activity *) activity;
 - (NSArray *) recentProjects;
 - (void) appendActivities: (NSArray *) activities;
+- (NSArray *) activitiesOnDay: (NSDate *) date;
 
 @end

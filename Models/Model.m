@@ -25,7 +25,7 @@ SynthesizeAndReleaseLater(properties, modelName);
 
   // set all properties
   for (NSString *key in [json allKeys]) {
-    id value;
+    id value = nil;
     NSString *property;
 
     if ([key hasSuffix: @"_id"]) {
