@@ -7,6 +7,7 @@
 
 #import "Account.h"
 #import "Activity.h"
+#import "PathBuilder.h"
 #import "Project.h"
 #import "Request.h"
 #import "RubyTimeConnector.h"
@@ -100,23 +101,27 @@
 - (void) loadActivitiesForUser: (User *) user
                          limit: (NSInteger) limit
                         offset: (NSInteger) offset {
-  NSString *path = RTFormat(@"/users/%d/activities?search_criteria[limit]=%d&search_criteria[offset]=%d",
-    user.recordId, limit, offset);
-  [self sendGetRequestToPath: path type: RTActivityIndexRequest];
+  PathBuilder *builder = [PathBuilder builderWithBasePath: @"/users/%d/activities" record: user];
+  [builder setInt: limit forKey: @"limit"];
+  [builder setInt: offset forKey: @"offset"];
+  [self sendGetRequestToPath: builder.path type: RTActivityIndexRequest];
 }
 
 - (void) loadActivitiesForProject: (Project *) project
                             limit: (NSInteger) limit
                            offset: (NSInteger) offset {
-  NSString *path = RTFormat(@"/projects/%d/activities?search_criteria[limit]=%d&search_criteria[offset]=%d",
-    project.recordId, limit, offset);
-  [self sendGetRequestToPath: path type: RTActivityIndexRequest];
+  PathBuilder *builder = [PathBuilder builderWithBasePath: @"/projects/%d/activities" record: project];
+  [builder setInt: limit forKey: @"limit"];
+  [builder setInt: offset forKey: @"offset"];
+  [self sendGetRequestToPath: builder.path type: RTActivityIndexRequest];
 }
 
 - (void) loadAllActivitiesWithLimit: (NSInteger) limit
                              offset: (NSInteger) offset {
-  NSString *path = RTFormat(@"/activities?search_criteria[limit]=%d&search_criteria[offset]=%d", limit, offset);
-  [self sendGetRequestToPath: path type: RTActivityIndexRequest];
+  PathBuilder *builder = [PathBuilder builderWithBasePath: @"/activities"];
+  [builder setInt: limit forKey: @"limit"];
+  [builder setInt: offset forKey: @"offset"];
+  [self sendGetRequestToPath: builder.path type: RTActivityIndexRequest];
 }
 
 - (void) createActivity: (Activity *) activity {
