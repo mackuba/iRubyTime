@@ -9,6 +9,11 @@
 
 @class Activity;
 
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Helper macros
+
+
 #define RubyTimeErrorDomain @"RubyTimeErrorDomain"
 
 #define ReleaseAll(...) \
@@ -55,6 +60,11 @@
 
 #define AbstractMethod(returnStatement) { [self doesNotRecognizeSelector: _cmd]; returnStatement; }
 
+
+// -------------------------------------------------------------------------------------------
+#pragma mark IntArray class
+
+
 @interface IntArray : NSObject {
   NSInteger *values;
   NSInteger size;
@@ -69,12 +79,16 @@
 - (NSInteger) integerAtIndex: (NSInteger) index;
 @end
 
-@interface UIAlertView (RubyTime)
-+ (void) showAlertWithTitle: (NSString *) title content: (NSString *) content;
-@end
+
+// -------------------------------------------------------------------------------------------
+#pragma mark Core class extensions
 
 @interface NSArray (RubyTime)
 - (NSDictionary *) groupByKey: (NSString *) key;
+@end
+
+@interface NSError (RubyTime)
+- (NSString *) friendlyDescription;
 @end
 
 @interface NSString (RubyTime)
@@ -82,28 +96,28 @@
 - (NSString *) stringWithPercentEscapesForFormValues;
 @end
 
-@interface NSError (RubyTime)
-- (NSString *) friendlyDescription;
-@end
-
-@interface UITableView (RubyTime)
-- (UITableViewCell *) cellWithStyle: (UITableViewCellStyle) style andIdentifier: (NSString *) identifier;
+@interface NSUserDefaults (RubyTime)
+- (NSString *) passwordForKey: (NSString *) key andUsername: (NSString *) username;
+- (void) setPassword: (NSString *) password forKey: (NSString *) key andUsername: (NSString *) username;
 @end
 
 @interface UIActivityIndicatorView (RubyTime)
 + (UIActivityIndicatorView *) spinnerBarButton;
 @end
 
+@interface UIAlertView (RubyTime)
++ (void) showAlertWithTitle: (NSString *) title content: (NSString *) content;
+@end
+
 @interface UIImage (RubyTime)
 + (UIImage *) loadImageFromBundle: (NSString *) imageName;
+@end
+
+@interface UITableView (RubyTime)
+- (UITableViewCell *) cellWithStyle: (UITableViewCellStyle) style andIdentifier: (NSString *) identifier;
 @end
 
 @interface UIViewController (RubyTime)
 - (void) initializeLengthPicker: (UIDatePicker *) picker usingActivity: (Activity *) activity;
 - (void) setBackButtonTitle: (NSString *) title;
-@end
-
-@interface NSUserDefaults (RubyTime)
-- (NSString *) passwordForKey: (NSString *) key andUsername: (NSString *) username;
-- (void) setPassword: (NSString *) password forKey: (NSString *) key andUsername: (NSString *) username;
 @end
