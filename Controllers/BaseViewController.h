@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define STANDARD_CELL_HEIGHT 44
+
 @class LoadingView;
 @class RubyTimeConnector;
 

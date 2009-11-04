@@ -57,6 +57,7 @@
 #define RTFormat(...) [NSString stringWithFormat: __VA_ARGS__]
 #define RTInt(i) [NSNumber numberWithInt: i]
 #define RTIndex(sec, row) [NSIndexPath indexPathForRow: row inSection: sec]
+#define RTNull [NSNull null]
 
 #define AbstractMethod(returnStatement) { [self doesNotRecognizeSelector: _cmd]; returnStatement; }
 

@@ -212,7 +212,7 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
     return nil;
   } else {
     NSDate *date = [manager.allDates objectAtIndex: section];
-    return [[ActivityDateFormatter sharedFormatter] formatDate: date];
+    return [[ActivityDateFormatter sharedFormatter] formatDate: date withAliases: YES];
   }
 }
 

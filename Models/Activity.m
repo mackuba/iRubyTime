@@ -43,7 +43,7 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project, user);
   date = [newDate copy];
 
   [dateAsString release];
-  dateAsString = [[[ActivityDateFormatter sharedFormatter] formatDate: date] retain];
+  dateAsString = [[[ActivityDateFormatter sharedFormatter] formatDate: date withAliases: YES] retain];
 }
 
 - (void) setDateAsString: (NSString *) dateString {

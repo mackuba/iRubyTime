@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 
 #import "Activity.h"
+#import "BaseViewController.h"
 #import "Project.h"
 #import "Request.h"
 #import "RubyTimeConnector.h"
@@ -16,7 +17,6 @@
 #import "NSDictionary+BSJSONAdditions.h"
 
 #define COMMENTS_CELL_HEIGHT 92
-#define STANDARD_CELL_HEIGHT 44
 
 typedef enum { DateRow, ProjectRow, UserRow, LengthRow, CommentsRow, DeleteButtonRow } RowType;
 

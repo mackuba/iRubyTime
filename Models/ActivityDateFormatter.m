@@ -22,9 +22,9 @@ OnDeallocRelease(calendar, dateComponentsForToday, dateComponentsForYesterday,
     dateUnits = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
 
     fullDateFormatter = [[NSDateFormatter alloc] init];
-    fullDateFormatter.dateFormat = @"E d MMM yyyy";
+    fullDateFormatter.dateFormat = @"d MMM yyyy";
     dayAndMonthFormatter = [[NSDateFormatter alloc] init];
-    dayAndMonthFormatter.dateFormat = @"E d MMM";
+    dayAndMonthFormatter.dateFormat = @"E, d MMM";
     inputFormatter = [[NSDateFormatter alloc] init];
     inputFormatter.dateFormat = @"yyyy-MM-dd";
 
@@ -40,17 +40,18 @@ OnDeallocRelease(calendar, dateComponentsForToday, dateComponentsForYesterday,
   return self;
 }
 
-- (NSString *) formatDate: (NSDate *) date {
+- (NSString *) formatDate: (NSDate *) date withAliases: (BOOL) aliases {
   NSDateComponents *dateComponents = [calendar components: dateUnits fromDate: date];
-  if ([dateComponents isEqual: dateComponentsForToday]) {
-    return @"Today";
-  } else if ([dateComponents isEqual: dateComponentsForYesterday]) {
-    return @"Yesterday";
-  } else if ([dateComponents year] == [dateComponentsForToday year]) {
-    return [dayAndMonthFormatter stringFromDate: date];
-  } else {
-    return [fullDateFormatter stringFromDate: date];
+  if (aliases) {
+    if ([dateComponents isEqual: dateComponentsForToday]) {
+      return @"Today";
+    } else if ([dateComponents isEqual: dateComponentsForYesterday]) {
+      return @"Yesterday";
+    } else if ([dateComponents year] == [dateComponentsForToday year]) {
+      return [dayAndMonthFormatter stringFromDate: date];
+    }
   }
+  return [fullDateFormatter stringFromDate: date];
 }
 
 - (NSDate *) parseDate: (NSString *) dateString {

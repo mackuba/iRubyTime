@@ -1,17 +1,18 @@
 // -------------------------------------------------------
-// ProjectChoiceController.h
+// RecordChoiceController.h
 //
 // Copyright (c) 2009 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under MIT license
 // -------------------------------------------------------
 
 #import <UIKit/UIKit.h>
-#import "RecordChoiceController.h"
 
-@class Activity;
+@interface RecordChoiceController : UITableViewController {
+  Class model;
+  id delegate;
+  BOOL allowNil;
+}
 
-@interface ProjectChoiceController : RecordChoiceController {}
-
-- (id) initWithActivity: (Activity *) newActivity;
+- (id) initWithModel: (Class) model delegate: (id) delegate allowNil: (BOOL) allowNil;
 
 @end
