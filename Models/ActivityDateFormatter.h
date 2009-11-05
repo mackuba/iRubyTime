@@ -19,6 +19,7 @@
 
 + (ActivityDateFormatter *) sharedFormatter;
 - (NSString *) formatDate: (NSDate *) date withAliases: (BOOL) aliases;
+- (NSString *) formatDateForRequest: (NSDate *) date;
 - (NSDate *) parseDate: (NSString *) dateString;
 
 @end

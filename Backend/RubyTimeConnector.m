@@ -7,6 +7,7 @@
 
 #import "Account.h"
 #import "Activity.h"
+#import "ActivityDateFormatter.h"
 #import "PathBuilder.h"
 #import "Project.h"
 #import "Request.h"
@@ -121,6 +122,23 @@
   PathBuilder *builder = [PathBuilder builderWithBasePath: @"/activities"];
   [builder setInt: limit forKey: @"limit"];
   [builder setInt: offset forKey: @"offset"];
+  [self sendGetRequestToPath: builder.path type: RTActivityIndexRequest];
+}
+
+- (void) searchActivitiesForProject: (Project *) project
+                               user: (User *) user
+                          startDate: (NSDate *) startDate
+                            endDate: (NSDate *) endDate {
+  PathBuilder *builder = [PathBuilder builderWithBasePath: @"/activities"];
+  if (project) {
+    [builder setInt: project.recordId forKey: @"project_id"];
+  }
+  if (user) {
+    [builder setInt: user.recordId forKey: @"user_id"];
+  }
+  ActivityDateFormatter *formatter = [ActivityDateFormatter sharedFormatter];
+  [builder setObject: [formatter formatDateForRequest: startDate] forKey: @"date_from"];
+  [builder setObject: [formatter formatDateForRequest: endDate] forKey: @"date_to"];
   [self sendGetRequestToPath: builder.path type: RTActivityIndexRequest];
 }
 

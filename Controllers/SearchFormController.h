@@ -31,4 +31,6 @@
 @property (nonatomic, retain) NSDate *startDate;
 @property (nonatomic, retain) NSDate *endDate;
 
+- (void) showNotFoundMessage;
+
 @end

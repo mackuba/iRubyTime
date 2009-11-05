@@ -40,6 +40,10 @@
                            offset: (NSInteger) offset;
 - (void) loadAllActivitiesWithLimit: (NSInteger) limit
                              offset: (NSInteger) offset;
+- (void) searchActivitiesForProject: (Project *) project
+                               user: (User *) user
+                          startDate: (NSDate *) startDate
+                            endDate: (NSDate *) endDate;
 - (void) loadProjects;
 - (void) loadUsers;
 - (void) createActivity: (Activity *) activity;

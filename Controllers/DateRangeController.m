@@ -12,14 +12,11 @@
 
 #define DATE_CELL_TYPE @"DateCell"
 
-@interface DateRangeController ()
-@end
-
+static UIColor *dateColor = nil;
 
 @implementation DateRangeController
 
-@synthesize tableView, datePicker;
-OnDeallocRelease(tableView, datePicker, dateColor);
+SynthesizeAndReleaseLater(tableView, datePicker);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -31,6 +28,10 @@ OnDeallocRelease(tableView, datePicker, dateColor);
     self.title = @"Choose date range";
   }
   return self;
+}
+
+- (void) viewDidLoad {
+  [datePicker setMaximumDate: [NSDate date]];
 }
 
 - (void) viewWillAppear: (BOOL) animated {
@@ -67,7 +68,7 @@ OnDeallocRelease(tableView, datePicker, dateColor);
 - (BOOL) datesAreCorrect {
   NSDate *startDate = [delegate startDate];
   NSDate *endDate = [delegate endDate];
-  return ([startDate earlierDate: endDate] == startDate);
+  return [startDate isEarlierThanOrEqualTo: endDate];
 }
 
 - (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {

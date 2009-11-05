@@ -12,6 +12,7 @@
 #import "RecordChoiceController.h"
 #import "RubyTimeConnector.h"
 #import "SearchFormController.h"
+#import "SearchResultsController.h"
 #import "User.h"
 #import "Utils.h"
 
@@ -19,9 +20,12 @@
 
 typedef enum { ProjectRow, UserRow, DateRangeRow } RowType;
 
+static CGFloat dateRangeCellHeight = 0.0;
+
 @interface SearchFormController ()
 - (NSDate *) dateOneMonthAgo;
 - (void) clearSubcontrollers;
+- (void) hideNotFoundMessage;
 - (UIViewController *) subcontrollerForRowType: (RowType) rowType;
 @end
 
@@ -29,8 +33,7 @@ typedef enum { ProjectRow, UserRow, DateRangeRow } RowType;
 @implementation SearchFormController
 
 @synthesize dateRangeCell, startDateLabel, endDateLabel, user, project, startDate, endDate;
-OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate,
-  project, user, subcontrollers);
+OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate, project, user, subcontrollers);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -40,12 +43,14 @@ OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate
   if (self) {
     project = nil;
     user = nil;
-    endDate = [[NSDate date] retain];
     startDate = [[self dateOneMonthAgo] retain];
+    endDate = [[NSDate date] retain];
     self.tabBarItem.image = [UIImage loadImageFromBundle: @"magnifying-glass.png"];
     self.title = @"Search";
+    [self setBackButtonTitle: @"Form"];
     [[NSBundle mainBundle] loadNibNamed: @"DateRangeCell" owner: self options: nil];
     [self clearSubcontrollers];
+    dateRangeCellHeight = dateRangeCell.frame.size.height;
   }
   return self;
 }
@@ -76,14 +81,42 @@ OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate
   [tableView deselectRowAtIndexPath: selection animated: YES];
 }
 
+- (void) viewDidDisappear: (BOOL) animated {
+  [self hideNotFoundMessage];
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Action handlers
 
 - (void) searchClicked {
-  if ([startDate earlierDate: endDate] == endDate) {
-    [UIAlertView showAlertWithTitle: @"Error" content: @"Start date can't be later than end date."];
+  if ([startDate isEarlierThanOrEqualTo: endDate]) {
+    SearchResultsController *controller;
+    controller = [[SearchResultsController alloc] initWithParentController: self connector: connector];
+    [self.navigationController pushViewController: controller animated: YES];
+    [controller release];
   } else {
-    NSLog(@"searching!");
+    [UIAlertView showAlertWithTitle: @"Error" content: @"Start date can't be later than end date."];
+  }
+}
+
+- (void) hideNotFoundMessage {
+  tableView.tableHeaderView = nil;
+}
+
+- (void) showNotFoundMessage {
+  if (!tableView.tableHeaderView) {
+    UIView *footer = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 60)];
+    UILabel *label = [[UILabel alloc] initWithFrame: footer.frame];
+    label.font = [UIFont systemFontOfSize: 14];
+    label.backgroundColor = [UIColor clearColor];
+    label.text = @"No activities found - please change your search criteria and try again.";
+    label.textColor = [UIColor colorWithRed: 0.7 green: 0.0 blue: 0.0 alpha: 1.0];
+    label.textAlignment = UITextAlignmentCenter;
+    label.numberOfLines = 2;
+    [footer addSubview: label];
+    tableView.tableHeaderView = footer;
+    [footer release];
+    [label release];
   }
 }
 
@@ -93,6 +126,8 @@ OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate
 - (IntArray *) rowTypes {
   if (connector.account.userType == Employee) {
     return [IntArray arrayOfSize: 2 integers: ProjectRow, DateRangeRow];
+  } else if (connector.account.userType == ClientUser && [Project count] < 2) {
+    return [IntArray arrayOfSize: 2 integers: UserRow, DateRangeRow];
   } else {
     return [IntArray arrayOfSize: 3 integers: ProjectRow, UserRow, DateRangeRow];
   }
@@ -145,14 +180,16 @@ OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate
 }
 
 - (UIViewController *) subcontrollerForRowType: (RowType) rowType {
-  UIViewController *controller;
+  id controller;
   switch (rowType) {
     case ProjectRow:
       controller = [[RecordChoiceController alloc] initWithModel: [Project class] delegate: self allowNil: YES];
+      [controller setCloseOnSelection: NO];
       break;
 
     case UserRow:
       controller = [[RecordChoiceController alloc] initWithModel: [User class] delegate: self allowNil: YES];
+      [controller setCloseOnSelection: NO];
       break;
 
     case DateRangeRow:
@@ -162,12 +199,18 @@ OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate
     default:
       break;
   }
+  UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithTitle: @"Search"
+                                                                   style: UIBarButtonItemStyleDone
+                                                                  target: self
+                                                                  action: @selector(searchClicked)];
+  [[controller navigationItem] setRightBarButtonItem: [searchButton autorelease]];
+  [controller setBackButtonTitle: self.navigationItem.backBarButtonItem.title];
   return [controller autorelease];
 }
 
 - (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
   if ([self rowTypeAtIndexPath: path] == DateRangeRow) {
-    return dateRangeCell.frame.size.height;
+    return dateRangeCellHeight;
   } else {
     return STANDARD_CELL_HEIGHT;
   }

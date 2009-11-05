@@ -30,5 +30,6 @@
 @property (nonatomic, retain) IBOutlet UILabel *loadMoreLabel;
 
 - (BOOL) hasNewActivityButton;
+- (void) activitiesReceived: (NSNotification *) notification;
 
 @end

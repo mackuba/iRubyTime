@@ -41,8 +41,8 @@ OnDeallocRelease(calendar, dateComponentsForToday, dateComponentsForYesterday,
 }
 
 - (NSString *) formatDate: (NSDate *) date withAliases: (BOOL) aliases {
-  NSDateComponents *dateComponents = [calendar components: dateUnits fromDate: date];
   if (aliases) {
+    NSDateComponents *dateComponents = [calendar components: dateUnits fromDate: date];
     if ([dateComponents isEqual: dateComponentsForToday]) {
       return @"Today";
     } else if ([dateComponents isEqual: dateComponentsForYesterday]) {
@@ -52,6 +52,10 @@ OnDeallocRelease(calendar, dateComponentsForToday, dateComponentsForYesterday,
     }
   }
   return [fullDateFormatter stringFromDate: date];
+}
+
+- (NSString *) formatDateForRequest: (NSDate *) date {
+  return [inputFormatter stringFromDate: date];
 }
 
 - (NSDate *) parseDate: (NSString *) dateString {

@@ -20,6 +20,7 @@
 @implementation RecordChoiceController
 
 OnDeallocRelease(model, delegate);
+@synthesize closeOnSelection;
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -30,6 +31,7 @@ OnDeallocRelease(model, delegate);
     model = [modelClass retain];
     delegate = [aDelegate retain];
     allowNil = allow;
+    closeOnSelection = YES;
     self.title = RTFormat(@"Choose %@", [self delegateGetterName]);
   }
   return self;
@@ -115,12 +117,13 @@ OnDeallocRelease(model, delegate);
     }
     UITableViewCell *cell = [table cellForRowAtIndexPath: path];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-      
     [self setDelegateValue: [self recordAtPath: path]];
   } 
 
   [table deselectRowAtIndexPath: path animated: YES];
-  [self.navigationController popViewControllerAnimated: YES];
+  if (closeOnSelection) {
+    [self.navigationController popViewControllerAnimated: YES];
+  }
 }
 
 @end

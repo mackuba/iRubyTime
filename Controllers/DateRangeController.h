@@ -11,7 +11,6 @@
   id delegate;
   UITableView *tableView;
   UIDatePicker *datePicker;
-  UIColor *dateColor;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;

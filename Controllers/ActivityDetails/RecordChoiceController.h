@@ -11,7 +11,10 @@
   Class model;
   id delegate;
   BOOL allowNil;
+  BOOL closeOnSelection;
 }
+
+@property (nonatomic) BOOL closeOnSelection;
 
 - (id) initWithModel: (Class) model delegate: (id) delegate allowNil: (BOOL) allowNil;
 

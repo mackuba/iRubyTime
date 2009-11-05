@@ -88,6 +88,11 @@
 - (NSDictionary *) groupByKey: (NSString *) key;
 @end
 
+@interface NSDate (RubyTime)
+- (NSDate *) midnight;
+- (BOOL) isEarlierThanOrEqualTo: (NSDate *) otherDate;
+@end
+
 @interface NSError (RubyTime)
 - (NSString *) friendlyDescription;
 @end
