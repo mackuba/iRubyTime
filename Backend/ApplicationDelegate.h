@@ -1,5 +1,5 @@
 // -------------------------------------------------------
-// RubyTimeAppDelegate.h
+// ApplicationDelegate.h
 //
 // Copyright (c) 2009 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under MIT license
@@ -9,13 +9,13 @@
 
 @class ActivityListController;
 @class BaseViewController;
-@class RubyTimeConnector;
+@class ServerConnector;
 
-@interface RubyTimeAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
+@interface ApplicationDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
   UIWindow *window;
   UITabBarController *tabBarController;
   id currentController;
-  RubyTimeConnector *connector;
+  ServerConnector *connector;
   BOOL initialDataIsLoaded;
 }
 

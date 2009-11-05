@@ -1,5 +1,5 @@
 // -------------------------------------------------------
-// RubyTimeAppDelegate.m
+// ApplicationDelegate.m
 //
 // Copyright (c) 2009 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under MIT license
@@ -7,11 +7,11 @@
 
 #import "Account.h"
 #import "AllActivitiesController.h"
+#import "ApplicationDelegate.h"
 #import "LoginDialogController.h"
 #import "ProjectListController.h"
-#import "RubyTimeAppDelegate.h"
-#import "RubyTimeConnector.h"
 #import "SearchFormController.h"
+#import "ServerConnector.h"
 #import "SettingsController.h"
 #import "UserActivitiesController.h"
 #import "UserListController.h"
@@ -23,7 +23,7 @@
 #define USER_TYPE_SETTING @"userType"
 
 
-@interface RubyTimeAppDelegate()
+@interface ApplicationDelegate()
 - (void) buildGuiForUserType: (UserType) type;
 - (void) initApplication;
 - (void) initialDataLoaded;
@@ -35,7 +35,7 @@
 @end
 
 
-@implementation RubyTimeAppDelegate
+@implementation ApplicationDelegate
 
 @synthesize window, tabBarController, currentController, initialDataIsLoaded;
 OnDeallocRelease(window, tabBarController, connector, currentController);
@@ -44,7 +44,7 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 #pragma mark Initialization
 
 - (void) initApplication {
-  connector = [[RubyTimeConnector alloc] initWithAccount: [self loadAccountData]];
+  connector = [[ServerConnector alloc] initWithAccount: [self loadAccountData]];
   [currentController setConnector: connector];
 
   Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);

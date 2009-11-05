@@ -8,7 +8,7 @@
 #import "Account.h"
 #import "ActivityListController.h"
 #import "LoginDialogController.h"
-#import "RubyTimeConnector.h"
+#import "ServerConnector.h"
 #import "SFHFEditableCell.h"
 #import "Utils.h"
 
@@ -26,7 +26,7 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector {
+- (id) initWithConnector: (ServerConnector *) rtConnector {
   self = [super initWithStyle: UITableViewStyleGrouped];
   if (self) {
     [[NSBundle mainBundle] loadNibNamed: @"LoginDialog" owner: self options: nil];

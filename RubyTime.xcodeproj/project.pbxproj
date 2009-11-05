@@ -31,10 +31,11 @@
 		5853E5BF10A1C7EB0060636F /* DateRangeDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5853E5BE10A1C7EB0060636F /* DateRangeDialog.xib */; };
 		5853E68B10A1DE290060636F /* SearchResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5853E68A10A1DE290060636F /* SearchResultsController.m */; };
 		5853E78810A303180060636F /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5853E78710A303180060636F /* SettingsController.m */; };
+		5853E7B810A30CCA0060636F /* ApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5853E7B510A30CCA0060636F /* ApplicationDelegate.m */; };
+		5853E7B910A30CCA0060636F /* ServerConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 5853E7B710A30CCA0060636F /* ServerConnector.m */; };
 		586DAE120FBB68CA00DBCF0A /* NewActivityDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */; };
 		586E34EB10987AB9005EB2C8 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E34EA10987AB9005EB2C8 /* Model.m */; };
 		586E368F10989EAE005EB2C8 /* ModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E368E10989EAE005EB2C8 /* ModelManager.m */; };
-		586E37111098A8EB005EB2C8 /* RubyTimeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E37101098A8EB005EB2C8 /* RubyTimeAppDelegate.m */; };
 		586E37171098A936005EB2C8 /* ActivityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E37161098A936005EB2C8 /* ActivityManager.m */; };
 		586E373E10999A60005EB2C8 /* ActivityCommentsDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E373110999A60005EB2C8 /* ActivityCommentsDialogController.m */; };
 		586E373F10999A60005EB2C8 /* ActivityDateDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E373310999A60005EB2C8 /* ActivityDateDialogController.m */; };
@@ -69,7 +70,6 @@
 		58B2D1351091DCCC00F7A801 /* ProjectListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B2D1341091DCCC00F7A801 /* ProjectListController.m */; };
 		58C0A0F20FBA009D00AF8C14 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C0A0F10FBA009D00AF8C14 /* Utils.m */; };
 		58CA2D4E0FA7995E007A6A65 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4B0FA7995E007A6A65 /* Request.m */; };
-		58CA2D4F0FA7995E007A6A65 /* RubyTimeConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4D0FA7995E007A6A65 /* RubyTimeConnector.m */; };
 		58CA2DAE0FA7AE6A007A6A65 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2DAD0FA7AE6A007A6A65 /* Activity.m */; };
 		58E9FFC10FB22F9D00CDA046 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E9FFC00FB22F9D00CDA046 /* Project.m */; };
 		58EB65700FBCEF4400717C36 /* ActivityDateDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EB656F0FBCEF4400717C36 /* ActivityDateDialog.xib */; };
@@ -116,15 +116,17 @@
 		5853E68A10A1DE290060636F /* SearchResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsController.m; sourceTree = "<group>"; };
 		5853E78610A303180060636F /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		5853E78710A303180060636F /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
+		5853E7B410A30CCA0060636F /* ApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationDelegate.h; sourceTree = "<group>"; };
+		5853E7B510A30CCA0060636F /* ApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationDelegate.m; sourceTree = "<group>"; };
+		5853E7B610A30CCA0060636F /* ServerConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConnector.h; sourceTree = "<group>"; };
+		5853E7B710A30CCA0060636F /* ServerConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnector.m; sourceTree = "<group>"; };
 		586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewActivityDialog.xib; sourceTree = "<group>"; };
 		586E34E910987AB9005EB2C8 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		586E34EA10987AB9005EB2C8 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		586E368D10989EAE005EB2C8 /* ModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelManager.h; sourceTree = "<group>"; };
 		586E368E10989EAE005EB2C8 /* ModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelManager.m; sourceTree = "<group>"; };
-		586E37101098A8EB005EB2C8 /* RubyTimeAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyTimeAppDelegate.m; sourceTree = "<group>"; };
 		586E37151098A936005EB2C8 /* ActivityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityManager.h; sourceTree = "<group>"; };
 		586E37161098A936005EB2C8 /* ActivityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityManager.m; sourceTree = "<group>"; };
-		586E37261098A953005EB2C8 /* RubyTimeAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyTimeAppDelegate.h; sourceTree = "<group>"; };
 		586E373010999A60005EB2C8 /* ActivityCommentsDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCommentsDialogController.h; sourceTree = "<group>"; };
 		586E373110999A60005EB2C8 /* ActivityCommentsDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCommentsDialogController.m; sourceTree = "<group>"; };
 		586E373210999A60005EB2C8 /* ActivityDateDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDateDialogController.h; sourceTree = "<group>"; };
@@ -183,8 +185,6 @@
 		58C0A0F10FBA009D00AF8C14 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		58CA2D4A0FA7995E007A6A65 /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
 		58CA2D4B0FA7995E007A6A65 /* Request.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
-		58CA2D4C0FA7995E007A6A65 /* RubyTimeConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyTimeConnector.h; sourceTree = "<group>"; };
-		58CA2D4D0FA7995E007A6A65 /* RubyTimeConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyTimeConnector.m; sourceTree = "<group>"; };
 		58CA2DAC0FA7AE6A007A6A65 /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
 		58CA2DAD0FA7AE6A007A6A65 /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
 		58E9FFBF0FB22F9D00CDA046 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
@@ -395,14 +395,14 @@
 		58CA2D3B0FA78DD8007A6A65 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
+				5853E7B410A30CCA0060636F /* ApplicationDelegate.h */,
+				5853E7B510A30CCA0060636F /* ApplicationDelegate.m */,
 				5842116910A080CC00F90AFB /* PathBuilder.h */,
 				5842116A10A080CC00F90AFB /* PathBuilder.m */,
 				58CA2D4A0FA7995E007A6A65 /* Request.h */,
 				58CA2D4B0FA7995E007A6A65 /* Request.m */,
-				586E37261098A953005EB2C8 /* RubyTimeAppDelegate.h */,
-				586E37101098A8EB005EB2C8 /* RubyTimeAppDelegate.m */,
-				58CA2D4C0FA7995E007A6A65 /* RubyTimeConnector.h */,
-				58CA2D4D0FA7995E007A6A65 /* RubyTimeConnector.m */,
+				5853E7B610A30CCA0060636F /* ServerConnector.h */,
+				5853E7B710A30CCA0060636F /* ServerConnector.m */,
 			);
 			path = Backend;
 			sourceTree = "<group>";
@@ -511,7 +511,6 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				58CA2D4E0FA7995E007A6A65 /* Request.m in Sources */,
-				58CA2D4F0FA7995E007A6A65 /* RubyTimeConnector.m in Sources */,
 				58CA2DAE0FA7AE6A007A6A65 /* Activity.m in Sources */,
 				588BAB190FADD79B00460689 /* ActivityCell.m in Sources */,
 				58E9FFC10FB22F9D00CDA046 /* Project.m in Sources */,
@@ -534,7 +533,6 @@
 				5833BED01095EA4400A5530E /* Account.m in Sources */,
 				586E34EB10987AB9005EB2C8 /* Model.m in Sources */,
 				586E368F10989EAE005EB2C8 /* ModelManager.m in Sources */,
-				586E37111098A8EB005EB2C8 /* RubyTimeAppDelegate.m in Sources */,
 				586E37171098A936005EB2C8 /* ActivityManager.m in Sources */,
 				586E373E10999A60005EB2C8 /* ActivityCommentsDialogController.m in Sources */,
 				586E373F10999A60005EB2C8 /* ActivityDateDialogController.m in Sources */,
@@ -553,6 +551,8 @@
 				5853E5BA10A1C79F0060636F /* DateRangeController.m in Sources */,
 				5853E68B10A1DE290060636F /* SearchResultsController.m in Sources */,
 				5853E78810A303180060636F /* SettingsController.m in Sources */,
+				5853E7B810A30CCA0060636F /* ApplicationDelegate.m in Sources */,
+				5853E7B910A30CCA0060636F /* ServerConnector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,9 +10,9 @@
 #import "DateRangeController.h"
 #import "Project.h"
 #import "RecordChoiceController.h"
-#import "RubyTimeConnector.h"
 #import "SearchFormController.h"
 #import "SearchResultsController.h"
+#import "ServerConnector.h"
 #import "User.h"
 #import "Utils.h"
 
@@ -38,7 +38,7 @@ OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector {
+- (id) initWithConnector: (ServerConnector *) rtConnector {
   self = [super initWithConnector: rtConnector andStyle: UITableViewStyleGrouped];
   if (self) {
     project = nil;

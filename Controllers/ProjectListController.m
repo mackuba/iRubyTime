@@ -8,7 +8,7 @@
 #import "Project.h"
 #import "ProjectActivitiesController.h"
 #import "ProjectListController.h"
-#import "RubyTimeConnector.h"
+#import "ServerConnector.h"
 #import "Utils.h"
 
 #define PROJECT_CELL_TYPE @"ProjectCell"
@@ -22,7 +22,7 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector {
+- (id) initWithConnector: (ServerConnector *) rtConnector {
   self = [super initWithConnector: rtConnector andStyle: UITableViewStylePlain];
   if (self) {
     self.title = @"Projects";

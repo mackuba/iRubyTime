@@ -8,7 +8,7 @@
 #import "Account.h"
 #import "Project.h"
 #import "ProjectActivitiesController.h"
-#import "RubyTimeConnector.h"
+#import "ServerConnector.h"
 #import "Utils.h"
 
 @implementation ProjectActivitiesController
@@ -16,7 +16,7 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector project: (Project *) project {
+- (id) initWithConnector: (ServerConnector *) rtConnector project: (Project *) project {
   self = [super initWithConnector: rtConnector];
   if (self) {
     displayedProject = [project retain];

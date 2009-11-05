@@ -11,7 +11,7 @@
 #import "BaseViewController.h"
 #import "Project.h"
 #import "Request.h"
-#import "RubyTimeConnector.h"
+#import "ServerConnector.h"
 #import "User.h"
 #import "Utils.h"
 #import "NSDictionary+BSJSONAdditions.h"
@@ -25,7 +25,7 @@ typedef enum { DateRow, ProjectRow, UserRow, LengthRow, CommentsRow, DeleteButto
 @interface ActivityDetailsController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
   Activity *activity;
   NSMutableDictionary *subcontrollers;
-  RubyTimeConnector *connector;
+  ServerConnector *connector;
   UIActivityIndicatorView *spinner;
   UIBarButtonItem *cancelButton;
   UIBarButtonItem *loadingButton;
@@ -39,7 +39,7 @@ typedef enum { DateRow, ProjectRow, UserRow, LengthRow, CommentsRow, DeleteButto
 @property (nonatomic, retain) IBOutlet UITableViewCell *commentsCell;
 @property (nonatomic, retain) IBOutlet UILabel *commentsLabel;
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector nibName: (NSString *) nib;
+- (id) initWithConnector: (ServerConnector *) rtConnector nibName: (NSString *) nib;
 
 - (void) setupToolbar;
 - (NSString *) errorMessageFromJSON: (NSString *) jsonString;

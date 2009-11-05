@@ -1,5 +1,5 @@
 // -------------------------------------------------------
-// RubyTimeConnector.m
+// ServerConnector.m
 //
 // Copyright (c) 2009 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under MIT license
@@ -11,7 +11,7 @@
 #import "PathBuilder.h"
 #import "Project.h"
 #import "Request.h"
-#import "RubyTimeConnector.h"
+#import "ServerConnector.h"
 #import "Utils.h"
 #import "NSDictionary+BSJSONAdditions.h"
 
@@ -20,7 +20,7 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Private interface
 
-@interface RubyTimeConnector ()
+@interface ServerConnector ()
 - (void) handleFinishedRequest: (Request *) request;
 - (void) cleanupRequest;
 - (void) sendPostRequestToPath: (NSString *) path type: (RTRequestType) type text: (NSString *) text;
@@ -37,7 +37,7 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Implementation
 
-@implementation RubyTimeConnector
+@implementation ServerConnector
 
 @synthesize account;
 

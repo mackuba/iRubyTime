@@ -28,6 +28,7 @@ OnDeallocRelease(tableView, activityDatePicker, activity);
 
 - (void) viewWillAppear: (BOOL) animated {
   [activityDatePicker setDate: activity.date animated: NO];
+  [activityDatePicker setMaximumDate: [NSDate date]];
 }
 
 // -------------------------------------------------------------------------------------------

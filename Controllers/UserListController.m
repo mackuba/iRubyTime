@@ -5,7 +5,7 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "RubyTimeConnector.h"
+#import "ServerConnector.h"
 #import "User.h"
 #import "UserActivitiesController.h"
 #import "UserListController.h"
@@ -22,7 +22,7 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector {
+- (id) initWithConnector: (ServerConnector *) rtConnector {
   self = [super initWithConnector: rtConnector andStyle: UITableViewStylePlain];
   if (self) {
     self.title = @"Users";

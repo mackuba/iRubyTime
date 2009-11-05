@@ -5,11 +5,11 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "ApplicationDelegate.h"
 #import "BaseViewController.h"
 #import "LoadingView.h"
 #import "LoginDialogController.h"
-#import "RubyTimeAppDelegate.h"
-#import "RubyTimeConnector.h"
+#import "ServerConnector.h"
 #import "Utils.h"
 
 @implementation BaseViewController
@@ -17,9 +17,9 @@
 @synthesize connector;
 OnDeallocRelease(connector, loadingView);
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector { AbstractMethod(return nil) }
+- (id) initWithConnector: (ServerConnector *) rtConnector { AbstractMethod(return nil) }
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector andStyle: (UITableViewStyle) style {
+- (id) initWithConnector: (ServerConnector *) rtConnector andStyle: (UITableViewStyle) style {
   self = [super init];
   if (self) {
     connector = [rtConnector retain];

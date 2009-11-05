@@ -6,7 +6,7 @@
 // -------------------------------------------------------
 
 #import "Account.h"
-#import "RubyTimeConnector.h"
+#import "ServerConnector.h"
 #import "User.h"
 #import "UserActivitiesController.h"
 #import "Utils.h"
@@ -16,7 +16,7 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector user: (User *) user {
+- (id) initWithConnector: (ServerConnector *) rtConnector user: (User *) user {
   self = [super initWithConnector: rtConnector];
   if (self) {
     displayedUser = [user retain];

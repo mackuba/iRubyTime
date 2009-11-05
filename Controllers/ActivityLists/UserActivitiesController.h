@@ -14,6 +14,6 @@
   User *displayedUser;
 }
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector user: (User *) user;
+- (id) initWithConnector: (ServerConnector *) rtConnector user: (User *) user;
 
 @end

@@ -1,5 +1,5 @@
 // -------------------------------------------------------
-// RubyTimeConnector.h
+// ServerConnector.h
 //
 // Copyright (c) 2009 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under MIT license
@@ -23,7 +23,7 @@
 @class Request;
 @class User;
 
-@interface RubyTimeConnector : NSObject {
+@interface ServerConnector : NSObject {
   Request *currentRequest;
   Account *account;
 }

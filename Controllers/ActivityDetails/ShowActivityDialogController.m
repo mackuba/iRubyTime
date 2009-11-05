@@ -24,7 +24,7 @@ OnDeallocRelease(originalActivity, editButton, lockedActivityInfo);
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithActivity: (Activity *) anActivity connector: (RubyTimeConnector *) rtConnector {
+- (id) initWithActivity: (Activity *) anActivity connector: (ServerConnector *) rtConnector {
   self = [super initWithConnector: rtConnector nibName: @"ShowActivityDialog"];
   if (self) {
     activity = [anActivity copy];

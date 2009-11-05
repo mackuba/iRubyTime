@@ -7,9 +7,9 @@
 
 #import "Account.h"
 #import "Project.h"
-#import "RubyTimeConnector.h"
 #import "SearchFormController.h"
 #import "SearchResultsController.h"
+#import "ServerConnector.h"
 #import "Utils.h"
 
 @implementation SearchResultsController
@@ -20,7 +20,7 @@ OnDeallocRelease(parentController);
 #pragma mark Initialization
 
 - (id) initWithParentController: (SearchFormController *) parent
-                      connector: (RubyTimeConnector *) rtConnector {
+                      connector: (ServerConnector *) rtConnector {
   self = [super initWithConnector: rtConnector];
   if (self) {
     self.title = @"Search results";

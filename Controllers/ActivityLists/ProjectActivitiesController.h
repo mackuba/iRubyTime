@@ -14,6 +14,6 @@
   Project *displayedProject;
 }
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector project: (Project *) project;
+- (id) initWithConnector: (ServerConnector *) rtConnector project: (Project *) project;
 
 @end

@@ -6,7 +6,7 @@
 // -------------------------------------------------------
 
 #import "Account.h"
-#import "RubyTimeConnector.h"
+#import "ServerConnector.h"
 #import "SettingsController.h"
 #import "Utils.h"
 
@@ -23,7 +23,7 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector {
+- (id) initWithConnector: (ServerConnector *) rtConnector {
   self = [super initWithConnector: rtConnector andStyle: UITableViewStyleGrouped];
   if (self) {
     self.tabBarItem.image = [UIImage loadImageFromBundle: @"gear.png"];

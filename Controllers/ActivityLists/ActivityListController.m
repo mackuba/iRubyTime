@@ -13,7 +13,7 @@
 #import "ActivityManager.h"
 #import "BaseViewController.h"
 #import "NewActivityDialogController.h"
-#import "RubyTimeConnector.h"
+#import "ServerConnector.h"
 #import "ShowActivityDialogController.h"
 #import "Utils.h"
 
@@ -32,7 +32,7 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization and settings
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector {
+- (id) initWithConnector: (ServerConnector *) rtConnector {
   self = [super initWithConnector: rtConnector andStyle: UITableViewStylePlain];
   if (self) {
     [[NSBundle mainBundle] loadNibNamed: @"ShowMoreCell" owner: self options: nil];

@@ -14,7 +14,7 @@ SynthesizeAndReleaseLater(activityLengthPicker);
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector
+- (id) initWithConnector: (ServerConnector *) rtConnector
           defaultProject: (Project *) project
            defaultLength: (NSInteger) minutes {
   self = [super initWithConnector: rtConnector nibName: @"NewActivityDialog"];

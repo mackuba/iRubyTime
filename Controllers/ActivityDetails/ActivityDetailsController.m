@@ -20,7 +20,7 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector nibName: (NSString *) nib {
+- (id) initWithConnector: (ServerConnector *) rtConnector nibName: (NSString *) nib {
   self = [super initWithNibName: nib bundle: [NSBundle mainBundle]];
   if (self) {
     [[NSBundle mainBundle] loadNibNamed: @"CommentsCell" owner: self options: nil];

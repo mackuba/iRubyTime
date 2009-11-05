@@ -8,7 +8,7 @@
 #import "Account.h"
 #import "AllActivitiesController.h"
 #import "Project.h"
-#import "RubyTimeConnector.h"
+#import "ServerConnector.h"
 #import "Utils.h"
 
 @implementation AllActivitiesController
@@ -16,7 +16,7 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector {
+- (id) initWithConnector: (ServerConnector *) rtConnector {
   self = [super initWithConnector: rtConnector];
   if (self) {
     self.title = @"Recent activities";

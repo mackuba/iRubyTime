@@ -15,6 +15,6 @@
 }
 
 - (id) initWithParentController: (SearchFormController *) parent
-                      connector: (RubyTimeConnector *) rtConnector;
+                      connector: (ServerConnector *) rtConnector;
 
 @end

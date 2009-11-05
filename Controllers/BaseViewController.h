@@ -10,17 +10,17 @@
 #define STANDARD_CELL_HEIGHT 44
 
 @class LoadingView;
-@class RubyTimeConnector;
+@class ServerConnector;
 
 @interface BaseViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
   LoadingView *loadingView;
-  RubyTimeConnector *connector;
+  ServerConnector *connector;
   UITableView *tableView;
   UITableViewStyle tableStyle;
 }
 
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector;
-- (id) initWithConnector: (RubyTimeConnector *) rtConnector andStyle: (UITableViewStyle) style;
+- (id) initWithConnector: (ServerConnector *) rtConnector;
+- (id) initWithConnector: (ServerConnector *) rtConnector andStyle: (UITableViewStyle) style;
 - (void) showLoadingMessage;
 - (void) hideLoadingMessage;
 - (void) showPopupView: (UIViewController *) controllerClass;
@@ -30,6 +30,6 @@
 - (void) fetchDataIfNeeded;
 - (void) initializeView;
 
-@property (nonatomic, retain) RubyTimeConnector *connector;
+@property (nonatomic, retain) ServerConnector *connector;
 
 @end
