@@ -19,9 +19,10 @@
 - (id) initWithConnector: (RubyTimeConnector *) rtConnector {
   self = [super initWithConnector: rtConnector];
   if (self) {
-    self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem: UITabBarSystemItemRecents tag: 0];
     self.title = @"Recent activities";
-    [self setBackButtonTitle: @"Recent"];
+    self.tabBarItem.image = [UIImage loadImageFromBundle: @"clock.png"];
+    self.tabBarItem.title = @"Activities";
+    [self setBackButtonTitle: @"Activities"];
   }
   return self;
 }
