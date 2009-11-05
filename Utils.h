@@ -61,6 +61,8 @@
 
 #define AbstractMethod(returnStatement) { [self doesNotRecognizeSelector: _cmd]; returnStatement; }
 
+#define GENERIC_CELL_TYPE @"GenericCellType"
+
 
 // -------------------------------------------------------------------------------------------
 #pragma mark IntArray class
@@ -121,6 +123,7 @@
 
 @interface UITableView (RubyTime)
 - (UITableViewCell *) cellWithStyle: (UITableViewCellStyle) style andIdentifier: (NSString *) identifier;
+- (UITableViewCell *) genericCellWithStyle: (UITableViewCellStyle) style;
 @end
 
 @interface UIViewController (RubyTime)

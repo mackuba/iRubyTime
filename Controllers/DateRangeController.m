@@ -10,9 +10,8 @@
 #import "SearchFormController.h"
 #import "Utils.h"
 
-#define DATE_CELL_TYPE @"DateCell"
-
 static UIColor *dateColor = nil;
+
 
 @implementation DateRangeController
 
@@ -76,7 +75,7 @@ SynthesizeAndReleaseLater(tableView, datePicker);
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  UITableViewCell *cell = [tableView cellWithStyle: UITableViewCellStyleValue1 andIdentifier: DATE_CELL_TYPE];
+  UITableViewCell *cell = [tableView genericCellWithStyle: UITableViewCellStyleValue1];
   NSDate *displayedDate;
   if (path.row == 0) {
     cell.textLabel.text = @"From date";

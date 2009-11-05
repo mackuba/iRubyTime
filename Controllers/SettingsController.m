@@ -10,13 +10,7 @@
 #import "SettingsController.h"
 #import "Utils.h"
 
-#define SETTINGS_CELL_TYPE @"SettingsCell"
-
 typedef enum { ServerRow, LoginRow, VersionRow } RowType;
-
-@interface SettingsController ()
-@end
-
 
 @implementation SettingsController
 
@@ -73,7 +67,7 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  UITableViewCell *cell = [tableView cellWithStyle: UITableViewCellStyleValue1 andIdentifier: SETTINGS_CELL_TYPE];
+  UITableViewCell *cell = [tableView genericCellWithStyle: UITableViewCellStyleValue1];
   switch ([self rowTypeAtIndexPath: path]) {
     case ServerRow:
       cell.textLabel.text = @"Server URL";

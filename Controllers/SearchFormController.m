@@ -16,11 +16,10 @@
 #import "User.h"
 #import "Utils.h"
 
-#define SEARCH_FORM_CELL_TYPE @"SearchFormCell"
-
 typedef enum { ProjectRow, UserRow, DateRangeRow } RowType;
 
 static CGFloat dateRangeCellHeight = 0.0;
+
 
 @interface SearchFormController ()
 - (NSDate *) dateOneMonthAgo;
@@ -145,14 +144,14 @@ OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate
   UITableViewCell *cell;
   switch ([self rowTypeAtIndexPath: path]) {
     case ProjectRow:
-      cell = [tableView cellWithStyle: UITableViewCellStyleValue1 andIdentifier: SEARCH_FORM_CELL_TYPE];
+      cell = [tableView genericCellWithStyle: UITableViewCellStyleValue1];
       cell.textLabel.text = @"Project";
       cell.detailTextLabel.text = project ? project.name : @"All";
       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
       break;
 
     case UserRow:
-      cell = [tableView cellWithStyle: UITableViewCellStyleValue1 andIdentifier: SEARCH_FORM_CELL_TYPE];
+      cell = [tableView genericCellWithStyle: UITableViewCellStyleValue1];
       cell.textLabel.text = @"User";
       cell.detailTextLabel.text = user ? user.name : @"All";
       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

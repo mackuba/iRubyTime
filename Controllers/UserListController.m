@@ -11,11 +11,11 @@
 #import "UserListController.h"
 #import "Utils.h"
 
-#define USER_CELL_TYPE @"UserCell"
 
 @interface UserListController ()
 - (UserActivitiesController *) subcontrollerForUser: (User *) user;
 @end
+
 
 @implementation UserListController
 
@@ -40,7 +40,7 @@
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  UITableViewCell *cell = [table cellWithStyle: UITableViewCellStyleDefault andIdentifier: USER_CELL_TYPE];
+  UITableViewCell *cell = [table genericCellWithStyle: UITableViewCellStyleDefault];
   User *user = [[User list] objectAtIndex: path.row];
   cell.textLabel.text = user.name;
   if ([user isEqual: connector.account]) {

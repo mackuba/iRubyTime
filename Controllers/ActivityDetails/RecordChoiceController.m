@@ -9,8 +9,6 @@
 #import "RecordChoiceController.h"
 #import "Utils.h"
 
-#define RECORD_CELL_TYPE @"RecordCell"
-
 
 @interface RecordChoiceController ()
 - (NSString *) delegateGetterName;
@@ -95,7 +93,7 @@ OnDeallocRelease(model, delegate);
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  UITableViewCell *cell = [table cellWithStyle: UITableViewCellStyleDefault andIdentifier: RECORD_CELL_TYPE];
+  UITableViewCell *cell = [table genericCellWithStyle: UITableViewCellStyleDefault];
   id record = [self recordAtPath: path];
   cell.textLabel.text = (record) ? [record name] : RTFormat(@"All %@s", [self delegateGetterName]);
 

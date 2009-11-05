@@ -17,12 +17,12 @@
 #import "ShowActivityDialogController.h"
 #import "Utils.h"
 
-#define ACTIVITY_CELL_TYPE @"ActivityCell"
 
 @interface ActivityListController ()
 - (void) showActivityDetailsDialogForActivity: (Activity *) activity;
 - (void) loadMore;
 @end
+
 
 @implementation ActivityListController
 
@@ -231,7 +231,7 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
     return loadMoreCell;
   } else {
     Activity *activity = [self activityAtPath: path];
-    ActivityCell *cell = (ActivityCell *) [table dequeueReusableCellWithIdentifier: ACTIVITY_CELL_TYPE];
+    ActivityCell *cell = (ActivityCell *) [table dequeueReusableCellWithIdentifier: GENERIC_CELL_TYPE];
     if (!cell) {
       [[NSBundle mainBundle] loadNibNamed: [self cellNibName] owner: self options: nil];
       cell = currentCell;

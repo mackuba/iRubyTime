@@ -213,6 +213,10 @@
   return cell;
 }
 
+- (UITableViewCell *) genericCellWithStyle: (UITableViewCellStyle) style {
+  return [self cellWithStyle: style andIdentifier: GENERIC_CELL_TYPE];
+}
+
 @end
 
 @implementation UIViewController (RubyTime)

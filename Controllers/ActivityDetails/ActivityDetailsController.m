@@ -11,7 +11,6 @@
 #import "ActivityLengthDialogController.h"
 #import "ProjectChoiceController.h"
 
-#define ACTIVITY_FIELD_CELL_TYPE @"ActivityFieldCell"
 
 @implementation ActivityDetailsController
 
@@ -153,7 +152,7 @@
 }
 
 - (UITableViewCell *) cellForRowType: (RowType) rowType {
-  UITableViewCell *cell = [tableView cellWithStyle: UITableViewCellStyleValue1 andIdentifier: ACTIVITY_FIELD_CELL_TYPE];
+  UITableViewCell *cell = [tableView genericCellWithStyle: UITableViewCellStyleValue1];
   switch (rowType) {
     case DateRow:
       cell.textLabel.text = @"Date";

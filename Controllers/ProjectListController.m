@@ -11,11 +11,11 @@
 #import "ServerConnector.h"
 #import "Utils.h"
 
-#define PROJECT_CELL_TYPE @"ProjectCell"
 
 @interface ProjectListController ()
 - (ProjectActivitiesController *) subcontrollerForProject: (Project *) project;
 @end
+
 
 @implementation ProjectListController
 
@@ -40,7 +40,7 @@
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  UITableViewCell *cell = [table cellWithStyle: UITableViewCellStyleDefault andIdentifier: PROJECT_CELL_TYPE];
+  UITableViewCell *cell = [table genericCellWithStyle: UITableViewCellStyleDefault];
   Project *project = [[Project list] objectAtIndex: path.row];
   cell.textLabel.text = project.name;
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
