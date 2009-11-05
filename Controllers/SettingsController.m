@@ -6,6 +6,8 @@
 // -------------------------------------------------------
 
 #import "Account.h"
+#import "ApplicationDelegate.h"
+#import "LoginDialogController.h"
 #import "ServerConnector.h"
 #import "SettingsController.h"
 #import "Utils.h"
@@ -26,14 +28,34 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
   return self;
 }
 
-/*- (void) viewWillAppear: (BOOL) animated {
-  [super viewWillAppear: animated];
-  NSIndexPath *selection = [tableView indexPathForSelectedRow];
-  [tableView deselectRowAtIndexPath: selection animated: YES];
-}*/
-
 // -------------------------------------------------------------------------------------------
 #pragma mark Action handlers
+
+- (void) loginClicked {
+  currentAccount = [connector.account retain];
+  LoginDialogController *loginDialog = [[LoginDialogController alloc] initWithConnector: connector];
+  UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle: @"Cancel"
+                                                                   style: UIBarButtonItemStyleBordered
+                                                                  target: self
+                                                                  action: @selector(cancelLoginClicked)];
+  loginDialog.navigationItem.leftBarButtonItem = [cancelButton autorelease];
+  [self showPopupView: [loginDialog autorelease]];
+  Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);
+}
+
+- (void) cancelLoginClicked {
+  StopObserving(connector, AuthenticationSuccessfulNotification);
+  [connector dropCurrentConnection];
+  connector.account = [currentAccount autorelease];
+  currentAccount = nil;
+  [self hidePopupView];
+}
+
+- (void) loginSuccessful {
+  StopObserving(connector, AuthenticationSuccessfulNotification);
+  id applicationDelegate = [[UIApplication sharedApplication] delegate];
+  [applicationDelegate reloginSuccessful];
+}
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
@@ -44,6 +66,25 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
     case 1: return [IntArray arrayOfSize: 1 integers: VersionRow];
     default: return [IntArray emptyArray];
   }
+}
+
+- (UIView *) logInFooterView {
+  static UIView *footerView = nil;
+  if (!footerView) {
+    footerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 70)];
+    UIButton *button = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+    CGSize buttonSize = CGSizeMake(220, 40);
+    button.frame = CGRectMake(
+      (footerView.frame.size.width - buttonSize.width) / 2,
+      (footerView.frame.size.height - buttonSize.height) / 2,
+      buttonSize.width,
+      buttonSize.height
+    );
+    [button setTitle: @"Switch to another account" forState: UIControlStateNormal];
+    [button addTarget: self action: @selector(loginClicked) forControlEvents: UIControlEventTouchUpInside];
+    [footerView addSubview: button];
+  }
+  return footerView;
 }
 
 - (NSInteger) numberOfSectionsInTableView: (UITableView *) table {
@@ -60,6 +101,14 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
     case 1: return @"About iRubyTime";
     default: return @"";
   }
+}
+
+- (UIView *) tableView: (UITableView *) table viewForFooterInSection: (NSInteger) section {
+  return (section == 0) ? [self logInFooterView] : nil;
+}
+
+- (CGFloat) tableView: (UITableView *) table heightForFooterInSection: (NSInteger) section {
+  return (section == 0) ? [self logInFooterView].frame.size.height : 0;
 }
 
 - (RowType) rowTypeAtIndexPath: (NSIndexPath *) path {

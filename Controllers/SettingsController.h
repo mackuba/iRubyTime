@@ -8,6 +8,10 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface SettingsController : BaseViewController {}
+@class Account;
+
+@interface SettingsController : BaseViewController {
+  Account *currentAccount;
+}
 
 @end

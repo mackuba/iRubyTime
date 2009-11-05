@@ -90,11 +90,20 @@
   [self sendRequestToPath: path method: @"GET" type: type text: nil info: nil];
 }
 
+- (void) clearCookies {
+  NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+  NSArray *cookies = [cookieStorage cookiesForURL: [NSURL URLWithString: account.serverURL]];
+  for (NSHTTPCookie *cookie in cookies) {
+    [cookieStorage deleteCookie: cookie];
+  }
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Request sending methods
 
 - (void) authenticate {
   if (account.canLogIn) {
+    [self clearCookies];
     [self sendGetRequestToPath: @"/users/authenticate" type: RTAuthenticationRequest];
   }
 }
@@ -218,6 +227,7 @@
     case RTProjectIndexRequest:
       if (trimmedString.length > 0) {
         records = [Project objectsFromJSONString: trimmedString];
+        [Project reset];
         [Project appendObjectsToList: records];
         NotifyWithData(ProjectsReceivedNotification, RTDict(records, @"projects"));
       }
@@ -226,6 +236,7 @@
     case RTUserIndexRequest:
       if (trimmedString.length > 0) {
         records = [User objectsFromJSONString: trimmedString];
+        [User reset];
         [User appendObjectsToList: records];
         if (account.userType == Admin) {
           [User addSelfToTopOfUsers: account];

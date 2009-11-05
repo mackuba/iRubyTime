@@ -32,6 +32,7 @@
 - (Account *) loadAccountData;
 - (NSArray *) viewControllersForUserType: (UserType) type;
 - (NSArray *) viewControllerClassesForUserType: (UserType) type;
+- (NSArray *) navigationControllersForUserType: (UserType) type;
 @end
 
 
@@ -86,6 +87,22 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 }
 
 - (void) buildGuiForUserType: (UserType) type {
+  NSArray *navigationControllers = [self navigationControllersForUserType: type];
+  [tabBarController setViewControllers: navigationControllers animated: NO];
+  self.currentController = [[[navigationControllers objectAtIndex: 0] viewControllers] objectAtIndex: 0];
+}
+
+- (void) rebuildGuiExceptLastControllerForUserType: (UserType) type {
+  NSArray *tabs = tabBarController.viewControllers;
+  UINavigationController *lastController = [tabs objectAtIndex: (tabs.count - 1)];
+  NSMutableArray *navigationControllers = [[self navigationControllersForUserType: type] mutableCopy];
+  [navigationControllers replaceObjectAtIndex: (navigationControllers.count - 1) withObject: lastController];
+  [tabBarController setViewControllers: navigationControllers animated: NO];
+  tabBarController.selectedIndex = 0;
+  self.currentController = [[[navigationControllers objectAtIndex: 0] viewControllers] objectAtIndex: 0];
+}
+
+- (NSArray *) navigationControllersForUserType: (UserType) type {
   NSArray *viewControllers = [self viewControllersForUserType: type];
   NSMutableArray *navigationControllers = [[NSMutableArray alloc] initWithCapacity: viewControllers.count];
   for (BaseViewController *actualController in viewControllers) {
@@ -93,9 +110,7 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
     [navigationControllers addObject: navigation];
     [navigation release];
   }
-  [tabBarController setViewControllers: navigationControllers animated: NO];
-  [navigationControllers release];
-  self.currentController = [viewControllers objectAtIndex: 0];
+  return [navigationControllers autorelease];
 }
 
 - (NSArray *) viewControllersForUserType: (UserType) type {
@@ -137,14 +152,30 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 #pragma mark Notification callbacks
 
 - (void) loginSuccessful {
-  [self saveAccountData];
   if ([currentController modalViewController]) {
     // login controller was shown previously
     [currentController hidePopupView];
     [self buildGuiForUserType: connector.account.userType];
     [currentController showLoadingMessage];
+  } else {
+    // check if user's type wasn't changed in the meantime
+    Account *oldAccount = [self loadAccountData];
+    if (oldAccount.userType != connector.account.userType) {
+      [self reloginSuccessful];
+      return;
+    }
   }
-  // TODO: handle the case where a user's type was changed in the meantime
+  [self saveAccountData];
+  Observe(connector, ProjectsReceivedNotification, projectsReceived);
+  [connector loadProjects];
+}
+
+- (void) reloginSuccessful {
+  initialDataIsLoaded = NO;
+  [self saveAccountData];
+  [self rebuildGuiExceptLastControllerForUserType: connector.account.userType];
+  [currentController hidePopupView];
+  [currentController showLoadingMessage];
   Observe(connector, ProjectsReceivedNotification, projectsReceived);
   [connector loadProjects];
 }

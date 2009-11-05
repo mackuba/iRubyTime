@@ -28,6 +28,7 @@
 + (NSInteger) count;
 + (NSMutableArray *) list;
 + (NSMutableDictionary *) identityMap;
++ (void) reset;
 
 - (id) initWithModelName: (NSString *) name properties: (NSArray *) propertyList;
 - (BOOL) isEqual: (id) other;

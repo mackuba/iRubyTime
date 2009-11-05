@@ -81,6 +81,11 @@ SynthesizeAndReleaseLater(properties, modelName);
   return [ModelManager managerForClass: NSStringFromClass([self class])];
 }
 
++ (void) reset {
+  [[self list] removeAllObjects];
+  [[self identityMap] removeAllObjects];
+}
+
 + (id) objectWithId: (NSInteger) objectId {
   return [[self identityMap] objectForKey: RTInt(objectId)];
 }

@@ -6,6 +6,7 @@
 // -------------------------------------------------------
 
 #import <UIKit/UIKit.h>
+#import "Account.h"
 
 @class ActivityListController;
 @class BaseViewController;
@@ -23,5 +24,7 @@
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) IBOutlet id currentController;
 @property (nonatomic, readonly) BOOL initialDataIsLoaded;
+
+- (void) reloginSuccessful;
 
 @end
