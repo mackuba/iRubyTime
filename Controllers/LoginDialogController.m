@@ -149,6 +149,8 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
   cell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
   cell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
   cell.textField.enablesReturnKeyAutomatically = YES;
+  cell.textField.adjustsFontSizeToFitWidth = YES;
+  cell.textField.minimumFontSize = 8.0;
 }
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {

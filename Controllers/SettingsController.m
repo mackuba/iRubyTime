@@ -120,7 +120,11 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
   switch ([self rowTypeAtIndexPath: path]) {
     case ServerRow:
       cell.textLabel.text = @"Server URL";
+      cell.textLabel.adjustsFontSizeToFitWidth = YES;
+      cell.textLabel.minimumFontSize = 16.0;
       cell.detailTextLabel.text = connector.account.serverURL;
+      cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
+      cell.detailTextLabel.minimumFontSize = 8.0;
       break;
 
     case LoginRow:
