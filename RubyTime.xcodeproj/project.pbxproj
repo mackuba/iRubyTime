@@ -30,6 +30,7 @@
 		5853E5BA10A1C79F0060636F /* DateRangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5853E5B910A1C79F0060636F /* DateRangeController.m */; };
 		5853E5BF10A1C7EB0060636F /* DateRangeDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5853E5BE10A1C7EB0060636F /* DateRangeDialog.xib */; };
 		5853E68B10A1DE290060636F /* SearchResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5853E68A10A1DE290060636F /* SearchResultsController.m */; };
+		5853E78810A303180060636F /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5853E78710A303180060636F /* SettingsController.m */; };
 		586DAE120FBB68CA00DBCF0A /* NewActivityDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */; };
 		586E34EB10987AB9005EB2C8 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E34EA10987AB9005EB2C8 /* Model.m */; };
 		586E368F10989EAE005EB2C8 /* ModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E368E10989EAE005EB2C8 /* ModelManager.m */; };
@@ -113,6 +114,8 @@
 		5853E5BE10A1C7EB0060636F /* DateRangeDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateRangeDialog.xib; sourceTree = "<group>"; };
 		5853E68910A1DE290060636F /* SearchResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsController.h; sourceTree = "<group>"; };
 		5853E68A10A1DE290060636F /* SearchResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsController.m; sourceTree = "<group>"; };
+		5853E78610A303180060636F /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
+		5853E78710A303180060636F /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewActivityDialog.xib; sourceTree = "<group>"; };
 		586E34E910987AB9005EB2C8 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		586E34EA10987AB9005EB2C8 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
@@ -364,6 +367,8 @@
 				58B2D1341091DCCC00F7A801 /* ProjectListController.m */,
 				5842119010A084A600F90AFB /* SearchFormController.h */,
 				5842119110A084A600F90AFB /* SearchFormController.m */,
+				5853E78610A303180060636F /* SettingsController.h */,
+				5853E78710A303180060636F /* SettingsController.m */,
 				5833BEB21095D9C800A5530E /* UserListController.h */,
 				5833BEB31095D9C800A5530E /* UserListController.m */,
 			);
@@ -547,6 +552,7 @@
 				5853E55010A1BB5E0060636F /* ProjectChoiceController.m in Sources */,
 				5853E5BA10A1C79F0060636F /* DateRangeController.m in Sources */,
 				5853E68B10A1DE290060636F /* SearchResultsController.m in Sources */,
+				5853E78810A303180060636F /* SettingsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

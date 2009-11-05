@@ -12,6 +12,7 @@
 #import "RubyTimeAppDelegate.h"
 #import "RubyTimeConnector.h"
 #import "SearchFormController.h"
+#import "SettingsController.h"
 #import "UserActivitiesController.h"
 #import "UserListController.h"
 #import "Utils.h"
@@ -113,13 +114,15 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
       [AllActivitiesController class],
       [ProjectListController class],
       [UserListController class],
-      [SearchFormController class]
+      [SearchFormController class],
+      [SettingsController class]
     );
   } else {
     return RTArray(
       [AllActivitiesController class],
       [ProjectListController class],
-      [SearchFormController class]
+      [SearchFormController class],
+      [SettingsController class]
     );
   }
 }
