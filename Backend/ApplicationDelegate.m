@@ -101,6 +101,7 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
   [tabBarController setViewControllers: navigationControllers animated: NO];
   tabBarController.selectedIndex = 0;
   self.currentController = [[[navigationControllers objectAtIndex: 0] viewControllers] objectAtIndex: 0];
+  [navigationControllers release];
 }
 
 - (NSArray *) navigationControllersForUserType: (UserType) type {

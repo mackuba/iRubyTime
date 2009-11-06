@@ -141,7 +141,7 @@ OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  UITableViewCell *cell;
+  UITableViewCell *cell = nil;
   switch ([self rowTypeAtIndexPath: path]) {
     case ProjectRow:
       cell = [tableView genericCellWithStyle: UITableViewCellStyleValue1];
@@ -179,7 +179,7 @@ OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate
 }
 
 - (UIViewController *) subcontrollerForRowType: (RowType) rowType {
-  id controller;
+  id controller = nil;
   switch (rowType) {
     case ProjectRow:
       controller = [[RecordChoiceController alloc] initWithModel: [Project class] delegate: self allowNil: YES];

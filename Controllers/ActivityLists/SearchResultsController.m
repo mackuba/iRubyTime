@@ -50,6 +50,7 @@ OnDeallocRelease(parentController);
     NSMutableArray *stack = [self.navigationController.viewControllers mutableCopy];
     [stack removeObjectAtIndex: 1];
     [self.navigationController setViewControllers: stack animated: NO];
+    [stack release];
   }
 }
 

@@ -140,7 +140,7 @@
 - (NSString *) camelizedString {
   NSArray *words = [self componentsSeparatedByString: @"_"];
   if (words.count == 1) {
-    return [self copy];
+    return [[self copy] autorelease];
   } else {
     NSMutableString *camelized = [[NSMutableString alloc] initWithString: [words objectAtIndex: 0]];
     for (NSInteger i = 1; i < words.count; i++) {
