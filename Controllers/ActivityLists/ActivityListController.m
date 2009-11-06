@@ -20,6 +20,7 @@
 
 @interface ActivityListController ()
 - (void) showActivityDetailsDialogForActivity: (Activity *) activity;
+- (NSIndexPath *) indexPathForActivity: (Activity *) activity;
 - (void) loadMore;
 @end
 
@@ -109,22 +110,32 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
 
 - (void) addActivityToList: (Activity *) activity {
   [manager addNewActivity: activity];
-  NSInteger index = [manager.activities indexOfObject: activity];
-  if (index != NSNotFound) {
-    NSInteger count = manager.activities.count;
-    NSIndexPath *newCellIndex = RTIndex(0, index);
-    if (count > 1) {
-      // don't scroll to the last one if it's not added yet (don't scroll at all if it's the first activity)
-      NSIndexPath *scrollIndex = RTIndex(0, MIN(index, count - 2));
-      [tableView scrollToRowAtIndexPath: scrollIndex atScrollPosition: UITableViewScrollPositionTop animated: YES];
+  BOOL isOnlyOne = (manager.activities.count == 1);
+  BOOL isOnlyOneInSection = ([manager activitiesOnDay: activity.date].count == 1);
+  BOOL isLastOne = isOnlyOne || ([manager.activities objectAtIndex: manager.activities.count - 1] == activity);
+  NSIndexPath *newCellIndex = [self indexPathForActivity: activity];
+
+  if (!isOnlyOne) {
+    NSIndexPath *scrollIndex;
+    if (isLastOne) {
+      Activity *nextToLast = [manager.activities objectAtIndex: manager.activities.count - 2];
+      scrollIndex = [self indexPathForActivity: nextToLast];
+    } else {
+      scrollIndex = newCellIndex;
     }
-    [tableView beginUpdates];
-    [tableView insertRowsAtIndexPaths: RTArray(newCellIndex) withRowAnimation: UITableViewRowAnimationTop];
-    [tableView endUpdates];
-    if (index == count - 1) {
-      // now you can scroll to the last one
-      [tableView scrollToRowAtIndexPath: newCellIndex atScrollPosition: UITableViewScrollPositionBottom animated: YES];
-    }
+    [tableView scrollToRowAtIndexPath: scrollIndex atScrollPosition: UITableViewScrollPositionTop animated: YES];
+  }
+
+  [tableView beginUpdates];
+  if (isOnlyOneInSection) {
+    NSIndexSet *sectionSet = [NSIndexSet indexSetWithIndex: newCellIndex.section];
+    [tableView insertSections: sectionSet withRowAnimation: UITableViewRowAnimationNone];
+  }
+  [tableView insertRowsAtIndexPaths: RTArray(newCellIndex) withRowAnimation: UITableViewRowAnimationNone];
+  [tableView endUpdates];
+
+  if (!isOnlyOne && isLastOne) {
+    [tableView scrollToRowAtIndexPath: newCellIndex atScrollPosition: UITableViewScrollPositionBottom animated: YES];
   }
 }
 
@@ -201,6 +212,12 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
 - (Activity *) activityAtPath: (NSIndexPath *) path {
   NSDate *date = [manager.allDates objectAtIndex: path.section];
   return [[manager activitiesOnDay: date] objectAtIndex: path.row];
+}
+
+- (NSIndexPath *) indexPathForActivity: (Activity *) activity {
+  NSInteger section = [manager.allDates indexOfObject: activity.date];
+  NSInteger row = [[manager activitiesOnDay: activity.date] indexOfObject: activity];
+  return (row != NSNotFound && section != NSNotFound) ? RTIndex(section, row) : RTIndex(0, 0);
 }
 
 - (NSInteger) numberOfSectionsInTableView: (UITableView *) table {
