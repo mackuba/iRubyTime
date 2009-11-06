@@ -198,6 +198,7 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
   Activity *activity = [notification.userInfo objectForKey: @"activity"];
   [manager deleteActivity: activity];
   [tableView reloadData];
+  [self.navigationController popViewControllerAnimated: YES];
 }
 
 - (void) activityUpdated: (NSNotification *) notification {

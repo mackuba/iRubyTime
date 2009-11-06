@@ -41,7 +41,6 @@ OnDeallocRelease(originalActivity, editButton, lockedActivityInfo);
     tableView.tableFooterView = lockedActivityInfo;
   }
   Observe(connector, ActivityUpdatedNotification, activityUpdated);
-  Observe(connector, ActivityDeletedNotification, activityDeleted);
 }
 
 - (void) setupToolbar {
@@ -108,10 +107,6 @@ OnDeallocRelease(originalActivity, editButton, lockedActivityInfo);
   self.navigationItem.leftBarButtonItem = nil;
   self.navigationItem.rightBarButtonItem = editButton;
   [spinner stopAnimating];
-}
-
-- (void) activityDeleted {
-  [self.navigationController popViewControllerAnimated: YES];
 }
 
 // -------------------------------------------------------------------------------------------
