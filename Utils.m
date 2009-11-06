@@ -111,6 +111,8 @@
   } else if (self.domain == RubyTimeErrorDomain) {
     switch (self.code) {
       case 403: return @"Access denied - please contact your administrator.";
+      case 412: return @"This version of iRubyTime is not compatible with your RubyTime server. "
+                       @"Please check if there are any updates in the AppStore or contact your server administrator.";
       default: return @"An error occurred on the server.";
     }
   } else {

@@ -26,9 +26,11 @@
 @interface ServerConnector : NSObject {
   Request *currentRequest;
   Account *account;
+  NSInteger serverApiVersion;
 }
 
 @property (nonatomic, retain) Account *account;
+@property (nonatomic, readonly) NSInteger serverApiVersion;
 
 - (id) initWithAccount: (Account *) userAccount;
 - (void) authenticate;

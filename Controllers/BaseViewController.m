@@ -72,13 +72,15 @@ OnDeallocRelease(connector, loadingView);
 
 - (void) fetchDataIfNeeded {
   id delegate = [[UIApplication sharedApplication] delegate];
-  if (![delegate initialDataIsLoaded]) {
-    [self showLoadingMessage];
-  } else if ([self needsOwnData]) {
-    [self showLoadingMessage];
-    [self fetchData];
-  } else {
-    [self initializeView];
+  if (![delegate kernelPanic]) {
+    if (![delegate initialDataIsLoaded]) {
+      [self showLoadingMessage];
+    } else if ([self needsOwnData]) {
+      [self showLoadingMessage];
+      [self fetchData];
+    } else {
+      [self initializeView];
+    }
   }
 }
 

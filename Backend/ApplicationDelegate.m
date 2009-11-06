@@ -38,7 +38,7 @@
 
 @implementation ApplicationDelegate
 
-@synthesize window, tabBarController, currentController, initialDataIsLoaded;
+@synthesize window, tabBarController, currentController, initialDataIsLoaded, kernelPanic;
 OnDeallocRelease(window, tabBarController, connector, currentController);
 
 // -------------------------------------------------------------------------------------------
@@ -49,6 +49,7 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
   [currentController setConnector: connector];
 
   Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);
+  Observe(connector, RequestFailedNotification, requestFailed);
   if ([connector.account canLogIn]) {
     [self buildGuiForUserType: connector.account.userType];
     [currentController showLoadingMessage];
@@ -172,16 +173,23 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 
 - (void) reloginSuccessful {
   initialDataIsLoaded = NO;
+  kernelPanic = NO;
   [self saveAccountData];
   [self rebuildGuiExceptLastControllerForUserType: connector.account.userType];
   [currentController hidePopupView];
   [currentController showLoadingMessage];
+  Observe(connector, RequestFailedNotification, requestFailed);
   Observe(connector, ProjectsReceivedNotification, projectsReceived);
   [connector loadProjects];
 }
 
 - (void) loginFailed {
   [self showLoginDialog];
+}
+
+- (void) requestFailed {
+  kernelPanic = YES;
+  StopObservingAll();
 }
 
 - (void) projectsReceived {

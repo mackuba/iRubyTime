@@ -30,5 +30,7 @@
 	<true/>
 	<key>UIRequiresPersistentWiFi</key>
 	<true/>
+	<key>RubyTimeAPIVersion</key>
+	<string>1</string>
 </dict>
 </plist>

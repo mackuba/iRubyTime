@@ -29,6 +29,8 @@ SynthesizeAndReleaseLater(response, receivedText, sentText, connection, info);
     receivedText = [[NSMutableString alloc] init];
     sentText = [text copy];
     [self setValue: @"application/json" forHTTPHeaderField: @"Accept"];
+    NSString *apiVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey: @"RubyTimeAPIVersion"];
+    [self setValue: apiVersion forHTTPHeaderField: @"X-API-Version"];
     if (sentText) {
       self.HTTPBody = [sentText dataUsingEncoding: NSUTF8StringEncoding];
       [self setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];

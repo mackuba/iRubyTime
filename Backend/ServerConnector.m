@@ -39,7 +39,7 @@
 
 @implementation ServerConnector
 
-@synthesize account;
+@synthesize account, serverApiVersion;
 
 - (id) initWithAccount: (Account *) userAccount {
   if (self = [super init]) {
@@ -199,6 +199,9 @@
   NSHTTPURLResponse *response = (NSHTTPURLResponse *) request.response;
   NSLog(@"finished request to %@ (%d) (status %d)", request.URL, request.type, response.statusCode);
   NSLog(@"text = \"%@\"", request.receivedText);
+  NSString *versionString = [response.allHeaderFields objectForKey: @"X-Api-Version"];
+  serverApiVersion = versionString ? [versionString intValue] : -1;
+
   if (response.statusCode >= 400) {
     NSError *error = [NSError errorWithDomain: RubyTimeErrorDomain code: response.statusCode userInfo: nil];
     NotifyWithData(RequestFailedNotification, RTDict(error, @"error", request.receivedText, @"text"));
