@@ -65,6 +65,7 @@
                             content: @"Activity comments field is empty - please fill it first."];
   } else {
     self.navigationItem.rightBarButtonItem = loadingButton;
+    cancelButton.enabled = NO;
     [spinner startAnimating];
     [self executeSave];
   }
@@ -78,6 +79,7 @@
 - (void) requestFailed: (NSNotification *) notification {
   [spinner stopAnimating];
   self.navigationItem.rightBarButtonItem = saveButton;
+  cancelButton.enabled = YES;
 
   NSError *error = [notification.userInfo objectForKey: @"error"];
   NSString *text = [notification.userInfo objectForKey: @"text"];

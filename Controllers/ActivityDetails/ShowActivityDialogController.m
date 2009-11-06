@@ -70,6 +70,7 @@ OnDeallocRelease(originalActivity, editButton, lockedActivityInfo);
 
 - (void) actionSheet: (UIActionSheet *) sheet clickedButtonAtIndex: (NSInteger) index {
   if (index == 0) {
+    cancelButton.enabled = NO;
     self.navigationItem.rightBarButtonItem = loadingButton;
     [spinner startAnimating];
     [connector deleteActivity: activity];
@@ -84,9 +85,7 @@ OnDeallocRelease(originalActivity, editButton, lockedActivityInfo);
   [self setEditing: NO animated: YES];
   self.navigationItem.leftBarButtonItem = nil;
   self.navigationItem.rightBarButtonItem = editButton;
-  [spinner stopAnimating];
   [subcontrollers removeAllObjects];
-  // TODO: cancel request?
 }
 
 - (void) editClicked {
@@ -104,6 +103,7 @@ OnDeallocRelease(originalActivity, editButton, lockedActivityInfo);
 
 - (void) activityUpdated {
   [self setEditing: NO animated: YES];
+  cancelButton.enabled = YES;
   self.navigationItem.leftBarButtonItem = nil;
   self.navigationItem.rightBarButtonItem = editButton;
   [spinner stopAnimating];
