@@ -10,6 +10,7 @@
 
 @interface ProjectListController : BaseViewController {
   NSMutableDictionary *subcontrollers;
+  NSArray *projectList;
 }
 
 @end

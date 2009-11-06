@@ -41,14 +41,14 @@ SynthesizeAndReleaseLater(properties, modelName);
       value = [json objectForKey: key];
 
       if ([key isEqual: @"id"]) {
-        // 'id' is saved as 'record_id'
+        // 'id' is saved as 'recordId'
         property = RECORD_ID;
       } else if ([key hasSuffix: @"?"]) {
         // 'foo?' is saved as 'foo'
-        property = [key substringToIndex: key.length - 1];
+        property = [[key substringToIndex: key.length - 1] camelizedString];
       } else {
         // normal property
-        property = key;
+        property = [key camelizedString];
       }
     }
 

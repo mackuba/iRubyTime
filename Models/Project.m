@@ -10,10 +10,15 @@
 
 @implementation Project
 
+@synthesize hasActivities;
 SynthesizeAndReleaseLater(name);
 
 - (id) init {
-  return [super initWithModelName: @"Project" properties: RTArray(@"name")];
+  return [super initWithModelName: @"Project" properties: RTArray(@"name", @"hasActivities")];
+}
+
++ (NSArray *) allWithActivities {
+  return [[self list] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat: @"hasActivities == TRUE"]];
 }
 
 @end

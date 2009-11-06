@@ -137,6 +137,19 @@
   return [escaped autorelease];
 }
 
+- (NSString *) camelizedString {
+  NSArray *words = [self componentsSeparatedByString: @"_"];
+  if (words.count == 1) {
+    return [self copy];
+  } else {
+    NSMutableString *camelized = [[NSMutableString alloc] initWithString: [words objectAtIndex: 0]];
+    for (NSInteger i = 1; i < words.count; i++) {
+      [camelized appendString: [[words objectAtIndex: i] capitalizedString]];
+    }
+    return [camelized autorelease];
+  }
+}
+
 @end
 
 @implementation NSUserDefaults (RubyTime)

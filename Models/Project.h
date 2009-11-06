@@ -9,8 +9,12 @@
 
 @interface Project : Model {
   NSString *name;
+  BOOL hasActivities;
 }
 
 @property (nonatomic, copy) NSString *name;
+@property (nonatomic) BOOL hasActivities;
+
++ (NSArray *) allWithActivities;
 
 @end

@@ -5,6 +5,7 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "Account.h"
 #import "Project.h"
 #import "ProjectActivitiesController.h"
 #import "ProjectListController.h"
@@ -19,6 +20,8 @@
 
 @implementation ProjectListController
 
+OnDeallocRelease(subcontrollers, projectList);
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
 
@@ -32,23 +35,30 @@
   return self;
 }
 
+- (void) viewWillAppear: (BOOL) animated {
+  [projectList release];
+  projectList = (connector.account.userType == Employee) ? [Project allWithActivities] : [Project list];
+  [projectList retain];
+  [tableView reloadData];
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
 - (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
-  return [Project count];
+  return projectList.count;
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
   UITableViewCell *cell = [table genericCellWithStyle: UITableViewCellStyleDefault];
-  Project *project = [[Project list] objectAtIndex: path.row];
+  Project *project = [projectList objectAtIndex: path.row];
   cell.textLabel.text = project.name;
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   return cell;
 }
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
-  Project *project = [[Project list] objectAtIndex: path.row];
+  Project *project = [projectList objectAtIndex: path.row];
   ActivityListController *controller = [self subcontrollerForProject: project];
   [self.navigationController pushViewController: controller animated: YES];
   [table deselectRowAtIndexPath: path animated: YES];

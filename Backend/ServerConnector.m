@@ -250,11 +250,13 @@
     
     case RTCreateActivityRequest:
       activity = [Activity objectFromJSONString: trimmedString];
+      activity.project.hasActivities = YES;
       NotifyWithData(ActivityCreatedNotification, RTDict(activity, @"activity"));
       break;
 
     case RTUpdateActivityRequest:
       activity = request.info;
+      activity.project.hasActivities = YES;
       NotifyWithData(ActivityUpdatedNotification, RTDict(activity, @"activity"));
       break;
 

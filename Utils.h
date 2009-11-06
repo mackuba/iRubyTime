@@ -101,6 +101,7 @@
 
 @interface NSString (RubyTime)
 - (NSString *) trimmedString;
+- (NSString *) camelizedString;
 - (NSString *) stringWithPercentEscapesForFormValues;
 @end
 
