@@ -61,6 +61,14 @@
 
 #define AbstractMethod(returnStatement) { [self doesNotRecognizeSelector: _cmd]; returnStatement; }
 
+// from http://www.cimgf.com/2009/01/24/dropping-nslog-in-release-builds/
+#ifdef DEBUG
+#    define DLog(...) NSLog(__VA_ARGS__)
+#else
+#    define DLog(...) do {} while (0)
+#endif
+#define ALog(...) NSLog(__VA_ARGS__)
+
 #define GENERIC_CELL_TYPE @"GenericCellType"
 
 

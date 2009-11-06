@@ -73,7 +73,7 @@
   if (info) {
     currentRequest.info = info;
   }
-  NSLog(@"sending %@ to %@ (type %d) with '%@'", method, url, type, text);
+  DLog(@"sending %@ to %@ (type %d) with '%@'", method, url, type, text);
   [currentRequest setValue: account.authenticationString forHTTPHeaderField: @"Authorization"];
   currentRequest.connection = [NSURLConnection connectionWithRequest: currentRequest delegate: self];
 }
@@ -197,8 +197,8 @@
   [self cleanupRequest];
   
   NSHTTPURLResponse *response = (NSHTTPURLResponse *) request.response;
-  NSLog(@"finished request to %@ (%d) (status %d)", request.URL, request.type, response.statusCode);
-  NSLog(@"text = \"%@\"", request.receivedText);
+  DLog(@"finished request to %@ (%d) (status %d)", request.URL, request.type, response.statusCode);
+  DLog(@"text = \"%@\"", request.receivedText);
   NSString *versionString = [response.allHeaderFields objectForKey: @"X-Api-Version"];
   serverApiVersion = versionString ? [versionString intValue] : -1;
 

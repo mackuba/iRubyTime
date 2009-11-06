@@ -570,6 +570,7 @@
 				GCC_PREFIX_HEADER = RubyTime_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Info.plist;
+				OTHER_CFLAGS = "-DDEBUG";
 				PRODUCT_NAME = iRubyTime;
 				SDKROOT = iphoneos3.0;
 			};
