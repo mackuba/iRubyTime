@@ -68,7 +68,7 @@ OnDeallocRelease(serverURL, username, password, authenticationString);
 }
 
 - (void) setUserTypeFromString: (NSString *) typeString {
-  if ([typeString isEqualToString: @"client"]) {
+  if ([typeString isEqualToString: @"client_user"]) {
     userType = ClientUser;
   } else if ([typeString isEqualToString: @"admin"]) {
     userType = Admin;
@@ -81,7 +81,7 @@ OnDeallocRelease(serverURL, username, password, authenticationString);
   switch (userType) {
     case Employee: return @"employee";
     case Admin: return @"admin";
-    case ClientUser: return @"client";
+    case ClientUser: return @"client_user";
     default: return @"";
   }
 }
@@ -90,7 +90,7 @@ OnDeallocRelease(serverURL, username, password, authenticationString);
   loggedIn = YES;
   self.recordId = [[dictionary objectForKey: @"id"] intValue];
   self.name = [dictionary objectForKey: @"name"];
-  [self setUserTypeFromString: [dictionary objectForKey: @"iphone_user_type"]];
+  [self setUserTypeFromString: [dictionary objectForKey: @"user_type"]];
 }
 
 @end
