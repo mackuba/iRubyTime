@@ -67,9 +67,14 @@ OnDeallocRelease(parentController);
   if (activities.count > 0) {
     [super activitiesReceived: notification];
   } else {
-    [parentController showNotFoundMessage];
-    [self.navigationController popViewControllerAnimated: YES];
+    // the nav controller gets confused if we call this when the previous animation hasn't finished yet
+    [self performSelector: @selector(noActivitiesReceived) withObject: nil afterDelay: 0.5];
   }
+}
+
+- (void) noActivitiesReceived {
+  [parentController showNotFoundMessage];
+  [self.navigationController popViewControllerAnimated: YES];
 }
 
 @end
