@@ -28,5 +28,6 @@
 @property (nonatomic, readonly) BOOL kernelPanic;
 
 - (void) reloginSuccessful;
+- (void) saveAccountData;
 
 @end

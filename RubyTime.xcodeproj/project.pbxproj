@@ -71,6 +71,8 @@
 		58C0A0F20FBA009D00AF8C14 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C0A0F10FBA009D00AF8C14 /* Utils.m */; };
 		58CA2D4E0FA7995E007A6A65 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2D4B0FA7995E007A6A65 /* Request.m */; };
 		58CA2DAE0FA7AE6A007A6A65 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CA2DAD0FA7AE6A007A6A65 /* Activity.m */; };
+		58D3934A10DD602600046558 /* LoggedOutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58D3934910DD602600046558 /* LoggedOutView.xib */; };
+		58D3937010DD61AC00046558 /* LoggedOutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D3936F10DD61AC00046558 /* LoggedOutViewController.m */; };
 		58E9FFC10FB22F9D00CDA046 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E9FFC00FB22F9D00CDA046 /* Project.m */; };
 		58EB65700FBCEF4400717C36 /* ActivityDateDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EB656F0FBCEF4400717C36 /* ActivityDateDialog.xib */; };
 		58EB65BA0FBDE71100717C36 /* ActivityCommentsDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EB65B90FBDE71100717C36 /* ActivityCommentsDialog.xib */; };
@@ -187,6 +189,9 @@
 		58CA2D4B0FA7995E007A6A65 /* Request.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
 		58CA2DAC0FA7AE6A007A6A65 /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
 		58CA2DAD0FA7AE6A007A6A65 /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
+		58D3934910DD602600046558 /* LoggedOutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoggedOutView.xib; sourceTree = "<group>"; };
+		58D3936E10DD61AC00046558 /* LoggedOutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggedOutViewController.h; sourceTree = "<group>"; };
+		58D3936F10DD61AC00046558 /* LoggedOutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggedOutViewController.m; sourceTree = "<group>"; };
 		58E9FFBF0FB22F9D00CDA046 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
 		58E9FFC00FB22F9D00CDA046 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		58EB656F0FBCEF4400717C36 /* ActivityDateDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityDateDialog.xib; sourceTree = "<group>"; };
@@ -328,6 +333,7 @@
 				5853E4FA10A18BD20060636F /* DateRangeCell.xib */,
 				5853E5BE10A1C7EB0060636F /* DateRangeDialog.xib */,
 				588BAB110FADD78B00460689 /* LoginDialog.xib */,
+				58D3934910DD602600046558 /* LoggedOutView.xib */,
 				588BAB120FADD78B00460689 /* MainWindow.xib */,
 				586DAE110FBB68CA00DBCF0A /* NewActivityDialog.xib */,
 				581063EA1013595100E8A540 /* ShowActivityDialog.xib */,
@@ -363,6 +369,8 @@
 				5853E5B910A1C79F0060636F /* DateRangeController.m */,
 				589BE9E70FD1D57C00CCFA82 /* LoginDialogController.h */,
 				589BE9E80FD1D57C00CCFA82 /* LoginDialogController.m */,
+				58D3936E10DD61AC00046558 /* LoggedOutViewController.h */,
+				58D3936F10DD61AC00046558 /* LoggedOutViewController.m */,
 				58B2D1331091DCCC00F7A801 /* ProjectListController.h */,
 				58B2D1341091DCCC00F7A801 /* ProjectListController.m */,
 				5842119010A084A600F90AFB /* SearchFormController.h */,
@@ -499,6 +507,7 @@
 				5842111310A06EE100F90AFB /* Images in Resources */,
 				5853E4FB10A18BD20060636F /* DateRangeCell.xib in Resources */,
 				5853E5BF10A1C7EB0060636F /* DateRangeDialog.xib in Resources */,
+				58D3934A10DD602600046558 /* LoggedOutView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,6 +562,7 @@
 				5853E78810A303180060636F /* SettingsController.m in Sources */,
 				5853E7B810A30CCA0060636F /* ApplicationDelegate.m in Sources */,
 				5853E7B910A30CCA0060636F /* ServerConnector.m in Sources */,
+				58D3937010DD61AC00046558 /* LoggedOutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

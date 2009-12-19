@@ -10,7 +10,7 @@
 
 @class Account;
 
-@interface SettingsController : BaseViewController {
+@interface SettingsController : BaseViewController <UIActionSheetDelegate> {
   Account *currentAccount;
 }
 

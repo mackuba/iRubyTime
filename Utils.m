@@ -171,14 +171,24 @@
 
 - (void) setPassword: (NSString *) password forKey: (NSString *) key andUsername: (NSString *) username {
   #if TARGET_IPHONE_SIMULATOR
-    [self setObject: password forKey: key];
+    if (password) {
+      [self setObject: password forKey: key];
+    } else {
+      [self removeObjectForKey: key];
+    }
   #else
     NSError *error;
-    [SFHFKeychainUtils storeUsername: username
-                         andPassword: password
-                      forServiceName: KEYCHAIN_SERVICE_NAME
-                      updateExisting: YES
-                               error: &error];
+    if (password) {
+      [SFHFKeychainUtils storeUsername: username
+                           andPassword: password
+                        forServiceName: KEYCHAIN_SERVICE_NAME
+                        updateExisting: YES
+                                 error: &error];
+    } else {
+      [SFHFKeychainUtils deleteItemForUsername: username
+                                andServiceName: KEYCHAIN_SERVICE_NAME
+                                         error: &error];
+    }
   #endif
 }
 

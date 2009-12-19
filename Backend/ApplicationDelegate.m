@@ -27,7 +27,6 @@
 - (void) buildGuiForUserType: (UserType) type;
 - (void) initApplication;
 - (void) initialDataLoaded;
-- (void) saveAccountData;
 - (void) showLoginDialog;
 - (Account *) loadAccountData;
 - (NSArray *) viewControllersForUserType: (UserType) type;
