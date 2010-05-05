@@ -60,24 +60,6 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Core class extensions
 
-@implementation NSDate (RubyTime)
-
-- (NSDate *) midnight {
-  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-  formatter.dateFormat = @"yyyy-MM-dd";
-  NSDate *midnight = [formatter dateFromString: [formatter stringFromDate: self]];
-  [formatter release];
-  return midnight;
-}
-
-- (BOOL) isEarlierThanOrEqualTo: (NSDate *) otherDate {
-  NSDate *current = [self midnight];
-  NSDate *other = [otherDate midnight];
-  return ([current earlierDate: other] == current);
-}
-
-@end
-
 @implementation NSError (RubyTime)
 
 - (NSString *) friendlyDescription {

@@ -68,7 +68,7 @@ PSReleaseOnDealloc(tableView, datePicker);
 - (BOOL) datesAreCorrect {
   NSDate *startDate = [delegate startDate];
   NSDate *endDate = [delegate endDate];
-  return [startDate isEarlierThanOrEqualTo: endDate];
+  return [startDate psIsEarlierOrSameDay: endDate];
 }
 
 - (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {

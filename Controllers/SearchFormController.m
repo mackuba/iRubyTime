@@ -88,7 +88,7 @@ PSReleaseOnDealloc(dateRangeCell, startDateLabel, endDateLabel, startDate, endDa
 #pragma mark Action handlers
 
 - (void) searchClicked {
-  if ([startDate isEarlierThanOrEqualTo: endDate]) {
+  if ([startDate psIsEarlierOrSameDay: endDate]) {
     SearchResultsController *controller;
     controller = [[SearchResultsController alloc] initWithParentController: self connector: connector];
     [self.navigationController pushViewController: controller animated: YES];

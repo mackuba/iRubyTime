@@ -10,7 +10,6 @@
 @class Activity;
 
 #define RubyTimeErrorDomain @"RubyTimeErrorDomain"
-
 #define AbstractMethod(returnStatement) { [self doesNotRecognizeSelector: _cmd]; returnStatement; }
 
 // -------------------------------------------------------------------------------------------
@@ -34,11 +33,6 @@
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Core class extensions
-
-@interface NSDate (RubyTime)
-- (NSDate *) midnight;
-- (BOOL) isEarlierThanOrEqualTo: (NSDate *) otherDate;
-@end
 
 @interface NSError (RubyTime)
 - (NSString *) friendlyDescription;
