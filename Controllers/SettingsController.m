@@ -82,11 +82,11 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
-- (IntArray *) rowTypesForSection: (NSInteger) section {
+- (PSIntArray *) rowTypesForSection: (NSInteger) section {
   switch (section) {
-    case 0: return [IntArray arrayOfSize: 2 integers: ServerRow, LoginRow];
-    case 1: return [IntArray arrayOfSize: 1 integers: VersionRow];
-    default: return [IntArray emptyArray];
+    case 0: return PSIntegers(ServerRow, LoginRow);
+    case 1: return PSIntegers(VersionRow);
+    default: return [PSIntArray emptyArray];
   }
 }
 
@@ -121,7 +121,7 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
 }
 
 - (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
-  return [[self rowTypesForSection: section] size];
+  return [[self rowTypesForSection: section] count];
 }
 
 - (NSString *) tableView: (UITableView *) table titleForHeaderInSection: (NSInteger) section {

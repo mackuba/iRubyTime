@@ -122,18 +122,18 @@ PSReleaseOnDealloc(dateRangeCell, startDateLabel, endDateLabel, startDate, endDa
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
-- (IntArray *) rowTypes {
+- (PSIntArray *) rowTypes {
   if (connector.account.userType == Employee) {
-    return [IntArray arrayOfSize: 2 integers: ProjectRow, DateRangeRow];
+    return PSIntegers(ProjectRow, DateRangeRow);
   } else if (connector.account.userType == ClientUser && [Project count] < 2) {
-    return [IntArray arrayOfSize: 2 integers: UserRow, DateRangeRow];
+    return PSIntegers(UserRow, DateRangeRow);
   } else {
-    return [IntArray arrayOfSize: 3 integers: ProjectRow, UserRow, DateRangeRow];
+    return PSIntegers(ProjectRow, UserRow, DateRangeRow);
   }
 }
 
 - (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
-  return [[self rowTypes] size];
+  return [[self rowTypes] count];
 }
 
 - (RowType) rowTypeAtIndexPath: (NSIndexPath *) path {

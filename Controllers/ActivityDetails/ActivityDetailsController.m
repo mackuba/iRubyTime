@@ -124,7 +124,7 @@
 // original delegate methods
 
 - (NSInteger) tableView: (UITableView *) table numberOfRowsInSection: (NSInteger) section {
-  return [[self rowTypesInSection: section] size];
+  return [[self rowTypesInSection: section] count];
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
@@ -142,7 +142,7 @@
 
 // abstract methods that the subclasses need to define
 
-- (IntArray *) rowTypesInSection: (NSInteger) section { AbstractMethod(return nil); }
+- (PSIntArray *) rowTypesInSection: (NSInteger) section { AbstractMethod(return nil); }
 
 - (CGFloat) heightForRowOfType: (RowType) rowType { AbstractMethod(return 0); }
 

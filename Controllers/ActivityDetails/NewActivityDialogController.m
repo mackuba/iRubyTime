@@ -64,8 +64,8 @@ PSReleaseOnDealloc(activityLengthPicker);
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
-- (IntArray *) rowTypesInSection: (NSInteger) section {
-  return [IntArray arrayOfSize: 3 integers: DateRow, ProjectRow, CommentsRow];
+- (PSIntArray *) rowTypesInSection: (NSInteger) section {
+  return PSIntegers(DateRow, ProjectRow, CommentsRow);
 }
 
 - (UITableViewCell *) cellForRowType: (RowType) rowType {

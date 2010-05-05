@@ -112,18 +112,18 @@ PSReleaseOnDealloc(originalActivity, editButton, lockedActivityInfo);
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
-- (IntArray *) rowTypesInSection: (NSInteger) section {
+- (PSIntArray *) rowTypesInSection: (NSInteger) section {
   if (section == 0) {
     if (displaysActivityUser) {
-      return [IntArray arrayOfSize: 5 integers: DateRow, ProjectRow, UserRow, LengthRow, CommentsRow];
+      return PSIntegers(DateRow, ProjectRow, UserRow, LengthRow, CommentsRow);
     } else {
-      return [IntArray arrayOfSize: 4 integers: DateRow, ProjectRow, LengthRow, CommentsRow];
+      return PSIntegers(DateRow, ProjectRow, LengthRow, CommentsRow);
     }
   } else {
     if (self.editing) {
-      return [IntArray arrayOfSize: 1 integers: DeleteButtonRow];
+      return PSIntegers(DeleteButtonRow);
     } else {
-      return [IntArray emptyArray];
+      return [PSIntArray emptyArray];
     }
   }
 }

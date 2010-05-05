@@ -52,6 +52,6 @@ typedef enum { DateRow, ProjectRow, UserRow, LengthRow, CommentsRow, DeleteButto
 // ABSTRACT METHODS
 - (void) executeSave;
 - (CGFloat) heightForRowOfType: (RowType) rowType;
-- (IntArray *) rowTypesInSection: (NSInteger) section;
+- (PSIntArray *) rowTypesInSection: (NSInteger) section;
 
 @end

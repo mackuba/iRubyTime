@@ -12,27 +12,6 @@
 #define RubyTimeErrorDomain @"RubyTimeErrorDomain"
 #define AbstractMethod(returnStatement) { [self doesNotRecognizeSelector: _cmd]; returnStatement; }
 
-// -------------------------------------------------------------------------------------------
-#pragma mark IntArray class
-
-
-@interface IntArray : NSObject {
-  NSInteger *values;
-  NSInteger size;
-}
-
-@property (nonatomic, readonly) NSInteger size;
-
-+ (IntArray *) arrayOfSize: (NSInteger) size integers: (NSInteger) first, ...;
-+ (IntArray *) emptyArray;
-- (id) initWithSize: (NSInteger) size;
-- (void) setInteger: (NSInteger) value atIndex: (NSInteger) index;
-- (NSInteger) integerAtIndex: (NSInteger) index;
-@end
-
-
-// -------------------------------------------------------------------------------------------
-#pragma mark Core class extensions
 
 @interface NSError (RubyTime)
 - (NSString *) friendlyDescription;

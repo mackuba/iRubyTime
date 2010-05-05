@@ -13,6 +13,7 @@
 		5810641D101362CC00E8A540 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5810641C101362CC00E8A540 /* LoadingView.m */; };
 		5817EE8611916B2A0096A3A2 /* FoundationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5817EE7F11916B290096A3A2 /* FoundationExtensions.m */; };
 		5817EE8811916B2A0096A3A2 /* UIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5817EE8411916B290096A3A2 /* UIExtensions.m */; };
+		5817EF541191AE0D0096A3A2 /* PSIntArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 5817EF531191AE0D0096A3A2 /* PSIntArray.m */; };
 		5833BEB41095D9C800A5530E /* UserListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BEB31095D9C800A5530E /* UserListController.m */; };
 		5833BEC11095E7F600A5530E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BEC01095E7F600A5530E /* User.m */; };
 		5833BED01095EA4400A5530E /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BECF1095EA4400A5530E /* Account.m */; };
@@ -96,6 +97,8 @@
 		5817EE8111916B290096A3A2 /* PsiToolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PsiToolkit.h; sourceTree = "<group>"; };
 		5817EE8311916B290096A3A2 /* UIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIExtensions.h; sourceTree = "<group>"; };
 		5817EE8411916B290096A3A2 /* UIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIExtensions.m; sourceTree = "<group>"; };
+		5817EF521191AE0D0096A3A2 /* PSIntArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSIntArray.h; sourceTree = "<group>"; };
+		5817EF531191AE0D0096A3A2 /* PSIntArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSIntArray.m; sourceTree = "<group>"; };
 		5833BEB21095D9C800A5530E /* UserListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListController.h; sourceTree = "<group>"; };
 		5833BEB31095D9C800A5530E /* UserListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListController.m; sourceTree = "<group>"; };
 		5833BEBF1095E7F600A5530E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -280,6 +283,8 @@
 				5817EE7E11916B290096A3A2 /* FoundationExtensions.h */,
 				5817EE7F11916B290096A3A2 /* FoundationExtensions.m */,
 				5817EE8011916B290096A3A2 /* Macros.h */,
+				5817EF521191AE0D0096A3A2 /* PSIntArray.h */,
+				5817EF531191AE0D0096A3A2 /* PSIntArray.m */,
 				5817EE8111916B290096A3A2 /* PsiToolkit.h */,
 				5817EE8311916B290096A3A2 /* UIExtensions.h */,
 				5817EE8411916B290096A3A2 /* UIExtensions.m */,
@@ -587,6 +592,7 @@
 				58D3937010DD61AC00046558 /* LoggedOutViewController.m in Sources */,
 				5817EE8611916B2A0096A3A2 /* FoundationExtensions.m in Sources */,
 				5817EE8811916B2A0096A3A2 /* UIExtensions.m in Sources */,
+				5817EF541191AE0D0096A3A2 /* PSIntArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
