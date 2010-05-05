@@ -12,7 +12,7 @@
 @implementation ActivityManager
 
 @synthesize allDates, activities;
-OnDeallocRelease(allDates, activities, dateGroups);
+PSReleaseOnDealloc(allDates, activities, dateGroups);
 
 - (id) init {
   if (self = [super init]) {
@@ -25,7 +25,7 @@ OnDeallocRelease(allDates, activities, dateGroups);
 
 - (void) recreateDateGroups {
   [dateGroups release];
-  dateGroups = [[activities groupByKey: @"date"] retain];
+  dateGroups = [[activities psGroupByKey: @"date"] retain];
   NSArray *unsortedDates = [dateGroups allKeys];
   [allDates release];
   allDates = [[[unsortedDates sortedArrayUsingSelector: @selector(compare:)] reverseObjectEnumerator] allObjects];

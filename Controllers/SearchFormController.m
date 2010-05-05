@@ -32,7 +32,7 @@ static CGFloat dateRangeCellHeight = 0.0;
 @implementation SearchFormController
 
 @synthesize dateRangeCell, startDateLabel, endDateLabel, user, project, startDate, endDate;
-OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate, project, user, subcontrollers);
+PSReleaseOnDealloc(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate, project, user, subcontrollers);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -46,7 +46,7 @@ OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate
     endDate = [[NSDate date] retain];
     self.tabBarItem.image = [UIImage loadImageFromBundle: @"magnifying-glass.png"];
     self.title = @"Search";
-    [self setBackButtonTitle: @"Form"];
+    [self psSetBackButtonTitle: @"Form"];
     [[NSBundle mainBundle] loadNibNamed: @"DateRangeCell" owner: self options: nil];
     [self clearSubcontrollers];
     dateRangeCellHeight = dateRangeCell.frame.size.height;
@@ -94,7 +94,7 @@ OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate
     [self.navigationController pushViewController: controller animated: YES];
     [controller release];
   } else {
-    [UIAlertView showAlertWithTitle: @"Error" content: @"Start date can't be later than end date."];
+    [UIAlertView psShowErrorWithMessage: @"Start date can't be later than end date."];
   }
 }
 
@@ -144,14 +144,14 @@ OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate
   UITableViewCell *cell = nil;
   switch ([self rowTypeAtIndexPath: path]) {
     case ProjectRow:
-      cell = [tableView genericCellWithStyle: UITableViewCellStyleValue1];
+      cell = [tableView psGenericCellWithStyle: UITableViewCellStyleValue1];
       cell.textLabel.text = @"Project";
       cell.detailTextLabel.text = project ? project.name : @"All";
       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
       break;
 
     case UserRow:
-      cell = [tableView genericCellWithStyle: UITableViewCellStyleValue1];
+      cell = [tableView psGenericCellWithStyle: UITableViewCellStyleValue1];
       cell.textLabel.text = @"User";
       cell.detailTextLabel.text = user ? user.name : @"All";
       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -171,7 +171,7 @@ OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
   UIViewController *subcontroller = [subcontrollers objectAtIndex: path.row];
-  if ([subcontroller isEqual: RTNull]) {
+  if ([subcontroller isEqual: PSNull]) {
     subcontroller = [self subcontrollerForRowType: [self rowTypeAtIndexPath: path]];
     [subcontrollers replaceObjectAtIndex: path.row withObject: subcontroller];
   }
@@ -203,7 +203,7 @@ OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate
                                                                   target: self
                                                                   action: @selector(searchClicked)];
   [[controller navigationItem] setRightBarButtonItem: [searchButton autorelease]];
-  [controller setBackButtonTitle: self.navigationItem.backBarButtonItem.title];
+  [controller psSetBackButtonTitle: self.navigationItem.backBarButtonItem.title];
   return [controller autorelease];
 }
 
@@ -220,7 +220,7 @@ OnDeallocRelease(dateRangeCell, startDateLabel, endDateLabel, startDate, endDate
 
 - (void) clearSubcontrollers {
   [subcontrollers release];
-  subcontrollers = [[NSMutableArray alloc] initWithObjects: RTNull, RTNull, RTNull, nil];
+  subcontrollers = [[NSMutableArray alloc] initWithObjects: PSNull, PSNull, PSNull, nil];
 }
 
 - (void) didReceiveMemoryWarning {

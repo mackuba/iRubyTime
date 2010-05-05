@@ -23,7 +23,7 @@
     self.title = user.name;
     if (user.name.length > 11) {
       NSString *firstName = [[user.name componentsSeparatedByString: @" "] objectAtIndex: 0];
-      [self setBackButtonTitle: firstName];
+      [self psSetBackButtonTitle: firstName];
     }
   }
   return self;

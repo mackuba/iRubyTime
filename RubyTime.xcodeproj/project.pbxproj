@@ -11,6 +11,8 @@
 		5810634B10132BE600E8A540 /* ActivityLengthDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5810634A10132BE600E8A540 /* ActivityLengthDialog.xib */; };
 		581063EB1013595100E8A540 /* ShowActivityDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581063EA1013595100E8A540 /* ShowActivityDialog.xib */; };
 		5810641D101362CC00E8A540 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5810641C101362CC00E8A540 /* LoadingView.m */; };
+		5817EE8611916B2A0096A3A2 /* FoundationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5817EE7F11916B290096A3A2 /* FoundationExtensions.m */; };
+		5817EE8811916B2A0096A3A2 /* UIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5817EE8411916B290096A3A2 /* UIExtensions.m */; };
 		5833BEB41095D9C800A5530E /* UserListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BEB31095D9C800A5530E /* UserListController.m */; };
 		5833BEC11095E7F600A5530E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BEC01095E7F600A5530E /* User.m */; };
 		5833BED01095EA4400A5530E /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BECF1095EA4400A5530E /* Account.m */; };
@@ -88,6 +90,12 @@
 		581063EA1013595100E8A540 /* ShowActivityDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowActivityDialog.xib; sourceTree = "<group>"; };
 		5810641B101362CC00E8A540 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
 		5810641C101362CC00E8A540 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
+		5817EE7E11916B290096A3A2 /* FoundationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundationExtensions.h; sourceTree = "<group>"; };
+		5817EE7F11916B290096A3A2 /* FoundationExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundationExtensions.m; sourceTree = "<group>"; };
+		5817EE8011916B290096A3A2 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		5817EE8111916B290096A3A2 /* PsiToolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PsiToolkit.h; sourceTree = "<group>"; };
+		5817EE8311916B290096A3A2 /* UIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIExtensions.h; sourceTree = "<group>"; };
+		5817EE8411916B290096A3A2 /* UIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIExtensions.m; sourceTree = "<group>"; };
 		5833BEB21095D9C800A5530E /* UserListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListController.h; sourceTree = "<group>"; };
 		5833BEB31095D9C800A5530E /* UserListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListController.m; sourceTree = "<group>"; };
 		5833BEBF1095E7F600A5530E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -266,6 +274,19 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		5817EE7B11916B290096A3A2 /* PsiToolkit */ = {
+			isa = PBXGroup;
+			children = (
+				5817EE7E11916B290096A3A2 /* FoundationExtensions.h */,
+				5817EE7F11916B290096A3A2 /* FoundationExtensions.m */,
+				5817EE8011916B290096A3A2 /* Macros.h */,
+				5817EE8111916B290096A3A2 /* PsiToolkit.h */,
+				5817EE8311916B290096A3A2 /* UIExtensions.h */,
+				5817EE8411916B290096A3A2 /* UIExtensions.m */,
+			);
+			path = PsiToolkit;
+			sourceTree = "<group>";
+		};
 		5833BF321095F4D700A5530E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				589BEA170FD1D5DD00CCFA82 /* BSJSONAdditions */,
+				5817EE7B11916B290096A3A2 /* PsiToolkit */,
 				5810641B101362CC00E8A540 /* LoadingView.h */,
 				5810641C101362CC00E8A540 /* LoadingView.m */,
 				589BE9D90FD1D52300CCFA82 /* NSDataMBBase64.h */,
@@ -563,6 +585,8 @@
 				5853E7B810A30CCA0060636F /* ApplicationDelegate.m in Sources */,
 				5853E7B910A30CCA0060636F /* ServerConnector.m in Sources */,
 				58D3937010DD61AC00046558 /* LoggedOutViewController.m in Sources */,
+				5817EE8611916B2A0096A3A2 /* FoundationExtensions.m in Sources */,
+				5817EE8811916B2A0096A3A2 /* UIExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

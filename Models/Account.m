@@ -24,7 +24,7 @@
 @implementation Account
 
 @synthesize serverURL, username, password, loggedIn, userType, authenticationString;
-OnDeallocRelease(serverURL, username, password, authenticationString);
+PSReleaseOnDealloc(serverURL, username, password, authenticationString);
 
 - (id) initWithServerURL: (NSString *) url
                 username: (NSString *) user
@@ -60,9 +60,9 @@ OnDeallocRelease(serverURL, username, password, authenticationString);
 
 - (void) generateAuthenticationString {
   if (username && password) {
-    NSString *stringToEncode = RTFormat(@"%@:%@", username, password);
+    NSString *stringToEncode = PSFormat(@"%@:%@", username, password);
     NSData *data = [stringToEncode dataUsingEncoding: NSUTF8StringEncoding];
-    NSString *encoded = RTFormat(@"Basic %@", [data base64Encoding]);
+    NSString *encoded = PSFormat(@"Basic %@", [data base64Encoding]);
     authenticationString = [encoded retain];
   }
 }

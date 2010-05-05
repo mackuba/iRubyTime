@@ -20,7 +20,7 @@
 
 @implementation ProjectListController
 
-OnDeallocRelease(subcontrollers, projectList);
+PSReleaseOnDealloc(subcontrollers, projectList);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -50,7 +50,7 @@ OnDeallocRelease(subcontrollers, projectList);
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  UITableViewCell *cell = [table genericCellWithStyle: UITableViewCellStyleDefault];
+  UITableViewCell *cell = [table psGenericCellWithStyle: UITableViewCellStyleDefault];
   Project *project = [projectList objectAtIndex: path.row];
   cell.textLabel.text = project.name;
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

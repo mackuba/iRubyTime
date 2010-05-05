@@ -16,7 +16,7 @@
 @implementation PathBuilder
 
 + (PathBuilder *) builderWithBasePath: (NSString *) path record: (Model *) record {
-  NSString *basePath = RTFormat(path, record.recordId);
+  NSString *basePath = PSFormat(path, record.recordId);
   PathBuilder *builder = [[PathBuilder alloc] initWithBasePath: basePath];
   return [builder autorelease];
 }
@@ -37,12 +37,12 @@
 
 - (void) setObject: (id) value forKey: (NSString *) key {
   [fullPath appendString: (hasParams ? @"&" : @"?")];
-  [fullPath appendString: RTFormat(@"search_criteria[%@]=%@", key, [value description])];
+  [fullPath appendString: PSFormat(@"search_criteria[%@]=%@", key, [value description])];
   hasParams = YES;
 }
 
 - (void) setInt: (NSInteger) number forKey: (NSString *) key {
-  [self setObject: RTInt(number) forKey: key];
+  [self setObject: PSInt(number) forKey: key];
 }
 
 - (NSString *) path {

@@ -38,7 +38,7 @@
 @implementation ApplicationDelegate
 
 @synthesize window, tabBarController, currentController, initialDataIsLoaded, kernelPanic;
-OnDeallocRelease(window, tabBarController, connector, currentController);
+PSReleaseOnDealloc(window, tabBarController, connector, currentController);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -47,12 +47,12 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
   connector = [[ServerConnector alloc] initWithAccount: [self loadAccountData]];
   [currentController setConnector: connector];
 
-  Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);
-  Observe(connector, RequestFailedNotification, requestFailed);
+  PSObserve(connector, AuthenticationSuccessfulNotification, loginSuccessful);
+  PSObserve(connector, RequestFailedNotification, requestFailed);
   if ([connector.account canLogIn]) {
     [self buildGuiForUserType: connector.account.userType];
     [currentController showLoadingMessage];
-    Observe(connector, AuthenticationFailedNotification, loginFailed);
+    PSObserve(connector, AuthenticationFailedNotification, loginFailed);
     [connector authenticate];
   } else {
     [self showLoginDialog];
@@ -126,7 +126,7 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 
 - (NSArray *) viewControllerClassesForUserType: (UserType) type {
   if (type == Admin || type == ClientUser) {
-    return RTArray(
+    return PSArray(
       [AllActivitiesController class],
       [ProjectListController class],
       [UserListController class],
@@ -134,7 +134,7 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
       [SettingsController class]
     );
   } else {
-    return RTArray(
+    return PSArray(
       [AllActivitiesController class],
       [ProjectListController class],
       [SearchFormController class],
@@ -167,7 +167,7 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
     }
   }
   [self saveAccountData];
-  Observe(connector, ProjectsReceivedNotification, projectsReceived);
+  PSObserve(connector, ProjectsReceivedNotification, projectsReceived);
   [connector loadProjects];
 }
 
@@ -178,8 +178,8 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
   [self rebuildGuiExceptLastControllerForUserType: connector.account.userType];
   [currentController hidePopupView];
   [currentController showLoadingMessage];
-  Observe(connector, RequestFailedNotification, requestFailed);
-  Observe(connector, ProjectsReceivedNotification, projectsReceived);
+  PSObserve(connector, RequestFailedNotification, requestFailed);
+  PSObserve(connector, ProjectsReceivedNotification, projectsReceived);
   [connector loadProjects];
 }
 
@@ -189,20 +189,20 @@ OnDeallocRelease(window, tabBarController, connector, currentController);
 
 - (void) requestFailed {
   kernelPanic = YES;
-  StopObservingAll();
+  PSStopObservingAll();
 }
 
 - (void) projectsReceived {
   if (connector.account.userType == Employee) {
     [self initialDataLoaded];
   } else {
-    Observe(connector, UsersReceivedNotification, initialDataLoaded);
+    PSObserve(connector, UsersReceivedNotification, initialDataLoaded);
     [connector loadUsers];
   }
 }
 
 - (void) initialDataLoaded {
-  StopObservingAll();
+  PSStopObservingAll();
   initialDataIsLoaded = YES;
   [currentController fetchDataIfNeeded];
 }

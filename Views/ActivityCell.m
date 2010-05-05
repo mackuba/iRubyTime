@@ -13,7 +13,8 @@
 
 @implementation ActivityCell
 
-SynthesizeAndReleaseLater(dateLabel, hoursLabel, commentsLabel, projectLabel, userLabel);
+@synthesize dateLabel, hoursLabel, commentsLabel, projectLabel, userLabel;
+PSReleaseOnDealloc(dateLabel, hoursLabel, commentsLabel, projectLabel, userLabel);
 
 - (void) displayActivity: (Activity *) activity {
   self.commentsLabel.text = activity.comments;

@@ -12,7 +12,7 @@
 @implementation ActivityDateDialogController
 
 @synthesize tableView, activityDatePicker;
-OnDeallocRelease(tableView, activityDatePicker, activity);
+PSReleaseOnDealloc(tableView, activityDatePicker, activity);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization

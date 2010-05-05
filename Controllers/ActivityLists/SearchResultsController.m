@@ -14,7 +14,7 @@
 
 @implementation SearchResultsController
 
-OnDeallocRelease(parentController);
+PSReleaseOnDealloc(parentController);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -24,7 +24,7 @@ OnDeallocRelease(parentController);
   self = [super initWithConnector: rtConnector];
   if (self) {
     self.title = @"Search results";
-    [self setBackButtonTitle: @"Results"];
+    [self psSetBackButtonTitle: @"Results"];
     parentController = [parent retain];
   }
   return self;

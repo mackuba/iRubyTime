@@ -12,7 +12,7 @@
 @implementation ActivityLengthDialogController
 
 @synthesize activityLengthPicker;
-OnDeallocRelease(activityLengthPicker, activity);
+PSReleaseOnDealloc(activityLengthPicker, activity);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization

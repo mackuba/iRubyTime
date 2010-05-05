@@ -13,12 +13,12 @@
 
 @implementation Activity
 
-@synthesize minutes, locked;
-SynthesizeAndReleaseLater(date, dateAsString, comments, project, user);
+@synthesize minutes, locked, date, dateAsString, comments, project, user;
+PSReleaseOnDealloc(date, dateAsString, comments, project, user);
 
 - (id) init {
   self = [super initWithModelName: @"Activity"
-                       properties: RTArray(@"comments", @"date", @"minutes", @"project", @"user", @"locked")];
+                       properties: PSArray(@"comments", @"date", @"minutes", @"project", @"user", @"locked")];
   if (self) {
     self.comments = @"";
     self.date = [NSDate date];
@@ -27,7 +27,7 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project, user);
 }
 
 - (NSString *) hourString {
-  return RTFormat(@"%d:%02d", minutes / 60, minutes % 60);
+  return PSFormat(@"%d:%02d", minutes / 60, minutes % 60);
 }
 
 - (void) setDate: (id) newDate {
@@ -60,9 +60,9 @@ SynthesizeAndReleaseLater(date, dateAsString, comments, project, user);
 }
 
 - (NSString *) toQueryString {
-  NSString *query = RTFormat(@"activity[date]=%@&activity[comments]=%@&activity[hours]=%@&activity[project_id]=%d",
+  NSString *query = PSFormat(@"activity[date]=%@&activity[comments]=%@&activity[hours]=%@&activity[project_id]=%d",
     [[ActivityDateFormatter sharedFormatter] formatDateForRequest: date],
-    [self.comments stringWithPercentEscapesForFormValues],
+    [self.comments psStringWithPercentEscapesForFormValues],
     [self hourString],
     self.project.recordId);
   return query;

@@ -9,68 +9,9 @@
 
 @class Activity;
 
-
-// -------------------------------------------------------------------------------------------
-#pragma mark Helper macros
-
-
 #define RubyTimeErrorDomain @"RubyTimeErrorDomain"
 
-#define ReleaseAll(...) \
-  NSArray *_releaseList = [[NSArray alloc] initWithObjects: __VA_ARGS__, nil]; \
-  for (NSObject *object in _releaseList) { \
-    [object release]; \
-  } \
-  [_releaseList release];
-
-#define OnDeallocRelease(...) \
-  - (void) dealloc { \
-    ReleaseAll(__VA_ARGS__); \
-    [super dealloc]; \
-  }
-
-#define SynthesizeAndReleaseLater(...) \
-  @synthesize __VA_ARGS__; \
-  OnDeallocRelease(__VA_ARGS__);
-
-#define Observe(sender, notification, callback) \
-  [[NSNotificationCenter defaultCenter] addObserver: self \
-                                           selector: @selector(callback) \
-                                               name: (notification) \
-                                             object: (sender)]
-
-#define StopObservingAll() [[NSNotificationCenter defaultCenter] removeObserver: self]
-#define StopObserving(sender, notification) \
-  [[NSNotificationCenter defaultCenter] removeObserver: self \
-                                                  name: (notification) \
-                                                object: (sender)]
-
-#define NotifyWithData(notification, data) \
-  [[NSNotificationCenter defaultCenter] postNotificationName: (notification) \
-                                                      object: self \
-                                                    userInfo: (data)]
-
-#define Notify(notification) NotifyWithData((notification), nil)
-
-#define RTArray(...) [NSArray arrayWithObjects: __VA_ARGS__, nil]
-#define RTDict(...) [NSDictionary dictionaryWithObjectsAndKeys: __VA_ARGS__, nil]
-#define RTFormat(...) [NSString stringWithFormat: __VA_ARGS__]
-#define RTInt(i) [NSNumber numberWithInt: i]
-#define RTIndex(sec, row) [NSIndexPath indexPathForRow: row inSection: sec]
-#define RTNull [NSNull null]
-
 #define AbstractMethod(returnStatement) { [self doesNotRecognizeSelector: _cmd]; returnStatement; }
-
-// from http://www.cimgf.com/2009/01/24/dropping-nslog-in-release-builds/
-#ifdef DEBUG
-#    define DLog(...) NSLog(__VA_ARGS__)
-#else
-#    define DLog(...) do {} while (0)
-#endif
-#define ALog(...) NSLog(__VA_ARGS__)
-
-#define GENERIC_CELL_TYPE @"GenericCellType"
-
 
 // -------------------------------------------------------------------------------------------
 #pragma mark IntArray class
@@ -94,10 +35,6 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Core class extensions
 
-@interface NSArray (RubyTime)
-- (NSDictionary *) groupByKey: (NSString *) key;
-@end
-
 @interface NSDate (RubyTime)
 - (NSDate *) midnight;
 - (BOOL) isEarlierThanOrEqualTo: (NSDate *) otherDate;
@@ -105,12 +42,6 @@
 
 @interface NSError (RubyTime)
 - (NSString *) friendlyDescription;
-@end
-
-@interface NSString (RubyTime)
-- (NSString *) trimmedString;
-- (NSString *) camelizedString;
-- (NSString *) stringWithPercentEscapesForFormValues;
 @end
 
 @interface NSUserDefaults (RubyTime)
@@ -122,20 +53,10 @@
 + (UIActivityIndicatorView *) spinnerBarButton;
 @end
 
-@interface UIAlertView (RubyTime)
-+ (void) showAlertWithTitle: (NSString *) title content: (NSString *) content;
-@end
-
 @interface UIImage (RubyTime)
 + (UIImage *) loadImageFromBundle: (NSString *) imageName;
 @end
 
-@interface UITableView (RubyTime)
-- (UITableViewCell *) cellWithStyle: (UITableViewCellStyle) style andIdentifier: (NSString *) identifier;
-- (UITableViewCell *) genericCellWithStyle: (UITableViewCellStyle) style;
-@end
-
 @interface UIViewController (RubyTime)
 - (void) initializeLengthPicker: (UIDatePicker *) picker usingActivity: (Activity *) activity;
-- (void) setBackButtonTitle: (NSString *) title;
 @end

@@ -15,7 +15,8 @@ static UIColor *dateColor = nil;
 
 @implementation DateRangeController
 
-SynthesizeAndReleaseLater(tableView, datePicker);
+@synthesize tableView, datePicker;
+PSReleaseOnDealloc(tableView, datePicker);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -38,7 +39,7 @@ SynthesizeAndReleaseLater(tableView, datePicker);
   NSIndexPath *selection = [tableView indexPathForSelectedRow];
   if (!selection) {
     [tableView reloadData];
-    [tableView selectRowAtIndexPath: RTIndex(0, 0) animated: NO scrollPosition: UITableViewScrollPositionNone];
+    [tableView selectRowAtIndexPath: PSIndex(0, 0) animated: NO scrollPosition: UITableViewScrollPositionNone];
     [datePicker setDate: [delegate startDate] animated: NO];
   }
 }
@@ -58,7 +59,7 @@ SynthesizeAndReleaseLater(tableView, datePicker);
     [delegate setEndDate: datePicker.date];
   }
   [tableView reloadData];
-  [tableView selectRowAtIndexPath: RTIndex(0, selectedRow) animated: NO scrollPosition: UITableViewScrollPositionNone];
+  [tableView selectRowAtIndexPath: PSIndex(0, selectedRow) animated: NO scrollPosition: UITableViewScrollPositionNone];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -75,7 +76,7 @@ SynthesizeAndReleaseLater(tableView, datePicker);
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  UITableViewCell *cell = [tableView genericCellWithStyle: UITableViewCellStyleValue1];
+  UITableViewCell *cell = [tableView psGenericCellWithStyle: UITableViewCellStyleValue1];
   NSDate *displayedDate;
   if (path.row == 0) {
     cell.textLabel.text = @"From date";

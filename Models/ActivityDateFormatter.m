@@ -12,7 +12,7 @@ static ActivityDateFormatter *sharedFormatter = nil;
 
 @implementation ActivityDateFormatter
 
-OnDeallocRelease(calendar, dateComponentsForToday, dateComponentsForYesterday,
+PSReleaseOnDealloc(calendar, dateComponentsForToday, dateComponentsForYesterday,
   fullDateFormatter, dayAndMonthFormatter, inputFormatter);
 
 - (id) init {

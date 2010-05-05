@@ -11,8 +11,8 @@
 
 @implementation Request
 
-@synthesize type;
-SynthesizeAndReleaseLater(response, receivedText, sentText, connection, info);
+@synthesize type, response, receivedText, sentText, connection, info;
+PSReleaseOnDealloc(response, receivedText, sentText, connection, info);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization

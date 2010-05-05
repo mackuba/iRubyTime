@@ -12,8 +12,8 @@
 
 @implementation Model
 
-@synthesize recordId;
-SynthesizeAndReleaseLater(properties, modelName);
+@synthesize recordId, properties, modelName;
+PSReleaseOnDealloc(properties, modelName);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Creating from JSON
@@ -45,10 +45,10 @@ SynthesizeAndReleaseLater(properties, modelName);
         property = RECORD_ID;
       } else if ([key hasSuffix: @"?"]) {
         // 'foo?' is saved as 'foo'
-        property = [[key substringToIndex: key.length - 1] camelizedString];
+        property = [[key substringToIndex: key.length - 1] psCamelizedString];
       } else {
         // normal property
-        property = [key camelizedString];
+        property = [key psCamelizedString];
       }
     }
 
@@ -87,7 +87,7 @@ SynthesizeAndReleaseLater(properties, modelName);
 }
 
 + (id) objectWithId: (NSInteger) objectId {
-  return [[self identityMap] objectForKey: RTInt(objectId)];
+  return [[self identityMap] objectForKey: PSInt(objectId)];
 }
 
 + (void) appendObjectsToList: (NSArray *) objects {

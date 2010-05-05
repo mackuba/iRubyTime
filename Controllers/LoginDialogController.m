@@ -21,7 +21,7 @@
 @implementation LoginDialogController
 
 @synthesize spinner, footerView, loginButton;
-OnDeallocRelease(connector, spinner, footerView, loginButton);
+PSReleaseOnDealloc(connector, spinner, footerView, loginButton);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -31,8 +31,8 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
   if (self) {
     [[NSBundle mainBundle] loadNibNamed: @"LoginDialog" owner: self options: nil];
     connector = [rtConnector retain];
-    Observe(connector, AuthenticationFailedNotification, authenticationFailed);
-    Observe(connector, RequestFailedNotification, requestFailed:);
+    PSObserve(connector, AuthenticationFailedNotification, authenticationFailed);
+    PSObserve(connector, RequestFailedNotification, requestFailed:);
   }
   return self;
 }
@@ -48,7 +48,7 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
 }
 
 - (void) viewWillDisappear: (BOOL) animated {
-  StopObservingAll();
+  PSStopObservingAll();
 }
 
 // -------------------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
 - (void) showError: (NSString *) message {
   [spinner stopAnimating];
   [loginButton setEnabled: YES];
-  [UIAlertView showAlertWithTitle: @"Error" content: message];
+  [UIAlertView psShowErrorWithMessage: message];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -110,9 +110,9 @@ OnDeallocRelease(connector, spinner, footerView, loginButton);
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  SFHFEditableCell *cell = (SFHFEditableCell *) [table dequeueReusableCellWithIdentifier: GENERIC_CELL_TYPE];
+  SFHFEditableCell *cell = (SFHFEditableCell *) [table dequeueReusableCellWithIdentifier: PSGenericCell];
   if (!cell) {
-    cell = [[SFHFEditableCell alloc] initWithReuseIdentifier: GENERIC_CELL_TYPE delegate: self];
+    cell = [[SFHFEditableCell alloc] initWithReuseIdentifier: PSGenericCell delegate: self];
   }
   [self setupCell: cell forRow: path.row];
   return cell;

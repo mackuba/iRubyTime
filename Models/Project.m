@@ -10,11 +10,11 @@
 
 @implementation Project
 
-@synthesize hasActivities;
-SynthesizeAndReleaseLater(name);
+@synthesize hasActivities, name;
+PSReleaseOnDealloc(name);
 
 - (id) init {
-  return [super initWithModelName: @"Project" properties: RTArray(@"name", @"hasActivities")];
+  return [super initWithModelName: @"Project" properties: PSArray(@"name", @"hasActivities")];
 }
 
 + (NSArray *) allWithActivities {

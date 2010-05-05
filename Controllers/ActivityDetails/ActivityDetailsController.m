@@ -32,7 +32,7 @@
 
 - (void) viewDidLoad {
   [self setupToolbar];
-  Observe(connector, RequestFailedNotification, requestFailed:);
+  PSObserve(connector, RequestFailedNotification, requestFailed:);
 }
 
 - (void) viewWillAppear: (BOOL) animated {
@@ -60,9 +60,9 @@
 #pragma mark Action handlers
 
 - (void) saveClicked {
-  if ([activity.comments trimmedString].length == 0) {
-    [UIAlertView showAlertWithTitle: @"Can't save activity"
-                            content: @"Activity comments field is empty - please fill it first."];
+  if ([activity.comments psIsBlank]) {
+    [UIAlertView psShowAlertWithTitle: @"Can't save activity"
+                              message: @"Activity comments field is empty - please fill it first."];
   } else {
     self.navigationItem.rightBarButtonItem = loadingButton;
     cancelButton.enabled = NO;
@@ -86,7 +86,7 @@
   Request *request = [notification.userInfo objectForKey: @"request"];
   NSString *message = [self errorMessageFromError: error text: text request: request];
 
-  [UIAlertView showAlertWithTitle: @"Error" content: message];
+  [UIAlertView psShowErrorWithMessage: message];
 }
 
 - (NSString *) errorMessageFromError: (NSError *) error text: (NSString *) text request: (Request *) request {
@@ -154,7 +154,7 @@
 }
 
 - (UITableViewCell *) cellForRowType: (RowType) rowType {
-  UITableViewCell *cell = [tableView genericCellWithStyle: UITableViewCellStyleValue1];
+  UITableViewCell *cell = [tableView psGenericCellWithStyle: UITableViewCellStyleValue1];
   switch (rowType) {
     case DateRow:
       cell.textLabel.text = @"Date";
@@ -208,11 +208,11 @@
 }
 
 - (UIViewController *) subcontrollerForRowType: (RowType) rowType {
-  UIViewController *controller = [subcontrollers objectForKey: RTInt(rowType)];
+  UIViewController *controller = [subcontrollers objectForKey: PSInt(rowType)];
   if (!controller) {
     Class controllerClass = [self subcontrollerClassForRowType: rowType];
     controller = [[controllerClass alloc] initWithActivity: activity];
-    [subcontrollers setObject: controller forKey: RTInt(rowType)];
+    [subcontrollers setObject: controller forKey: PSInt(rowType)];
     [controller release];
   }
   return controller;
@@ -226,8 +226,8 @@
 }
 
 - (void) dealloc {
-  StopObservingAll();
-  ReleaseAll(tableView, activity, connector, spinner, saveButton, loadingButton, cancelButton,
+  PSStopObservingAll();
+  PSRelease(tableView, activity, connector, spinner, saveButton, loadingButton, cancelButton,
     subcontrollers, commentsCell, commentsLabel);
   [super dealloc];
 }

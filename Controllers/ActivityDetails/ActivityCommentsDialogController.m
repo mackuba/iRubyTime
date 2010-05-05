@@ -12,7 +12,7 @@
 @implementation ActivityCommentsDialogController
 
 @synthesize textView, textCell;
-OnDeallocRelease(activity, textView, textCell);
+PSReleaseOnDealloc(activity, textView, textCell);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization

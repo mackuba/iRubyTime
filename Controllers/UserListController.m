@@ -40,7 +40,7 @@
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  UITableViewCell *cell = [table genericCellWithStyle: UITableViewCellStyleDefault];
+  UITableViewCell *cell = [table psGenericCellWithStyle: UITableViewCellStyleDefault];
   User *user = [[User list] objectAtIndex: path.row];
   cell.textLabel.text = user.name;
   if ([user isEqual: connector.account]) {

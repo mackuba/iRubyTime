@@ -9,7 +9,8 @@
 
 @implementation NewActivityDialogController
 
-SynthesizeAndReleaseLater(activityLengthPicker);
+@synthesize activityLengthPicker;
+PSReleaseOnDealloc(activityLengthPicker);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -53,7 +54,7 @@ SynthesizeAndReleaseLater(activityLengthPicker);
 }
 
 - (void) cancelClicked {
-  Notify(ActivityDialogCancelledNotification);
+  PSNotify(ActivityDialogCancelledNotification);
 }
 
 - (IBAction) timeChanged {

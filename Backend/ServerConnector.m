@@ -15,7 +15,7 @@
 #import "Utils.h"
 #import "NSDictionary+BSJSONAdditions.h"
 
-#define ActivityPath(activity) RTFormat(@"/activities/%d", activity.recordId)
+#define ActivityPath(activity) PSFormat(@"/activities/%d", activity.recordId)
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Private interface
@@ -73,7 +73,7 @@
   if (info) {
     currentRequest.info = info;
   }
-  DLog(@"sending %@ to %@ (type %d) with '%@'", method, url, type, text);
+  PSLog(@"sending %@ to %@ (type %d) with '%@'", method, url, type, text);
   [currentRequest setValue: account.authenticationString forHTTPHeaderField: @"Authorization"];
   currentRequest.connection = [NSURLConnection connectionWithRequest: currentRequest delegate: self];
 }
@@ -197,33 +197,33 @@
   [self cleanupRequest];
   
   NSHTTPURLResponse *response = (NSHTTPURLResponse *) request.response;
-  DLog(@"finished request to %@ (%d) (status %d)", request.URL, request.type, response.statusCode);
-  DLog(@"text = \"%@\"", request.receivedText);
+  PSLog(@"finished request to %@ (%d) (status %d)", request.URL, request.type, response.statusCode);
+  PSLog(@"text = \"%@\"", request.receivedText);
   NSString *versionString = [response.allHeaderFields objectForKey: @"X-Api-Version"];
   serverApiVersion = versionString ? [versionString intValue] : -1;
 
   if (response.statusCode >= 400) {
     NSError *error = [NSError errorWithDomain: RubyTimeErrorDomain code: response.statusCode userInfo: nil];
-    NotifyWithData(RequestFailedNotification, RTDict(error, @"error", request.receivedText, @"text"));
+    PSNotifyWithData(RequestFailedNotification, PSDict(error, @"error", request.receivedText, @"text"));
   } else {
     [self handleFinishedRequest: request];
   }
 }
 
 - (void) handleFinishedRequest: (Request *) request {
-  NSString *trimmedString = [request.receivedText trimmedString];
+  NSString *trimmedString = [request.receivedText psTrimmedString];
   NSArray *records;
   Activity *activity;
   switch (request.type) {
     case RTAuthenticationRequest:
       [account logInWithResponse: [NSDictionary dictionaryWithJSONString: trimmedString]];
-      Notify(AuthenticationSuccessfulNotification);
+      PSNotify(AuthenticationSuccessfulNotification);
       break;
 
     case RTActivityIndexRequest:
       if (trimmedString.length > 0) {
         records = [Activity objectsFromJSONString: trimmedString];
-        NotifyWithData(ActivitiesReceivedNotification, RTDict(records, @"activities"));
+        PSNotifyWithData(ActivitiesReceivedNotification, PSDict(records, @"activities"));
       }
       break;
     
@@ -232,7 +232,7 @@
         records = [Project objectsFromJSONString: trimmedString];
         [Project reset];
         [Project appendObjectsToList: records];
-        NotifyWithData(ProjectsReceivedNotification, RTDict(records, @"projects"));
+        PSNotifyWithData(ProjectsReceivedNotification, PSDict(records, @"projects"));
       }
       break;
 
@@ -244,32 +244,32 @@
         if (account.userType == Admin) {
           [User addSelfToTopOfUsers: account];
         }
-        NotifyWithData(UsersReceivedNotification, RTDict(records, @"users"));
+        PSNotifyWithData(UsersReceivedNotification, PSDict(records, @"users"));
       }
       break;
     
     case RTCreateActivityRequest:
       activity = [Activity objectFromJSONString: trimmedString];
       activity.project.hasActivities = YES;
-      NotifyWithData(ActivityCreatedNotification, RTDict(activity, @"activity"));
+      PSNotifyWithData(ActivityCreatedNotification, PSDict(activity, @"activity"));
       break;
 
     case RTUpdateActivityRequest:
       activity = request.info;
       activity.project.hasActivities = YES;
-      NotifyWithData(ActivityUpdatedNotification, RTDict(activity, @"activity"));
+      PSNotifyWithData(ActivityUpdatedNotification, PSDict(activity, @"activity"));
       break;
 
     case RTDeleteActivityRequest:
       activity = request.info;
-      NotifyWithData(ActivityDeletedNotification, RTDict(activity, @"activity"));
+      PSNotifyWithData(ActivityDeletedNotification, PSDict(activity, @"activity"));
       break;
   }
 }
 
 - (void) connection: (NSURLConnection *) connection didFailWithError: (NSError *) error {
   if (error.code != NSURLErrorUserCancelledAuthentication) {
-    NotifyWithData(RequestFailedNotification, RTDict(error, @"error", currentRequest, @"request"));
+    PSNotifyWithData(RequestFailedNotification, PSDict(error, @"error", currentRequest, @"request"));
     [self cleanupRequest];
   }
 }
@@ -280,7 +280,7 @@
   [[challenge sender] cancelAuthenticationChallenge: challenge];
   [self cleanupRequest];
   account.password = nil; // make sure that canLogIn returns NO
-  Notify(AuthenticationFailedNotification);
+  PSNotify(AuthenticationFailedNotification);
 }
 
 // -------------------------------------------------------------------------------------------

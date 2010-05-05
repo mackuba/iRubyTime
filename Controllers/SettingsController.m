@@ -41,11 +41,11 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
                                                                   action: @selector(cancelLoginClicked)];
   loginDialog.navigationItem.leftBarButtonItem = [cancelButton autorelease];
   [self showPopupView: [loginDialog autorelease]];
-  Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);
+  PSObserve(connector, AuthenticationSuccessfulNotification, loginSuccessful);
 }
 
 - (void) cancelLoginClicked {
-  StopObserving(connector, AuthenticationSuccessfulNotification);
+  PSStopObserving(connector, AuthenticationSuccessfulNotification);
   [connector dropCurrentConnection];
   connector.account = [currentAccount autorelease];
   currentAccount = nil;
@@ -53,7 +53,7 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
 }
 
 - (void) loginSuccessful {
-  StopObserving(connector, AuthenticationSuccessfulNotification);
+  PSStopObserving(connector, AuthenticationSuccessfulNotification);
   id applicationDelegate = [[UIApplication sharedApplication] delegate];
   [applicationDelegate reloginSuccessful];
 }
@@ -145,7 +145,7 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  UITableViewCell *cell = [tableView genericCellWithStyle: UITableViewCellStyleValue1];
+  UITableViewCell *cell = [tableView psGenericCellWithStyle: UITableViewCellStyleValue1];
   switch ([self rowTypeAtIndexPath: path]) {
     case ServerRow:
       cell.textLabel.text = @"Server URL";

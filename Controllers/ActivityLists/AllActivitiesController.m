@@ -22,7 +22,7 @@
     self.title = @"Recent activities";
     self.tabBarItem.image = [UIImage loadImageFromBundle: @"clock.png"];
     self.tabBarItem.title = @"Activities";
-    [self setBackButtonTitle: @"Activities"];
+    [self psSetBackButtonTitle: @"Activities"];
   }
   return self;
 }

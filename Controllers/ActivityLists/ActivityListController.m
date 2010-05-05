@@ -28,7 +28,7 @@
 @implementation ActivityListController
 
 @synthesize currentCell, loadMoreSpinner, loadMoreCell, loadMoreLabel;
-OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
+PSReleaseOnDealloc(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization and settings
@@ -78,7 +78,7 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
 
 // override in subclasses and call super
 - (void) fetchData {
-  Observe(connector, ActivitiesReceivedNotification, activitiesReceived:);
+  PSObserve(connector, ActivitiesReceivedNotification, activitiesReceived:);
 }
 
 // override in subclasses
@@ -131,7 +131,7 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
     NSIndexSet *sectionSet = [NSIndexSet indexSetWithIndex: newCellIndex.section];
     [tableView insertSections: sectionSet withRowAnimation: UITableViewRowAnimationNone];
   }
-  [tableView insertRowsAtIndexPaths: RTArray(newCellIndex) withRowAnimation: UITableViewRowAnimationNone];
+  [tableView insertRowsAtIndexPaths: PSArray(newCellIndex) withRowAnimation: UITableViewRowAnimationNone];
   [tableView endUpdates];
 
   if (!isOnlyOne && isLastOne) {
@@ -145,8 +145,8 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
                                                    defaultProject: [self defaultProjectForNewActivity]
                                                     defaultLength: [self defaultLengthForNewActivity]];
   [self showPopupView: dialog];
-  Observe(connector, ActivityCreatedNotification, activityCreated:);
-  Observe(dialog, ActivityDialogCancelledNotification, hidePopupView);
+  PSObserve(connector, ActivityCreatedNotification, activityCreated:);
+  PSObserve(dialog, ActivityDialogCancelledNotification, hidePopupView);
   [dialog release];
 }
 
@@ -156,8 +156,8 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
   controller.displaysActivityUser = (connector.account.userType != Employee);
   [self.navigationController pushViewController: controller animated: YES];
   [controller release];
-  Observe(connector, ActivityDeletedNotification, activityDeleted:);
-  Observe(connector, ActivityUpdatedNotification, activityUpdated:);
+  PSObserve(connector, ActivityDeletedNotification, activityDeleted:);
+  PSObserve(connector, ActivityUpdatedNotification, activityUpdated:);
 }
 
 - (void) loadMore {
@@ -185,7 +185,7 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
   [self restoreLoadMoreLabel];
   [self initializeView];
   self.navigationItem.rightBarButtonItem.enabled = ([Project count] > 0);
-  StopObserving(connector, ActivitiesReceivedNotification);
+  PSStopObserving(connector, ActivitiesReceivedNotification);
 }
 
 - (void) activityCreated: (NSNotification *) notification {
@@ -218,7 +218,7 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
 - (NSIndexPath *) indexPathForActivity: (Activity *) activity {
   NSInteger section = [manager.allDates indexOfObject: activity.date];
   NSInteger row = [[manager activitiesOnDay: activity.date] indexOfObject: activity];
-  return (row != NSNotFound && section != NSNotFound) ? RTIndex(section, row) : RTIndex(0, 0);
+  return (row != NSNotFound && section != NSNotFound) ? PSIndex(section, row) : PSIndex(0, 0);
 }
 
 - (NSInteger) numberOfSectionsInTableView: (UITableView *) table {
@@ -249,7 +249,7 @@ OnDeallocRelease(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
     return loadMoreCell;
   } else {
     Activity *activity = [self activityAtPath: path];
-    ActivityCell *cell = (ActivityCell *) [table dequeueReusableCellWithIdentifier: GENERIC_CELL_TYPE];
+    ActivityCell *cell = (ActivityCell *) [table dequeueReusableCellWithIdentifier: PSGenericCell];
     if (!cell) {
       [[NSBundle mainBundle] loadNibNamed: [self cellNibName] owner: self options: nil];
       cell = currentCell;

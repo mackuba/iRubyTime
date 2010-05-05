@@ -60,24 +60,6 @@
 // -------------------------------------------------------------------------------------------
 #pragma mark Core class extensions
 
-@implementation NSArray (RubyTime)
-
-- (NSDictionary *) groupByKey: (NSString *) key {
-  NSMutableDictionary *groups = [[NSMutableDictionary alloc] init];
-  for (id object in self) {
-    id keyForObject = [object valueForKey: key];
-    NSMutableArray *list = [groups objectForKey: keyForObject];
-    if (!list) {
-      list = [NSMutableArray array];
-      [groups setObject: list forKey: keyForObject];
-    }
-    [list addObject: object];
-  }
-  return [groups autorelease];
-}
-
-@end
-
 @implementation NSDate (RubyTime)
 
 - (NSDate *) midnight {
@@ -117,36 +99,6 @@
     }
   } else {
     return [self localizedDescription];
-  }
-}
-
-@end
-
-@implementation NSString (RubyTime)
-
-- (NSString *) trimmedString {
-  NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-  return [self stringByTrimmingCharactersInSet: whitespace];
-}
-
-- (NSString *) stringWithPercentEscapesForFormValues {
-  CFStringRef escapedSymbols = CFSTR("￼=,!$&'()*+;@?\n\"<>#\t :/");
-  CFStringRef string = (CFStringRef) [[self mutableCopy] autorelease];
-  NSString *escaped =
-    (NSString *) CFURLCreateStringByAddingPercentEscapes(NULL, string, NULL, escapedSymbols, kCFStringEncodingUTF8);
-  return [escaped autorelease];
-}
-
-- (NSString *) camelizedString {
-  NSArray *words = [self componentsSeparatedByString: @"_"];
-  if (words.count == 1) {
-    return [[self copy] autorelease];
-  } else {
-    NSMutableString *camelized = [[NSMutableString alloc] initWithString: [words objectAtIndex: 0]];
-    for (NSInteger i = 1; i < words.count; i++) {
-      [camelized appendString: [[words objectAtIndex: i] capitalizedString]];
-    }
-    return [camelized autorelease];
   }
 }
 
@@ -194,20 +146,6 @@
 
 @end
 
-@implementation UIAlertView (RubyTime)
-
-+ (void) showAlertWithTitle: (NSString *) title content: (NSString *) content {
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle: title
-                                                  message: content
-                                                 delegate: nil
-                                        cancelButtonTitle: @"OK"
-                                        otherButtonTitles: nil];
-  [alert show];
-  [alert release];
-}
-
-@end
-
 @implementation UIActivityIndicatorView (RubyTime)
 
 + (UIActivityIndicatorView *) spinnerBarButton {
@@ -223,23 +161,7 @@
 @implementation UIImage (RubyTime)
 
 + (UIImage *) loadImageFromBundle: (NSString *) imageName {
-  return [UIImage imageNamed: RTFormat(@"Images/%@", imageName)];
-}
-
-@end
-
-@implementation UITableView (RubyTime)
-
-- (UITableViewCell *) cellWithStyle: (UITableViewCellStyle) style andIdentifier: (NSString *) identifier {
-  UITableViewCell *cell = [self dequeueReusableCellWithIdentifier: identifier];
-  if (!cell) {
-    cell = [[[UITableViewCell alloc] initWithStyle: style reuseIdentifier: identifier] autorelease];
-  }
-  return cell;
-}
-
-- (UITableViewCell *) genericCellWithStyle: (UITableViewCellStyle) style {
-  return [self cellWithStyle: style andIdentifier: GENERIC_CELL_TYPE];
+  return [UIImage imageNamed: PSFormat(@"Images/%@", imageName)];
 }
 
 @end
@@ -250,14 +172,6 @@
   picker.countDownDuration = activity.minutes * 60;
   NSInteger precision = picker.minuteInterval;
   activity.minutes = activity.minutes / precision * precision;
-}
-
-- (void) setBackButtonTitle: (NSString *) title {
-  UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle: title
-                                                             style: UIBarButtonItemStyleDone
-                                                            target: nil
-                                                            action: nil];
-  self.navigationItem.backBarButtonItem = [button autorelease];
 }
 
 @end

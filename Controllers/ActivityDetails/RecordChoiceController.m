@@ -17,7 +17,7 @@
 
 @implementation RecordChoiceController
 
-OnDeallocRelease(model, delegate);
+PSReleaseOnDealloc(model, delegate);
 @synthesize closeOnSelection;
 
 // -------------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ OnDeallocRelease(model, delegate);
     delegate = [aDelegate retain];
     allowNil = allow;
     closeOnSelection = YES;
-    self.title = RTFormat(@"Choose %@", [self delegateGetterName]);
+    self.title = PSFormat(@"Choose %@", [self delegateGetterName]);
   }
   return self;
 }
@@ -47,7 +47,7 @@ OnDeallocRelease(model, delegate);
 
 // e.g. "setProject:"
 - (NSString *) delegateSetterName {
-  return RTFormat(@"set%@:", [self modelName]);
+  return PSFormat(@"set%@:", [self modelName]);
 }
 
 // returns e.g. activity.project
@@ -73,13 +73,13 @@ OnDeallocRelease(model, delegate);
 
 - (NSIndexPath *) pathForRecord: (Model *) record {
   if (allowNil && !record) {
-    return RTIndex(0, 0);
+    return PSIndex(0, 0);
   } else {
     NSInteger row = [[model list] indexOfObject: [self delegateValue]];
     if (row == NSNotFound) {
       return nil;
     } else {
-      return RTIndex(allowNil ? 1 : 0, row);
+      return PSIndex(allowNil ? 1 : 0, row);
     }
   }
 }
@@ -93,9 +93,9 @@ OnDeallocRelease(model, delegate);
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
-  UITableViewCell *cell = [table genericCellWithStyle: UITableViewCellStyleDefault];
+  UITableViewCell *cell = [table psGenericCellWithStyle: UITableViewCellStyleDefault];
   id record = [self recordAtPath: path];
-  cell.textLabel.text = (record) ? [record name] : RTFormat(@"All %@s", [self delegateGetterName]);
+  cell.textLabel.text = (record) ? [record name] : PSFormat(@"All %@s", [self delegateGetterName]);
 
   if (record == [self delegateValue]) {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;

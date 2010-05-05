@@ -14,7 +14,7 @@
 @implementation LoggedOutViewController
 
 @synthesize footerView;
-OnDeallocRelease(footerView, connector);
+PSReleaseOnDealloc(footerView, connector);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -43,18 +43,18 @@ OnDeallocRelease(footerView, connector);
   [self presentModalViewController: navigation animated: YES];
   [navigation release];
   [loginDialog release];
-  Observe(connector, AuthenticationSuccessfulNotification, loginSuccessful);
+  PSObserve(connector, AuthenticationSuccessfulNotification, loginSuccessful);
 }
 
 - (void) cancelLoginClicked {
-  StopObserving(connector, AuthenticationSuccessfulNotification);
+  PSStopObserving(connector, AuthenticationSuccessfulNotification);
   [connector dropCurrentConnection];
   connector.account = nil;
   [self dismissModalViewControllerAnimated: YES];
 }
 
 - (void) loginSuccessful {
-  StopObserving(connector, AuthenticationSuccessfulNotification);
+  PSStopObserving(connector, AuthenticationSuccessfulNotification);
   id applicationDelegate = [[UIApplication sharedApplication] delegate];
   [applicationDelegate reloginSuccessful];
 }

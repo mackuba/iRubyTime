@@ -10,10 +10,11 @@
 
 @implementation User
 
-SynthesizeAndReleaseLater(name);
+@synthesize name;
+PSReleaseOnDealloc(name);
 
 - (id) init {
-  return [super initWithModelName: @"User" properties: RTArray(@"name")];
+  return [super initWithModelName: @"User" properties: PSArray(@"name")];
 }
 
 + (void) addSelfToTopOfUsers: (User *) user {

@@ -15,7 +15,7 @@
 @implementation BaseViewController
 
 @synthesize connector;
-OnDeallocRelease(connector, loadingView);
+PSReleaseOnDealloc(connector, loadingView);
 
 - (id) initWithConnector: (ServerConnector *) rtConnector { AbstractMethod(return nil) }
 
@@ -90,14 +90,14 @@ OnDeallocRelease(connector, loadingView);
 }
 
 - (void) viewWillAppear: (BOOL) animated {
-  StopObservingAll();
-  Observe(connector, RequestFailedNotification, requestFailed:);
+  PSStopObservingAll();
+  PSObserve(connector, RequestFailedNotification, requestFailed:);
   [tableView reloadData];
   [self fetchDataIfNeeded];
 }
 
 - (void) viewWillDisappear: (BOOL) animated {
-  StopObservingAll();
+  PSStopObservingAll();
   [self hideLoadingMessage];
   id delegate = [[UIApplication sharedApplication] delegate];
   if ([delegate initialDataIsLoaded]) {
@@ -109,7 +109,7 @@ OnDeallocRelease(connector, loadingView);
   [self hideLoadingMessage];
   NSError *error = [notification.userInfo objectForKey: @"error"];
   NSString *message = error ? [error friendlyDescription] : @"Can't connect to the server.";
-  [UIAlertView showAlertWithTitle: @"Error" content: message];
+  [UIAlertView psShowErrorWithMessage: message];
 }
 
 // implement in subclasses

@@ -19,7 +19,7 @@
 @implementation ShowActivityDialogController
 
 @synthesize displaysActivityUser, lockedActivityInfo;
-OnDeallocRelease(originalActivity, editButton, lockedActivityInfo);
+PSReleaseOnDealloc(originalActivity, editButton, lockedActivityInfo);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -40,13 +40,13 @@ OnDeallocRelease(originalActivity, editButton, lockedActivityInfo);
   if (activity.isLocked) {
     tableView.tableFooterView = lockedActivityInfo;
   }
-  Observe(connector, ActivityUpdatedNotification, activityUpdated);
+  PSObserve(connector, ActivityUpdatedNotification, activityUpdated);
 }
 
 - (void) setupToolbar {
   [super setupToolbar];
   self.navigationItem.title = @"Activity details";
-  [self setBackButtonTitle: @"Activity"];
+  [self psSetBackButtonTitle: @"Activity"];
   if ((connector.account.userType != ClientUser) && (!activity.isLocked)) {
     editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemEdit
                                                                target: self
@@ -75,7 +75,7 @@ OnDeallocRelease(originalActivity, editButton, lockedActivityInfo);
     [spinner startAnimating];
     [connector deleteActivity: activity];
   }
-  [tableView deselectRowAtIndexPath: RTIndex(1, 0) animated: YES];
+  [tableView deselectRowAtIndexPath: PSIndex(1, 0) animated: YES];
 }
 
 - (void) cancelClicked {
@@ -135,7 +135,7 @@ OnDeallocRelease(originalActivity, editButton, lockedActivityInfo);
 - (UITableViewCell *) cellForRowType: (RowType) rowType {
   UITableViewCell *cell;
   if (rowType == DeleteButtonRow) {
-    cell = [tableView cellWithStyle: UITableViewCellStyleDefault andIdentifier: DELETE_ACTIVITY_CELL_TYPE];
+    cell = [tableView psCellWithStyle: UITableViewCellStyleDefault andIdentifier: DELETE_ACTIVITY_CELL_TYPE];
     cell.textLabel.text = @"Delete activity";
     cell.textLabel.textAlignment = UITextAlignmentCenter;
     cell.textLabel.textColor = [UIColor colorWithRed: 0.7 green: 0.0 blue: 0.0 alpha: 1.0];
@@ -190,7 +190,7 @@ OnDeallocRelease(originalActivity, editButton, lockedActivityInfo);
   [super setEditing: editing animated: animated];
   [tableView beginUpdates];
   [tableView setEditing: editing animated: animated];
-  NSArray *indexes = RTArray(RTIndex(1, 0));
+  NSArray *indexes = PSArray(PSIndex(1, 0));
   if (editing) {
     [tableView insertRowsAtIndexPaths: indexes withRowAnimation: UITableViewRowAnimationNone];
   } else {
