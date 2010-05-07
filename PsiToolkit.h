@@ -8,6 +8,7 @@
 #import "Macros.h"
 #import "FoundationExtensions.h"
 #import "PSIntArray.h"
+#import "PSModel.h"
 
 #if TARGET_OS_IPHONE
 #  import "UIExtensions.h"

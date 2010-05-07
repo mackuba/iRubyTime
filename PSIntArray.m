@@ -5,7 +5,8 @@
 // Licensed under WTFPL license
 // -------------------------------------------------------
 
-#include "PSIntArray.h"
+#import "PSIntArray.h"
+#import "Macros.h"
 
 @implementation PSIntArray
 

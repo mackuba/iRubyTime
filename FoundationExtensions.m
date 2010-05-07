@@ -45,6 +45,19 @@
 
 @implementation NSDate (PsiToolkit)
 
++ (NSDate *) psDaysAgo: (NSInteger) days {
+  return [NSDate psDaysFromNow: -days];
+}
+
++ (NSDate *) psDaysFromNow: (NSInteger) days {
+  NSCalendar *calendar = [NSCalendar currentCalendar];
+  NSDateComponents *interval = [[NSDateComponents alloc] init];
+  [interval setDay: days];
+  NSDate *date = [calendar dateByAddingComponents: interval toDate: [NSDate date] options: 0];
+  [interval release];
+  return date;
+}
+
 + (NSDateFormatter *) psJSONDateFormatter {
   static NSDateFormatter *formatter = nil;
   if (!formatter) {
@@ -52,19 +65,6 @@
     formatter.dateFormat = @"yyyy-MM-dd";
   }
   return formatter;
-}
-
-- (NSDate *) psDaysAgo: (NSInteger) days {
-  return [self psDaysFromNow: -days];
-}
-
-- (NSDate *) psDaysFromNow: (NSInteger) days {
-  NSCalendar *calendar = [NSCalendar currentCalendar];
-  NSDateComponents *interval = [[NSDateComponents alloc] init];
-  [interval setDay: days];
-  NSDate *date = [calendar dateByAddingComponents: interval toDate: [NSDate date] options: 0];
-  [interval release];
-  return date;
 }
 
 - (BOOL) psIsEarlierOrSameDay: (NSDate *) otherDate {
