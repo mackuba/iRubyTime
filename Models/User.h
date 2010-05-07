@@ -5,9 +5,7 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "Model.h"
-
-@interface User : Model {
+@interface User : PSModel {
   NSString *name;
 }
 

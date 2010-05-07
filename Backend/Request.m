@@ -7,7 +7,6 @@
 
 #import "Request.h"
 #import "Utils.h"
-#import "NSString+BSJSONAdditions.h"
 
 @implementation Request
 

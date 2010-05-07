@@ -5,7 +5,6 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "Model.h"
 #import "RecordChoiceController.h"
 #import "Utils.h"
 
@@ -51,19 +50,19 @@ PSReleaseOnDealloc(model, delegate);
 }
 
 // returns e.g. activity.project
-- (Model *) delegateValue {
+- (PSModel *) delegateValue {
   return [delegate performSelector: NSSelectorFromString([self delegateGetterName])];
 }
 
 // calls e.g. activity.project = ...
-- (void) setDelegateValue: (Model *) value {
+- (void) setDelegateValue: (PSModel *) value {
   [delegate performSelector: NSSelectorFromString([self delegateSetterName]) withObject: value];
 }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
-- (Model *) recordAtPath: (NSIndexPath *) path {
+- (PSModel *) recordAtPath: (NSIndexPath *) path {
   if (allowNil && path.section == 0) {
     return nil;
   } else {
@@ -71,7 +70,7 @@ PSReleaseOnDealloc(model, delegate);
   }
 }
 
-- (NSIndexPath *) pathForRecord: (Model *) record {
+- (NSIndexPath *) pathForRecord: (PSModel *) record {
   if (allowNil && !record) {
     return PSIndex(0, 0);
   } else {

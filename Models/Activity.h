@@ -5,12 +5,10 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "Model.h"
-
 @class Project;
 @class User;
 
-@interface Activity : Model {
+@interface Activity : PSModel {
   NSString *comments;
   NSDate *date;
   NSString *dateAsString;

@@ -62,7 +62,7 @@ PSReleaseOnDealloc(allDates, activities, dateGroups);
   Activity *existing;
   for (index = 0; index < activities.count; index++) {
     existing = [activities objectAtIndex: index];
-    if (existing.recordId == activity.recordId) break;
+    if ([existing.recordId isEqual: activity.recordId]) break;
   }
   if (index < activities.count) {
     [activities removeObjectAtIndex: index];

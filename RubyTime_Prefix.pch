@@ -6,4 +6,5 @@
     #import <Foundation/Foundation.h>
     #import <UIKit/UIKit.h>
     #import "PsiToolkit.h"
+    #import "YAJL.h"
 #endif

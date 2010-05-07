@@ -13,12 +13,12 @@
 @synthesize name;
 PSReleaseOnDealloc(name);
 
-- (id) init {
-  return [super initWithModelName: @"User" properties: PSArray(@"name")];
++ (NSArray *) propertyList {
+  return PSArray(@"name");
 }
 
 + (void) addSelfToTopOfUsers: (User *) user {
-  NSMutableArray *userList = [self list];
+  NSMutableArray *userList = (NSMutableArray *) [self list];
   [userList removeObject: user];
   [userList insertObject: user atIndex: 0];
 }

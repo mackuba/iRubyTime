@@ -30,7 +30,7 @@ PSReleaseOnDealloc(serverURL, username, password, authenticationString);
                 username: (NSString *) user
                 password: (NSString *) pass {
   if (self = [super init]) {
-    recordId = -1;
+    recordId = [PSInt(-1) retain];
     loggedIn = NO;
     username = [user copy];
     password = [pass copy];
@@ -88,7 +88,7 @@ PSReleaseOnDealloc(serverURL, username, password, authenticationString);
 
 - (void) logInWithResponse: (NSDictionary *) dictionary {
   loggedIn = YES;
-  self.recordId = [[dictionary objectForKey: @"id"] intValue];
+  self.recordId = [dictionary objectForKey: @"id"];
   self.name = [dictionary objectForKey: @"name"];
   [self setUserTypeFromString: [dictionary objectForKey: @"user_type"]];
 }

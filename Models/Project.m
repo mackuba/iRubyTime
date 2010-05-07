@@ -13,8 +13,8 @@
 @synthesize hasActivities, name;
 PSReleaseOnDealloc(name);
 
-- (id) init {
-  return [super initWithModelName: @"Project" properties: PSArray(@"name", @"hasActivities")];
++ (NSArray *) propertyList {
+  return PSArray(@"name", @"hasActivities");
 }
 
 + (NSArray *) allWithActivities {

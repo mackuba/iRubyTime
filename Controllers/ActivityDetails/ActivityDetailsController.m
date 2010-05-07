@@ -108,7 +108,7 @@
 
 - (NSString *) errorMessageFromJSON: (NSString *) jsonString {
   NSString *message = nil;
-  NSDictionary *result = [NSDictionary dictionaryWithJSONString: jsonString];
+  NSDictionary *result = [jsonString yajl_JSON];
   if (result.count > 0) {
     NSArray *errors = [result objectForKey: [[result allKeys] objectAtIndex: 0]];
     if (errors.count > 0) {

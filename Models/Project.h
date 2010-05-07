@@ -5,9 +5,7 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "Model.h"
-
-@interface Project : Model {
+@interface Project : PSModel {
   NSString *name;
   BOOL hasActivities;
 }

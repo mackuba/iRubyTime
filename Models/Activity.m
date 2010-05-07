@@ -16,9 +16,12 @@
 @synthesize minutes, locked, date, dateAsString, comments, project, user;
 PSReleaseOnDealloc(date, dateAsString, comments, project, user);
 
++ (NSArray *) propertyList {
+  return PSArray(@"comments", @"date", @"minutes", @"project", @"user", @"locked");
+}
+
 - (id) init {
-  self = [super initWithModelName: @"Activity"
-                       properties: PSArray(@"comments", @"date", @"minutes", @"project", @"user", @"locked")];
+  self = [super init];
   if (self) {
     self.comments = @"";
     self.date = [NSDate date];
@@ -52,15 +55,15 @@ PSReleaseOnDealloc(date, dateAsString, comments, project, user);
 
 - (BOOL) isEqualToActivity: (Activity *) other {
   return other &&
-    other.recordId == self.recordId &&
     other.minutes == self.minutes &&
     other.project == self.project &&
+    [other.recordId isEqual: self.recordId] &&
     [other.date isEqualToDate: self.date] &&
     [other.comments isEqualToString: self.comments];
 }
 
 - (NSString *) toQueryString {
-  NSString *query = PSFormat(@"activity[date]=%@&activity[comments]=%@&activity[hours]=%@&activity[project_id]=%d",
+  NSString *query = PSFormat(@"activity[date]=%@&activity[comments]=%@&activity[hours]=%@&activity[project_id]=%@",
     [[ActivityDateFormatter sharedFormatter] formatDateForRequest: date],
     [self.comments psStringWithPercentEscapesForFormValues],
     [self hourString],

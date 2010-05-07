@@ -5,7 +5,6 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "Model.h"
 #import "PathBuilder.h"
 #import "Utils.h"
 
@@ -15,8 +14,8 @@
 
 @implementation PathBuilder
 
-+ (PathBuilder *) builderWithBasePath: (NSString *) path record: (Model *) record {
-  NSString *basePath = PSFormat(path, record.recordId);
++ (PathBuilder *) builderWithBasePath: (NSString *) path record: (PSModel *) record {
+  NSString *basePath = PSFormat(path, [record.recordId intValue]);
   PathBuilder *builder = [[PathBuilder alloc] initWithBasePath: basePath];
   return [builder autorelease];
 }

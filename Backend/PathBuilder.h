@@ -16,7 +16,7 @@
 
 @property (nonatomic, readonly) NSString *path;
 
-+ (PathBuilder *) builderWithBasePath: (NSString *) path record: (Model *) record;
++ (PathBuilder *) builderWithBasePath: (NSString *) path record: (PSModel *) record;
 + (PathBuilder *) builderWithBasePath: (NSString *) path;
 - (void) setObject: (id) value forKey: (NSString *) key;
 - (void) setInt: (NSInteger) number forKey: (NSString *) key;

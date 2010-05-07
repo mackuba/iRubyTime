@@ -17,6 +17,6 @@
 @property (nonatomic) BOOL closeOnSelection;
 
 - (id) initWithModel: (Class) model delegate: (id) delegate allowNil: (BOOL) allowNil;
-- (Model *) recordAtPath: (NSIndexPath *) path;
+- (PSModel *) recordAtPath: (NSIndexPath *) path;
 
 @end

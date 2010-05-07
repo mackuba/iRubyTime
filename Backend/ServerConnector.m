@@ -13,9 +13,8 @@
 #import "Request.h"
 #import "ServerConnector.h"
 #import "Utils.h"
-#import "NSDictionary+BSJSONAdditions.h"
 
-#define ActivityPath(activity) PSFormat(@"/activities/%d", activity.recordId)
+#define ActivityPath(activity) PSFormat(@"/activities/%@", activity.recordId)
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Private interface
@@ -140,10 +139,10 @@
                             endDate: (NSDate *) endDate {
   PathBuilder *builder = [PathBuilder builderWithBasePath: @"/activities"];
   if (project) {
-    [builder setInt: project.recordId forKey: @"project_id"];
+    [builder setObject: project.recordId forKey: @"project_id"];
   }
   if (user) {
-    [builder setInt: user.recordId forKey: @"user_id"];
+    [builder setObject: user.recordId forKey: @"user_id"];
   }
   ActivityDateFormatter *formatter = [ActivityDateFormatter sharedFormatter];
   [builder setObject: [formatter formatDateForRequest: startDate] forKey: @"date_from"];
@@ -216,7 +215,7 @@
   Activity *activity;
   switch (request.type) {
     case RTAuthenticationRequest:
-      [account logInWithResponse: [NSDictionary dictionaryWithJSONString: trimmedString]];
+      [account logInWithResponse: [trimmedString yajl_JSON]];
       PSNotify(AuthenticationSuccessfulNotification);
       break;
 

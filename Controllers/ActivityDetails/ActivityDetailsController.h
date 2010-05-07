@@ -14,7 +14,6 @@
 #import "ServerConnector.h"
 #import "User.h"
 #import "Utils.h"
-#import "NSDictionary+BSJSONAdditions.h"
 
 #define COMMENTS_CELL_HEIGHT 92
 
