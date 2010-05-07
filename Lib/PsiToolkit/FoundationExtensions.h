@@ -14,10 +14,10 @@
 @end
 
 @interface NSDate (PsiToolkit)
++ (NSDate *) psDaysAgo: (NSInteger) days;
++ (NSDate *) psDaysFromNow: (NSInteger) days;
 + (NSDateFormatter *) psJSONDateFormatter;
 - (BOOL) psIsEarlierOrSameDay: (NSDate *) otherDate;
-- (NSDate *) psDaysAgo: (NSInteger) days;
-- (NSDate *) psDaysFromNow: (NSInteger) days;
 - (NSDate *) psMidnight;
 - (NSString *) psJSONDateFormat;
 @end
