@@ -8,7 +8,6 @@
 #import "Account.h"
 #import "Activity.h"
 #import "ActivityDateFormatter.h"
-#import "PathBuilder.h"
 #import "Project.h"
 #import "Request.h"
 #import "ServerConnector.h"
@@ -110,26 +109,26 @@
 - (void) loadActivitiesForUser: (User *) user
                          limit: (NSInteger) limit
                         offset: (NSInteger) offset {
-  PathBuilder *builder = [PathBuilder builderWithBasePath: @"/users/%d/activities" record: user];
-  [builder setInt: limit forKey: @"limit"];
-  [builder setInt: offset forKey: @"offset"];
+  PSPathBuilder *builder = [PSPathBuilder builderWithBasePath: @"/users/%d/activities" record: user];
+  [builder setInt: limit forKey: @"search_criteria[limit]"];
+  [builder setInt: offset forKey: @"search_criteria[offset]"];
   [self sendGetRequestToPath: builder.path type: RTActivityIndexRequest];
 }
 
 - (void) loadActivitiesForProject: (Project *) project
                             limit: (NSInteger) limit
                            offset: (NSInteger) offset {
-  PathBuilder *builder = [PathBuilder builderWithBasePath: @"/projects/%d/activities" record: project];
-  [builder setInt: limit forKey: @"limit"];
-  [builder setInt: offset forKey: @"offset"];
+  PSPathBuilder *builder = [PSPathBuilder builderWithBasePath: @"/projects/%d/activities" record: project];
+  [builder setInt: limit forKey: @"search_criteria[limit]"];
+  [builder setInt: offset forKey: @"search_criteria[offset]"];
   [self sendGetRequestToPath: builder.path type: RTActivityIndexRequest];
 }
 
 - (void) loadAllActivitiesWithLimit: (NSInteger) limit
                              offset: (NSInteger) offset {
-  PathBuilder *builder = [PathBuilder builderWithBasePath: @"/activities"];
-  [builder setInt: limit forKey: @"limit"];
-  [builder setInt: offset forKey: @"offset"];
+  PSPathBuilder *builder = [PSPathBuilder builderWithBasePath: @"/activities"];
+  [builder setInt: limit forKey: @"search_criteria[limit]"];
+  [builder setInt: offset forKey: @"search_criteria[offset]"];
   [self sendGetRequestToPath: builder.path type: RTActivityIndexRequest];
 }
 
@@ -137,16 +136,16 @@
                                user: (User *) user
                           startDate: (NSDate *) startDate
                             endDate: (NSDate *) endDate {
-  PathBuilder *builder = [PathBuilder builderWithBasePath: @"/activities"];
+  PSPathBuilder *builder = [PSPathBuilder builderWithBasePath: @"/activities"];
   if (project) {
-    [builder setObject: project.recordId forKey: @"project_id"];
+    [builder setObject: project.recordId forKey: @"search_criteria[project_id]"];
   }
   if (user) {
-    [builder setObject: user.recordId forKey: @"user_id"];
+    [builder setObject: user.recordId forKey: @"search_criteria[user_id]"];
   }
   ActivityDateFormatter *formatter = [ActivityDateFormatter sharedFormatter];
-  [builder setObject: [formatter formatDateForRequest: startDate] forKey: @"date_from"];
-  [builder setObject: [formatter formatDateForRequest: endDate] forKey: @"date_to"];
+  [builder setObject: [formatter formatDateForRequest: startDate] forKey: @"search_criteria[date_from]"];
+  [builder setObject: [formatter formatDateForRequest: endDate] forKey: @"search_criteria[date_to]"];
   [self sendGetRequestToPath: builder.path type: RTActivityIndexRequest];
 }
 
