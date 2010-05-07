@@ -26,11 +26,13 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
+	<key>NSMainNibFile~ipad</key>
+	<string>MainWindow-iPad</string>
+	<key>RubyTimeAPIVersion</key>
+	<string>1</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiresPersistentWiFi</key>
 	<true/>
-	<key>RubyTimeAPIVersion</key>
-	<string>1</string>
 </dict>
 </plist>

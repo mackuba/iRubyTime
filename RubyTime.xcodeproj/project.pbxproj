@@ -23,6 +23,7 @@
 		58420FD2109EFD1600F90AFB /* ShowMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58420FD1109EFD1600F90AFB /* ShowMoreCell.xib */; };
 		5842111310A06EE100F90AFB /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 5842110C10A06EE100F90AFB /* Images */; };
 		5842119210A084A600F90AFB /* SearchFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5842119110A084A600F90AFB /* SearchFormController.m */; };
+		5843B41D1194415900A98F10 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5843B41C1194415900A98F10 /* MainWindow-iPad.xib */; };
 		5844CE620FC31FA8007F22FE /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 5844CE610FC31FA8007F22FE /* README.markdown */; };
 		5853E4FB10A18BD20060636F /* DateRangeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5853E4FA10A18BD20060636F /* DateRangeCell.xib */; };
 		5853E54910A1B5C20060636F /* RecordChoiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5853E54810A1B5C20060636F /* RecordChoiceController.m */; };
@@ -105,6 +106,7 @@
 		5842110C10A06EE100F90AFB /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 		5842119010A084A600F90AFB /* SearchFormController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFormController.h; sourceTree = "<group>"; };
 		5842119110A084A600F90AFB /* SearchFormController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFormController.m; sourceTree = "<group>"; };
+		5843B41C1194415900A98F10 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/Views/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		5844CE610FC31FA8007F22FE /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		5853E4FA10A18BD20060636F /* DateRangeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateRangeCell.xib; sourceTree = "<group>"; };
 		5853E54710A1B5C20060636F /* RecordChoiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordChoiceController.h; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				58CA2DAB0FA7AE54007A6A65 /* Models */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				5843B41B1194415500A98F10 /* Resources-iPad */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = CustomTemplate;
@@ -304,6 +307,14 @@
 				5833C0D01095F98A00A5530E /* Foundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5843B41B1194415500A98F10 /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+				5843B41C1194415900A98F10 /* MainWindow-iPad.xib */,
+			);
+			name = "Resources-iPad";
 			sourceTree = "<group>";
 		};
 		586E372D1098A967005EB2C8 /* ActivityLists */ = {
@@ -530,6 +541,7 @@
 				5853E4FB10A18BD20060636F /* DateRangeCell.xib in Resources */,
 				5853E5BF10A1C7EB0060636F /* DateRangeDialog.xib in Resources */,
 				58D3934A10DD602600046558 /* LoggedOutView.xib in Resources */,
+				5843B41D1194415900A98F10 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,6 +605,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_ENTITLEMENTS = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -601,13 +614,15 @@
 				GCC_PREFIX_HEADER = RubyTime_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Lib/libYAJL\"",
 				);
 				OTHER_CFLAGS = "-DDEBUG";
 				PRODUCT_NAME = iRubyTime;
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -615,17 +630,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = RubyTime_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Lib/libYAJL\"",
 				);
 				PRODUCT_NAME = iRubyTime;
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -652,17 +670,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = RubyTime_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Lib/libYAJL\"",
 				);
 				PRODUCT_NAME = iRubyTime;
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = AppStore;
 		};
@@ -728,17 +749,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = RubyTime_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Lib/libYAJL\"",
 				);
 				PRODUCT_NAME = iRubyTime;
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Distribution;
 		};
