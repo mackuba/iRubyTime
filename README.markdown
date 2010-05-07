@@ -17,4 +17,4 @@ iRubyTime is a native iPhone client for RubyTime 3.0, a time-tracking system wri
 ## License
 
 Copyright by Jakub Suder <jakub.suder at gmail.com> & <a href="http://lunarlogicpolska.com">Lunar Logic Polska</a>. Licensed under MIT license.
-Includes open source libraries NSData+MBBase64 by MiloBird, BSJSONAdditions by Blake Seely, scifihifi-iphone by Buzz Andersen, and LoadingView by Matt Gallagher. Icons by Joseph Wain (<a href="http://glyphish.com">glyphish.com</a>).
+Includes open source libraries NSData+MBBase64 by MiloBird, YAJL by Lloyd Hilaiel and Gabriel Handford, scifihifi-iphone by Buzz Andersen, and LoadingView by Matt Gallagher. Icons by Joseph Wain (<a href="http://glyphish.com">glyphish.com</a>).
