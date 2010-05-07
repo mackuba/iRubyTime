@@ -1,5 +1,5 @@
 // -------------------------------------------------------
-// UIExtensions.m
+// PSUIExtensions.m
 //
 // Copyright (c) 2010 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under WTFPL license
@@ -7,8 +7,8 @@
 
 #if TARGET_OS_IPHONE
 
-#import "Macros.h"
-#import "UIExtensions.h"
+#import "PSMacros.h"
+#import "PSUIExtensions.h"
 
 @implementation UIAlertView (PsiToolkit)
 

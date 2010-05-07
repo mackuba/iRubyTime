@@ -1,5 +1,5 @@
 // -------------------------------------------------------
-// CocoaExtensions.m
+// PSCocoaExtensions.m
 //
 // Copyright (c) 2010 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under WTFPL license
@@ -7,7 +7,7 @@
 
 #if !TARGET_OS_IPHONE
 
-#import "CocoaExtensions.h"
+#import "PSCocoaExtensions.h"
 
 @implementation NSControl (PsiToolkit)
 

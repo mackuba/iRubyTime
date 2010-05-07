@@ -5,13 +5,14 @@
 // Licensed under WTFPL license
 // -------------------------------------------------------
 
-#import "Macros.h"
-#import "FoundationExtensions.h"
+#import "PSMacros.h"
+#import "PSFoundationExtensions.h"
 #import "PSIntArray.h"
 #import "PSModel.h"
+#import "PSPathBuilder.h"
 
 #if TARGET_OS_IPHONE
-#  import "UIExtensions.h"
+#  import "PSUIExtensions.h"
 #else
-#  import "CocoaExtensions.h"
+#  import "PSCocoaExtensions.h"
 #endif
