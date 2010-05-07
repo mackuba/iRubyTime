@@ -7,8 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class Model;
-
 @interface PathBuilder : NSObject {
   NSMutableString *fullPath;
   BOOL hasParams;
