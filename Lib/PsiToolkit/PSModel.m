@@ -7,7 +7,8 @@
 
 #import "PSModel.h"
 #import "PSModelManager.h"
-#import "Macros.h"
+#import "PSMacros.h"
+#import "PSFoundationExtensions.h"
 
 @interface PSModel ()
 + (NSArray *) properties;

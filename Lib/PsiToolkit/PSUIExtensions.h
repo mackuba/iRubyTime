@@ -1,5 +1,5 @@
 // -------------------------------------------------------
-// UIExtensions.h
+// PSUIExtensions.h
 //
 // Copyright (c) 2010 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under WTFPL license

@@ -6,7 +6,7 @@
 // -------------------------------------------------------
 
 #import "PSIntArray.h"
-#import "Macros.h"
+#import "PSMacros.h"
 
 @implementation PSIntArray
 

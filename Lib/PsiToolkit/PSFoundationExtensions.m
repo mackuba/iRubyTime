@@ -1,12 +1,12 @@
 // -------------------------------------------------------
-// FoundationExtensions.m
+// PSFoundationExtensions.m
 //
 // Copyright (c) 2010 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under WTFPL license
 // -------------------------------------------------------
 
-#import "FoundationExtensions.h"
-#import "Macros.h"
+#import "PSFoundationExtensions.h"
+#import "PSMacros.h"
 
 @implementation NSArray (PsiToolkit)
 
