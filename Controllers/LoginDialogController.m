@@ -155,6 +155,7 @@ PSReleaseOnDealloc(connector, spinner, footerView, loginButton);
   cell.textField.enablesReturnKeyAutomatically = YES;
   cell.textField.adjustsFontSizeToFitWidth = YES;
   cell.textField.minimumFontSize = 8.0;
+  cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {

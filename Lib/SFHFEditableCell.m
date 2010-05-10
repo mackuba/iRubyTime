@@ -36,7 +36,7 @@
     m_label = [[UILabel alloc] initWithFrame: CGRectZero];
 		m_label.font = [UIFont boldSystemFontOfSize: 16.0];
 		m_label.textColor = [UIColor darkTextColor];
-		[self addSubview: m_label];
+		[self.contentView addSubview: m_label];
 
     textColor = [[UIColor colorWithRed: 0.2 green: 0.3 blue: 0.5 alpha: 1.0] retain];
 		
@@ -46,18 +46,19 @@
     m_textField.textColor = textColor;
 		m_textField.clearButtonMode = UITextFieldViewModeWhileEditing;
 		m_textField.delegate = delegate;
-    [self addSubview: m_textField];
+    [self.contentView addSubview: m_textField];
   }
   return self;
 }
 
 - (void) layoutSubviews {
-	[self.label sizeToFit];
-	self.label.frame = CGRectMake(self.bounds.origin.x + 20, self.bounds.origin.y + 12,
-	                              self.label.frame.size.width, self.label.frame.size.height);
-  self.textField.frame = CGRectMake(120, self.bounds.origin.y,
-                                    self.bounds.size.width - 133,
-                                    self.bounds.size.height);
+  [super layoutSubviews];
+  [self.label sizeToFit];
+  self.label.frame = CGRectMake(self.contentView.bounds.origin.x + 20, self.contentView.bounds.origin.y + 12,
+                                self.label.frame.size.width, self.label.frame.size.height);
+  self.textField.frame = CGRectMake(120, self.contentView.bounds.origin.y,
+                                    self.contentView.bounds.size.width - 133,
+                                    self.contentView.bounds.size.height);
 }
 
 - (void) setLabelText: (NSString *) labelText andPlaceholderText: (NSString *) placeholderText {
