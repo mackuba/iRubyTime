@@ -42,7 +42,7 @@
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUIDatePicker" id="1048965001">
+					<object class="IBUIDatePicker" id="267516506">
 						<reference key="NSNextResponder" ref="476924784"/>
 						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{0, 200}, {320, 216}}</string>
@@ -54,9 +54,52 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIDatePickerMode">3</int>
-						<object class="NSLocale" key="IBUILocale">
+						<object class="NSLocale" key="IBUILocale" id="1008999375">
 							<string key="NS.identifier">en_GB</string>
 						</object>
+						<object class="NSTimeZone" key="IBUITimeZone">
+							<string key="NS.name">Europe/Warsaw</string>
+							<object class="NSMutableData" key="NS.data">
+								<bytes key="NS.bytes">VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAKAAAACgAAAAAAAACnAAAACgAAABaZqCrQmwwXYJvV2vCc2a6Q
+naS1kJ65kJCfhJeQoJq2AKFlvQCmfXxgyHbeEMznSxDNqReQzqJDEM+SNBDQgKlg0IS6ANGVknDSirtg
+02L/cNRLI5DVXq0Q1im0ENcsGhDYCZYQ2QLBkNnpeBDoVNIA6PG0gOnhpYDq0ZaA7BSWAOy6swDtqqQA
+7pqVAO/UWgDwencA8bQ8APJaWQDzlB4A9Do7APV9OoD2Gh0ADSr9cA2kVYAOiwwAD4Q3gBB0KIARZBmA
+ElQKgBNNNgAUM+yAFSPdgBYTzoAXA7+AF/OwgBjjoYAZ05KAGsODgBu8rwAcrKAAHZyRAB6MggAffHMA
+IGxkACFcVQAh2tbwIkxUECM8RRAkLDYQJRwnECYMGBAnBUOQJ/U0kCjlJZAp1RaQKsUHkCu0+JAspOmQ
+LZTakC6Ey5AvdLyQMGStkDFd2RAycrQQMz27EDRSlhA1HZ0QNjJ4EDb9fxA4G5SQON1hEDn7dpA6vUMQ
+O9tYkDymX5A9uzqQPoZBkD+bHJBAZiOQQYQ5EEJGBZBDZBsQRCXnkEVD/RBGBcmQRyPfEEfu5hBJA8EQ
+Sc7IEErjoxBLrqoQTMy/kE2OjBBOrKGQT25uEFCMg5BRV4qQUmxlkFM3bJBUTEeQVRdOkFYsKZBW9zCQ
+WBVGEFjXEpBZ9SgQWrb0kFvVChBcoBEQXbTsEF5/8xBflM4QYF/VEGF96pBiP7cQY13MkGQfmRBlPa6Q
+Zgi1kGcdkJBn6JeQaP1ykGnIeZBq3VSQa6hbkGzGcRBtiD2QbqZTEG9oH5BwhjUQcVE8EHJmFxBzMR4Q
+dEX5EHURABB2LxWQdvDiEHgO95B40MQQee7ZkHqwphB7zruQfJnCkH2unZB+eaSQf45/kAIBAgMEAwcF
+BgIBBAMEAwECAQIDBAMEAwQDBAMEAwQDBAMEAwQDBAMEAwQCAwQDBAMEAwQDBAMEAwQDBAMEAwQDBAII
+CQgJCAkICQgJCAkICQgJCAkICQgJCAkICQgJCAkICQgJCAkICQgJCAkICQgJCAkICQgJCAkICQgJCAkI
+CQgJCAkICQgJCAkICQgJCAkICQgJCAkICQgJCAkICQgJCAkICQgJAAATsAAAAAAcIAEEAAAOEAAJAAAc
+IAEEAAAOEAAJAAAqMAENAAAcIAASAAAcIAASAAAcIAEEAAAOEAAJV01UAENFU1QAQ0VUAEVFU1QARUVU
+AAAAAAEBAQEAAQEAAAAAAAAAAAEBA</bytes>
+							</object>
+						</object>
+						<object class="NSDate" key="IBUIMinimumDate">
+							<double key="NS.time">-31624160</double>
+						</object>
+						<object class="NSDate" key="IBUIMaximumDate">
+							<double key="NS.time">3124051000</double>
+						</object>
+						<int key="IBUIMinuteInterval">5</int>
+					</object>
+					<object class="IBUIDatePicker" id="1048965001">
+						<reference key="NSNextResponder" ref="476924784"/>
+						<int key="NSvFlags">269</int>
+						<string key="NSFrame">{{0, 200}, {320, 216}}</string>
+						<reference key="NSSuperview" ref="476924784"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<int key="IBUIDatePickerMode">3</int>
+						<reference key="IBUILocale" ref="1008999375"/>
 						<object class="NSTimeZone" key="IBUITimeZone">
 							<string key="NS.name">Europe/Warsaw</string>
 							<object class="NSMutableData" key="NS.data">
@@ -191,6 +234,7 @@ AAAAAAEBAQEAAQEAAAAAAAAAAAEBA</bytes>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="349335812"/>
 							<reference ref="1048965001"/>
+							<reference ref="267516506"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -204,6 +248,11 @@ AAAAAAEBAQEAAQEAAAAAAAAAAAEBA</bytes>
 						<reference key="object" ref="1048965001"/>
 						<reference key="parent" ref="476924784"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">13</int>
+						<reference key="object" ref="267516506"/>
+						<reference key="parent" ref="476924784"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -212,6 +261,7 @@ AAAAAAEBAQEAAQEAAAAAAAAAAAEBA</bytes>
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>-1.CustomClassName</string>
 					<string>-2.CustomClassName</string>
+					<string>13.IBPluginDependency</string>
 					<string>3.IBEditorWindowLastContentRect</string>
 					<string>3.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
@@ -221,7 +271,8 @@ AAAAAAEBAQEAAQEAAAAAAAAAAAEBA</bytes>
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>ActivityLengthDialogController</string>
 					<string>UIResponder</string>
-					<string>{{425, 526}, {320, 480}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>{{873, 355}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -243,7 +294,7 @@ AAAAAAEBAQEAAQEAAAAAAAAAAAEBA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">12</int>
+			<int key="maxID">14</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
