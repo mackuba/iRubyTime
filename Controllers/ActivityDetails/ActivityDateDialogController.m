@@ -31,6 +31,10 @@ PSReleaseOnDealloc(tableView, activityDatePicker, activity);
   [activityDatePicker setMaximumDate: [NSDate date]];
 }
 
+- (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
+  return RTiPad;
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Action handlers
 

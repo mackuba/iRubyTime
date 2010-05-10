@@ -51,6 +51,10 @@ PSReleaseOnDealloc(connector, spinner, footerView, loginButton);
   PSStopObservingAll();
 }
 
+- (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
+  return RTiPad;
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Action handlers
 

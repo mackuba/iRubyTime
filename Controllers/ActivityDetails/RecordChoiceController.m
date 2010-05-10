@@ -59,6 +59,10 @@ PSReleaseOnDealloc(model, delegate);
   [delegate performSelector: NSSelectorFromString([self delegateSetterName]) withObject: value];
 }
 
+- (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
+  return RTiPad;
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 

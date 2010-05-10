@@ -30,6 +30,10 @@ PSReleaseOnDealloc(activityLengthPicker, activity);
   [self initializeLengthPicker: activityLengthPicker usingActivity: activity];
 }
 
+- (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
+  return RTiPad;
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Action handlers
 

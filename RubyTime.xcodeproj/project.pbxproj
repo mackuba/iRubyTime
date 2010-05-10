@@ -49,8 +49,8 @@
 		586E37A91099D721005EB2C8 /* ActivityCellWithUser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586E37A81099D721005EB2C8 /* ActivityCellWithUser.xib */; };
 		586E37AB1099D74A005EB2C8 /* ActivityCellWithProject.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586E37AA1099D74A005EB2C8 /* ActivityCellWithProject.xib */; };
 		586E37AD1099D769005EB2C8 /* ActivityCellWithBoth.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586E37AC1099D769005EB2C8 /* ActivityCellWithBoth.xib */; };
-		588619C811981E2F0028AAE9 /* Default-PortraitUpsideDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 588619C411981E2F0028AAE9 /* Default-PortraitUpsideDown.png */; };
 		588619CA11981E2F0028AAE9 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 588619C611981E2F0028AAE9 /* Default-Portrait.png */; };
+		588619F11198272E0028AAE9 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 588619F01198272E0028AAE9 /* Default-Landscape.png */; };
 		588867231090753E00EEFCF9 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588867221090753E00EEFCF9 /* BaseViewController.m */; };
 		588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB020FADD47C00460689 /* MIT-LICENSE.txt */; };
 		588BAB150FADD78B00460689 /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB110FADD78B00460689 /* LoginDialog.xib */; };
@@ -152,8 +152,8 @@
 		586E37A81099D721005EB2C8 /* ActivityCellWithUser.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCellWithUser.xib; sourceTree = "<group>"; };
 		586E37AA1099D74A005EB2C8 /* ActivityCellWithProject.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCellWithProject.xib; sourceTree = "<group>"; };
 		586E37AC1099D769005EB2C8 /* ActivityCellWithBoth.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCellWithBoth.xib; sourceTree = "<group>"; };
-		588619C411981E2F0028AAE9 /* Default-PortraitUpsideDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-PortraitUpsideDown.png"; sourceTree = "<group>"; };
 		588619C611981E2F0028AAE9 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
+		588619F01198272E0028AAE9 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 		588867211090753E00EEFCF9 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		588867221090753E00EEFCF9 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		588BAB020FADD47C00460689 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
@@ -276,7 +276,7 @@
 				588BAB020FADD47C00460689 /* MIT-LICENSE.txt */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				58EBA4470FD45562004DBC6F /* Default.png */,
-				588619C411981E2F0028AAE9 /* Default-PortraitUpsideDown.png */,
+				588619F01198272E0028AAE9 /* Default-Landscape.png */,
 				588619C611981E2F0028AAE9 /* Default-Portrait.png */,
 			);
 			name = Resources;
@@ -548,8 +548,8 @@
 				5853E5BF10A1C7EB0060636F /* DateRangeDialog.xib in Resources */,
 				58D3934A10DD602600046558 /* LoggedOutView.xib in Resources */,
 				5843B41D1194415900A98F10 /* MainWindow-iPad.xib in Resources */,
-				588619C811981E2F0028AAE9 /* Default-PortraitUpsideDown.png in Resources */,
 				588619CA11981E2F0028AAE9 /* Default-Portrait.png in Resources */,
+				588619F11198272E0028AAE9 /* Default-Landscape.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

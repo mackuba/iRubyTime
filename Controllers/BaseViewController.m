@@ -105,6 +105,10 @@ PSReleaseOnDealloc(connector, loadingView);
   }
 }
 
+- (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
+  return RTiPad;
+}
+
 - (void) requestFailed: (NSNotification *) notification {
   [self hideLoadingMessage];
   NSError *error = [notification.userInfo objectForKey: @"error"];

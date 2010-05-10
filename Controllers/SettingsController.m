@@ -15,6 +15,10 @@
 
 typedef enum { ServerRow, LoginRow, VersionRow } RowType;
 
+@interface SettingsController ()
+- (UIView *) logInFooterView;
+@end
+
 @implementation SettingsController
 
 // -------------------------------------------------------------------------------------------
@@ -27,6 +31,15 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
     self.title = @"Settings";
   }
   return self;
+}
+
+- (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) orientation
+                                          duration: (NSTimeInterval) duration {
+  CGFloat width = self.view.frame.size.width;
+  UIView *footerView = [self logInFooterView];
+  [footerView psResizeHorizontallyTo: width];
+  [[footerView viewWithTag: 1] psMoveHorizontallyTo: (width - 300) / 2.0];
+  [[footerView viewWithTag: 2] psMoveHorizontallyTo: (width - 300) / 2.0 + 155];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -109,10 +122,12 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
     UIButton *button = [self buttonWithFrame: CGRectMake((width - 300) / 2.0, 15, 145, 40)
                                    withTitle: @"Switch account"
                                       action: @selector(loginClicked)];
+    [button setTag: 1];
     [footerView addSubview: button];
     UIButton *button2 = [self buttonWithFrame: CGRectMake((width - 300) / 2.0 + 155, 15, 145, 40)
                                     withTitle: @"Log out"
                                        action: @selector(logoutClicked)];
+    [button2 setTag: 2];
     [footerView addSubview: button2];
   }
   return footerView;

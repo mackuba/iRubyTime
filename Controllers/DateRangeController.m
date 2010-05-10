@@ -44,6 +44,10 @@ PSReleaseOnDealloc(tableView, datePicker);
   }
 }
 
+- (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
+  return RTiPad;
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Action handlers
 

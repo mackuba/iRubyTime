@@ -40,6 +40,10 @@ PSReleaseOnDealloc(activity, textView, textCell);
   activity.comments = textView.text;
 }
 
+- (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
+  return RTiPad;
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 

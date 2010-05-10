@@ -69,6 +69,7 @@ PSReleaseOnDealloc(dateRangeCell, startDateLabel, endDateLabel, startDate, endDa
   UIView *footerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, width, 40)];
   UIButton *button = [UIButton buttonWithType: UIButtonTypeRoundedRect];
   button.frame = CGRectMake((width - 160) / 2.0, 0, 160, 40);
+  [button setTag: 1];
   [button setTitle: @"Search" forState: UIControlStateNormal];
   [button addTarget: self action: @selector(searchClicked) forControlEvents: UIControlEventTouchUpInside];
   [footerView addSubview: button];
@@ -83,6 +84,13 @@ PSReleaseOnDealloc(dateRangeCell, startDateLabel, endDateLabel, startDate, endDa
 
 - (void) viewDidDisappear: (BOOL) animated {
   [self hideNotFoundMessage];
+}
+
+- (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) orientation
+                                          duration: (NSTimeInterval) duration {
+  CGFloat width = self.view.frame.size.width;
+  [tableView.tableFooterView psResizeHorizontallyTo: width];
+  [[tableView.tableFooterView viewWithTag: 1] psMoveHorizontallyTo: (width - 160) / 2.0];
 }
 
 // -------------------------------------------------------------------------------------------

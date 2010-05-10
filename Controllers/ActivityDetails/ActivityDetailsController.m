@@ -56,6 +56,10 @@
   loadingButton = [[UIBarButtonItem alloc] initWithCustomView: spinner];
 }
 
+- (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
+  return RTiPad;
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Action handlers
 
