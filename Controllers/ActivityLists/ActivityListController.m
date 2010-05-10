@@ -251,7 +251,7 @@ PSReleaseOnDealloc(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
     Activity *activity = [self activityAtPath: path];
     ActivityCell *cell = (ActivityCell *) [table dequeueReusableCellWithIdentifier: PSGenericCell];
     if (!cell) {
-      [[NSBundle mainBundle] loadNibNamed: [self cellNibName] owner: self options: nil];
+      [[NSBundle mainBundle] loadNibNamed: RTUniversalNib([self cellNibName]) owner: self options: nil];
       cell = currentCell;
     }
     [cell displayActivity: activity];

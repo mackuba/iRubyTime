@@ -18,7 +18,7 @@
   #define RTiPad (NO)
 #endif
 
-#define RTUniversalNib(name) (RTiPad ? (name @"-iPad") : name)
+#define RTUniversalNib(name) (RTiPad ? ([name stringByAppendingString: @"-iPad"]) : name)
 
 @interface NSError (RubyTime)
 - (NSString *) friendlyDescription;

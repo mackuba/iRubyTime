@@ -52,6 +52,9 @@
 		588619F11198272E0028AAE9 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 588619F01198272E0028AAE9 /* Default-Landscape.png */; };
 		58861A12119832B60028AAE9 /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 58861A11119832B60028AAE9 /* Icon72.png */; };
 		58861B181198519C0028AAE9 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58861B171198519C0028AAE9 /* MainWindow-iPad.xib */; };
+		58861B1C119851F30028AAE9 /* ActivityCellWithBoth-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58861B19119851F30028AAE9 /* ActivityCellWithBoth-iPad.xib */; };
+		58861B1D119851F30028AAE9 /* ActivityCellWithProject-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58861B1A119851F30028AAE9 /* ActivityCellWithProject-iPad.xib */; };
+		58861B1E119851F30028AAE9 /* ActivityCellWithUser-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58861B1B119851F30028AAE9 /* ActivityCellWithUser-iPad.xib */; };
 		588867231090753E00EEFCF9 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588867221090753E00EEFCF9 /* BaseViewController.m */; };
 		588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB020FADD47C00460689 /* MIT-LICENSE.txt */; };
 		588BAB150FADD78B00460689 /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB110FADD78B00460689 /* LoginDialog.xib */; };
@@ -156,6 +159,9 @@
 		588619F01198272E0028AAE9 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 		58861A11119832B60028AAE9 /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
 		58861B171198519C0028AAE9 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		58861B19119851F30028AAE9 /* ActivityCellWithBoth-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "ActivityCellWithBoth-iPad.xib"; sourceTree = "<group>"; };
+		58861B1A119851F30028AAE9 /* ActivityCellWithProject-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "ActivityCellWithProject-iPad.xib"; sourceTree = "<group>"; };
+		58861B1B119851F30028AAE9 /* ActivityCellWithUser-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "ActivityCellWithUser-iPad.xib"; sourceTree = "<group>"; };
 		588867211090753E00EEFCF9 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		588867221090753E00EEFCF9 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		588BAB020FADD47C00460689 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
@@ -321,6 +327,9 @@
 		5843B41B1194415500A98F10 /* Views-iPad */ = {
 			isa = PBXGroup;
 			children = (
+				58861B19119851F30028AAE9 /* ActivityCellWithBoth-iPad.xib */,
+				58861B1A119851F30028AAE9 /* ActivityCellWithProject-iPad.xib */,
+				58861B1B119851F30028AAE9 /* ActivityCellWithUser-iPad.xib */,
 				58861B171198519C0028AAE9 /* MainWindow-iPad.xib */,
 			);
 			path = "Views-iPad";
@@ -554,6 +563,9 @@
 				588619F11198272E0028AAE9 /* Default-Landscape.png in Resources */,
 				58861A12119832B60028AAE9 /* Icon72.png in Resources */,
 				58861B181198519C0028AAE9 /* MainWindow-iPad.xib in Resources */,
+				58861B1C119851F30028AAE9 /* ActivityCellWithBoth-iPad.xib in Resources */,
+				58861B1D119851F30028AAE9 /* ActivityCellWithProject-iPad.xib in Resources */,
+				58861B1E119851F30028AAE9 /* ActivityCellWithUser-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
