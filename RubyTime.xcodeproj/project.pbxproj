@@ -51,6 +51,7 @@
 		586E37AD1099D769005EB2C8 /* ActivityCellWithBoth.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586E37AC1099D769005EB2C8 /* ActivityCellWithBoth.xib */; };
 		588619CA11981E2F0028AAE9 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 588619C611981E2F0028AAE9 /* Default-Portrait.png */; };
 		588619F11198272E0028AAE9 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 588619F01198272E0028AAE9 /* Default-Landscape.png */; };
+		58861A12119832B60028AAE9 /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 58861A11119832B60028AAE9 /* Icon72.png */; };
 		588867231090753E00EEFCF9 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588867221090753E00EEFCF9 /* BaseViewController.m */; };
 		588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB020FADD47C00460689 /* MIT-LICENSE.txt */; };
 		588BAB150FADD78B00460689 /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB110FADD78B00460689 /* LoginDialog.xib */; };
@@ -154,6 +155,7 @@
 		586E37AC1099D769005EB2C8 /* ActivityCellWithBoth.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCellWithBoth.xib; sourceTree = "<group>"; };
 		588619C611981E2F0028AAE9 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		588619F01198272E0028AAE9 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
+		58861A11119832B60028AAE9 /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
 		588867211090753E00EEFCF9 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		588867221090753E00EEFCF9 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		588BAB020FADD47C00460689 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				5842110C10A06EE100F90AFB /* Images */,
 				58AD921C1050335F007A5175 /* Entitlements.plist */,
 				58F47A610FF6AB5F00A1F20F /* Icon.png */,
+				58861A11119832B60028AAE9 /* Icon72.png */,
 				5844CE610FC31FA8007F22FE /* README.markdown */,
 				588BAB020FADD47C00460689 /* MIT-LICENSE.txt */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -550,6 +553,7 @@
 				5843B41D1194415900A98F10 /* MainWindow-iPad.xib in Resources */,
 				588619CA11981E2F0028AAE9 /* Default-Portrait.png in Resources */,
 				588619F11198272E0028AAE9 /* Default-Landscape.png in Resources */,
+				58861A12119832B60028AAE9 /* Icon72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
