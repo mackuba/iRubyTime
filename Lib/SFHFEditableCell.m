@@ -36,6 +36,7 @@
     m_label = [[UILabel alloc] initWithFrame: CGRectZero];
 		m_label.font = [UIFont boldSystemFontOfSize: 16.0];
 		m_label.textColor = [UIColor darkTextColor];
+		m_label.backgroundColor = [UIColor clearColor];
 		[self.contentView addSubview: m_label];
 
     textColor = [[UIColor colorWithRed: 0.2 green: 0.3 blue: 0.5 alpha: 1.0] retain];
