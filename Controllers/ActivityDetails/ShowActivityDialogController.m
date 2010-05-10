@@ -64,7 +64,8 @@ PSReleaseOnDealloc(originalActivity, editButton, lockedActivityInfo);
                                             cancelButtonTitle: @"Cancel"
                                        destructiveButtonTitle: @"Delete"
                                             otherButtonTitles: nil];
-  [sheet showInView: self.view.window];
+  [sheet setActionSheetStyle: UIActionSheetStyleDefault];
+  [sheet showInView: [self.view.window.subviews objectAtIndex: 0]];
   [sheet release];
 }
 

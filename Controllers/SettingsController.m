@@ -64,7 +64,8 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
                                             cancelButtonTitle: @"Cancel"
                                        destructiveButtonTitle: @"Log out"
                                             otherButtonTitles: nil];
-  [sheet showInView: self.view.window];
+  [sheet setActionSheetStyle: UIActionSheetStyleDefault];
+  [sheet showInView: [self.view.window.subviews objectAtIndex: 0]];
   [sheet release];
 }
 
@@ -103,12 +104,13 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
 - (UIView *) logInFooterView {
   static UIView *footerView = nil;
   if (!footerView) {
-    footerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 70)];
-    UIButton *button = [self buttonWithFrame: CGRectMake(10, 15, 145, 40)
+    CGFloat width = self.view.frame.size.width;
+    footerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, width, 70)];
+    UIButton *button = [self buttonWithFrame: CGRectMake((width - 300) / 2.0, 15, 145, 40)
                                    withTitle: @"Switch account"
                                       action: @selector(loginClicked)];
     [footerView addSubview: button];
-    UIButton *button2 = [self buttonWithFrame: CGRectMake(165, 15, 145, 40)
+    UIButton *button2 = [self buttonWithFrame: CGRectMake((width - 300) / 2.0 + 155, 15, 145, 40)
                                     withTitle: @"Log out"
                                        action: @selector(logoutClicked)];
     [footerView addSubview: button2];

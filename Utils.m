@@ -83,8 +83,8 @@
 @implementation UIActivityIndicatorView (RubyTime)
 
 + (UIActivityIndicatorView *) spinnerBarButton {
-  UIActivityIndicatorView *spinner =
-    [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+  UIActivityIndicatorViewStyle color = (RTiPad) ? UIActivityIndicatorViewStyleGray : UIActivityIndicatorViewStyleWhite;
+  UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: color];
   spinner.frame = CGRectMake(0, 0, 36, 20);
   spinner.contentMode = UIViewContentModeCenter;
   return [spinner autorelease];

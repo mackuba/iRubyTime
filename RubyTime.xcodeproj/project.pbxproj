@@ -242,10 +242,10 @@
 				5833BF321095F4D700A5530E /* Frameworks */,
 				589BE9CC0FD1D4C800CCFA82 /* Lib */,
 				588BAB0E0FADD76E00460689 /* Views */,
+				5843B41B1194415500A98F10 /* iPadViews */,
 				58CA2DAB0FA7AE54007A6A65 /* Models */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
-				5843B41B1194415500A98F10 /* Resources-iPad */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = CustomTemplate;
@@ -309,12 +309,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5843B41B1194415500A98F10 /* Resources-iPad */ = {
+		5843B41B1194415500A98F10 /* iPadViews */ = {
 			isa = PBXGroup;
 			children = (
 				5843B41C1194415900A98F10 /* MainWindow-iPad.xib */,
 			);
-			name = "Resources-iPad";
+			name = iPadViews;
 			sourceTree = "<group>";
 		};
 		586E372D1098A967005EB2C8 /* ActivityLists */ = {

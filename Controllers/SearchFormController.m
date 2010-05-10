@@ -65,9 +65,10 @@ PSReleaseOnDealloc(dateRangeCell, startDateLabel, endDateLabel, startDate, endDa
 }
 
 - (void) viewDidLoad {
-  UIView *footerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 40)];
+  CGFloat width = self.view.frame.size.width;
+  UIView *footerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, width, 40)];
   UIButton *button = [UIButton buttonWithType: UIButtonTypeRoundedRect];
-  button.frame = CGRectMake(80, 0, 160, 40);
+  button.frame = CGRectMake((width - 160) / 2.0, 0, 160, 40);
   [button setTitle: @"Search" forState: UIControlStateNormal];
   [button addTarget: self action: @selector(searchClicked) forControlEvents: UIControlEventTouchUpInside];
   [footerView addSubview: button];
