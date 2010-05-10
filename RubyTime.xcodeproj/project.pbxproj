@@ -23,7 +23,6 @@
 		58420FD2109EFD1600F90AFB /* ShowMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58420FD1109EFD1600F90AFB /* ShowMoreCell.xib */; };
 		5842111310A06EE100F90AFB /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 5842110C10A06EE100F90AFB /* Images */; };
 		5842119210A084A600F90AFB /* SearchFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5842119110A084A600F90AFB /* SearchFormController.m */; };
-		5843B41D1194415900A98F10 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5843B41C1194415900A98F10 /* MainWindow-iPad.xib */; };
 		5844CE620FC31FA8007F22FE /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 5844CE610FC31FA8007F22FE /* README.markdown */; };
 		5853E4FB10A18BD20060636F /* DateRangeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5853E4FA10A18BD20060636F /* DateRangeCell.xib */; };
 		5853E54910A1B5C20060636F /* RecordChoiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5853E54810A1B5C20060636F /* RecordChoiceController.m */; };
@@ -52,6 +51,7 @@
 		588619CA11981E2F0028AAE9 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 588619C611981E2F0028AAE9 /* Default-Portrait.png */; };
 		588619F11198272E0028AAE9 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 588619F01198272E0028AAE9 /* Default-Landscape.png */; };
 		58861A12119832B60028AAE9 /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 58861A11119832B60028AAE9 /* Icon72.png */; };
+		58861B181198519C0028AAE9 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58861B171198519C0028AAE9 /* MainWindow-iPad.xib */; };
 		588867231090753E00EEFCF9 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588867221090753E00EEFCF9 /* BaseViewController.m */; };
 		588BAB040FADD47C00460689 /* MIT-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB020FADD47C00460689 /* MIT-LICENSE.txt */; };
 		588BAB150FADD78B00460689 /* LoginDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588BAB110FADD78B00460689 /* LoginDialog.xib */; };
@@ -109,7 +109,6 @@
 		5842110C10A06EE100F90AFB /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 		5842119010A084A600F90AFB /* SearchFormController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFormController.h; sourceTree = "<group>"; };
 		5842119110A084A600F90AFB /* SearchFormController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFormController.m; sourceTree = "<group>"; };
-		5843B41C1194415900A98F10 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/Views/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		5844CE610FC31FA8007F22FE /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		5853E4FA10A18BD20060636F /* DateRangeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateRangeCell.xib; sourceTree = "<group>"; };
 		5853E54710A1B5C20060636F /* RecordChoiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordChoiceController.h; sourceTree = "<group>"; };
@@ -156,6 +155,7 @@
 		588619C611981E2F0028AAE9 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		588619F01198272E0028AAE9 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 		58861A11119832B60028AAE9 /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
+		58861B171198519C0028AAE9 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		588867211090753E00EEFCF9 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		588867221090753E00EEFCF9 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		588BAB020FADD47C00460689 /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
@@ -248,7 +248,7 @@
 				5833BF321095F4D700A5530E /* Frameworks */,
 				589BE9CC0FD1D4C800CCFA82 /* Lib */,
 				588BAB0E0FADD76E00460689 /* Views */,
-				5843B41B1194415500A98F10 /* iPadViews */,
+				5843B41B1194415500A98F10 /* Views-iPad */,
 				58CA2DAB0FA7AE54007A6A65 /* Models */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -318,12 +318,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5843B41B1194415500A98F10 /* iPadViews */ = {
+		5843B41B1194415500A98F10 /* Views-iPad */ = {
 			isa = PBXGroup;
 			children = (
-				5843B41C1194415900A98F10 /* MainWindow-iPad.xib */,
+				58861B171198519C0028AAE9 /* MainWindow-iPad.xib */,
 			);
-			name = iPadViews;
+			path = "Views-iPad";
 			sourceTree = "<group>";
 		};
 		586E372D1098A967005EB2C8 /* ActivityLists */ = {
@@ -550,10 +550,10 @@
 				5853E4FB10A18BD20060636F /* DateRangeCell.xib in Resources */,
 				5853E5BF10A1C7EB0060636F /* DateRangeDialog.xib in Resources */,
 				58D3934A10DD602600046558 /* LoggedOutView.xib in Resources */,
-				5843B41D1194415900A98F10 /* MainWindow-iPad.xib in Resources */,
 				588619CA11981E2F0028AAE9 /* Default-Portrait.png in Resources */,
 				588619F11198272E0028AAE9 /* Default-Landscape.png in Resources */,
 				58861A12119832B60028AAE9 /* Icon72.png in Resources */,
+				58861B181198519C0028AAE9 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
