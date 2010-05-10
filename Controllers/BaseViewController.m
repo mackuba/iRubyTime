@@ -53,6 +53,11 @@ PSReleaseOnDealloc(connector, loadingView);
 
 - (void) showPopupView: (UIViewController *) controller {
   UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController: controller];
+  #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
+    if ([self respondsToSelector: @selector(setModalPresentationStyle:)]) {
+      navigation.modalPresentationStyle = UIModalPresentationPageSheet;
+    }
+  #endif
   [self presentModalViewController: navigation animated: YES];
   [navigation release];
 }
