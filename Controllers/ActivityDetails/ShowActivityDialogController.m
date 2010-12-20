@@ -116,9 +116,14 @@ PSReleaseOnDealloc(originalActivity, editButton, lockedActivityInfo);
 - (PSIntArray *) rowTypesInSection: (NSInteger) section {
   if (section == 0) {
     if (displaysActivityUser) {
-      return PSIntegers(DateRow, ProjectRow, UserRow, LengthRow, CommentsRow);
+      if ([activity.project hasAvailableActivityTypes]) {
+        return PSIntegers(DateRow, ProjectRow, ActivityTypeRow, UserRow, LengthRow, CommentsRow);
+      } else {
+        return PSIntegers(DateRow, ProjectRow, UserRow, LengthRow, CommentsRow);
+      }
+
     } else {
-      return PSIntegers(DateRow, ProjectRow, LengthRow, CommentsRow);
+      return PSIntegers(DateRow, ProjectRow, ActivityTypeRow, LengthRow, CommentsRow);
     }
   } else {
     if (self.editing) {
@@ -147,18 +152,6 @@ PSReleaseOnDealloc(originalActivity, editButton, lockedActivityInfo);
      (rowType == UserRow) ? UITableViewCellAccessoryNone : UITableViewCellAccessoryDisclosureIndicator;
   }
   return cell;
-}
-
-- (CGFloat) heightForRowOfType: (RowType) rowType {
-  if (rowType == CommentsRow) {
-    CGSize rect = [activity.comments sizeWithFont: commentsLabel.font
-                                constrainedToSize: CGSizeMake(commentsLabel.bounds.size.width, 200)
-                                    lineBreakMode: UILineBreakModeWordWrap];
-    CGFloat requiredHeight = rect.height + 2 * commentsLabel.frame.origin.y + 5;
-    return MAX(STANDARD_CELL_HEIGHT, requiredHeight);
-  } else {
-    return STANDARD_CELL_HEIGHT;
-  }
 }
 
 - (UITableViewCellEditingStyle) tableView: (UITableView *) table

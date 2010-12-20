@@ -5,19 +5,22 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "ApplicationDelegate.h"
+#import "ServerConnector.h"
 #import "Activity.h"
 #import "ActivityDateFormatter.h"
 #import "Project.h"
+#import "ActivityType.h"
 #import "User.h"
 #import "Utils.h"
 
 @implementation Activity
 
-@synthesize minutes, locked, date, dateAsString, comments, project, user;
-PSReleaseOnDealloc(date, dateAsString, comments, project, user);
+@synthesize minutes, locked, date, dateAsString, comments, activityType, project, user;
+PSReleaseOnDealloc(date, dateAsString, comments, project, user, activityType);
 
 + (NSArray *) propertyList {
-  return PSArray(@"comments", @"date", @"minutes", @"project", @"user", @"locked");
+  return PSArray(@"comments", @"date", @"minutes", @"project", @"user", @"locked", @"activityType");
 }
 
 - (id) init {
@@ -53,6 +56,26 @@ PSReleaseOnDealloc(date, dateAsString, comments, project, user);
   self.date = [[ActivityDateFormatter sharedFormatter] parseDate: dateString];
 }
 
+- (void) setActivityType: (id) objectId {
+  [activityType autorelease];
+  [activityTypeId autorelease];
+  if (!objectId) {
+    activityTypeId = nil;
+    activityType = nil;
+  } else if ([objectId isKindOfClass: [NSNumber class]]) {
+    activityTypeId = [objectId copy];
+  } else {
+    activityType = [objectId retain];
+  }
+}
+
+- (ActivityType *) activityType {
+  if (!activityType) {
+    activityType = [project activityTypeWithId: activityTypeId];
+  }
+  return activityType;
+}
+
 - (BOOL) isEqualToActivity: (Activity *) other {
   return other &&
     other.minutes == self.minutes &&
@@ -63,11 +86,13 @@ PSReleaseOnDealloc(date, dateAsString, comments, project, user);
 }
 
 - (NSString *) toQueryString {
-  NSString *query = PSFormat(@"activity[date]=%@&activity[comments]=%@&activity[hours]=%@&activity[project_id]=%@",
+  NSString *query = PSFormat(@"activity[date]=%@&activity[comments]=%@&activity[hours]=%@&activity[project_id]=%@&activity[%@]=%@",
     [[ActivityDateFormatter sharedFormatter] formatDateForRequest: date],
     [self.comments psStringWithPercentEscapesForFormValues],
     [self hourString],
-    self.project.recordId);
+    self.project.recordId,
+    self.activityType.isSubtype ? @"sub_activity_type_id" : @"main_activity_type_id",
+    self.activityType ? [self.activityType.recordId description] : @"");
   return query;
 }
 

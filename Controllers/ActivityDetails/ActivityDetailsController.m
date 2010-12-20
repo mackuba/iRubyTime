@@ -10,11 +10,12 @@
 #import "ActivityDateDialogController.h"
 #import "ActivityLengthDialogController.h"
 #import "ProjectChoiceController.h"
+#import "ActivityTypeChoiceController.h"
 
 
 @implementation ActivityDetailsController
 
-@synthesize tableView, commentsCell, commentsLabel;
+@synthesize tableView, activity;
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Initialization
@@ -22,7 +23,6 @@
 - (id) initWithConnector: (ServerConnector *) rtConnector nibName: (NSString *) nib {
   self = [super initWithNibName: nib bundle: [NSBundle mainBundle]];
   if (self) {
-    [[NSBundle mainBundle] loadNibNamed: @"CommentsCell" owner: self options: nil];
     connector = [rtConnector retain];
     activity = nil;
     subcontrollers = [[NSMutableDictionary alloc] init];
@@ -37,8 +37,6 @@
 
 - (void) viewWillAppear: (BOOL) animated {
   [super viewWillAppear: animated];
-  commentsLabel.text = (activity.comments.length > 0) ? activity.comments : @"Comments";
-  commentsLabel.textColor = (activity.comments.length > 0) ? [UIColor blackColor] : [UIColor lightGrayColor];
   [tableView reloadData];
   NSIndexPath *selection = [tableView indexPathForSelectedRow];
   [tableView deselectRowAtIndexPath: selection animated: YES];
@@ -135,10 +133,6 @@
   return [self cellForRowType: [self rowTypeAtIndexPath: path]];
 }
 
-- (CGFloat) tableView: (UITableView *) table heightForRowAtIndexPath: (NSIndexPath *) path {
-  return [self heightForRowOfType: [self rowTypeAtIndexPath: path]];
-}
-
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
   [self pushSubcontrollerForPath: path];
 }
@@ -148,8 +142,6 @@
 
 - (PSIntArray *) rowTypesInSection: (NSInteger) section { AbstractMethod(return nil); }
 
-- (CGFloat) heightForRowOfType: (RowType) rowType { AbstractMethod(return 0); }
-
 
 // helper methods
 
@@ -158,35 +150,45 @@
 }
 
 - (UITableViewCell *) cellForRowType: (RowType) rowType {
-  UITableViewCell *cell = [tableView psGenericCellWithStyle: UITableViewCellStyleValue1];
-  switch (rowType) {
-    case DateRow:
-      cell.textLabel.text = @"Date";
-      cell.detailTextLabel.text = activity.dateAsString;
-      break;
+  if (rowType == CommentsRow) {
+    UITableViewCell *cell = [tableView psCellWithStyle: UITableViewCellStyleDefault andIdentifier: @"CommentsCell"];
+    cell.textLabel.text = (activity.comments.length > 0) ? activity.comments : @"Comments";
+    cell.textLabel.textColor = (activity.comments.length > 0) ? [UIColor blackColor] : [UIColor lightGrayColor];
+    cell.textLabel.font = [UIFont systemFontOfSize: 14.0];
+    return cell;
+  } else {
+    UITableViewCell *cell = [tableView psGenericCellWithStyle: UITableViewCellStyleValue1];
+    switch (rowType) {
+      case DateRow:
+        cell.textLabel.text = @"Date";
+        cell.detailTextLabel.text = activity.dateAsString;
+        break;
 
-    case ProjectRow:
-      cell.textLabel.text = @"Project";
-      cell.detailTextLabel.text = activity.project.name;
-      break;
+      case ProjectRow:
+        cell.textLabel.text = @"Project";
+        cell.detailTextLabel.text = activity.project.name;
+        break;
+        
+      case ActivityTypeRow:
+        cell.textLabel.text = @"Activity Type";
+        cell.detailTextLabel.text = activity.activityType.name;
+        break;
 
-    case UserRow:
-      cell.textLabel.text = @"User";
-      cell.detailTextLabel.text = activity.user.name;
-      break;
+      case UserRow:
+        cell.textLabel.text = @"User";
+        cell.detailTextLabel.text = activity.user.name;
+        break;
 
-    case LengthRow:
-      cell.textLabel.text = @"Length";
-      cell.detailTextLabel.text = [activity hourString];
-      break;
-
-    case CommentsRow:
-      cell = commentsCell;
-
-    default:
-      break;
+      case LengthRow:
+        cell.textLabel.text = @"Length";
+        cell.detailTextLabel.text = [activity hourString];
+        break;
+        
+      default:
+        break;
+    }
+    return cell;
   }
-  return cell;
 }
 
 - (void) pushSubcontrollerForPath: (NSIndexPath *) path {
@@ -196,29 +198,32 @@
   }
 }
 
-- (Class) subcontrollerClassForRowType: (RowType) rowType {
-  switch (rowType) {
-    case DateRow:
-      return [ActivityDateDialogController class];
-    case ProjectRow:
-      return [ProjectChoiceController class];
-    case LengthRow:
-      return [ActivityLengthDialogController class];
-    case CommentsRow:
-      return [ActivityCommentsDialogController class];
-    default:
-      return nil;
-  }
-}
-
 - (UIViewController *) subcontrollerForRowType: (RowType) rowType {
   UIViewController *controller = [subcontrollers objectForKey: PSInt(rowType)];
+
   if (!controller) {
-    Class controllerClass = [self subcontrollerClassForRowType: rowType];
-    controller = [[controllerClass alloc] initWithActivity: activity];
+    switch (rowType) {
+      case DateRow:
+        controller = [[ActivityDateDialogController alloc] initWithActivity: activity];
+        break;
+      case ProjectRow:
+        controller = [[ProjectChoiceController alloc] initWithActivity: activity];
+        break;
+      case ActivityTypeRow:
+        controller = [[ActivityTypeChoiceController alloc] initWithActivity: activity parent: self];
+        break;
+      case LengthRow:
+        controller = [[ActivityLengthDialogController alloc] initWithActivity: activity];
+        break;
+      case CommentsRow:
+        controller = [[ActivityCommentsDialogController alloc] initWithActivity: activity];
+        break;
+    }
+    
     [subcontrollers setObject: controller forKey: PSInt(rowType)];
     [controller release];
   }
+
   return controller;
 }
 
@@ -231,8 +236,7 @@
 
 - (void) dealloc {
   PSStopObservingAll();
-  PSRelease(tableView, activity, connector, spinner, saveButton, loadingButton, cancelButton,
-    subcontrollers, commentsCell, commentsLabel);
+  PSRelease(tableView, activity, connector, spinner, saveButton, loadingButton, cancelButton, subcontrollers);
   [super dealloc];
 }
 

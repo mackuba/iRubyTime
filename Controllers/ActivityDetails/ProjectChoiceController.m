@@ -8,6 +8,7 @@
 #import "Activity.h"
 #import "Project.h"
 #import "ProjectChoiceController.h"
+#import "ActivityDetailsController.h"
 
 @implementation ProjectChoiceController
 
@@ -24,6 +25,11 @@
     cell.textLabel.font = [UIFont systemFontOfSize: 16.0];
   }
   return cell;
+}
+
+- (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
+  [delegate setActivityType: nil];
+  [super tableView: table didSelectRowAtIndexPath: path];
 }
 
 @end

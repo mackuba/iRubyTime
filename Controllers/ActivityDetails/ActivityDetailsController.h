@@ -10,14 +10,13 @@
 #import "Activity.h"
 #import "BaseViewController.h"
 #import "Project.h"
+#import "ActivityType.h"
 #import "Request.h"
 #import "ServerConnector.h"
 #import "User.h"
 #import "Utils.h"
 
-#define COMMENTS_CELL_HEIGHT 92
-
-typedef enum { DateRow, ProjectRow, UserRow, LengthRow, CommentsRow, DeleteButtonRow } RowType;
+typedef enum { DateRow, ProjectRow, ActivityTypeRow, UserRow, LengthRow, CommentsRow, DeleteButtonRow } RowType;
 
 // ABSTRACT CLASS
 
@@ -30,13 +29,10 @@ typedef enum { DateRow, ProjectRow, UserRow, LengthRow, CommentsRow, DeleteButto
   UIBarButtonItem *loadingButton;
   UIBarButtonItem *saveButton;
   UITableView *tableView;
-  UITableViewCell *commentsCell;
-  UILabel *commentsLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) IBOutlet UITableViewCell *commentsCell;
-@property (nonatomic, retain) IBOutlet UILabel *commentsLabel;
+@property (nonatomic, retain) Activity *activity;
 
 - (id) initWithConnector: (ServerConnector *) rtConnector nibName: (NSString *) nib;
 
@@ -50,7 +46,6 @@ typedef enum { DateRow, ProjectRow, UserRow, LengthRow, CommentsRow, DeleteButto
 
 // ABSTRACT METHODS
 - (void) executeSave;
-- (CGFloat) heightForRowOfType: (RowType) rowType;
 - (PSIntArray *) rowTypesInSection: (NSInteger) section;
 
 @end

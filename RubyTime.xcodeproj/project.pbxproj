@@ -64,7 +64,6 @@
 		589BE9DF0FD1D52300CCFA82 /* SFHFEditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9DC0FD1D52300CCFA82 /* SFHFEditableCell.m */; };
 		589BE9F20FD1D57C00CCFA82 /* LoginDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BE9E80FD1D57C00CCFA82 /* LoginDialogController.m */; };
 		589BEA2A0FD1D66700CCFA82 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BEA290FD1D66700CCFA82 /* SFHFKeychainUtils.m */; };
-		58ACEFA71014ED9100426EA8 /* CommentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58ACEFA61014ED9100426EA8 /* CommentsCell.xib */; };
 		58AD921D1050335F007A5175 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58AD921C1050335F007A5175 /* Entitlements.plist */; };
 		58B082FD101BBB3B00D30C73 /* ActivityDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B082FC101BBB3B00D30C73 /* ActivityDateFormatter.m */; };
 		58B2D1351091DCCC00F7A801 /* ProjectListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B2D1341091DCCC00F7A801 /* ProjectListController.m */; };
@@ -83,7 +82,10 @@
 		58EB65BA0FBDE71100717C36 /* ActivityCommentsDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EB65B90FBDE71100717C36 /* ActivityCommentsDialog.xib */; };
 		58EBA4480FD45562004DBC6F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 58EBA4470FD45562004DBC6F /* Default.png */; };
 		58F47A620FF6AB5F00A1F20F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F47A610FF6AB5F00A1F20F /* Icon.png */; };
+		81C9792312BB79DD00FF09CC /* SubActivityTypeChoiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C9792212BB79DD00FF09CC /* SubActivityTypeChoiceController.m */; };
 		81DCB26512A8FC4E00662C1C /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81DCB26412A8FC4E00662C1C /* YAJL.framework */; };
+		81DCB2FE12A9340C00662C1C /* ActivityType.m in Sources */ = {isa = PBXBuildFile; fileRef = 81DCB2FD12A9340C00662C1C /* ActivityType.m */; };
+		81DCB30112A93ADC00662C1C /* ActivityTypeChoiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81DCB30012A93ADC00662C1C /* ActivityTypeChoiceController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -177,7 +179,6 @@
 		589BE9E80FD1D57C00CCFA82 /* LoginDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDialogController.m; sourceTree = "<group>"; };
 		589BEA280FD1D66700CCFA82 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		589BEA290FD1D66700CCFA82 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
-		58ACEFA61014ED9100426EA8 /* CommentsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentsCell.xib; sourceTree = "<group>"; };
 		58AD921C1050335F007A5175 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		58B082FB101BBB3B00D30C73 /* ActivityDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDateFormatter.h; sourceTree = "<group>"; };
 		58B082FC101BBB3B00D30C73 /* ActivityDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDateFormatter.m; sourceTree = "<group>"; };
@@ -209,7 +210,13 @@
 		58EB65B90FBDE71100717C36 /* ActivityCommentsDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCommentsDialog.xib; sourceTree = "<group>"; };
 		58EBA4470FD45562004DBC6F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		58F47A610FF6AB5F00A1F20F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		81C9792112BB79DD00FF09CC /* SubActivityTypeChoiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubActivityTypeChoiceController.h; sourceTree = "<group>"; };
+		81C9792212BB79DD00FF09CC /* SubActivityTypeChoiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubActivityTypeChoiceController.m; sourceTree = "<group>"; };
 		81DCB26412A8FC4E00662C1C /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YAJL.framework; sourceTree = "<group>"; };
+		81DCB2FC12A9340C00662C1C /* ActivityType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityType.h; sourceTree = "<group>"; };
+		81DCB2FD12A9340C00662C1C /* ActivityType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityType.m; sourceTree = "<group>"; };
+		81DCB2FF12A93ADC00662C1C /* ActivityTypeChoiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTypeChoiceController.h; sourceTree = "<group>"; };
+		81DCB30012A93ADC00662C1C /* ActivityTypeChoiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTypeChoiceController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -364,6 +371,10 @@
 				5853E54810A1B5C20060636F /* RecordChoiceController.m */,
 				586E373C10999A60005EB2C8 /* ShowActivityDialogController.h */,
 				586E373D10999A60005EB2C8 /* ShowActivityDialogController.m */,
+				81DCB2FF12A93ADC00662C1C /* ActivityTypeChoiceController.h */,
+				81DCB30012A93ADC00662C1C /* ActivityTypeChoiceController.m */,
+				81C9792112BB79DD00FF09CC /* SubActivityTypeChoiceController.h */,
+				81C9792212BB79DD00FF09CC /* SubActivityTypeChoiceController.m */,
 			);
 			path = ActivityDetails;
 			sourceTree = "<group>";
@@ -379,7 +390,6 @@
 				58EB65B90FBDE71100717C36 /* ActivityCommentsDialog.xib */,
 				58EB656F0FBCEF4400717C36 /* ActivityDateDialog.xib */,
 				5810634A10132BE600E8A540 /* ActivityLengthDialog.xib */,
-				58ACEFA61014ED9100426EA8 /* CommentsCell.xib */,
 				5853E4FA10A18BD20060636F /* DateRangeCell.xib */,
 				5853E5BE10A1C7EB0060636F /* DateRangeDialog.xib */,
 				588BAB110FADD78B00460689 /* LoginDialog.xib */,
@@ -461,6 +471,8 @@
 				58E9FFC00FB22F9D00CDA046 /* Project.m */,
 				5833BEBF1095E7F600A5530E /* User.h */,
 				5833BEC01095E7F600A5530E /* User.m */,
+				81DCB2FC12A9340C00662C1C /* ActivityType.h */,
+				81DCB2FD12A9340C00662C1C /* ActivityType.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -490,6 +502,9 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "(c)";
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "RubyTime" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
@@ -526,7 +541,6 @@
 				58F47A620FF6AB5F00A1F20F /* Icon.png in Resources */,
 				5810634B10132BE600E8A540 /* ActivityLengthDialog.xib in Resources */,
 				581063EB1013595100E8A540 /* ShowActivityDialog.xib in Resources */,
-				58ACEFA71014ED9100426EA8 /* CommentsCell.xib in Resources */,
 				58AD921D1050335F007A5175 /* Entitlements.plist in Resources */,
 				586E37A91099D721005EB2C8 /* ActivityCellWithUser.xib in Resources */,
 				586E37AB1099D74A005EB2C8 /* ActivityCellWithProject.xib in Resources */,
@@ -596,6 +610,9 @@
 				58E404431194131F001BC9B8 /* PSFoundationExtensions.m in Sources */,
 				58E404441194131F001BC9B8 /* PSPathBuilder.m in Sources */,
 				58E404451194131F001BC9B8 /* PSUIExtensions.m in Sources */,
+				81DCB2FE12A9340C00662C1C /* ActivityType.m in Sources */,
+				81DCB30112A93ADC00662C1C /* ActivityTypeChoiceController.m in Sources */,
+				81C9792312BB79DD00FF09CC /* SubActivityTypeChoiceController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,10 +637,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Lib/libYAJL\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "-DDEBUG";
 				PRODUCT_NAME = iRubyTime;
 				SDKROOT = iphoneos;
@@ -646,10 +660,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Lib/libYAJL\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = iRubyTime;
 				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -690,10 +701,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Lib/libYAJL\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = iRubyTime;
 				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -773,10 +781,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Lib/libYAJL\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = iRubyTime;
 				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

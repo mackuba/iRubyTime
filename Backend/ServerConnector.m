@@ -170,7 +170,7 @@
 }
 
 - (void) loadProjects {
-  [self sendGetRequestToPath: @"/projects" type: RTProjectIndexRequest];
+  [self sendGetRequestToPath: @"/projects?include_activity_types=true" type: RTProjectIndexRequest];
 }
 
 - (void) loadUsers {
@@ -226,7 +226,7 @@
       break;
     
     case RTProjectIndexRequest:
-      if (trimmedString.length > 0) {
+      if (trimmedString.length > 0) {        
         records = [Project objectsFromJSONString: trimmedString];
         [Project reset];
         [Project appendObjectsToList: records];

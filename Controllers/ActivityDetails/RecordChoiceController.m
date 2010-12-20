@@ -41,7 +41,7 @@ PSReleaseOnDealloc(model, delegate);
 
 // e.g. "project"
 - (NSString *) delegateGetterName {
-  return [[self modelName] lowercaseString];
+  return PSFormat(@"%@%@", [[[self modelName] substringToIndex: 1] lowercaseString], [[self modelName] substringFromIndex: 1]);
 }
 
 // e.g. "setProject:"
@@ -66,11 +66,15 @@ PSReleaseOnDealloc(model, delegate);
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 
+- (NSArray *) list {
+  return [model list];
+}
+
 - (PSModel *) recordAtPath: (NSIndexPath *) path {
   if (allowNil && path.section == 0) {
     return nil;
   } else {
-    return [[model list] objectAtIndex: path.row];
+    return [[self list] objectAtIndex: path.row];
   }
 }
 
@@ -78,7 +82,7 @@ PSReleaseOnDealloc(model, delegate);
   if (allowNil && !record) {
     return PSIndex(0, 0);
   } else {
-    NSInteger row = [[model list] indexOfObject: [self delegateValue]];
+    NSInteger row = [[self list] indexOfObject: [self delegateValue]];
     if (row == NSNotFound) {
       return nil;
     } else {
@@ -92,7 +96,7 @@ PSReleaseOnDealloc(model, delegate);
 }
 
 - (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section {
-  return (allowNil && section == 0) ? 1 : [model count];
+  return (allowNil && section == 0) ? 1 : [[self list] count];
 }
 
 - (UITableViewCell *) tableView: (UITableView *) table cellForRowAtIndexPath: (NSIndexPath *) path {
@@ -109,18 +113,34 @@ PSReleaseOnDealloc(model, delegate);
   return cell;
 }
 
+- (UITableViewCell *) oldCellWithOldChoiceController: (RecordChoiceController *) oldController {
+  NSIndexPath *oldIndexPath = [self pathForRecord: [self delegateValue]];
+  if (oldIndexPath) {
+    return [self.tableView cellForRowAtIndexPath: oldIndexPath];
+  } else {
+    oldIndexPath = [oldController pathForRecord: [self delegateValue]];
+    if (oldIndexPath) {
+      return [oldController.tableView cellForRowAtIndexPath: oldIndexPath];
+    } else {
+      return nil;
+    }
+  }
+  return nil;
+}
+
+- (void) deselectOldCell {
+  UITableViewCell *oldCell = [self oldCellWithOldChoiceController: nil];
+  oldCell.accessoryType = UITableViewCellAccessoryNone;
+}
+
 - (void) tableView: (UITableView *) table didSelectRowAtIndexPath: (NSIndexPath *) path {
   if ([self delegateValue] != [self recordAtPath: path]) {
-    NSIndexPath *oldIndexPath = [self pathForRecord: [self delegateValue]];
-    if (oldIndexPath) {
-      UITableViewCell *oldCell = [table cellForRowAtIndexPath: oldIndexPath];
-      oldCell.accessoryType = UITableViewCellAccessoryNone;
-    }
+    [self deselectOldCell];
     UITableViewCell *cell = [table cellForRowAtIndexPath: path];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     [self setDelegateValue: [self recordAtPath: path]];
   } 
-
+  
   [table deselectRowAtIndexPath: path animated: YES];
   if (closeOnSelection) {
     [self.navigationController popViewControllerAnimated: YES];

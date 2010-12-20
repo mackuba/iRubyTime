@@ -65,17 +65,17 @@ PSReleaseOnDealloc(activityLengthPicker);
 #pragma mark Table view delegate & data source
 
 - (PSIntArray *) rowTypesInSection: (NSInteger) section {
-  return PSIntegers(DateRow, ProjectRow, CommentsRow);
+  if ([activity.project hasAvailableActivityTypes]) {
+    return PSIntegers(DateRow, ProjectRow, ActivityTypeRow, CommentsRow);
+  } else {
+    return PSIntegers(DateRow, ProjectRow, CommentsRow);
+  }
 }
 
 - (UITableViewCell *) cellForRowType: (RowType) rowType {
   UITableViewCell *cell = [super cellForRowType: rowType];
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   return cell;
-}
-
-- (CGFloat) heightForRowOfType: (RowType) rowType {
-  return (rowType == CommentsRow) ? COMMENTS_CELL_HEIGHT : STANDARD_CELL_HEIGHT;
 }
 
 @end

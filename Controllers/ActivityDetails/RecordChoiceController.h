@@ -18,5 +18,7 @@
 
 - (id) initWithModel: (Class) model delegate: (id) delegate allowNil: (BOOL) allowNil;
 - (PSModel *) recordAtPath: (NSIndexPath *) path;
+- (NSArray *) list;
+- (UITableViewCell *) oldCellWithOldChoiceController: (RecordChoiceController *) oldController;
 
 @end

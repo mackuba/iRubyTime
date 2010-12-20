@@ -7,9 +7,12 @@
 
 @class Project;
 @class User;
+@class ActivityType;
 
 @interface Activity : PSModel {
   NSString *comments;
+	ActivityType *activityType;
+  NSNumber *activityTypeId;
   NSDate *date;
   NSString *dateAsString;
   NSInteger minutes;
@@ -19,6 +22,7 @@
 }
 
 @property (nonatomic, copy) NSString *comments;
+@property (nonatomic, copy) ActivityType *activityType;
 @property (nonatomic, copy) NSDate *date;
 @property (nonatomic, copy) NSString *dateAsString;
 @property (nonatomic) NSInteger minutes;
