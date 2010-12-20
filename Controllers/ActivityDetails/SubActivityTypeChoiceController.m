@@ -13,7 +13,7 @@
 
 @implementation SubActivityTypeChoiceController
 
-PSReleaseOnDealloc(parent, activityType);
+PSReleaseOnDealloc(activityType);
 
 - (id) initWithActivity: (Activity *) newActivity activityType: (ActivityType *) newActivityType parent: (ActivityTypeChoiceController *) newParent {
   self = [super initWithModel: [ActivityType class] delegate: newActivity allowNil: NO];
