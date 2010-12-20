@@ -45,7 +45,7 @@ PSReleaseOnDealloc(tableView, datePicker);
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
-  return RTiPad;
+  return (RTiPad ? YES : (orientation == UIInterfaceOrientationPortrait));
 }
 
 // -------------------------------------------------------------------------------------------

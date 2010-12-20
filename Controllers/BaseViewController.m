@@ -111,7 +111,7 @@ PSReleaseOnDealloc(connector, loadingView);
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
-  return RTiPad;
+  return (RTiPad ? YES : (orientation == UIInterfaceOrientationPortrait));
 }
 
 - (void) requestFailed: (NSNotification *) notification {

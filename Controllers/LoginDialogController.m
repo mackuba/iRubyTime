@@ -52,7 +52,7 @@ PSReleaseOnDealloc(connector, spinner, footerView, loginButton);
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
-  return RTiPad;
+  return (RTiPad ? YES : (orientation == UIInterfaceOrientationPortrait));
 }
 
 // -------------------------------------------------------------------------------------------

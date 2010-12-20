@@ -12,12 +12,7 @@
 #define RubyTimeErrorDomain @"RubyTimeErrorDomain"
 #define AbstractMethod(returnStatement) { [self doesNotRecognizeSelector: _cmd]; returnStatement; }
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
-  #define RTiPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-#else
-  #define RTiPad (NO)
-#endif
-
+#define RTiPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define RTUniversalNib(name) (RTiPad ? ([name stringByAppendingString: @"-iPad"]) : name)
 
 @interface NSError (RubyTime)

@@ -41,7 +41,7 @@ PSReleaseOnDealloc(activity, textView, textCell);
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
-  return RTiPad;
+  return (RTiPad ? YES : (orientation == UIInterfaceOrientationPortrait));
 }
 
 // -------------------------------------------------------------------------------------------
