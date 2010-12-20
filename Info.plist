@@ -24,7 +24,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
@@ -32,7 +32,7 @@
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow-iPad</string>
 	<key>RubyTimeAPIVersion</key>
-	<string>1</string>
+	<string>3</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiresPersistentWiFi</key>
