@@ -44,11 +44,9 @@ PSReleaseOnDealloc(footerView, connector);
                                                                   action: @selector(cancelLoginClicked)];
   loginDialog.navigationItem.leftBarButtonItem = [cancelButton autorelease];
   UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController: loginDialog];
-  #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
-    if ([self respondsToSelector: @selector(setModalPresentationStyle:)]) {
-      navigation.modalPresentationStyle = UIModalPresentationPageSheet;
-    }
-  #endif
+  if ([self respondsToSelector: @selector(setModalPresentationStyle:)]) {
+    navigation.modalPresentationStyle = UIModalPresentationPageSheet;
+  }
   [self presentModalViewController: navigation animated: YES];
   [navigation release];
   [loginDialog release];
