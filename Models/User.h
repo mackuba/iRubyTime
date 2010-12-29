@@ -5,9 +5,7 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-@interface User : PSModel {
-  NSString *name;
-}
+@interface User : PSModel {}
 
 @property (nonatomic, copy) NSString *name;
 

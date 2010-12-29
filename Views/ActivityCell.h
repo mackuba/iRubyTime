@@ -9,14 +9,7 @@
 
 @class Activity;
 
-@interface ActivityCell : UITableViewCell {
-  UILabel *dateLabel;
-  UILabel *hoursLabel;
-  UILabel *commentsLabel;
-  UILabel *projectLabel;
-  UILabel *activityTypeLabel;
-  UILabel *userLabel;
-}
+@interface ActivityCell : UITableViewCell {}
 
 @property (nonatomic, retain) IBOutlet UILabel *dateLabel;
 @property (nonatomic, retain) IBOutlet UILabel *hoursLabel;

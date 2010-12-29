@@ -10,15 +10,7 @@
 @class ActivityType;
 
 @interface Activity : PSModel {
-  NSString *comments;
-	ActivityType *activityType;
   NSNumber *activityTypeId;
-  NSDate *date;
-  NSString *dateAsString;
-  NSInteger minutes;
-  BOOL locked;
-  Project *project;
-  User *user;
 }
 
 @property (nonatomic, copy) NSString *comments;

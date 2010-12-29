@@ -7,11 +7,7 @@
 
 @class ActivityType;
 
-@interface Project : PSModel {
-  NSString *name;
-  BOOL hasActivities;
-  NSMutableArray *availableActivityTypes;
-}
+@interface Project : PSModel {}
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic) BOOL hasActivities;

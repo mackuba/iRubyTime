@@ -9,14 +9,7 @@
 
 typedef enum { Employee, ClientUser, Admin } UserType;
 
-@interface Account : User {
-  BOOL loggedIn;
-  NSString *serverURL;
-  NSString *username;
-  NSString *password;
-  NSString *authenticationString;
-  UserType userType;
-}
+@interface Account : User {}
 
 @property (nonatomic) BOOL loggedIn;
 @property (nonatomic, readonly) UserType userType;

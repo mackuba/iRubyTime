@@ -6,12 +6,7 @@
 //  Copyright 2010 (c). All rights reserved.
 //
 
-@interface ActivityType : PSModel {
-  NSString *name;
-  NSInteger position;
-  NSMutableArray *availableSubactivityTypes;
-  BOOL isSubtype;
-}
+@interface ActivityType : PSModel {}
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) NSInteger position;
@@ -19,4 +14,5 @@
 @property (nonatomic, assign) BOOL isSubtype;
 
 - (BOOL) hasAvailableSubactivityTypes;
+
 @end
