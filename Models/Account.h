@@ -17,6 +17,7 @@ typedef enum { Employee, ClientUser, Admin } UserType;
 @property (nonatomic, readonly) NSString *username;
 @property (nonatomic, copy) NSString *password;
 @property (nonatomic, readonly) NSString *authenticationString;
+@property (nonatomic, copy) NSString *userTypeString;
 
 - (id) initWithServerURL: (NSString *) url
                 username: (NSString *) name
@@ -24,7 +25,5 @@ typedef enum { Employee, ClientUser, Admin } UserType;
 
 - (BOOL) canLogIn;
 - (void) logInWithResponse: (NSDictionary *) dictionary;
-- (void) setUserTypeFromString: (NSString *) typeString;
-- (NSString *) userTypeToString;
 
 @end

@@ -8,7 +8,6 @@
 
 #import "ActivityType.h"
 
-
 @implementation ActivityType
 
 @synthesize name, position, availableSubactivityTypes, isSubtype;
@@ -19,6 +18,8 @@ PSReleaseOnDealloc(name, availableSubactivityTypes);
 }
 
 + (id) objectWithId: (NSNumber *) objectId {
+  // we can't look up activity type by id in a global list,
+  // because one activity type can have multiple separate instances in several projects
   return objectId;
 }
 
@@ -32,7 +33,7 @@ PSReleaseOnDealloc(name, availableSubactivityTypes);
 
 - (void) setAvailableSubactivityTypes: (id) newAvailableSubactivityTypes {
   [availableSubactivityTypes release];
-  availableSubactivityTypes = [[NSMutableArray alloc] init];
+  availableSubactivityTypes = [[NSMutableArray alloc] initWithCapacity: [newAvailableSubactivityTypes count]];
   for (id subactivityTypeHash in newAvailableSubactivityTypes) {
     ActivityType *type = [ActivityType objectFromJSON: subactivityTypeHash];
     type.isSubtype = YES;
@@ -41,7 +42,7 @@ PSReleaseOnDealloc(name, availableSubactivityTypes);
 }
 
 - (BOOL) hasAvailableSubactivityTypes {
-  return [self.availableSubactivityTypes count] > 0;
+  return availableSubactivityTypes.count > 0;
 }
 
 - (NSString *) description {

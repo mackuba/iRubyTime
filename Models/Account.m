@@ -67,7 +67,7 @@ PSReleaseOnDealloc(serverURL, username, password, authenticationString);
   }
 }
 
-- (void) setUserTypeFromString: (NSString *) typeString {
+- (void) setUserTypeString: (NSString *) typeString {
   if ([typeString isEqualToString: @"client_user"]) {
     userType = ClientUser;
   } else if ([typeString isEqualToString: @"admin"]) {
@@ -77,7 +77,7 @@ PSReleaseOnDealloc(serverURL, username, password, authenticationString);
   }
 }
 
-- (NSString *) userTypeToString {
+- (NSString *) userTypeString {
   switch (userType) {
     case Employee: return @"employee";
     case Admin: return @"admin";
@@ -90,7 +90,7 @@ PSReleaseOnDealloc(serverURL, username, password, authenticationString);
   loggedIn = YES;
   self.recordId = [dictionary objectForKey: @"id"];
   self.name = [dictionary objectForKey: @"name"];
-  [self setUserTypeFromString: [dictionary objectForKey: @"user_type"]];
+  self.userTypeString = [dictionary objectForKey: @"user_type"];
 }
 
 @end

@@ -31,23 +31,25 @@ PSReleaseOnDealloc(name, availableActivityTypes);
 }
 
 - (ActivityType *) activityTypeWithId: (NSNumber *) aRecordId {
+  NSInteger activityId = [aRecordId integerValue];
+
   for (ActivityType *activityType in availableActivityTypes) {
-    if (activityType.recordId == aRecordId) {
+    if (activityType.recordIdValue == activityId) {
       return activityType;
-    }
-    else {
+    } else {
       for (ActivityType *subactivityType in [activityType availableSubactivityTypes]) {
-        if (subactivityType.recordId == aRecordId) {
+        if (subactivityType.recordIdValue == activityId) {
           return subactivityType;
         }
       }
     }
   }
+
   return nil;
 }
 
 - (BOOL) hasAvailableActivityTypes {
-  return self.availableActivityTypes.count > 0;
+  return availableActivityTypes.count > 0;
 }
 
 @end

@@ -59,21 +59,17 @@ PSReleaseOnDealloc(date, dateAsString, comments, project, user, activityType);
 - (void) setActivityType: (id) objectId {
   [activityType autorelease];
   [activityTypeId autorelease];
+
   if (!objectId) {
     activityTypeId = nil;
     activityType = nil;
   } else if ([objectId isKindOfClass: [NSNumber class]]) {
     activityTypeId = [objectId copy];
+    activityType = [[project activityTypeWithId: activityTypeId] retain];
   } else {
     activityType = [objectId retain];
+    activityTypeId = [activityType recordId];
   }
-}
-
-- (ActivityType *) activityType {
-  if (!activityType) {
-    activityType = [project activityTypeWithId: activityTypeId];
-  }
-  return activityType;
 }
 
 - (BOOL) isEqualToActivity: (Activity *) other {
