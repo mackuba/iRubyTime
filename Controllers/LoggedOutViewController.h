@@ -10,7 +10,6 @@
 @class ServerConnector;
 
 @interface LoggedOutViewController : UITableViewController {
-  UIView *footerView;
   ServerConnector *connector;
 }
 

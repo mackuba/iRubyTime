@@ -10,8 +10,6 @@
 @class Activity;
 
 @interface ActivityCommentsDialogController : UITableViewController {
-  UITextView *textView;
-  UITableViewCell *textCell;
   Activity *activity;
 }
 
