@@ -17,10 +17,9 @@ PSReleaseOnDealloc(name);
   return PSArray(@"name");
 }
 
-+ (void) addSelfToTopOfUsers: (User *) user {
-  NSMutableArray *userList = (NSMutableArray *) [self list];
-  [userList removeObject: user];
-  [userList insertObject: user atIndex: 0];
+- (void) addSelfToTopOfUsers {
+  [self removeObjectFromList];
+  [[self class] prependObjectsToList: PSArray(self)];
 }
 
 @end

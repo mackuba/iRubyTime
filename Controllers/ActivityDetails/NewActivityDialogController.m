@@ -50,7 +50,7 @@ PSReleaseOnDealloc(activityLengthPicker);
 #pragma mark Action handlers
 
 - (void) executeSave {
-  [connector createActivity: activity];
+  [[connector createRequestForActivity: activity] send];
 }
 
 - (void) cancelClicked {

@@ -56,22 +56,6 @@ PSReleaseOnDealloc(date, dateAsString, comments, project, user, activityType);
   self.date = [[ActivityDateFormatter sharedFormatter] parseDate: dateString];
 }
 
-- (void) setActivityType: (id) objectId {
-  [activityType autorelease];
-  [activityTypeId autorelease];
-
-  if (!objectId) {
-    activityTypeId = nil;
-    activityType = nil;
-  } else if ([objectId isKindOfClass: [NSNumber class]]) {
-    activityTypeId = [objectId copy];
-    activityType = [[project activityTypeWithId: activityTypeId] retain];
-  } else {
-    activityType = [objectId retain];
-    activityTypeId = [activityType recordId];
-  }
-}
-
 - (BOOL) isEqualToActivity: (Activity *) other {
   return other &&
     other.minutes == self.minutes &&
@@ -81,15 +65,19 @@ PSReleaseOnDealloc(date, dateAsString, comments, project, user, activityType);
     [other.comments isEqualToString: self.comments];
 }
 
-- (NSString *) toQueryString {
-  NSString *query = PSFormat(@"activity[date]=%@&activity[comments]=%@&activity[hours]=%@&activity[project_id]=%@&activity[%@]=%@",
-    [[ActivityDateFormatter sharedFormatter] formatDateForRequest: date],
-    [self.comments psStringWithPercentEscapesForFormValues],
-    [self hourString],
-    self.project.recordId,
-    self.activityType.isSubtype ? @"sub_activity_type_id" : @"main_activity_type_id",
-    self.activityType ? [self.activityType.recordId description] : @"");
-  return query;
+- (NSString *) encodeToPostData {
+  NSString *activityTypeField = self.activityType.isSubtype ? @"sub_activity_type_id" : @"main_activity_type_id";
+  NSString *activityTypeValue = self.activityType ? [self.activityType.recordId description] : @"";
+
+  NSDictionary *fields = PSHash(
+    @"date",           [[ActivityDateFormatter sharedFormatter] formatDateForRequest: date],
+    @"comments",       [self.comments psStringWithPercentEscapesForFormValues],
+    @"hours",          [self hourString],
+    @"project_id",     self.project.recordId,
+    activityTypeField, activityTypeValue
+  );
+
+  return [NSString psStringWithFormEncodedFields: fields ofModelNamed: @"activity"];
 }
 
 @end

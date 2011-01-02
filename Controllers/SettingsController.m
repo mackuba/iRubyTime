@@ -59,7 +59,7 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
 
 - (void) cancelLoginClicked {
   PSStopObserving(connector, AuthenticationSuccessfulNotification);
-  [connector dropCurrentConnection];
+  [connector cancelAllRequests];
   connector.account = [currentAccount autorelease];
   currentAccount = nil;
   [self hidePopupView];
@@ -84,9 +84,8 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
 
 - (void) actionSheet: (UIActionSheet *) sheet clickedButtonAtIndex: (NSInteger) index {
   if (index == 0) {
+    [connector.account clear];
     connector.account = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    [delegate saveAccountData];
     LoggedOutViewController *loggedOut = [[LoggedOutViewController alloc] initWithConnector: connector];
     [self presentModalViewController: loggedOut animated: NO];
     [loggedOut release];
@@ -168,14 +167,14 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
       cell.textLabel.text = @"Server URL";
       cell.textLabel.adjustsFontSizeToFitWidth = YES;
       cell.textLabel.minimumFontSize = 16.0;
-      cell.detailTextLabel.text = connector.account.serverURL;
+      cell.detailTextLabel.text = [connector.account serverURL];
       cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
       cell.detailTextLabel.minimumFontSize = 8.0;
       break;
 
     case LoginRow:
       cell.textLabel.text = @"Username";
-      cell.detailTextLabel.text = connector.account.username;
+      cell.detailTextLabel.text = [connector.account username];
       break;
 
     case VersionRow:

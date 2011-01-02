@@ -8,10 +8,9 @@
 #import <UIKit/UIKit.h>
 
 #import "Activity.h"
+#import "ActivityType.h"
 #import "BaseViewController.h"
 #import "Project.h"
-#import "ActivityType.h"
-#import "Request.h"
 #import "ServerConnector.h"
 #import "User.h"
 #import "Utils.h"
@@ -38,7 +37,7 @@ typedef enum { DateRow, ProjectRow, ActivityTypeRow, UserRow, LengthRow, Comment
 
 - (void) setupToolbar;
 - (NSString *) errorMessageFromJSON: (NSString *) jsonString;
-- (NSString *) errorMessageFromError: (NSError *) error text: (NSString *) text request: (Request *) request;
+- (NSString *) errorMessageFromError: (NSError *) error text: (NSString *) text request: (PSRequest *) request;
 - (void) pushSubcontrollerForPath: (NSIndexPath *) path;
 - (RowType) rowTypeAtIndexPath: (NSIndexPath *) path;
 - (UITableViewCell *) cellForRowType: (RowType) rowType;

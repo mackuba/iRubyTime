@@ -7,10 +7,6 @@
 
 #import "Activity.h"
 #import "Utils.h"
-#import "SFHFKeychainUtils.h"
-
-#define KEYCHAIN_SERVICE_NAME @"iRubyTime"
-
 
 @implementation NSError (RubyTime)
 
@@ -24,7 +20,7 @@
       case NSURLErrorNetworkConnectionLost: return @"Server disconnected or network connection lost.";
       default: return @"Connection problems.";
     }
-  } else if (self.domain == RubyTimeErrorDomain) {
+  } else if (self.domain == PsiToolkitErrorDomain && self.code > 0) {
     switch (self.code) {
       case 403: return @"Access denied - please contact your administrator.";
       case 412: return @"This version of iRubyTime is not compatible with your RubyTime server. "
@@ -38,53 +34,15 @@
 
 @end
 
-@implementation NSUserDefaults (RubyTime)
-
-- (NSString *) passwordForKey: (NSString *) key andUsername: (NSString *) username {
-  #if TARGET_IPHONE_SIMULATOR
-    return [self objectForKey: key];
-  #else
-    NSString *password = nil;
-    NSError *error;
-    if (username) {
-      password = [SFHFKeychainUtils getPasswordForUsername: username
-                                            andServiceName: KEYCHAIN_SERVICE_NAME
-                                                     error: &error];
-    }
-    return password;
-  #endif
-}
-
-- (void) setPassword: (NSString *) password forKey: (NSString *) key andUsername: (NSString *) username {
-  #if TARGET_IPHONE_SIMULATOR
-    if (password) {
-      [self setObject: password forKey: key];
-    } else {
-      [self removeObjectForKey: key];
-    }
-  #else
-    NSError *error;
-    if (password) {
-      [SFHFKeychainUtils storeUsername: username
-                           andPassword: password
-                        forServiceName: KEYCHAIN_SERVICE_NAME
-                        updateExisting: YES
-                                 error: &error];
-    } else {
-      [SFHFKeychainUtils deleteItemForUsername: username
-                                andServiceName: KEYCHAIN_SERVICE_NAME
-                                         error: &error];
-    }
-  #endif
-}
-
-@end
-
 @implementation UIActivityIndicatorView (RubyTime)
 
 + (UIActivityIndicatorView *) spinnerBarButton {
-  UIActivityIndicatorViewStyle color = (RTiPad) ? UIActivityIndicatorViewStyleGray : UIActivityIndicatorViewStyleWhite;
-  UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: color];
+  UIActivityIndicatorView *spinner;
+  if (PSiPadDevice) {
+    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
+  } else {
+    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+  }
   spinner.frame = CGRectMake(0, 0, 36, 20);
   spinner.contentMode = UIViewContentModeCenter;
   return [spinner autorelease];

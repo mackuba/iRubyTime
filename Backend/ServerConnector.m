@@ -9,295 +9,213 @@
 #import "Activity.h"
 #import "ActivityDateFormatter.h"
 #import "Project.h"
-#import "Request.h"
 #import "ServerConnector.h"
+#import "User.h"
 #import "Utils.h"
-
-#define ActivityPath(activity) PSFormat(@"/activities/%@", activity.recordId)
-
-// -------------------------------------------------------------------------------------------
-#pragma mark Private interface
-
-@interface ServerConnector ()
-- (void) handleFinishedRequest: (Request *) request;
-- (void) cleanupRequest;
-- (void) sendPostRequestToPath: (NSString *) path type: (RTRequestType) type text: (NSString *) text;
-- (void) sendGetRequestToPath: (NSString *) path type: (RTRequestType) type text: (NSString *) text;
-- (void) sendGetRequestToPath: (NSString *) path type: (RTRequestType) type;
-- (void) sendRequestToPath: (NSString *) path
-                    method: (NSString *) method
-                      type: (RTRequestType) type
-                      text: (NSString *) text
-                      info: (id) info;
-@end
-
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Implementation
 
 @implementation ServerConnector
 
-@synthesize account, serverApiVersion;
+@synthesize serverApiVersion;
 
-- (id) initWithAccount: (Account *) userAccount {
-  if (self = [super init]) {
-    self.account = userAccount;
+- (id) init {
+  self = [super init];
+  if (self) {
+    self.account = [Account accountFromSettings];
+    self.usesHTTPAuthentication = YES;
   }
   return self;
 }
 
-
-// -------------------------------------------------------------------------------------------
-#pragma mark Instance methods
-
-- (BOOL) hasOpenConnections {
-  return currentRequest ? YES : NO;
-}
-
-// -------------------------------------------------------------------------------------------
-#pragma mark General request sending helpers
-
-- (void) sendRequestToPath: (NSString *) path
-                    method: (NSString *) method
-                      type: (RTRequestType) type
-                      text: (NSString *) text
-                      info: (id) info {
-  if (currentRequest) {
-    [currentRequest.connection cancel];
-    [self cleanupRequest];
-  }
-  NSString *url = [account.serverURL stringByAppendingString: path];
-  currentRequest = [[Request alloc] initWithURL: url method: method type: type text: text];
-  if (info) {
-    currentRequest.info = info;
-  }
-  PSLog(@"sending %@ to %@ (type %d) with '%@'", method, url, type, text);
-  [currentRequest setValue: account.authenticationString forHTTPHeaderField: @"Authorization"];
-  currentRequest.connection = [NSURLConnection connectionWithRequest: currentRequest delegate: self];
-}
-
-- (void) sendPostRequestToPath: (NSString *) path type: (RTRequestType) type text: (NSString *) text {
-  [self sendRequestToPath: path method: @"POST" type: type text: text info: nil];
-}
-
-- (void) sendGetRequestToPath: (NSString *) path type: (RTRequestType) type text: (NSString *) text {
-  [self sendRequestToPath: path method: @"GET" type: type text: text info: nil];
-}
-
-- (void) sendGetRequestToPath: (NSString *) path type: (RTRequestType) type {
-  [self sendRequestToPath: path method: @"GET" type: type text: nil info: nil];
-}
-
-- (void) clearCookies {
-  NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-  NSArray *cookies = [cookieStorage cookiesForURL: [NSURL URLWithString: account.serverURL]];
-  for (NSHTTPCookie *cookie in cookies) {
-    [cookieStorage deleteCookie: cookie];
-  }
+- (NSString *) baseURL {
+  return [account serverURL];
 }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Request sending methods
 
-- (void) authenticate {
-  if (account.canLogIn) {
-    [self clearCookies];
-    [self sendGetRequestToPath: @"/users/authenticate" type: RTAuthenticationRequest];
+- (void) prepareRequest: (PSRequest *) request {
+  NSString *apiVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey: @"RubyTimeAPIVersion"];
+
+  [request addRequestHeader: @"X-API-Version" value: apiVersion];
+  [request addRequestHeader: @"Content-Type" value: @"application/x-www-form-urlencoded"];
+
+  request.useSessionPersistence = NO;
+  request.useCookiePersistence = NO;
+  request.useKeychainPersistence = NO;
+}
+
+- (PSRequest *) authenticateRequest {
+  if ([account hasAllRequiredProperties]) {
+    PSRequest *request = [self requestToPath: @"/users/authenticate"];
+    request.successHandler = @selector(authenticationSucceeded:);
+    return request;
+  } else {
+    return nil;
   }
 }
 
-- (void) loadActivitiesForUser: (User *) user
-                         limit: (NSInteger) limit
-                        offset: (NSInteger) offset {
-  PSPathBuilder *builder = [PSPathBuilder builderWithBasePath: @"/users/%d/activities" record: user];
-  [builder setInt: limit forKey: @"search_criteria[limit]"];
-  [builder setInt: offset forKey: @"search_criteria[offset]"];
-  [self sendGetRequestToPath: builder.path type: RTActivityIndexRequest];
+- (PSRequest *) loadActivitiesRequestForUser: (User *) user
+                                       limit: (NSInteger) limit
+                                      offset: (NSInteger) offset {
+  PSRequest *request = [self requestToPath: PSFormat(@"/users/%d/activities", [user toParam])];
+  [request addURLParameter: @"search_criteria[limit]" integerValue: limit];
+  [request addURLParameter: @"search_criteria[offset]" integerValue: offset];
+  [request setSuccessHandler: @selector(activitiesLoaded:)];
+  return request;
 }
 
-- (void) loadActivitiesForProject: (Project *) project
-                            limit: (NSInteger) limit
-                           offset: (NSInteger) offset {
-  PSPathBuilder *builder = [PSPathBuilder builderWithBasePath: @"/projects/%d/activities" record: project];
-  [builder setInt: limit forKey: @"search_criteria[limit]"];
-  [builder setInt: offset forKey: @"search_criteria[offset]"];
-  [self sendGetRequestToPath: builder.path type: RTActivityIndexRequest];
+- (PSRequest *) loadActivitiesRequestForProject: (Project *) project
+                                          limit: (NSInteger) limit
+                                         offset: (NSInteger) offset {
+  PSRequest *request = [self requestToPath: PSFormat(@"/projects/%d/activities", [project toParam])];
+  [request addURLParameter: @"search_criteria[limit]" integerValue: limit];
+  [request addURLParameter: @"search_criteria[offset]" integerValue: offset];
+  [request setSuccessHandler: @selector(activitiesLoaded:)];
+  return request;
 }
 
-- (void) loadAllActivitiesWithLimit: (NSInteger) limit
-                             offset: (NSInteger) offset {
-  PSPathBuilder *builder = [PSPathBuilder builderWithBasePath: @"/activities"];
-  [builder setInt: limit forKey: @"search_criteria[limit]"];
-  [builder setInt: offset forKey: @"search_criteria[offset]"];
-  [self sendGetRequestToPath: builder.path type: RTActivityIndexRequest];
+- (PSRequest *) loadActivitiesRequestWithLimit: (NSInteger) limit offset: (NSInteger) offset {
+  PSRequest *request = [self requestToPath: @"/activities"];
+  [request addURLParameter: @"search_criteria[limit]" integerValue: limit];
+  [request addURLParameter: @"search_criteria[offset]" integerValue: offset];
+  [request setSuccessHandler: @selector(activitiesLoaded:)];
+  return request;
 }
 
-- (void) searchActivitiesForProject: (Project *) project
-                               user: (User *) user
-                          startDate: (NSDate *) startDate
-                            endDate: (NSDate *) endDate {
-  PSPathBuilder *builder = [PSPathBuilder builderWithBasePath: @"/activities"];
+- (PSRequest *) searchActivitiesRequestWithProject: (Project *) project
+                                              user: (User *) user
+                                         startDate: (NSDate *) startDate
+                                           endDate: (NSDate *) endDate {
+  PSRequest *request = [self requestToPath: @"/activities"];
+
   if (project) {
-    [builder setObject: project.recordId forKey: @"search_criteria[project_id]"];
+    [request addURLParameter: @"search_criteria[project_id]" value: project.recordId];
   }
   if (user) {
-    [builder setObject: user.recordId forKey: @"search_criteria[user_id]"];
+    [request addURLParameter: @"search_criteria[user_id]" value: user.recordId];
   }
+
   ActivityDateFormatter *formatter = [ActivityDateFormatter sharedFormatter];
-  [builder setObject: [formatter formatDateForRequest: startDate] forKey: @"search_criteria[date_from]"];
-  [builder setObject: [formatter formatDateForRequest: endDate] forKey: @"search_criteria[date_to]"];
-  [self sendGetRequestToPath: builder.path type: RTActivityIndexRequest];
+  [request addURLParameter: @"search_criteria[date_from]" value: [formatter formatDateForRequest: startDate]];
+  [request addURLParameter: @"search_criteria[date_to]" value: [formatter formatDateForRequest: endDate]];
+  [request setSuccessHandler: @selector(activitiesLoaded:)];
+  return request;
 }
 
-- (void) createActivity: (Activity *) activity {
-  [self sendPostRequestToPath: @"/activities" type: RTCreateActivityRequest text: [activity toQueryString]];
+- (PSRequest *) createRequestForActivity: (Activity *) activity {
+  PSRequest *request = [self createRequestForObject: activity];
+  request.successHandler = @selector(activityCreated:);
+  return request;
 }
 
-- (void) updateActivity: (Activity *) activity {
-  [self sendRequestToPath: ActivityPath(activity)
-                   method: @"PUT"
-                     type: RTUpdateActivityRequest
-                     text: [activity toQueryString]
-                     info: activity];
+- (PSRequest *) updateRequestForActivity: (Activity *) activity {
+  PSRequest *request = [self updateRequestForObject: activity];
+  request.successHandler = @selector(activityUpdated:);
+  return request;
 }
 
-- (void) deleteActivity: (Activity *) activity {
-  [self sendRequestToPath: ActivityPath(activity)
-                   method: @"DELETE"
-                     type: RTDeleteActivityRequest
-                     text: nil
-                     info: activity];
+- (PSRequest *) deleteRequestForActivity: (Activity *) activity {
+  PSRequest *request = [self deleteRequestForObject: activity];
+  request.successHandler = @selector(activityDeleted:);
+  return request;
 }
 
-- (void) loadProjects {
-  [self sendGetRequestToPath: @"/projects?include_activity_types=true" type: RTProjectIndexRequest];
+- (PSRequest *) loadProjectsRequest {
+  PSRequest *request = [self requestToPath: @"/projects?include_activity_types=true"];
+  request.successHandler = @selector(projectsLoaded:);
+  return request;
 }
 
-- (void) loadUsers {
-  [self sendGetRequestToPath: @"/users/with_activities" type: RTUserIndexRequest];
+- (PSRequest *) loadUsersRequest {
+  PSRequest *request = [self requestToPath: @"/users/with_activities"];
+  request.successHandler = @selector(usersLoaded:);
+  return request;
 }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Response handling
 
-- (void) connection: (NSURLConnection *) connection didReceiveResponse: (NSURLResponse *) response {
-  currentRequest.response = response;
-}
-
-- (void) connection: (NSURLConnection *) connection didReceiveData: (NSData *) data {
-  NSString *receivedText = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-  [currentRequest appendReceivedText: receivedText];
-  [receivedText release];
-}
-
-- (void) connectionDidFinishLoading: (NSURLConnection *) connection {
-  Request *request = [[currentRequest retain] autorelease]; // keep it in memory until the end of this method
-  [self cleanupRequest];
-  
-  NSHTTPURLResponse *response = (NSHTTPURLResponse *) request.response;
-  PSLog(@"finished request to %@ (%d) (status %d)", request.URL, request.type, response.statusCode);
-  PSLog(@"text = \"%@\"", request.receivedText);
-  NSString *versionString = [response.allHeaderFields objectForKey: @"X-Api-Version"];
-  serverApiVersion = versionString ? [versionString intValue] : -1;
-
-  if (response.statusCode >= 400) {
-    NSError *error = [NSError errorWithDomain: RubyTimeErrorDomain code: response.statusCode userInfo: nil];
-    PSNotifyWithData(RequestFailedNotification, PSDict(error, @"error", request.receivedText, @"text"));
-  } else {
-    [self handleFinishedRequest: request];
+- (void) authenticationSucceeded: (PSRequest *) request {
+  NSDictionary *response = [self parseResponseFromRequest: request];
+  if (response) {
+    [account logInWithResponse: response];
+    PSNotify(AuthenticationSuccessfulNotification);
   }
 }
 
-- (void) handleFinishedRequest: (Request *) request {
-  NSString *trimmedString = [request.receivedText psTrimmedString];
-  NSArray *records;
-  Activity *activity;
-  switch (request.type) {
-    case RTAuthenticationRequest:
-      [account logInWithResponse: [trimmedString yajl_JSON]];
-      PSNotify(AuthenticationSuccessfulNotification);
-      break;
-
-    case RTActivityIndexRequest:
-      if (trimmedString.length > 0) {
-        records = [Activity objectsFromJSONString: trimmedString];
-        PSNotifyWithData(ActivitiesReceivedNotification, PSDict(records, @"activities"));
-      }
-      break;
-    
-    case RTProjectIndexRequest:
-      if (trimmedString.length > 0) {        
-        records = [Project objectsFromJSONString: trimmedString];
-        [Project reset];
-        [Project appendObjectsToList: records];
-        PSNotifyWithData(ProjectsReceivedNotification, PSDict(records, @"projects"));
-      }
-      break;
-
-    case RTUserIndexRequest:
-      if (trimmedString.length > 0) {
-        records = [User objectsFromJSONString: trimmedString];
-        [User reset];
-        [User appendObjectsToList: records];
-        if (account.userType == Admin) {
-          [User addSelfToTopOfUsers: account];
-        }
-        PSNotifyWithData(UsersReceivedNotification, PSDict(records, @"users"));
-      }
-      break;
-    
-    case RTCreateActivityRequest:
-      activity = [Activity objectFromJSONString: trimmedString];
-      activity.project.hasActivities = YES;
-      PSNotifyWithData(ActivityCreatedNotification, PSDict(activity, @"activity"));
-      break;
-
-    case RTUpdateActivityRequest:
-      activity = request.info;
-      activity.project.hasActivities = YES;
-      PSNotifyWithData(ActivityUpdatedNotification, PSDict(activity, @"activity"));
-      break;
-
-    case RTDeleteActivityRequest:
-      activity = request.info;
-      PSNotifyWithData(ActivityDeletedNotification, PSDict(activity, @"activity"));
-      break;
+- (void) activitiesLoaded: (PSRequest *) request {
+  NSArray *activities = [self parseObjectsFromRequest: request model: [Activity class]];
+  if (activities) {
+    if ([activities isEqual: PSNull]) {
+      activities = [NSArray array];
+    }
+    PSNotifyWithData(ActivitiesReceivedNotification, PSHash(@"activities", activities));
   }
 }
 
-- (void) connection: (NSURLConnection *) connection didFailWithError: (NSError *) error {
-  if (error.code != NSURLErrorUserCancelledAuthentication) {
-    PSNotifyWithData(RequestFailedNotification, PSDict(error, @"error", currentRequest, @"request"));
-    [self cleanupRequest];
+- (void) projectsLoaded: (PSRequest *) request {
+  NSArray *projects = [self parseObjectsFromRequest: request model: [Project class]];
+  if (projects) {
+    [Project reset];
+    [Project appendObjectsToList: projects];
+    PSNotifyWithData(ProjectsReceivedNotification, PSHash(@"projects", projects));
   }
 }
 
-- (void) connection: (NSURLConnection *) connection
-         didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *) challenge {
-  // TODO: let the user try again and reuse the connection
-  [[challenge sender] cancelAuthenticationChallenge: challenge];
-  [self cleanupRequest];
-  account.password = nil; // make sure that canLogIn returns NO
+- (void) usersLoaded: (PSRequest *) request {
+  NSArray *users = [self parseObjectsFromRequest: request model: [User class]];
+  if (users) {
+    [User reset];
+    [User appendObjectsToList: users];
+    if ([account userType] == Admin) {
+      [[account asUser] addSelfToTopOfUsers];
+    }
+    PSNotifyWithData(UsersReceivedNotification, PSHash(@"users", users));
+  }
+}
+
+- (void) activityCreated: (PSRequest *) request {
+  Activity *activity = [self parseObjectFromRequest: request model: [Activity class]];
+  if (activity) {
+    activity.project.hasActivities = YES;
+    PSNotifyWithData(ActivityCreatedNotification, PSHash(@"activity", activity));
+  }
+}
+
+- (void) activityUpdated: (PSRequest *) request {
+  if ([self parseResponseFromRequest: request]) {
+    Activity *activity = [request objectForKey: @"object"];
+    activity.project.hasActivities = YES;
+    PSNotifyWithData(ActivityUpdatedNotification, PSHash(@"activity", activity));
+  }
+}
+
+- (void) activityDeleted: (PSRequest *) request {
+  if ([self parseResponseFromRequest: request]) {
+    Activity *activity = [request objectForKey: @"object"];
+    PSNotifyWithData(ActivityDeletedNotification, PSHash(@"activity", activity));
+  }
+}
+
+- (void) handleFailedRequest: (PSRequest *) request {
+  PSNotifyWithData(RequestFailedNotification, PSHash(@"request", request));
+}
+
+- (void) handleFailedAuthentication: (PSRequest *) request {
+  [request cancel];
+  [account setPassword: nil]; // make sure that hasAllRequiredProperties returns NO
   PSNotify(AuthenticationFailedNotification);
 }
 
-// -------------------------------------------------------------------------------------------
-#pragma mark Cleanup
-
-- (void) cleanupRequest {
-  [currentRequest release];
-  currentRequest = nil;
-}
-
-- (void) dropCurrentConnection {
-  [currentRequest.connection cancel];
-  [self cleanupRequest];
-}
-
-- (void) dealloc {
-  [self dropCurrentConnection];
-  [account release];
-  [super dealloc];
+- (void) cleanupRequest: (PSRequest *) request {
+  NSString *versionString = [request.responseHeaders objectForKey: @"X-Api-Version"];
+  if (versionString) {
+    serverApiVersion = [versionString intValue];
+  }
+  [super cleanupRequest: request];
 }
 
 @end

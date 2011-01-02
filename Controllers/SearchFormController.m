@@ -132,9 +132,9 @@ PSReleaseOnDealloc(dateRangeCell, startDateLabel, endDateLabel, startDate, endDa
 #pragma mark Table view delegate & data source
 
 - (PSIntArray *) rowTypes {
-  if (connector.account.userType == Employee) {
+  if ([connector.account userType] == Employee) {
     return PSIntegers(ProjectRow, DateRangeRow);
-  } else if (connector.account.userType == ClientUser && [Project count] < 2) {
+  } else if ([connector.account userType] == ClientUser && [Project count] < 2) {
     return PSIntegers(UserRow, DateRangeRow);
   } else {
     return PSIntegers(ProjectRow, UserRow, DateRangeRow);

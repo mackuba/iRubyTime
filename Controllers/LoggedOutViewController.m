@@ -30,7 +30,7 @@ PSReleaseOnDealloc(footerView, connector);
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
-  return (RTiPad ? YES : (orientation == UIInterfaceOrientationPortrait));
+  return (PSiPadDevice ? YES : (orientation == UIInterfaceOrientationPortrait));
 }
 
 // -------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ PSReleaseOnDealloc(footerView, connector);
 
 - (void) cancelLoginClicked {
   PSStopObserving(connector, AuthenticationSuccessfulNotification);
-  [connector dropCurrentConnection];
+  [connector cancelAllRequests];
   connector.account = nil;
   [self dismissModalViewControllerAnimated: YES];
 }

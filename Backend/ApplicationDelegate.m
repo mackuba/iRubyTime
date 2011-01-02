@@ -17,23 +17,15 @@
 #import "UserListController.h"
 #import "Utils.h"
 
-#define USERNAME_SETTING @"username"
-#define PASSWORD_SETTING @"password"
-#define SERVER_SETTING @"serverURL"
-#define USER_TYPE_SETTING @"userType"
-
-
 @interface ApplicationDelegate()
 - (void) buildGuiForUserType: (UserType) type;
 - (void) initApplication;
 - (void) initialDataLoaded;
 - (void) showLoginDialog;
-- (Account *) loadAccountData;
 - (NSArray *) viewControllersForUserType: (UserType) type;
 - (NSArray *) viewControllerClassesForUserType: (UserType) type;
 - (NSArray *) navigationControllersForUserType: (UserType) type;
 @end
-
 
 @implementation ApplicationDelegate
 
@@ -44,16 +36,17 @@ PSReleaseOnDealloc(window, tabBarController, connector, currentController);
 #pragma mark Initialization
 
 - (void) initApplication {
-  connector = [[ServerConnector alloc] initWithAccount: [self loadAccountData]];
+  connector = [[ServerConnector alloc] init];
   [currentController setConnector: connector];
+  [PSConnector setSharedConnector: connector];
 
   PSObserve(connector, AuthenticationSuccessfulNotification, loginSuccessful);
   PSObserve(connector, RequestFailedNotification, requestFailed);
-  if ([connector.account canLogIn]) {
-    [self buildGuiForUserType: connector.account.userType];
+  if ([connector.account hasAllRequiredProperties]) {
+    [self buildGuiForUserType: [connector.account userType]];
     [currentController showLoadingMessage];
     PSObserve(connector, AuthenticationFailedNotification, loginFailed);
-    [connector authenticate];
+    [[connector authenticateRequest] send];
   } else {
     [self showLoginDialog];
   }
@@ -61,30 +54,6 @@ PSReleaseOnDealloc(window, tabBarController, connector, currentController);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Instance methods
-
-- (Account *) loadAccountData {
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *username = [settings objectForKey: USERNAME_SETTING];
-  NSString *serverURL = [settings objectForKey: SERVER_SETTING];
-  NSString *userType = [settings objectForKey: USER_TYPE_SETTING];
-  NSString *password = [settings passwordForKey: PASSWORD_SETTING andUsername: username];
-  Account *account = [[Account alloc] initWithServerURL: serverURL username: username password: password];
-  [account setUserTypeFromString: userType];
-  return [account autorelease];
-}
-
-- (void) saveAccountData {
-  NSString *username = connector.account.username;
-  NSString *password = connector.account.password;
-  NSString *serverURL = connector.account.serverURL;
-  NSString *userType = [connector.account userTypeToString];
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings setObject: username forKey: USERNAME_SETTING];
-  [settings setObject: serverURL forKey: SERVER_SETTING];
-  [settings setObject: userType forKey: USER_TYPE_SETTING];
-  [settings setPassword: password forKey: PASSWORD_SETTING andUsername: username];
-  [settings synchronize];
-}
 
 - (void) buildGuiForUserType: (UserType) type {
   NSArray *navigationControllers = [self navigationControllersForUserType: type];
@@ -156,31 +125,31 @@ PSReleaseOnDealloc(window, tabBarController, connector, currentController);
   if ([currentController modalViewController]) {
     // login controller was shown previously
     [currentController hidePopupView];
-    [self buildGuiForUserType: connector.account.userType];
+    [self buildGuiForUserType: [connector.account userType]];
     [currentController showLoadingMessage];
   } else {
     // check if user's type wasn't changed in the meantime
-    Account *oldAccount = [self loadAccountData];
-    if (oldAccount.userType != connector.account.userType) {
+    Account *oldAccount = [Account accountFromSettings];
+    if (oldAccount.userType != [connector.account userType]) {
       [self reloginSuccessful];
       return;
     }
   }
-  [self saveAccountData];
+  [connector.account save];
   PSObserve(connector, ProjectsReceivedNotification, projectsReceived);
-  [connector loadProjects];
+  [[connector loadProjectsRequest] send];
 }
 
 - (void) reloginSuccessful {
   initialDataIsLoaded = NO;
   kernelPanic = NO;
-  [self saveAccountData];
-  [self rebuildGuiExceptLastControllerForUserType: connector.account.userType];
+  [connector.account save];
+  [self rebuildGuiExceptLastControllerForUserType: [connector.account userType]];
   [currentController hidePopupView];
   [currentController showLoadingMessage];
   PSObserve(connector, RequestFailedNotification, requestFailed);
   PSObserve(connector, ProjectsReceivedNotification, projectsReceived);
-  [connector loadProjects];
+  [[connector loadProjectsRequest] send];
 }
 
 - (void) loginFailed {
@@ -193,11 +162,11 @@ PSReleaseOnDealloc(window, tabBarController, connector, currentController);
 }
 
 - (void) projectsReceived {
-  if (connector.account.userType == Employee) {
+  if ([connector.account userType] == Employee) {
     [self initialDataLoaded];
   } else {
     PSObserve(connector, UsersReceivedNotification, initialDataLoaded);
-    [connector loadUsers];
+    [[connector loadUsersRequest] send];
   }
 }
 

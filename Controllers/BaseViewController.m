@@ -104,17 +104,17 @@ PSReleaseOnDealloc(connector, loadingView);
   [self hideLoadingMessage];
   id delegate = [[UIApplication sharedApplication] delegate];
   if ([delegate initialDataIsLoaded]) {
-    [connector dropCurrentConnection];
+    [connector cancelAllRequests];
   }
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
-  return (RTiPad ? YES : (orientation == UIInterfaceOrientationPortrait));
+  return (PSiPadDevice ? YES : (orientation == UIInterfaceOrientationPortrait));
 }
 
 - (void) requestFailed: (NSNotification *) notification {
   [self hideLoadingMessage];
-  NSError *error = [notification.userInfo objectForKey: @"error"];
+  NSError *error = [[notification.userInfo objectForKey: @"request"] error];
   NSString *message = error ? [error friendlyDescription] : @"Can't connect to the server.";
   [UIAlertView psShowErrorWithMessage: message];
 }

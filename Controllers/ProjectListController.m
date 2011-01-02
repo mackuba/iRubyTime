@@ -37,7 +37,7 @@ PSReleaseOnDealloc(subcontrollers, projectList);
 
 - (void) viewWillAppear: (BOOL) animated {
   [projectList release];
-  projectList = (connector.account.userType == Employee) ? [Project allWithActivities] : [Project list];
+  projectList = ([connector.account userType] == Employee) ? [Project allWithActivities] : [Project list];
   [projectList retain];
   [tableView reloadData];
 }

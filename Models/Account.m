@@ -6,42 +6,45 @@
 // -------------------------------------------------------
 
 #import "Account.h"
+#import "User.h"
 #import "Utils.h"
-#import "NSDataMBBase64.h"
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Private interface
 
 @interface Account ()
 - (NSString *) fixURL: (NSString *) url;
-- (void) generateAuthenticationString;
 @end
-
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Implementation
 
 @implementation Account
 
-@synthesize serverURL, username, password, loggedIn, userType, authenticationString;
-PSReleaseOnDealloc(serverURL, username, password, authenticationString);
+@synthesize serverURL, loggedIn, userType, name;
+PSReleaseOnDealloc(serverURL, name);
 
-- (id) initWithServerURL: (NSString *) url
-                username: (NSString *) user
-                password: (NSString *) pass {
-  if (self = [super init]) {
-    recordId = [PSInt(-1) retain];
-    loggedIn = NO;
-    username = [user copy];
-    password = [pass copy];
-    serverURL = [[self fixURL: url] retain];
-    [self generateAuthenticationString];
++ (NSArray *) propertyList {
+  return PSArray(@"username", @"password", @"serverURL", @"userTypeString");
+}
+
++ (BOOL) isPropertySavedSecurely: (NSString *) property {
+  return ([property isEqual: @"password"]);
+}
+
+- (id) init {
+  self = [super init];
+  if (self) {
+    self.loggedIn = NO;
   }
   return self;
 }
 
-- (BOOL) canLogIn {
-  return (username && password && serverURL);
+- (void) setServerURL: (NSString *) url {
+  if (url != serverURL) {
+    [serverURL release];
+    serverURL = [[self fixURL: url] retain];
+  }
 }
 
 - (NSString *) fixURL: (NSString *) url {
@@ -56,15 +59,6 @@ PSReleaseOnDealloc(serverURL, username, password, authenticationString);
     }
   }
   return url;
-}
-
-- (void) generateAuthenticationString {
-  if (username && password) {
-    NSString *stringToEncode = PSFormat(@"%@:%@", username, password);
-    NSData *data = [stringToEncode dataUsingEncoding: NSUTF8StringEncoding];
-    NSString *encoded = PSFormat(@"Basic %@", [data base64Encoding]);
-    authenticationString = [encoded retain];
-  }
 }
 
 - (void) setUserTypeString: (NSString *) typeString {
@@ -91,6 +85,13 @@ PSReleaseOnDealloc(serverURL, username, password, authenticationString);
   self.recordId = [dictionary objectForKey: @"id"];
   self.name = [dictionary objectForKey: @"name"];
   self.userTypeString = [dictionary objectForKey: @"user_type"];
+}
+
+- (User *) asUser {
+  User *user = [[User alloc] init];
+  user.name = name;
+  user.recordId = self.recordId;
+  return [user autorelease];
 }
 
 @end

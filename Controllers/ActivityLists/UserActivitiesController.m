@@ -30,7 +30,7 @@
 }
 
 - (BOOL) hasNewActivityButton {
-  return ([displayedUser isEqual: connector.account]);
+  return ([displayedUser isEqual: [connector.account asUser]]);
 }
 
 - (NSInteger) activityBatchSize {
@@ -39,7 +39,7 @@
 
 - (void) fetchData {
   [super fetchData];
-  [connector loadActivitiesForUser: displayedUser limit: [self activityBatchSize] offset: listOffset];
+  [[connector loadActivitiesRequestForUser: displayedUser limit: [self activityBatchSize] offset: listOffset] send];
 }
 
 @end

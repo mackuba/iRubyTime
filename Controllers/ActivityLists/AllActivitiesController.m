@@ -28,11 +28,11 @@
 }
 
 - (BOOL) hasNewActivityButton {
-  return (connector.account.userType != ClientUser);
+  return ([connector.account userType] != ClientUser);
 }
 
 - (NSString *) cellNibName {
-  if (connector.account.userType == Employee) {
+  if ([connector.account userType] == Employee) {
     return @"ActivityCellWithProject";
   } else if ([Project count] == 1) {
     return @"ActivityCellWithUser";
@@ -42,7 +42,7 @@
 }
 
 - (NSInteger) activityBatchSize {
-  switch (connector.account.userType) {
+  switch ([connector.account userType]) {
     case ClientUser:
       return 30;
     case Admin:
@@ -55,7 +55,7 @@
 
 - (void) fetchData {
   [super fetchData];
-  [connector loadAllActivitiesWithLimit: [self activityBatchSize] offset: listOffset];
+  [[connector loadActivitiesRequestWithLimit: [self activityBatchSize] offset: listOffset] send];
 }
 
 @end
