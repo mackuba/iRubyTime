@@ -20,7 +20,7 @@
   BOOL initialDataIsLoaded;
   BOOL kernelPanic;  // this means that something very bad has happened (e.g. server refused connection) :)
 }
-
+      
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) IBOutlet id currentController;
