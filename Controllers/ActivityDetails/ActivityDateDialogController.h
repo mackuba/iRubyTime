@@ -10,8 +10,6 @@
 @class Activity;
 
 @interface ActivityDateDialogController : UIViewController {
-  UIDatePicker *activityDatePicker;
-  UITableView *tableView;
   Activity *activity;
 }
 

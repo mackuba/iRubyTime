@@ -52,7 +52,7 @@ PSReleaseOnDealloc(connector, spinner, footerView, loginButton);
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
-  return (RTiPad ? YES : (orientation == UIInterfaceOrientationPortrait));
+  return (PSiPadDevice ? YES : (orientation == UIInterfaceOrientationPortrait));
 }
 
 // -------------------------------------------------------------------------------------------
@@ -64,10 +64,14 @@ PSReleaseOnDealloc(connector, spinner, footerView, loginButton);
     [usernameField resignFirstResponder];
     [passwordField resignFirstResponder];
     [loginButton setEnabled: NO];
-    connector.account = [[[Account alloc] initWithServerURL: urlField.text
-                                                   username: usernameField.text
-                                                   password: passwordField.text] autorelease];
-    [connector authenticate];
+
+    Account *account = [[Account alloc] init];
+    account.username = usernameField.text;
+    account.password = passwordField.text;
+    account.serverURL = urlField.text;
+    connector.account = [account autorelease];
+
+    [[connector authenticateRequest] send];
     [spinner startAnimating];
   }
 }
@@ -96,7 +100,7 @@ PSReleaseOnDealloc(connector, spinner, footerView, loginButton);
 }
 
 - (void) requestFailed: (NSNotification *) notification {
-  NSError *error = [notification.userInfo objectForKey: @"error"];
+  NSError *error = [[notification.userInfo objectForKey: @"request"] error];
   [self showError: (error ? [error friendlyDescription] : @"Can't connect to the server.")];
 }
 
@@ -130,7 +134,7 @@ PSReleaseOnDealloc(connector, spinner, footerView, loginButton);
       cell.textField.returnKeyType = UIReturnKeyNext;
       cell.textField.secureTextEntry = NO;
       urlField = cell.textField;
-      urlField.text = connector.account.serverURL;
+      urlField.text = [connector.account serverURL];
       break;
 
     case 1:
@@ -139,7 +143,7 @@ PSReleaseOnDealloc(connector, spinner, footerView, loginButton);
       cell.textField.returnKeyType = UIReturnKeyNext;
       cell.textField.secureTextEntry = NO;
       usernameField = cell.textField;
-      usernameField.text = connector.account.username;
+      usernameField.text = [connector.account username];
       break;
 
     case 2:

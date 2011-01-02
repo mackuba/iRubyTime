@@ -26,7 +26,7 @@
 }
 
 - (BOOL) hasNewActivityButton {
-  return (connector.account.userType != ClientUser);
+  return ([connector.account userType] != ClientUser);
 }
 
 - (Project *) defaultProjectForNewActivity {
@@ -34,16 +34,19 @@
 }
 
 - (NSString *) cellNibName {
-  return (connector.account.userType == Employee) ? @"ActivityCellWithProject" : @"ActivityCellWithUser";
+  return ([connector.account userType] == Employee) ? @"ActivityCellWithProject" : @"ActivityCellWithUser";
 }
 
 - (NSInteger) activityBatchSize {
-  return (connector.account.userType == Employee) ? 20 : 25;
+  return ([connector.account userType] == Employee) ? 20 : 25;
 }
 
 - (void) fetchData {
   [super fetchData];
-  [connector loadActivitiesForProject: displayedProject limit: [self activityBatchSize] offset: listOffset];
+  PSRequest *request = [connector loadActivitiesRequestForProject: displayedProject
+                                                            limit: [self activityBatchSize]
+                                                           offset: listOffset];
+  [request send];
 }
 
 @end

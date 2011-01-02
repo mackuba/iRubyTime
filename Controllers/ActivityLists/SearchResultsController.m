@@ -31,7 +31,7 @@ PSReleaseOnDealloc(parentController);
 }
 
 - (NSString *) cellNibName {
-  if (connector.account.userType == Employee) {
+  if ([connector.account userType] == Employee) {
     return @"ActivityCellWithProject";
   } else if ([Project count] == 1) {
     return @"ActivityCellWithUser";
@@ -56,10 +56,11 @@ PSReleaseOnDealloc(parentController);
 
 - (void) fetchData {
   [super fetchData];
-  [connector searchActivitiesForProject: parentController.project
-                                   user: parentController.user
-                              startDate: parentController.startDate
-                                endDate: parentController.endDate];
+  PSRequest *request = [connector searchActivitiesRequestWithProject: parentController.project
+                                                                user: parentController.user
+                                                           startDate: parentController.startDate
+                                                             endDate: parentController.endDate];
+  [request send];
 }
 
 - (void) activitiesReceived: (NSNotification *) notification {

@@ -47,7 +47,7 @@ PSReleaseOnDealloc(originalActivity, editButton, lockedActivityInfo);
   [super setupToolbar];
   self.navigationItem.title = @"Activity details";
   [self psSetBackButtonTitle: @"Activity"];
-  if ((connector.account.userType != ClientUser) && (!activity.isLocked)) {
+  if (([connector.account userType] != ClientUser) && (!activity.isLocked)) {
     editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemEdit
                                                                target: self
                                                                action: @selector(editClicked)];
@@ -74,7 +74,7 @@ PSReleaseOnDealloc(originalActivity, editButton, lockedActivityInfo);
     cancelButton.enabled = NO;
     self.navigationItem.rightBarButtonItem = loadingButton;
     [spinner startAnimating];
-    [connector deleteActivity: activity];
+    [[connector deleteRequestForActivity: activity] send];
   }
   [tableView deselectRowAtIndexPath: PSIndex(1, 0) animated: YES];
 }
@@ -96,7 +96,7 @@ PSReleaseOnDealloc(originalActivity, editButton, lockedActivityInfo);
 }
 
 - (void) executeSave {
-  [connector updateActivity: activity];
+  [[connector updateRequestForActivity: activity] send];
 }
 
 // -------------------------------------------------------------------------------------------

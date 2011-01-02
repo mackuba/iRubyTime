@@ -153,7 +153,7 @@ PSReleaseOnDealloc(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
 - (void) showActivityDetailsDialogForActivity: (Activity *) activity {
   ShowActivityDialogController *controller =
     [[ShowActivityDialogController alloc] initWithActivity: activity connector: connector];
-  controller.displaysActivityUser = (connector.account.userType != Employee);
+  controller.displaysActivityUser = ([connector.account userType] != Employee);
   [self.navigationController pushViewController: controller animated: YES];
   [controller release];
   PSObserve(connector, ActivityDeletedNotification, activityDeleted:);

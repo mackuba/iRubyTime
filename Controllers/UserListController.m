@@ -5,6 +5,7 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "Account.h"
 #import "ServerConnector.h"
 #import "User.h"
 #import "UserActivitiesController.h"
@@ -43,7 +44,7 @@
   UITableViewCell *cell = [table psGenericCellWithStyle: UITableViewCellStyleDefault];
   User *user = [[User list] objectAtIndex: path.row];
   cell.textLabel.text = user.name;
-  if ([user isEqual: connector.account]) {
+  if ([user isEqual: [connector.account asUser]]) {
     cell.textLabel.font = [UIFont boldSystemFontOfSize: 16];
   } else {
     cell.textLabel.font = [UIFont systemFontOfSize: 16];

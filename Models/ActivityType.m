@@ -7,6 +7,7 @@
 //
 
 #import "ActivityType.h"
+#import "Project.h"
 
 @implementation ActivityType
 
@@ -17,10 +18,10 @@ PSReleaseOnDealloc(name, availableSubactivityTypes);
   return PSArray(@"name", @"position", @"availableSubactivityTypes");
 }
 
-+ (id) objectWithId: (NSNumber *) objectId {
-  // we can't look up activity type by id in a global list,
-  // because one activity type can have multiple separate instances in several projects
-  return objectId;
++ (id) objectWithId: (NSNumber *) objectId context: (id) context {
+  NSNumber *projectId = [context objectForKey: @"project_id"];
+  Project *project = [Project objectWithId: projectId];
+  return [project activityTypeWithId: objectId];
 }
 
 - (id) init {

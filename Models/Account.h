@@ -5,25 +5,19 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#import "User.h"
-
 typedef enum { Employee, ClientUser, Admin } UserType;
 
-@interface Account : User {}
+@class User;
+
+@interface Account : PSAccount {}
 
 @property (nonatomic) BOOL loggedIn;
 @property (nonatomic, readonly) UserType userType;
-@property (nonatomic, readonly) NSString *serverURL;
-@property (nonatomic, readonly) NSString *username;
-@property (nonatomic, copy) NSString *password;
-@property (nonatomic, readonly) NSString *authenticationString;
 @property (nonatomic, copy) NSString *userTypeString;
+@property (nonatomic, copy) NSString *serverURL;
+@property (nonatomic, copy) NSString *name;
 
-- (id) initWithServerURL: (NSString *) url
-                username: (NSString *) name
-                password: (NSString *) pass;
-
-- (BOOL) canLogIn;
 - (void) logInWithResponse: (NSDictionary *) dictionary;
+- (User *) asUser;
 
 @end

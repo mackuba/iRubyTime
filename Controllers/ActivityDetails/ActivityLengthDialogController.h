@@ -10,7 +10,6 @@
 @class Activity;
 
 @interface ActivityLengthDialogController : UIViewController {
-  UIDatePicker *activityLengthPicker;
   Activity *activity;
 }
 

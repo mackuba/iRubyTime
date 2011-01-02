@@ -9,6 +9,6 @@
 
 @property (nonatomic, copy) NSString *name;
 
-+ (void) addSelfToTopOfUsers: (User *) user;
+- (void) addSelfToTopOfUsers;
 
 @end

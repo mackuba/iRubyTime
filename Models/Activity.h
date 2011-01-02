@@ -9,9 +9,7 @@
 @class User;
 @class ActivityType;
 
-@interface Activity : PSModel {
-  NSNumber *activityTypeId;
-}
+@interface Activity : PSModel {}
 
 @property (nonatomic, copy) NSString *comments;
 @property (nonatomic, copy) ActivityType *activityType;
@@ -24,7 +22,6 @@
 
 - (NSString *) hourString;
 - (BOOL) isEqualToActivity: (Activity *) other;
-- (NSString *) toQueryString;
 - (void) setDateAsDate: (NSDate *) newDate;
 
 @end

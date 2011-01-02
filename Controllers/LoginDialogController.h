@@ -14,9 +14,6 @@
   UITextField *urlField;
   UITextField *usernameField;
   UITextField *passwordField;
-  UIActivityIndicatorView *spinner;
-  UIView *footerView;
-  UIButton *loginButton;
   ServerConnector *connector;
 }
 

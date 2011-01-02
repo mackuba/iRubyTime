@@ -60,7 +60,7 @@ PSReleaseOnDealloc(model, delegate);
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
-  return (RTiPad ? YES : (orientation == UIInterfaceOrientationPortrait));
+  return (PSiPadDevice ? YES : (orientation == UIInterfaceOrientationPortrait));
 }
 
 // -------------------------------------------------------------------------------------------

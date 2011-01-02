@@ -9,8 +9,6 @@
 
 @interface DateRangeController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
   id delegate;
-  UITableView *tableView;
-  UIDatePicker *datePicker;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;

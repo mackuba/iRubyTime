@@ -55,21 +55,21 @@
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation {
-  return (RTiPad ? YES : (orientation == UIInterfaceOrientationPortrait));
+  return (PSiPadDevice ? YES : (orientation == UIInterfaceOrientationPortrait));
 }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Action handlers
 
 - (void) saveClicked {
-  if ([activity.comments psIsBlank]) {
-    [UIAlertView psShowAlertWithTitle: @"Can't save activity"
-                              message: @"Activity comments field is empty - please fill it first."];
-  } else {
+  if ([activity.comments psIsPresent]) {
     self.navigationItem.rightBarButtonItem = loadingButton;
     cancelButton.enabled = NO;
     [spinner startAnimating];
     [self executeSave];
+  } else {
+    [UIAlertView psShowAlertWithTitle: @"Can't save activity"
+                              message: @"Activity comments field is empty - please fill it first."];
   }
 }
 
@@ -83,23 +83,21 @@
   self.navigationItem.rightBarButtonItem = saveButton;
   cancelButton.enabled = YES;
 
-  NSError *error = [notification.userInfo objectForKey: @"error"];
-  NSString *text = [notification.userInfo objectForKey: @"text"];
-  Request *request = [notification.userInfo objectForKey: @"request"];
-  NSString *message = [self errorMessageFromError: error text: text request: request];
+  PSRequest *request = [notification.userInfo objectForKey: @"request"];
+  NSString *message = [self errorMessageFromError: request.error text: request.response.text request: request];
 
   [UIAlertView psShowErrorWithMessage: message];
 }
 
-- (NSString *) errorMessageFromError: (NSError *) error text: (NSString *) text request: (Request *) request {
+- (NSString *) errorMessageFromError: (NSError *) error text: (NSString *) text request: (PSRequest *) request {
   NSString *message = nil;
-  if (error && error.domain == RubyTimeErrorDomain && error.code == 400 && text) {
+  if (error && error.domain == PsiToolkitErrorDomain && error.code == PSHTTPStatusBadRequest && text) {
     message = [self errorMessageFromJSON: text];
   } else if (error) {
     message = [error friendlyDescription];
   }
   if (!message) {
-    if (request.type == RTDeleteActivityRequest) {
+    if ([request.requestMethod isEqual: PSDeleteMethod]) {
       message = @"Activity could not be deleted.";
     } else {
       message = @"Activity could not be saved.";
@@ -110,7 +108,7 @@
 
 - (NSString *) errorMessageFromJSON: (NSString *) jsonString {
   NSString *message = nil;
-  NSDictionary *result = [jsonString yajl_JSON];
+  NSDictionary *result = [PSModel valueFromJSONString: jsonString];
   if (result.count > 0) {
     NSArray *errors = [result objectForKey: [[result allKeys] objectAtIndex: 0]];
     if (errors.count > 0) {

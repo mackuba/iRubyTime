@@ -3,8 +3,13 @@
 //
 
 #ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-    #import <UIKit/UIKit.h>
-    #import "PsiToolkit.h"
-    #import "YAJL/YAJL.h"
+  #import <Foundation/Foundation.h>
+  #import <UIKit/UIKit.h>
+
+  #define PSITOOLKIT_ENABLE_UIKIT
+  #define PSITOOLKIT_ENABLE_MODELS
+  #define PSITOOLKIT_ENABLE_NETWORK
+  #define PSITOOLKIT_ENABLE_SECURITY
+  #define PSITOOLKIT_USE_YAJL
+  #import "PsiToolkit.h"
 #endif
