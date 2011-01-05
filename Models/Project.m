@@ -26,7 +26,11 @@ PSReleaseOnDealloc(name, availableActivityTypes);
   [availableActivityTypes release];
   availableActivityTypes = [[NSMutableArray alloc] init];
   for (id activityTypeHash in newAvailableActivityTypes) {
-    [availableActivityTypes addObject: [ActivityType objectFromJSON: activityTypeHash]];
+    if ([activityTypeHash class] == [ActivityType class]) {
+      [availableActivityTypes addObject: activityTypeHash];
+    } else {
+      [availableActivityTypes addObject: [ActivityType objectFromJSON: activityTypeHash]];
+    }
   }
 }
 
