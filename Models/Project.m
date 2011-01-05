@@ -35,13 +35,15 @@ PSReleaseOnDealloc(name, availableActivityTypes);
 }
 
 - (ActivityType *) activityTypeWithId: (NSNumber *) aRecordId {
+  NSInteger activityTypeId = [aRecordId integerValue];
+
   for (ActivityType *activityType in availableActivityTypes) {
-    if (activityType.recordId == aRecordId) {
+    if ([activityType.recordId integerValue] == activityTypeId) {
       return activityType;
     }
     else {
       for (ActivityType *subactivityType in [activityType availableSubactivityTypes]) {
-        if (subactivityType.recordId == aRecordId) {
+        if ([subactivityType.recordId integerValue] == activityTypeId) {
           return subactivityType;
         }
       }
