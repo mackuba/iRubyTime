@@ -113,7 +113,7 @@ PSReleaseOnDealloc(dateRangeCell, startDateLabel, endDateLabel, startDate, endDa
 
 - (void) showNotFoundMessage {
   if (!tableView.tableHeaderView) {
-    UIView *footer = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 60)];
+    UIView *footer = [[UIView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 60)];
     UILabel *label = [[UILabel alloc] initWithFrame: footer.frame];
     label.font = [UIFont systemFontOfSize: 14];
     label.backgroundColor = [UIColor clearColor];

@@ -22,7 +22,7 @@
 }
 
 @property (nonatomic, copy) NSString *comments;
-@property (nonatomic, copy) ActivityType *activityType;
+@property (nonatomic, retain) ActivityType *activityType;
 @property (nonatomic, copy) NSDate *date;
 @property (nonatomic, copy) NSString *dateAsString;
 @property (nonatomic) NSInteger minutes;
