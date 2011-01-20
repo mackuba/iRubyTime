@@ -122,9 +122,12 @@ PSReleaseOnDealloc(originalActivity, editButton, lockedActivityInfo);
       } else {
         return PSIntegers(DateRow, ProjectRow, UserRow, LengthRow, CommentsRow);
       }
-
     } else {
-      return PSIntegers(DateRow, ProjectRow, ActivityTypeRow, LengthRow, CommentsRow);
+      if ([activity.project hasAvailableActivityTypes]) {
+        return PSIntegers(DateRow, ProjectRow, ActivityTypeRow, LengthRow, CommentsRow);
+      } else {
+        return PSIntegers(DateRow, ProjectRow, LengthRow, CommentsRow);
+      }
     }
   } else {
     if (self.editing) {
