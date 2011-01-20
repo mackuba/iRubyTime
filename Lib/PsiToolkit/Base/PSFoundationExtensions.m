@@ -190,13 +190,41 @@
 - (NSString *) psPluralizedString {
   static NSDictionary *exceptions;
   if (!exceptions) {
-    exceptions = [PSHash(@"person", @"people") retain];
+    exceptions = PSHash(
+      @"person", @"people",
+      @"man", @"men",
+      @"woman", @"women",
+      @"child", @"children"
+    );
+    [exceptions retain];
   }
 
   NSString *downcased = [self lowercaseString];
   NSString *result = [exceptions objectForKey: downcased];
   if (result) {
+    // one of the exceptions above
     return result;
+  } else if ([downcased hasSuffix: @"ch"]) {
+    // e.g. match -> matches
+    return [downcased stringByAppendingString: @"es"];
+  } else if ([downcased hasSuffix: @"fe"]) {
+    // e.g. knife -> knives
+    return [[downcased substringToIndex: downcased.length - 2] stringByAppendingString: @"ves"];
+  } else if ([downcased hasSuffix: @"sh"]) {
+    // e.g. flash -> flashes
+    return [downcased stringByAppendingString: @"es"];
+  } else if ([downcased hasSuffix: @"ss"]) {
+    // e.g. boss -> bosses
+    return [downcased stringByAppendingString: @"es"];
+  } else if ([downcased hasSuffix: @"us"]) {
+    // e.g. bus -> buses
+    return [downcased stringByAppendingString: @"es"];
+  } else if ([downcased hasSuffix: @"x"]) {
+    // e.g. box -> boxes
+    return [downcased stringByAppendingString: @"es"];
+  } else if ([downcased hasSuffix: @"y"]) {
+    // e.g. activity -> activities
+    return [[downcased substringToIndex: downcased.length - 1] stringByAppendingString: @"ies"];
   } else if ([downcased hasSuffix: @"s"]) {
     return downcased;
   } else {
