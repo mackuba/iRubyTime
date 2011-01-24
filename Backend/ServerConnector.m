@@ -120,6 +120,7 @@
 - (PSRequest *) deleteRequestForActivity: (Activity *) activity {
   PSRequest *request = [self deleteRequestForObject: activity];
   request.successHandler = @selector(activityDeleted:);
+  request.expectedContentType = PSAnyResponseType;
   return request;
 }
 
