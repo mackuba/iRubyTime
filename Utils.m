@@ -50,14 +50,6 @@
 
 @end
 
-@implementation UIImage (RubyTime)
-
-+ (UIImage *) loadImageFromBundle: (NSString *) imageName {
-  return [UIImage imageNamed: PSFormat(@"Images/%@", imageName)];
-}
-
-@end
-
 @implementation UIViewController (RubyTime)
 
 - (void) initializeLengthPicker: (UIDatePicker *) picker usingActivity: (Activity *) activity {

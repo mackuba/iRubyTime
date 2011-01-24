@@ -29,7 +29,7 @@ PSReleaseOnDealloc(subcontrollers, projectList);
   self = [super initWithConnector: rtConnector andStyle: UITableViewStylePlain];
   if (self) {
     self.title = @"Projects";
-    self.tabBarItem.image = [UIImage loadImageFromBundle: @"cabinet.png"];
+    self.tabBarItem.image = [UIImage imageNamed: @"cabinet.png"];
     subcontrollers = [[NSMutableDictionary alloc] init];
   }
   return self;

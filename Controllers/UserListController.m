@@ -27,7 +27,7 @@
   self = [super initWithConnector: rtConnector andStyle: UITableViewStylePlain];
   if (self) {
     self.title = @"Users";
-    self.tabBarItem.image = [UIImage loadImageFromBundle: @"walk.png"];
+    self.tabBarItem.image = [UIImage imageNamed: @"walk.png"];
     subcontrollers = [[NSMutableDictionary alloc] init];
   }
   return self;

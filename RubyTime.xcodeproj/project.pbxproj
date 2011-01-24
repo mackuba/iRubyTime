@@ -27,6 +27,11 @@
 		5831CBAA12EDFBC0008169A7 /* SDKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831CB8212EDFBC0008169A7 /* SDKeychain.m */; };
 		5831CBAB12EDFBC0008169A7 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831CB8412EDFBC0008169A7 /* SFHFKeychainUtils.m */; };
 		5831CBAC12EDFBC0008169A7 /* PSUIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831CB8712EDFBC0008169A7 /* PSUIExtensions.m */; };
+		5831CDB612EE2AF3008169A7 /* cabinet.png in Resources */ = {isa = PBXBuildFile; fileRef = 5831CDB112EE2AF3008169A7 /* cabinet.png */; };
+		5831CDB712EE2AF3008169A7 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 5831CDB212EE2AF3008169A7 /* clock.png */; };
+		5831CDB812EE2AF3008169A7 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 5831CDB312EE2AF3008169A7 /* gear.png */; };
+		5831CDB912EE2AF3008169A7 /* magnifying-glass.png in Resources */ = {isa = PBXBuildFile; fileRef = 5831CDB412EE2AF3008169A7 /* magnifying-glass.png */; };
+		5831CDBA12EE2AF3008169A7 /* walk.png in Resources */ = {isa = PBXBuildFile; fileRef = 5831CDB512EE2AF3008169A7 /* walk.png */; };
 		5833BEB41095D9C800A5530E /* UserListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BEB31095D9C800A5530E /* UserListController.m */; };
 		5833BEC11095E7F600A5530E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BEC01095E7F600A5530E /* User.m */; };
 		5833BED01095EA4400A5530E /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833BECF1095EA4400A5530E /* Account.m */; };
@@ -36,7 +41,6 @@
 		5833C0D11095F98A00A5530E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5833C0D01095F98A00A5530E /* Foundation.framework */; };
 		583BB00912D11283002AD442 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583BB00812D11283002AD442 /* Security.framework */; };
 		58420FD2109EFD1600F90AFB /* ShowMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58420FD1109EFD1600F90AFB /* ShowMoreCell.xib */; };
-		5842111310A06EE100F90AFB /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 5842110C10A06EE100F90AFB /* Images */; };
 		5842119210A084A600F90AFB /* SearchFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5842119110A084A600F90AFB /* SearchFormController.m */; };
 		5844CE620FC31FA8007F22FE /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 5844CE610FC31FA8007F22FE /* README.markdown */; };
 		5853E4FB10A18BD20060636F /* DateRangeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5853E4FA10A18BD20060636F /* DateRangeCell.xib */; };
@@ -154,6 +158,11 @@
 		5831CB8412EDFBC0008169A7 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		5831CB8612EDFBC0008169A7 /* PSUIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSUIExtensions.h; sourceTree = "<group>"; };
 		5831CB8712EDFBC0008169A7 /* PSUIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSUIExtensions.m; sourceTree = "<group>"; };
+		5831CDB112EE2AF3008169A7 /* cabinet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cabinet.png; sourceTree = "<group>"; };
+		5831CDB212EE2AF3008169A7 /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
+		5831CDB312EE2AF3008169A7 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		5831CDB412EE2AF3008169A7 /* magnifying-glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "magnifying-glass.png"; sourceTree = "<group>"; };
+		5831CDB512EE2AF3008169A7 /* walk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = walk.png; sourceTree = "<group>"; };
 		5833BEB21095D9C800A5530E /* UserListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListController.h; sourceTree = "<group>"; };
 		5833BEB31095D9C800A5530E /* UserListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListController.m; sourceTree = "<group>"; };
 		5833BEBF1095E7F600A5530E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -166,7 +175,6 @@
 		5833C0D01095F98A00A5530E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		583BB00812D11283002AD442 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		58420FD1109EFD1600F90AFB /* ShowMoreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowMoreCell.xib; sourceTree = "<group>"; };
-		5842110C10A06EE100F90AFB /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 		5842119010A084A600F90AFB /* SearchFormController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFormController.h; sourceTree = "<group>"; };
 		5842119110A084A600F90AFB /* SearchFormController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFormController.m; sourceTree = "<group>"; };
 		5844CE610FC31FA8007F22FE /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
@@ -344,7 +352,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5842110C10A06EE100F90AFB /* Images */,
+				5831CDB012EE2AF3008169A7 /* Images */,
 				58AD921C1050335F007A5175 /* Entitlements.plist */,
 				58F47A610FF6AB5F00A1F20F /* Icon.png */,
 				58861A11119832B60028AAE9 /* Icon72.png */,
@@ -449,6 +457,18 @@
 				5831CB8712EDFBC0008169A7 /* PSUIExtensions.m */,
 			);
 			path = UIKit;
+			sourceTree = "<group>";
+		};
+		5831CDB012EE2AF3008169A7 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				5831CDB112EE2AF3008169A7 /* cabinet.png */,
+				5831CDB212EE2AF3008169A7 /* clock.png */,
+				5831CDB312EE2AF3008169A7 /* gear.png */,
+				5831CDB412EE2AF3008169A7 /* magnifying-glass.png */,
+				5831CDB512EE2AF3008169A7 /* walk.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		5833BF321095F4D700A5530E /* Frameworks */ = {
@@ -714,7 +734,6 @@
 				586E37AB1099D74A005EB2C8 /* ActivityCellWithProject.xib in Resources */,
 				586E37AD1099D769005EB2C8 /* ActivityCellWithBoth.xib in Resources */,
 				58420FD2109EFD1600F90AFB /* ShowMoreCell.xib in Resources */,
-				5842111310A06EE100F90AFB /* Images in Resources */,
 				5853E4FB10A18BD20060636F /* DateRangeCell.xib in Resources */,
 				5853E5BF10A1C7EB0060636F /* DateRangeDialog.xib in Resources */,
 				58D3934A10DD602600046558 /* LoggedOutView.xib in Resources */,
@@ -726,6 +745,11 @@
 				58861B1D119851F30028AAE9 /* ActivityCellWithProject-iPad.xib in Resources */,
 				58861B1E119851F30028AAE9 /* ActivityCellWithUser-iPad.xib in Resources */,
 				5831CB9E12EDFBC0008169A7 /* generate_bridges.sh in Resources */,
+				5831CDB612EE2AF3008169A7 /* cabinet.png in Resources */,
+				5831CDB712EE2AF3008169A7 /* clock.png in Resources */,
+				5831CDB812EE2AF3008169A7 /* gear.png in Resources */,
+				5831CDB912EE2AF3008169A7 /* magnifying-glass.png in Resources */,
+				5831CDBA12EE2AF3008169A7 /* walk.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

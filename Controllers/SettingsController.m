@@ -27,7 +27,7 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
 - (id) initWithConnector: (ServerConnector *) rtConnector {
   self = [super initWithConnector: rtConnector andStyle: UITableViewStyleGrouped];
   if (self) {
-    self.tabBarItem.image = [UIImage loadImageFromBundle: @"gear.png"];
+    self.tabBarItem.image = [UIImage imageNamed: @"gear.png"];
     self.title = @"Settings";
   }
   return self;

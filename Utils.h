@@ -19,10 +19,6 @@
 + (UIActivityIndicatorView *) spinnerBarButton;
 @end
 
-@interface UIImage (RubyTime)
-+ (UIImage *) loadImageFromBundle: (NSString *) imageName;
-@end
-
 @interface UIViewController (RubyTime)
 - (void) initializeLengthPicker: (UIDatePicker *) picker usingActivity: (Activity *) activity;
 @end

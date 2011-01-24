@@ -44,7 +44,7 @@ PSReleaseOnDealloc(dateRangeCell, startDateLabel, endDateLabel, startDate, endDa
     user = nil;
     startDate = [[self dateOneMonthAgo] retain];
     endDate = [[NSDate date] retain];
-    self.tabBarItem.image = [UIImage loadImageFromBundle: @"magnifying-glass.png"];
+    self.tabBarItem.image = [UIImage imageNamed: @"magnifying-glass.png"];
     self.title = @"Search";
     [self psSetBackButtonTitle: @"Form"];
     [[NSBundle mainBundle] loadNibNamed: @"DateRangeCell" owner: self options: nil];

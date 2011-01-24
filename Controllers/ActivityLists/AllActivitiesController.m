@@ -20,7 +20,7 @@
   self = [super initWithConnector: rtConnector];
   if (self) {
     self.title = @"Recent activities";
-    self.tabBarItem.image = [UIImage loadImageFromBundle: @"clock.png"];
+    self.tabBarItem.image = [UIImage imageNamed: @"clock.png"];
     self.tabBarItem.title = @"Activities";
     [self psSetBackButtonTitle: @"Activities"];
   }
