@@ -16,12 +16,9 @@
 
 @implementation Activity
 
-@synthesize minutes, locked, date, dateAsString, comments, activityType, project, user;
-PSReleaseOnDealloc(date, dateAsString, comments, project, user, activityType);
-
-+ (NSArray *) propertyList {
-  return PSArray(@"comments", @"date", @"minutes", @"project", @"user", @"locked", @"activityType");
-}
+@synthesize dateAsString;
+PSModelProperties(date, comments, project, user, activityType, minutes, locked);
+PSReleaseOnDealloc(date, comments, project, user, activityType, dateAsString);
 
 - (id) init {
   self = [super init];

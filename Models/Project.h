@@ -11,7 +11,7 @@
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic) BOOL hasActivities;
-@property (nonatomic, retain) NSMutableArray *availableActivityTypes;
+@property (nonatomic, retain) NSArray *availableActivityTypes;
 
 + (NSArray *) allWithActivities;
 - (ActivityType *) activityTypeWithId: (NSNumber *) recordId;

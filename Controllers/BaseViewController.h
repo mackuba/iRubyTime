@@ -23,8 +23,6 @@
 - (id) initWithConnector: (ServerConnector *) rtConnector andStyle: (UITableViewStyle) style;
 - (void) showLoadingMessage;
 - (void) hideLoadingMessage;
-- (void) showPopupView: (UIViewController *) controllerClass;
-- (void) hidePopupView;
 - (BOOL) needsOwnData;
 - (void) fetchData;
 - (void) fetchDataIfNeeded;

@@ -22,7 +22,7 @@
     displayedUser = [user retain];
     self.title = user.name;
     if (user.name.length > 11) {
-      NSString *firstName = [[user.name componentsSeparatedByString: @" "] objectAtIndex: 0];
+      NSString *firstName = [[user.name componentsSeparatedByString: @" "] psFirstObject];
       [self psSetBackButtonTitle: firstName];
     }
   }

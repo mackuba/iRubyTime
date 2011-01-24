@@ -21,10 +21,11 @@
 
 @implementation Account
 
-@synthesize serverURL, loggedIn, userType, name;
+@synthesize loggedIn, userType;
+PSModelProperties(serverURL, name, userTypeString);
 PSReleaseOnDealloc(serverURL, name);
 
-+ (NSArray *) propertyList {
++ (NSArray *) propertiesSavedInSettings {
   return PSArray(@"username", @"password", @"serverURL", @"userTypeString");
 }
 

@@ -9,7 +9,6 @@
 
 @class Activity;
 
-#define AbstractMethod(returnStatement) { [self doesNotRecognizeSelector: _cmd]; returnStatement; }
 #define RTUniversalNib(name) (PSiPadDevice ? ([name stringByAppendingString: @"-iPad"]) : name)
 
 @interface NSError (RubyTime)

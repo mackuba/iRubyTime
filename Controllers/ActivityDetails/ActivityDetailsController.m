@@ -73,7 +73,7 @@
   }
 }
 
-- (void) executeSave { AbstractMethod() }
+- (void) executeSave { PSAbstractMethod(void) }
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Notification callbacks
@@ -110,9 +110,9 @@
   NSString *message = nil;
   NSDictionary *result = [PSModel valueFromJSONString: jsonString];
   if (result.count > 0) {
-    NSArray *errors = [result objectForKey: [[result allKeys] objectAtIndex: 0]];
+    NSArray *errors = [result objectForKey: [[result allKeys] psFirstObject]];
     if (errors.count > 0) {
-      message = [[errors objectAtIndex: 0] stringByAppendingString: @"."];
+      message = [[errors psFirstObject] stringByAppendingString: @"."];
     }
   }
   return message;
@@ -138,7 +138,7 @@
 
 // abstract methods that the subclasses need to define
 
-- (PSIntArray *) rowTypesInSection: (NSInteger) section { AbstractMethod(return nil); }
+- (PSIntArray *) rowTypesInSection: (NSInteger) section { PSAbstractMethod(id) }
 
 
 // helper methods

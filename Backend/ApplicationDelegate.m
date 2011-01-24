@@ -6,6 +6,7 @@
 // -------------------------------------------------------
 
 #import "Account.h"
+#import "User.h"
 #import "AllActivitiesController.h"
 #import "ApplicationDelegate.h"
 #import "LoginDialogController.h"
@@ -42,6 +43,7 @@ PSReleaseOnDealloc(window, tabBarController, connector, currentController);
 
   PSObserve(connector, AuthenticationSuccessfulNotification, loginSuccessful);
   PSObserve(connector, RequestFailedNotification, requestFailed);
+
   if ([connector.account hasAllRequiredProperties]) {
     [self buildGuiForUserType: [connector.account userType]];
     [currentController showLoadingMessage];
@@ -58,39 +60,31 @@ PSReleaseOnDealloc(window, tabBarController, connector, currentController);
 - (void) buildGuiForUserType: (UserType) type {
   NSArray *navigationControllers = [self navigationControllersForUserType: type];
   [tabBarController setViewControllers: navigationControllers animated: NO];
-  self.currentController = [[[navigationControllers objectAtIndex: 0] viewControllers] objectAtIndex: 0];
+  self.currentController = [[navigationControllers psFirstObject] psRootController];
 }
 
 - (void) rebuildGuiExceptLastControllerForUserType: (UserType) type {
-  NSArray *tabs = tabBarController.viewControllers;
-  UINavigationController *lastController = [tabs objectAtIndex: (tabs.count - 1)];
+  UINavigationController *lastController = [[tabBarController viewControllers] lastObject];
   NSMutableArray *navigationControllers = [[self navigationControllersForUserType: type] mutableCopy];
   [navigationControllers replaceObjectAtIndex: (navigationControllers.count - 1) withObject: lastController];
   [tabBarController setViewControllers: navigationControllers animated: NO];
   tabBarController.selectedIndex = 0;
-  self.currentController = [[[navigationControllers objectAtIndex: 0] viewControllers] objectAtIndex: 0];
+  self.currentController = [[navigationControllers psFirstObject] psRootController];
   [navigationControllers release];
 }
 
 - (NSArray *) navigationControllersForUserType: (UserType) type {
   NSArray *viewControllers = [self viewControllersForUserType: type];
-  NSMutableArray *navigationControllers = [[NSMutableArray alloc] initWithCapacity: viewControllers.count];
-  for (BaseViewController *actualController in viewControllers) {
-    UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController: actualController];
-    [navigationControllers addObject: navigation];
-    [navigation release];
-  }
-  return [navigationControllers autorelease];
+  return [viewControllers psArrayByCalling: @selector(psWrapInNavigationController)];
 }
 
 - (NSArray *) viewControllersForUserType: (UserType) type {
   NSArray *classes = [self viewControllerClassesForUserType: type];
-  NSMutableArray *controllers = [[NSMutableArray alloc] initWithCapacity: classes.count];
-  for (Class controllerClass in classes) {
-    BaseViewController *controller = [[[controllerClass alloc] initWithConnector: connector] autorelease];
-    [controllers addObject: controller];
-  }
-  return [controllers autorelease];
+  return [self psArrayByCalling: @selector(controllerOfClass:) withObjectsFrom: classes];
+}
+
+- (BaseViewController *) controllerOfClass: (Class) class {
+  return [[[class alloc] initWithConnector: connector] autorelease];
 }
 
 - (NSArray *) viewControllerClassesForUserType: (UserType) type {
@@ -113,9 +107,8 @@ PSReleaseOnDealloc(window, tabBarController, connector, currentController);
 }
 
 - (void) showLoginDialog {
-  LoginDialogController *loginDialog = [[LoginDialogController alloc] initWithConnector: connector];
-  [currentController showPopupView: loginDialog];
-  [loginDialog release];
+  LoginDialogController *loginDialog = [[[LoginDialogController alloc] initWithConnector: connector] autorelease];
+  [currentController psShowPopupView: loginDialog withStyle: UIModalPresentationPageSheet];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -124,7 +117,7 @@ PSReleaseOnDealloc(window, tabBarController, connector, currentController);
 - (void) loginSuccessful {
   if ([currentController modalViewController]) {
     // login controller was shown previously
-    [currentController hidePopupView];
+    [currentController psHidePopupView];
     [self buildGuiForUserType: [connector.account userType]];
     [currentController showLoadingMessage];
   } else {
@@ -145,7 +138,7 @@ PSReleaseOnDealloc(window, tabBarController, connector, currentController);
   kernelPanic = NO;
   [connector.account save];
   [self rebuildGuiExceptLastControllerForUserType: [connector.account userType]];
-  [currentController hidePopupView];
+  [currentController psHidePopupView];
   [currentController showLoadingMessage];
   PSObserve(connector, RequestFailedNotification, requestFailed);
   PSObserve(connector, ProjectsReceivedNotification, projectsReceived);

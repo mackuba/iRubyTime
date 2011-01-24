@@ -87,7 +87,7 @@ PSReleaseOnDealloc(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
 }
 
 // override in subclasses
-- (NSInteger) activityBatchSize { AbstractMethod(return 0); }
+- (NSInteger) activityBatchSize { PSAbstractMethod(NSInteger); }
 
 - (NSInteger) defaultLengthForNewActivity {
   if (manager.activities.count > 0) {
@@ -99,9 +99,9 @@ PSReleaseOnDealloc(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
 
 - (Project *) defaultProjectForNewActivity {
   if (manager.activities.count > 0) {
-    return [[manager.activities objectAtIndex: 0] project];
+    return [[manager.activities psFirstObject] project];
   } else {
-    return [[Project list] objectAtIndex: 0];
+    return [[Project list] psFirstObject];
   }
 }
 
@@ -112,7 +112,7 @@ PSReleaseOnDealloc(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
   [manager addNewActivity: activity];
   BOOL isOnlyOne = (manager.activities.count == 1);
   BOOL isOnlyOneInSection = ([manager activitiesOnDay: activity.date].count == 1);
-  BOOL isLastOne = isOnlyOne || ([manager.activities objectAtIndex: manager.activities.count - 1] == activity);
+  BOOL isLastOne = isOnlyOne || ([manager.activities lastObject] == activity);
   NSIndexPath *newCellIndex = [self indexPathForActivity: activity];
 
   if (!isOnlyOne) {
@@ -144,7 +144,7 @@ PSReleaseOnDealloc(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
   dialog = [[NewActivityDialogController alloc] initWithConnector: connector
                                                    defaultProject: [self defaultProjectForNewActivity]
                                                     defaultLength: [self defaultLengthForNewActivity]];
-  [self showPopupView: dialog];
+  [self psShowPopupView: dialog withStyle: UIModalPresentationPageSheet];
   PSObserve(connector, ActivityCreatedNotification, activityCreated:);
   PSObserve(dialog, ActivityDialogCancelledNotification, hidePopupView);
   [dialog release];
@@ -191,7 +191,7 @@ PSReleaseOnDealloc(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
 - (void) activityCreated: (NSNotification *) notification {
   Activity *activity = [notification.userInfo objectForKey: @"activity"];
   [self addActivityToList: activity];
-  [self hidePopupView];
+  [self psHidePopupView];
 }
 
 - (void) activityDeleted: (NSNotification *) notification {

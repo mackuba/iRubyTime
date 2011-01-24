@@ -10,12 +10,8 @@
 
 @implementation User
 
-@synthesize name;
+PSModelProperties(name);
 PSReleaseOnDealloc(name);
-
-+ (NSArray *) propertyList {
-  return PSArray(@"name");
-}
 
 - (void) addSelfToTopOfUsers {
   [self removeObjectFromList];

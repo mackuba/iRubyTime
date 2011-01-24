@@ -11,23 +11,16 @@
 
 @implementation Project
 
-@synthesize hasActivities, name, availableActivityTypes;
+PSModelProperties(name, availableActivityTypes, hasActivities);
 PSReleaseOnDealloc(name, availableActivityTypes);
 
-+ (NSArray *) propertyList {
-  return PSArray(@"name", @"hasActivities", @"availableActivityTypes");
-}
-
 + (NSArray *) allWithActivities {
-  return [[self list] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat: @"hasActivities == TRUE"]];
+  return [[self list] psFilterWithPredicate: @"hasActivities == TRUE"];
 }
 
-- (void) setAvailableActivityTypes: (id) newAvailableActivityTypes {
+- (void) setAvailableActivityTypes: (id) types {
   [availableActivityTypes release];
-  availableActivityTypes = [[NSMutableArray alloc] init];
-  for (id activityTypeHash in newAvailableActivityTypes) {
-    [availableActivityTypes addObject: [ActivityType objectFromJSON: activityTypeHash]];
-  }
+  availableActivityTypes = [[ActivityType objectsFromJSON: types] retain];
 }
 
 - (ActivityType *) activityTypeWithId: (NSNumber *) aRecordId {

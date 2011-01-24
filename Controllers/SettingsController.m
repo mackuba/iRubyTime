@@ -53,7 +53,7 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
                                                                   target: self
                                                                   action: @selector(cancelLoginClicked)];
   loginDialog.navigationItem.leftBarButtonItem = [cancelButton autorelease];
-  [self showPopupView: [loginDialog autorelease]];
+  [self psShowPopupView: [loginDialog autorelease] withStyle: UIModalPresentationPageSheet];
   PSObserve(connector, AuthenticationSuccessfulNotification, loginSuccessful);
 }
 
@@ -62,7 +62,7 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
   [connector cancelAllRequests];
   connector.account = [currentAccount autorelease];
   currentAccount = nil;
-  [self hidePopupView];
+  [self psHidePopupView];
 }
 
 - (void) loginSuccessful {
@@ -78,7 +78,7 @@ typedef enum { ServerRow, LoginRow, VersionRow } RowType;
                                        destructiveButtonTitle: @"Log out"
                                             otherButtonTitles: nil];
   [sheet setActionSheetStyle: UIActionSheetStyleDefault];
-  [sheet showInView: [self.view.window.subviews objectAtIndex: 0]];
+  [sheet showInView: [self.view.window.subviews psFirstObject]];
   [sheet release];
 }
 

@@ -17,7 +17,7 @@
 @synthesize connector;
 PSReleaseOnDealloc(connector, loadingView);
 
-- (id) initWithConnector: (ServerConnector *) rtConnector { AbstractMethod(return nil) }
+- (id) initWithConnector: (ServerConnector *) rtConnector { PSAbstractMethod(id) }
 
 - (id) initWithConnector: (ServerConnector *) rtConnector andStyle: (UITableViewStyle) style {
   self = [super init];
@@ -49,19 +49,6 @@ PSReleaseOnDealloc(connector, loadingView);
   [loadingView removeView];
   [loadingView release];
   loadingView = nil;
-}
-
-- (void) showPopupView: (UIViewController *) controller {
-  UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController: controller];
-  if ([self respondsToSelector: @selector(setModalPresentationStyle:)]) {
-    navigation.modalPresentationStyle = UIModalPresentationPageSheet;
-  }
-  [self presentModalViewController: navigation animated: YES];
-  [navigation release];
-}
-
-- (void) hidePopupView {
-  [self dismissModalViewControllerAnimated: YES];
 }
 
 // override in subclasses and return YES if the controller needs to fetch data (activities) before it's displayed
@@ -125,6 +112,6 @@ PSReleaseOnDealloc(connector, loadingView);
 }
 
 // implement in subclasses
-- (UITableViewCell *) tableView: (UITableView *) t cellForRowAtIndexPath: (NSIndexPath *) p {AbstractMethod(return nil)}
+- (UITableViewCell *) tableView: (UITableView *) t cellForRowAtIndexPath: (NSIndexPath *) p { PSAbstractMethod(id); }
 
 @end

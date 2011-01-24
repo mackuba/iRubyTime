@@ -11,17 +11,20 @@
 
 @implementation ActivityType
 
-@synthesize name, position, availableSubactivityTypes, isSubtype;
+@synthesize isSubtype;
+PSModelProperties(name, availableSubactivityTypes, position);
 PSReleaseOnDealloc(name, availableSubactivityTypes);
-
-+ (NSArray *) propertyList {
-  return PSArray(@"name", @"position", @"availableSubactivityTypes");
-}
 
 + (id) objectWithId: (NSNumber *) objectId context: (id) context {
   NSNumber *projectId = [context objectForKey: @"project_id"];
   Project *project = [Project objectWithId: projectId];
   return [project activityTypeWithId: objectId];
+}
+
++ (id) subActivityTypeFromJSON: (NSDictionary *) json {
+  ActivityType *subtype = [ActivityType objectFromJSON: json];
+  subtype.isSubtype = YES;
+  return subtype;
 }
 
 - (id) init {
@@ -32,22 +35,15 @@ PSReleaseOnDealloc(name, availableSubactivityTypes);
   return self;
 }
 
-- (void) setAvailableSubactivityTypes: (id) newAvailableSubactivityTypes {
+- (void) setAvailableSubactivityTypes: (id) types {
   [availableSubactivityTypes release];
-  availableSubactivityTypes = [[NSMutableArray alloc] initWithCapacity: [newAvailableSubactivityTypes count]];
-  for (id subactivityTypeHash in newAvailableSubactivityTypes) {
-    ActivityType *type = [ActivityType objectFromJSON: subactivityTypeHash];
-    type.isSubtype = YES;
-    [availableSubactivityTypes addObject: type];
-  }
+  availableSubactivityTypes = [ActivityType psArrayByCalling: @selector(subActivityTypeFromJSON:)
+                                             withObjectsFrom: types];
+  [availableSubactivityTypes retain];
 }
 
 - (BOOL) hasAvailableSubactivityTypes {
   return availableSubactivityTypes.count > 0;
-}
-
-- (NSString *) description {
-  return PSFormat(@"%@ %@", name, availableSubactivityTypes);
 }
 
 @end

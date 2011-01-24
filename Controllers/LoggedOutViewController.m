@@ -37,19 +37,15 @@ PSReleaseOnDealloc(footerView, connector);
 #pragma mark Action handlers
 
 - (void) loginClicked {
-  LoginDialogController *loginDialog = [[LoginDialogController alloc] initWithConnector: connector];
+  LoginDialogController *loginDialog = [[[LoginDialogController alloc] initWithConnector: connector] autorelease];
+
   UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle: @"Cancel"
                                                                    style: UIBarButtonItemStyleBordered
                                                                   target: self
                                                                   action: @selector(cancelLoginClicked)];
   loginDialog.navigationItem.leftBarButtonItem = [cancelButton autorelease];
-  UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController: loginDialog];
-  if ([self respondsToSelector: @selector(setModalPresentationStyle:)]) {
-    navigation.modalPresentationStyle = UIModalPresentationPageSheet;
-  }
-  [self presentModalViewController: navigation animated: YES];
-  [navigation release];
-  [loginDialog release];
+
+  [self psShowPopupView: loginDialog withStyle: UIModalPresentationPageSheet];
   PSObserve(connector, AuthenticationSuccessfulNotification, loginSuccessful);
 }
 

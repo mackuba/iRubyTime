@@ -10,7 +10,7 @@
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) NSInteger position;
-@property (nonatomic, retain) NSMutableArray *availableSubactivityTypes;
+@property (nonatomic, retain) NSArray *availableSubactivityTypes;
 @property (nonatomic, assign) BOOL isSubtype;
 
 - (BOOL) hasAvailableSubactivityTypes;
