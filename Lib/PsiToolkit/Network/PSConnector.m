@@ -95,6 +95,12 @@ static PSConnector *sharedConnector = nil;
   }
 }
 
+- (void) log: (NSString *) text {
+  if (loggingEnabled) {
+    NSLog(@"%@", text);
+  }
+}
+
 #ifdef PSITOOLKIT_ENABLE_MODELS
 
 - (PSRequest *) createRequestForObject: (PSModel *) object {
@@ -303,9 +309,7 @@ static PSConnector *sharedConnector = nil;
 }
 
 - (void) cancelAllRequests {
-  for (ASIHTTPRequest *request in currentRequests) {
-    [request cancel];
-  }
+  [currentRequests makeObjectsPerformSelector: @selector(cancel)];
   [currentRequests removeAllObjects];
 }
 

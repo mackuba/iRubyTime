@@ -16,6 +16,7 @@
 + (NSArray *) properties;
 + (NSMutableArray *) mutableList;
 + (NSMutableDictionary *) identityMap;
++ (NSString *) collectionElementsCount: (id) collection;
 @end
 
 @implementation PSModel
@@ -84,55 +85,17 @@ PSReleaseOnDealloc(numericRecordId);
 #endif // ifdef PSITOOLKIT_ENABLE_MODELS_JSON
 
 + (id) objectFromJSON: (NSDictionary *) json {
-  // create a blank object
-  PSModel *object = [[self alloc] init];
-  NSArray *properties = [self properties];
-
-  // set all properties
-  for (NSString *key in [json allKeys]) {
-    id value = [json objectForKey: key];
-    NSString *property = nil;
-    if (value == nil || [value isEqual: PSNull]) {
-      continue;
-    }
-
-    if ([key hasSuffix: @"_id"]) {
-      // for names ending with _id, find an associated object in another PSModel
-      property = [[key substringToIndex: key.length - 3] psCamelizedString];
-      Class targetClass = NSClassFromString([self classNameForProperty: property]);
-      if ([targetClass isSubclassOfClass: [PSModel class]]) {
-        value = [targetClass objectWithId: value context: json];
-      } else {
-        continue;
-      }
-    } else {
-      // for other names, assign the value as is to a correct property
-      if ([key isEqual: @"id"]) {
-        // 'id' is saved as 'recordId'
-        property = [self recordIdProperty];
-      } else if ([key hasSuffix: @"?"]) {
-        // 'foo?' is saved as 'foo'
-        property = [[key substringToIndex: key.length - 1] psCamelizedString];
-      } else {
-        // normal property
-        property = [key psCamelizedString];
-      }
-    }
-
-    if (value && [properties containsObject: property]) {
-      [object setValue: value forKey: property];
-    }
+  if ([json isKindOfClass: [PSModel class]]) {
+    return [[json copy] autorelease];
+  } else {
+    PSModel *object = [[self alloc] init];
+    [object copyFieldsFrom: json skipNullValues: YES];
+    return [object autorelease];
   }
-
-  return [object autorelease];
 }
 
 + (NSArray *) objectsFromJSON: (NSArray *) jsonArray {
-  NSMutableArray *objects = [NSMutableArray arrayWithCapacity: jsonArray.count];
-  for (NSDictionary *record in jsonArray) {
-    [objects addObject: [self objectFromJSON: record]];
-  }
-  return objects;
+  return [self psArrayByCalling: @selector(objectFromJSON:) withObjectsFrom: jsonArray];
 }
 
 // -------------------------------------------------------------------------------------------
@@ -231,12 +194,94 @@ PSReleaseOnDealloc(numericRecordId);
   }
 }
 
+- (void) copyFieldsFromDictionary: (NSDictionary *) json
+                      onlyMissing: (BOOL) onlyMissing
+                   skipNullValues: (BOOL) skipNullValues {
+  NSArray *properties = [[self class] properties];
+  NSString *property;
+  id value;
+
+  // set all properties
+  for (NSString *key in [json allKeys]) {
+    property = nil;
+    value = [json objectForKey: key];
+    if (skipNullValues && [value isEqual: PSNull]) {
+      continue;
+    }
+
+    if ([key hasSuffix: @"_id"]) {
+      // for names ending with _id, find an associated object in another PSModel
+      property = [[key substringToIndex: key.length - 3] psCamelizedString];
+      Class targetClass = NSClassFromString([[self class] classNameForProperty: property]);
+      if ([targetClass isSubclassOfClass: [PSModel class]]) {
+        value = [targetClass objectWithId: value context: json];
+      } else {
+        continue;
+      }
+    } else {
+      // for other names, assign the value as is to a correct property
+      if ([key isEqual: @"id"]) {
+        // 'id' is saved as 'recordId'
+        property = [[self class] recordIdProperty];
+      } else if ([key hasSuffix: @"?"]) {
+        // 'foo?' is saved as 'foo'
+        property = [[key substringToIndex: key.length - 1] psCamelizedString];
+      } else {
+        // normal property
+        property = [key psCamelizedString];
+      }
+    }
+
+    if ([properties containsObject: property]) {
+      if (!value) {
+        value = PSNull;
+      }
+
+      if (onlyMissing && [self valueForKey: property]) {
+        continue;
+      } else if (skipNullValues && [value isEqual: PSNull]) {
+        continue;
+      } else {
+        [self setValue: value forKey: property];
+      }
+    }
+  }
+}
+
+- (void) copyFieldsFromObject: (id) object
+                  onlyMissing: (BOOL) onlyMissing
+               skipNullValues: (BOOL) skipNullValues {
+  for (NSString *property in [[self class] properties]) {
+    id newValue = [object valueForKey: property];
+    id oldValue = [self valueForKey: property];
+
+    if ((onlyMissing && oldValue) || (skipNullValues && !newValue)) {
+      continue;
+    } else {
+      [self setValue: newValue forKey: property];
+    }
+  }
+}
+
+- (void) copyFieldsFrom: (id) object skipNullValues: (BOOL) skipNullValues {
+  if ([object isKindOfClass: [NSDictionary class]]) {
+    [self copyFieldsFromDictionary: object onlyMissing: NO skipNullValues: skipNullValues];
+  } else {
+    [self copyFieldsFromObject: object onlyMissing: NO skipNullValues: skipNullValues];
+  }
+}
+
+- (void) copyMissingFieldsFrom: (id) object {
+  if ([object isKindOfClass: [NSDictionary class]]) {
+    [self copyFieldsFromDictionary: object onlyMissing: YES skipNullValues: YES];
+  } else {
+    [self copyFieldsFromObject: object onlyMissing: YES skipNullValues: YES];
+  }
+}
+
 - (id) copyWithZone: (NSZone *) zone {
   id other = [[[self class] alloc] init];
-  for (NSString *property in [[self class] properties]) {
-    id value = [self valueForKey: property];
-    [other setValue: value forKey: property];
-  }
+  [other copyFieldsFrom: self skipNullValues: YES];
   return other;
 }
 
@@ -274,13 +319,24 @@ PSReleaseOnDealloc(numericRecordId);
   [result appendFormat: @": 0x%x", self];
 
   NSArray *fields = [PSArray(@"recordId") arrayByAddingObjectsFromArray: [[self class] propertyList]];
+  id value, output;
+
   for (NSString *property in fields) {
-    id value = [self valueForKey: property];
+    value = [self valueForKey: property];
+
     if ([value isKindOfClass: [NSString class]]) {
-      [result appendFormat: @", %@=\"%@\"", property, value];
+      output = PSFormat(@"\"%@\"", value);
+    } else if ([value isKindOfClass: [NSArray class]]) {
+      output = PSFormat(@"[%@]", [PSModel collectionElementsCount: value]);
+    } else if ([value isKindOfClass: [NSDictionary class]]) {
+      output = PSFormat(@"{%@}", [PSModel collectionElementsCount: value]);
+    } else if ([value isKindOfClass: [PSModel class]]) {
+      output = PSFormat(@"<%@: 0x%x, recordId=%@>", NSStringFromClass([value class]), value, [value recordId]);
     } else {
-      [result appendFormat: @", %@=%@", property, value];
+      output = value;
     }
+
+    [result appendFormat: @", %@=%@", property, output];
   }
 
   [result appendString: @">"];
@@ -290,6 +346,15 @@ PSReleaseOnDealloc(numericRecordId);
 - (NSString *) encodeToPostData {
   [self doesNotRecognizeSelector: _cmd];
   return nil;
+}
+
++ (NSString *) collectionElementsCount: (id) collection {
+  NSInteger count = [collection count];
+  switch (count) {
+    case 0: return @"";
+    case 1: return @"1 element";
+    default: return PSFormat(@"%d elements", count);
+  }
 }
 
 @end

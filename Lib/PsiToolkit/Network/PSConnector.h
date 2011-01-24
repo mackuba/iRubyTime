@@ -177,4 +177,7 @@
 // cancels all requests that are currently in progress
 - (void) cancelAllRequests;
 
+// prints string to NSLog if loggingEnabled is YES
+- (void) log: (NSString *) text;
+
 @end
