@@ -97,7 +97,8 @@ PSReleaseOnDealloc(originalActivity, editButton, lockedActivityInfo);
 
 - (void) executeSave {
   [[connector updateRequestForActivity: activity] send];
-  originalActivity = [activity retain];
+  [originalActivity release];
+  originalActivity = [activity copy];
 }
 
 // -------------------------------------------------------------------------------------------
