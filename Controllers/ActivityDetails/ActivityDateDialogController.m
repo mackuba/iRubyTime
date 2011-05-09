@@ -47,6 +47,11 @@ PSReleaseOnDealloc(tableView, activityDatePicker, activity);
   [activityDatePicker setDate: activity.date animated: YES];
 }
 
+- (IBAction) setToYesterday {
+  activity.date = [NSDate psDaysAgo: 1];
+  [activityDatePicker setDate: activity.date animated: YES];
+}
+
 // -------------------------------------------------------------------------------------------
 #pragma mark Table view delegate & data source
 

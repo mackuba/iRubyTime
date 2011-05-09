@@ -19,5 +19,6 @@
 - (id) initWithActivity: (Activity *) activity;
 - (IBAction) dateChanged;
 - (IBAction) setToToday;
+- (IBAction) setToYesterday;
 
 @end
