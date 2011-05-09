@@ -146,7 +146,7 @@ PSReleaseOnDealloc(manager, loadMoreSpinner, loadMoreCell, loadMoreLabel);
                                                     defaultLength: [self defaultLengthForNewActivity]];
   [self psShowPopupView: dialog withStyle: UIModalPresentationPageSheet];
   PSObserve(connector, ActivityCreatedNotification, activityCreated:);
-  PSObserve(dialog, ActivityDialogCancelledNotification, hidePopupView);
+  PSObserve(dialog, ActivityDialogCancelledNotification, psHidePopupView);
   [dialog release];
 }
 
