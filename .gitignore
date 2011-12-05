@@ -4,5 +4,7 @@ RubyTime.xcodeproj/*.pbxuser
 RubyTime.xcodeproj/*.perspective*
 RubyTime.xcodeproj/*.mode1v3
 RubyTime.xcodeproj/*.mode2v3
+RubyTime.xcodeproj/*.xcworkspace/xcuserdata/*.xcuserdatad
+RubyTime.xcodeproj/xcuserdata/*.xcuserdatad
 ._*
 *.DS_Store
