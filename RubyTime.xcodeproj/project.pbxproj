@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		5805215C148CDC6C00A4E977 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5805215B148CDC6C00A4E977 /* libz.1.dylib */; };
 		5810634B10132BE600E8A540 /* ActivityLengthDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5810634A10132BE600E8A540 /* ActivityLengthDialog.xib */; };
 		581063EB1013595100E8A540 /* ShowActivityDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581063EA1013595100E8A540 /* ShowActivityDialog.xib */; };
 		5810641D101362CC00E8A540 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5810641C101362CC00E8A540 /* LoadingView.m */; };
@@ -79,7 +80,6 @@
 		5872EE7C12C93D3000162208 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5872EE7B12C93D3000162208 /* CFNetwork.framework */; };
 		5872EE7E12C93D3000162208 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5872EE7D12C93D3000162208 /* MobileCoreServices.framework */; };
 		5872EE8012C93D3000162208 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5872EE7F12C93D3000162208 /* SystemConfiguration.framework */; };
-		5872EE8212C93D3000162208 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5872EE8112C93D3000162208 /* libz.1.2.3.dylib */; };
 		588619CA11981E2F0028AAE9 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 588619C611981E2F0028AAE9 /* Default-Portrait.png */; };
 		588619F11198272E0028AAE9 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 588619F01198272E0028AAE9 /* Default-Landscape.png */; };
 		58861A12119832B60028AAE9 /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 58861A11119832B60028AAE9 /* Icon72.png */; };
@@ -116,6 +116,7 @@
 		1D6058910D05DD3D006BFB54 /* iRubyTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iRubyTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A0AAE50D9B0CCF005BE974 /* RubyTime_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyTime_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5805215B148CDC6C00A4E977 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
 		5810634A10132BE600E8A540 /* ActivityLengthDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityLengthDialog.xib; sourceTree = "<group>"; };
 		581063EA1013595100E8A540 /* ShowActivityDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowActivityDialog.xib; sourceTree = "<group>"; };
 		5810641B101362CC00E8A540 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
@@ -245,7 +246,6 @@
 		5872EE7B12C93D3000162208 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5872EE7D12C93D3000162208 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		5872EE7F12C93D3000162208 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		5872EE8112C93D3000162208 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		588619C611981E2F0028AAE9 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		588619F01198272E0028AAE9 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 		58861A11119832B60028AAE9 /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
@@ -297,6 +297,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5805215C148CDC6C00A4E977 /* libz.1.dylib in Frameworks */,
 				5833BF691095F8AC00A5530E /* UIKit.framework in Frameworks */,
 				5833BF6D1095F90F00A5530E /* QuartzCore.framework in Frameworks */,
 				5833BF731095F91800A5530E /* CoreGraphics.framework in Frameworks */,
@@ -305,7 +306,6 @@
 				5872EE7C12C93D3000162208 /* CFNetwork.framework in Frameworks */,
 				5872EE7E12C93D3000162208 /* MobileCoreServices.framework in Frameworks */,
 				5872EE8012C93D3000162208 /* SystemConfiguration.framework in Frameworks */,
-				5872EE8212C93D3000162208 /* libz.1.2.3.dylib in Frameworks */,
 				583BB00912D11283002AD442 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,7 +482,7 @@
 				5872EE7B12C93D3000162208 /* CFNetwork.framework */,
 				5872EE7D12C93D3000162208 /* MobileCoreServices.framework */,
 				5872EE7F12C93D3000162208 /* SystemConfiguration.framework */,
-				5872EE8112C93D3000162208 /* libz.1.2.3.dylib */,
+				5805215B148CDC6C00A4E977 /* libz.1.dylib */,
 				583BB00812D11283002AD442 /* Security.framework */,
 			);
 			name = Frameworks;
