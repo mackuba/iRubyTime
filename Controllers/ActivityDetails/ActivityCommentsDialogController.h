@@ -16,4 +16,6 @@
 @property (nonatomic, retain) IBOutlet UITextView *textView;
 @property (nonatomic, retain) IBOutlet UITableViewCell *textCell;
 
+- (id) initWithActivity: (Activity *) newActivity;
+
 @end

@@ -216,10 +216,14 @@
       case CommentsRow:
         controller = [[ActivityCommentsDialogController alloc] initWithActivity: activity];
         break;
+      default:
+        break;
     }
-    
-    [subcontrollers setObject: controller forKey: PSInt(rowType)];
-    [controller release];
+
+    if (controller) {
+      [subcontrollers setObject: controller forKey: PSInt(rowType)];
+      [controller release];
+    }
   }
 
   return controller;

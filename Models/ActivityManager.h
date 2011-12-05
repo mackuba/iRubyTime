@@ -11,7 +11,7 @@
 
 @interface ActivityManager : NSObject {
   NSMutableArray *activities;
-  NSMutableDictionary *dateGroups;
+  NSDictionary *dateGroups;
 }
 
 @property (nonatomic, readonly) NSArray *activities;

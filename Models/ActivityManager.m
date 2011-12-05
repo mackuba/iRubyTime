@@ -17,7 +17,7 @@ PSReleaseOnDealloc(allDates, activities, dateGroups);
 - (id) init {
   if (self = [super init]) {
     activities = [[NSMutableArray alloc] initWithCapacity: 50];
-    dateGroups = [[NSMutableDictionary alloc] initWithCapacity: 50];
+    dateGroups = [NSDictionary dictionary];
     allDates = [[NSArray alloc] init];
   }
   return self;
